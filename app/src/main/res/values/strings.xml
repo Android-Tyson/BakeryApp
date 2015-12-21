@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Bakery App</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="myContent">Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app.Static contents for bakery app.</string>
+    <string name="faceboook_login">Facebook Login</string>
+    <string name="label_button_continue_without_login">Continue Without Login</string>
+    <string name="title_activity_2">Activity2</string>
+</resources>
