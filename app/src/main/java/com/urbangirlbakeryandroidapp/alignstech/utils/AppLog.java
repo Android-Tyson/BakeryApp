@@ -1,4 +1,4 @@
-package com.urbangirlbakeryandroidapp.alignstech.app_toast_log;
+package com.urbangirlbakeryandroidapp.alignstech.utils;
 
 import android.util.Log;
 
