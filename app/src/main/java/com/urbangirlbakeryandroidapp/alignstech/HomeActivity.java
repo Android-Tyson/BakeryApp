@@ -1,8 +1,10 @@
 package com.urbangirlbakeryandroidapp.alignstech;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -14,12 +16,11 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class Activity2 extends MaterialNavigationDrawer implements MaterialAccountListener{
+public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_2);
     }
 
     @Override
@@ -56,14 +57,6 @@ public class Activity2 extends MaterialNavigationDrawer implements MaterialAccou
         setAccountListener(this);
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
-        // add first account
-//        MaterialAccount account = new MaterialAccount(
-//                getResources(), "You're not logged in.", "Click here for facebook login.", R.drawable.black_gradient, R.drawable.black_gradient);
-//        addAccount(account);
-//        setAccountListener(this);
-
-//        setDrawerHeaderImage(R.drawable.drawer_bg);
-
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
         addSection(newSection("Bakeries", R.mipmap.ic_launcher, new BakeryFragment()));
 
@@ -84,6 +77,14 @@ public class Activity2 extends MaterialNavigationDrawer implements MaterialAccou
 
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
+
+        Toast.makeText(this , "onAccountOpening" , Toast.LENGTH_SHORT).show();
+        Bundle loginBundle = new Bundle();
+        loginBundle.putBoolean("isDirectLogin", true);
+        Intent loginIntent = new Intent(this, MainActivity.class);
+        loginIntent.putExtras(loginBundle);
+        startActivity(loginIntent);
+        finish();
 
     }
 

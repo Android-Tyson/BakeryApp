@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()){
             case R.id.button_continueWithoutLogin:
-                Intent intent = new Intent(this , Activity2.class);
+                Intent intent = new Intent(this , HomeActivity.class);
                 startActivity(intent);
                 break;
         }
