@@ -29,7 +29,7 @@ import butterknife.InjectView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @InjectView(R.id.button_continueWithoutLogin)
-    Button btnContinueWithourLogin;
+    Button btnContinueWithoutLogin;
 
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        btnContinueWithourLogin.setOnClickListener(this);
+        btnContinueWithoutLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
 
         Permission[] permissions = new Permission[]{
@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onComplete(Profile profile) {
             AppLog.showLog("My profile id =" + profile.getId());
-            AppLog.showLog("My profile id =" + profile.getId());
 
             AppUtils.saveDataInPreferences(getApplicationContext() , "USER_LOGGED_IN" , "LOGGED_IN");
             UserDetials user = new UserDetials();
@@ -201,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
             intent.putExtra("UserName" , user.getFirstName()+" "+user.getLastName());
             startActivity(intent);
+            finish();
 
         }
 
