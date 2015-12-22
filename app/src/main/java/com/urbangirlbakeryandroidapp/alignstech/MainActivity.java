@@ -130,6 +130,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     };
 
+//    Logging Out
+//
+//    OnLogoutListener onLogoutListener = new OnLogoutListener() {
+//
+//        @Override
+//        public void onLogout() {
+//            AppLog.showLog("You are logged out");
+//        }
+//
+//    };
+//     simpleFacebook.logout(onLogoutListener);
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         simpleFacebook.onActivityResult(requestCode, resultCode, data);
