@@ -54,9 +54,7 @@ public class FacebookUserDetials {
                 params.put("district", "reupedehi");
                 params.put("location", "butwl");
                 params.put("full_name", "BipinPandey");
-                params.put("created_at", "12-12-12");
-                params.put("update_at", "12-23-4");
-
+                
                 return params;
             }
         };
