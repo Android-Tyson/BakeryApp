@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -16,12 +18,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.button_continueWithoutLogin)
     Button btnContinueWithourLogin;
 
+    @InjectView(R.id.btn_loginWithFacebook)
+    Button btnLoginWithFacebook;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         btnContinueWithourLogin.setOnClickListener(this);
+        btnLoginWithFacebook.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this , HomeActivity.class);
                 startActivity(intent);
                 finish();
+                break;
+
+            case R.id.btn_loginWithFacebook:
+                AppToast.showToast(this , "LoginWithFacebook Job");
                 break;
         }
 
