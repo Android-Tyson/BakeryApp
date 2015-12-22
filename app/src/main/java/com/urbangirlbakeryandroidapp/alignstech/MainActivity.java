@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,12 @@ import android.widget.Button;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
+import com.sromku.simple.fb.listeners.OnLoginListener;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Generate KeyHash Reference
     // http://stackoverflow.com/questions/5306009/facebook-android-generate-key-hash
 
-    private ProgressDialog progressDialog;
     private SimpleFacebook simpleFacebook;
 
     @Override
@@ -93,11 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (AppUtils.isNetworkConnected(this)) {
 
-                    progressDialog = new ProgressDialog(this);
-                    progressDialog.setMessage("Please wait...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-
+                    simpleFacebook.login(onLoginListener);
 
                 } else {
                     AppToast.showToast(this , "Please Check your Internet Connection And try again...");
@@ -107,9 +105,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    OnLoginListener onLoginListener = new OnLoginListener() {
+
+        @Override
+        public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
+            // change the state of the button or do whatever you want
+            AppLog.showLog("Logged in");
+        }
+
+        @Override
+        public void onCancel() {
+            // user canceled the dialog
+        }
+
+        @Override
+        public void onFail(String reason) {
+            // failed to login
+        }
+
+        @Override
+        public void onException(Throwable throwable) {
+            // exception from facebook
+        }
+
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         simpleFacebook.onActivityResult(requestCode, resultCode, data);
+        AppLog.showLog(data.toString());
         super.onActivityResult(requestCode, resultCode, data);
     }
 
