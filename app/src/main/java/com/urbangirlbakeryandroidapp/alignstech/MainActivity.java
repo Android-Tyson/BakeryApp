@@ -14,6 +14,8 @@ import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
+import com.sromku.simple.fb.utils.Attributes;
+import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppUtils;
@@ -113,7 +115,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
             // change the state of the button or do whatever you want
             AppLog.showLog("Logged in");
-            simpleFacebook.getProfile(onProfileListener);
+
+            PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
+            pictureAttributes.setHeight(500);
+            pictureAttributes.setWidth(500);
+            pictureAttributes.setType(PictureAttributes.PictureType.SQUARE);
+
+            Profile.Properties properties = new Profile.Properties.Builder()
+                    .add(Profile.Properties.ID)
+                    .add(Profile.Properties.FIRST_NAME)
+                    .add(Profile.Properties.LAST_NAME)
+                    .add(Profile.Properties.EMAIL)
+                    .add(Profile.Properties.COVER)
+                    .add(Profile.Properties.BIO)
+                    .add(Profile.Properties.BIRTHDAY)
+                    .add(Profile.Properties.GENDER)
+                    .add(Profile.Properties.HOMETOWN)
+                    .add(Profile.Properties.WORK)
+                    .add(Profile.Properties.LOCATION)
+                    .add(Profile.Properties.PICTURE, pictureAttributes)
+                    .build();
+
+            simpleFacebook.getProfile(properties , onProfileListener);
 
         }
 
@@ -152,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onComplete(Profile profile) {
             AppLog.showLog("My profile id =" + profile.getId());
             AppLog.showLog("My profile id =" + profile.getId());
+
+
         }
 
         @Override
