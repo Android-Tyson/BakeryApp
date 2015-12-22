@@ -11,6 +11,8 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
+import com.urbangirlbakeryandroidapp.alignstech.post.FacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
@@ -21,6 +23,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookUserDetials.postUserDetials(Apis.userDetialPostURl , this);
     }
 
     @Override
