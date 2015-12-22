@@ -1,6 +1,7 @@
 package com.urbangirlbakeryandroidapp.alignstech.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -22,4 +23,22 @@ public class AppUtils {
                     networkInfo.getType() == ConnectivityManager.TYPE_WIMAX;
         }
     }
+
+    public static void saveDataInPreferences(Context context , String key , String value){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key , value);
+        editor.commit();
+
+    }
+
+    public static String checkDataFromPreferences(Context context , String key){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
+        String result = sharedPreferences.getString(key  , "");
+
+        return result;
+    }
+
 }

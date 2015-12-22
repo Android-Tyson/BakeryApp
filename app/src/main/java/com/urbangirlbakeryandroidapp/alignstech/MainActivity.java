@@ -16,6 +16,7 @@ import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
+import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppUtils;
@@ -43,6 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        if(AppUtils.checkDataFromPreferences(getApplicationContext() , "USER_LOGGED_IN") != null &&
+                !AppUtils.checkDataFromPreferences(getApplicationContext() , "USER_LOGGED_IN").isEmpty()){
+
+            Intent intent = new Intent(this , HomeActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+
         btnContinueWithourLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
 
@@ -176,6 +187,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AppLog.showLog("My profile id =" + profile.getId());
             AppLog.showLog("My profile id =" + profile.getId());
 
+            AppUtils.saveDataInPreferences(getApplicationContext() , "USER_LOGGED_IN" , "LOGGED_IN");
+            UserDetials user = new UserDetials();
+
+            user.setFirstName(profile.getFirstName());
+            user.setLastName(profile.getLastName());
+            user.setEmail(profile.getEmail());
+            user.setDob(profile.getBirthday());
+            user.setGender(profile.getGender());
+            user.setUserPictureUrl(profile.getPicture());
+            user.setUser_id(profile.getId());
+
+            Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
+            intent.putExtra("UserName" , user.getFirstName()+" "+user.getLastName());
+            startActivity(intent);
 
         }
 
