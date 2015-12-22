@@ -11,7 +11,9 @@ import android.widget.Button;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
+import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
+import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppUtils;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnContinueWithourLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
 
-        Permission[] permissions = new Permission[] {
+        Permission[] permissions = new Permission[]{
                 Permission.USER_PHOTOS,
                 Permission.EMAIL,
                 Permission.PUBLISH_ACTION
@@ -84,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_continueWithoutLogin:
-                Intent intent = new Intent(this , HomeActivity.class);
+                Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     simpleFacebook.login(onLoginListener);
 
                 } else {
-                    AppToast.showToast(this , "Please Check your Internet Connection And try again...");
+                    AppToast.showToast(this, "Please Check your Internet Connection And try again...");
                 }
 
                 break;
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
             // change the state of the button or do whatever you want
             AppLog.showLog("Logged in");
+            simpleFacebook.getProfile(onProfileListener);
+
         }
 
         @Override
@@ -142,6 +146,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    };
 //     simpleFacebook.logout(onLogoutListener);
 
+
+    OnProfileListener onProfileListener = new OnProfileListener() {
+        @Override
+        public void onComplete(Profile profile) {
+            AppLog.showLog("My profile id =" + profile.getId());
+            AppLog.showLog("My profile id =" + profile.getId());
+        }
+
+        @Override
+        public void onException(Throwable throwable) {
+            super.onException(throwable);
+        }
+
+        @Override
+        public void onFail(String reason) {
+            super.onFail(reason);
+        }
+
+        @Override
+        public void onThinking() {
+            super.onThinking();
+        }
+
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
