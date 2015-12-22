@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
 
+    // Generate KeyHash Reference
+    // http://stackoverflow.com/questions/5306009/facebook-android-generate-key-hash
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
