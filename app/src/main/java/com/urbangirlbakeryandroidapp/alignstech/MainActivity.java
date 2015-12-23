@@ -19,7 +19,7 @@ import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppUtils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
 
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        if(AppUtils.checkDataFromPreferences(getApplicationContext() , "USER_LOGGED_IN") != null &&
-                !AppUtils.checkDataFromPreferences(getApplicationContext() , "USER_LOGGED_IN").isEmpty()){
+        if(MyUtils.checkDataFromPreferences(getApplicationContext(), "USER_LOGGED_IN") != null &&
+                !MyUtils.checkDataFromPreferences(getApplicationContext(), "USER_LOGGED_IN").isEmpty()){
 
             Intent intent = new Intent(this , HomeActivity.class);
             startActivity(intent);
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_loginWithFacebook:
 
-                if (AppUtils.isNetworkConnected(this)) {
+                if (MyUtils.isNetworkConnected(this)) {
 
                     simpleFacebook.login(onLoginListener);
 
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onComplete(Profile profile) {
             AppLog.showLog("My profile id =" + profile.getId());
 
-            AppUtils.saveDataInPreferences(getApplicationContext() , "USER_LOGGED_IN" , "LOGGED_IN");
+            MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
             UserDetials user = new UserDetials();
 
             user.setFirstName(profile.getFirstName());

@@ -1,44 +1,25 @@
 package com.urbangirlbakeryandroidapp.alignstech.utils;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.app.Application;
+
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
 /**
- * Created by Dell on 12/22/2015.
+ * Created by Dell on 11/23/2015.
  */
-public class AppUtils {
+public class AppUtils extends Application{
 
-    public static boolean isNetworkConnected(Context context) {
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Configuration.Builder configurationBuilder = new Configuration.Builder(this).setDatabaseName("my_database.db");
+        configurationBuilder.addModelClass(DataBase_UserInfo.class);
+        ActiveAndroid.initialize(configurationBuilder.create());
 
-        if (networkInfo == null) {
-            return false;
-        } else {
-            return networkInfo.getType() == ConnectivityManager.TYPE_WIFI ||
-                    networkInfo.getType() == ConnectivityManager.TYPE_MOBILE ||
-                    networkInfo.getType() == ConnectivityManager.TYPE_WIMAX;
-        }
-    }
-
-    public static void saveDataInPreferences(Context context , String key , String value){
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key , value);
-        editor.commit();
-
-    }
-
-    public static String checkDataFromPreferences(Context context , String key){
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
-        String result = sharedPreferences.getString(key  , "");
-
-        return result;
+        AppLog.showLog("Active android initialize");
     }
 
 }
