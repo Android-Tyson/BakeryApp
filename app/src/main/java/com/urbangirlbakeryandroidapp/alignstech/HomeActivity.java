@@ -1,6 +1,7 @@
 package com.urbangirlbakeryandroidapp.alignstech;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,17 +12,22 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener{
+public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
+
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,8 +56,14 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-        MaterialAccount account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
-                , R.mipmap.ic_launcher, R.drawable.drawer_bg);
+        MaterialAccount account;
+        if(MyUtils.checkDataFromPreferences(getApplicationContext(), "USER_LOGGED_IN") != null){
+             account = new MaterialAccount(getResources(), " Logged in.", "FullName"
+                    , MyUtils.getProfilePicture(this), R.drawable.drawer_bg);
+        } else {
+            account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
+                    , R.mipmap.ic_launcher, R.drawable.drawer_bg);
+        }
 
         addAccount(account);
         setAccountListener(this);
@@ -78,7 +90,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
-        Toast.makeText(this , "onAccountOpening" , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "onAccountOpening", Toast.LENGTH_SHORT).show();
         Bundle loginBundle = new Bundle();
         loginBundle.putBoolean("isDirectLogin", true);
         Intent loginIntent = new Intent(this, MainActivity.class);
