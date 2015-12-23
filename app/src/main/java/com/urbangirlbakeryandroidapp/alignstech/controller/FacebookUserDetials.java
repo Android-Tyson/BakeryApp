@@ -1,4 +1,4 @@
-package com.urbangirlbakeryandroidapp.alignstech.post;
+package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -52,9 +52,9 @@ public class FacebookUserDetials {
                 params.put("gender", "male");
                 params.put("zone", "lumbini");
                 params.put("district", "reupedehi");
-                params.put("location", "butwl");
-                params.put("full_name", "BipinPandey");
-                
+                params.put("location", "butwal");
+                params.put("full_name", "Bpn");
+
                 return params;
             }
         };

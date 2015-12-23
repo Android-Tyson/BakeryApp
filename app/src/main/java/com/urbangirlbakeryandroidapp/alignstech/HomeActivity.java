@@ -11,7 +11,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
-import com.urbangirlbakeryandroidapp.alignstech.post.FacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.controller.FacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
