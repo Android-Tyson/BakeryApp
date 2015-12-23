@@ -40,9 +40,12 @@ public class DataBase_UserInfo extends Model{
     @Column(name = "Location")
     private String location;
 
+    @Column(name = "PicUrl")
+    private String profilePicUrl;
+
     public DataBase_UserInfo(){}
 
-    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location) {
+    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl) {
         this.fb_id = fb_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,6 +56,7 @@ public class DataBase_UserInfo extends Model{
         this.zone = zone;
         this.district = district;
         this.location = location;
+        this.profilePicUrl = profilePicUrl;
     }
 
     public String getFb_id() {
@@ -133,5 +137,13 @@ public class DataBase_UserInfo extends Model{
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
     }
 }

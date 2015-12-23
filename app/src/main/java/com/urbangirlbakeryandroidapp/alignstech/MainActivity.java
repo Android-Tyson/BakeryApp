@@ -187,18 +187,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AppLog.showLog("My profile id =" + profile.getId());
 
             MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
-            UserDetials user = new UserDetials();
 
-            user.setFirstName(profile.getFirstName());
-            user.setLastName(profile.getLastName());
-            user.setEmail(profile.getEmail());
-            user.setDob(profile.getBirthday());
-            user.setGender(profile.getGender());
-            user.setUserPictureUrl(profile.getPicture());
-            user.setUser_id(profile.getId());
+            UserDetials userDetials = new UserDetials();
+
+            userDetials.setFb_id(profile.getId());
+            userDetials.setFirstName(profile.getFirstName());
+            userDetials.setLastName(profile.getLastName());
+            userDetials.setMobileNo(profile.getReligion());
+            userDetials.setEmail(profile.getEmail());
+            userDetials.setDob(profile.getBirthday());
+            userDetials.setGender(profile.getGender());
+            userDetials.setZone(profile.getLocale());
+            userDetials.setDistrict(profile.getLocale());
+            userDetials.setLocation(profile.getLocale());
+            userDetials.setProfilePicUrl(profile.getPicture());
+
+            String fb_id = userDetials.getFb_id();
+            String firstName = userDetials.getFirstName();
+            String lastName = userDetials.getLastName();
+            String mobileNo = userDetials.getMobileNo();
+            String email = userDetials.getEmail();
+            String dob = userDetials.getDob();
+            String gender = userDetials.getGender();
+            String zone = userDetials.getZone();
+            String district = userDetials.getDistrict();
+            String location  = userDetials.getLocation();
+            String picUrl = userDetials.getProfilePicUrl();
+
+            
 
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
-            intent.putExtra("UserName" , user.getFirstName()+" "+user.getLastName());
+            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
             startActivity(intent);
             finish();
 

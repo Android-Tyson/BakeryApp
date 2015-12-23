@@ -5,37 +5,27 @@ package com.urbangirlbakeryandroidapp.alignstech.model;
  */
 public class UserDetials {
 
-    private String user_id;
+    private String fb_id;
     private String firstName;
     private String lastName;
-    private String gender;
-    private String dob;
-    private String phoneNumber;
+    private String mobileNo;
     private String email;
-    private String deviceId;
-    private String userPictureUrl;
+    private String dob;
+    private String gender;
+    private String zone;
+    private String district;
+    private String location;
+    private String profilePicUrl;
 
     public UserDetials() {
     }
 
-    public UserDetials(String user_id, String firstName, String lastName, String gender, String dob, String phoneNumber, String email, String deviceId, String userPictureUrl) {
-        this.user_id = user_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.dob = dob;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.deviceId = deviceId;
-        this.userPictureUrl = userPictureUrl;
+    public String getFb_id() {
+        return fb_id;
     }
 
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setFb_id(String fb_id) {
+        this.fb_id = fb_id;
     }
 
     public String getFirstName() {
@@ -54,28 +44,12 @@ public class UserDetials {
         this.lastName = lastName;
     }
 
-    public String getGender() {
-        return gender;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public String getEmail() {
@@ -86,19 +60,52 @@ public class UserDetials {
         this.email = email;
     }
 
-    public String getDeviceId() {
-        return deviceId;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
-    public String getUserPictureUrl() {
-        return userPictureUrl;
+    public String getGender() {
+        return gender;
     }
 
-    public void setUserPictureUrl(String userPictureUrl) {
-        this.userPictureUrl = userPictureUrl;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
 }
