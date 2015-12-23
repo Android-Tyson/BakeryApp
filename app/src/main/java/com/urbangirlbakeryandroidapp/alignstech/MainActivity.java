@@ -235,27 +235,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private void handlingNullUserInfo(UserDetials userDetials){
 
             if(userDetials.getFb_id() == null){
-                userDetials.setFb_id("Please Enter Your Id");
+                userDetials.setFb_id("11a22ss33dd44ff");
             }if(userDetials.getFirstName() == null){
-                userDetials.setFirstName("Please Enter Your FirstName");
+                userDetials.setFirstName("FirstName");
             } if(userDetials.getLastName() == null){
-                userDetials.setLastName("Please Enter Your LastName");
+                userDetials.setLastName("LastName");
             } if(userDetials.getMobileNo() == null){
-                userDetials.setMobileNo("Please Enter Your MoboNo");
+                userDetials.setMobileNo("9847092920");
             } if(userDetials.getEmail() == null){
-                userDetials.setEmail("Please Enter Your Email");
+                userDetials.setEmail("jazzbpn@gmial.com");
             } if (userDetials.getDob() == null){
-                userDetials.setDob("Please Enter Your DOB");
+                userDetials.setDob("2014-10-10");
             } if(userDetials.getGender() == null){
-                userDetials.setGender("Please Enter Your Gender");
+                userDetials.setGender("Male");
             } if (userDetials.getZone() == null){
-                userDetials.setZone("Please Enter Your Zone");
+                userDetials.setZone("Lumbini");
             } if(userDetials.getDistrict() == null){
-                userDetials.setDistrict("Please Enter Your District");
+                userDetials.setDistrict("Rupendehi");
             } if(userDetials.getLocation() == null){
-                userDetials.setLocation("Please Enter Your Location");
+                userDetials.setLocation("Butwal");
             } if(userDetials.getProfilePicUrl() == null){
-                userDetials.setProfilePicUrl("Please Enter Your ProfilePicUrl");
+                userDetials.setProfilePicUrl("http://www.google.com");
             }
 
         }

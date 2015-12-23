@@ -3,16 +3,19 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.activeandroid.query.Select;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,15 +50,21 @@ public class FacebookUserDetials {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("fb_id", MainActivity.userDetials.getFb_id());
-                params.put("mobile_no", MainActivity.userDetials.getMobileNo());
-                params.put("email", MainActivity.userDetials.getEmail());
-                params.put("dob", MainActivity.userDetials.getDob());
-                params.put("gender", MainActivity.userDetials.getGender());
-                params.put("zone", MainActivity.userDetials.getZone());
-                params.put("district", MainActivity.userDetials.getDistrict());
-                params.put("location", MainActivity.userDetials.getLocation());
-                params.put("full_name", MainActivity.userDetials.getFirstName() +" "+ MainActivity.userDetials.getLastName());
+                if(Db_Utils.isTableDataExists()){
+
+                    List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+
+                    params.put("fb_id", queryResults.get(0).getFb_id());
+                    params.put("mobile_no", queryResults.get(0).getMobileNo());
+                    params.put("email", queryResults.get(0).getEmail());
+                    params.put("dob", queryResults.get(0).getDob());
+                    params.put("gender", queryResults.get(0).getGender());
+                    params.put("zone", queryResults.get(0).getZone());
+                    params.put("district", queryResults.get(0).getDistrict());
+                    params.put("location", queryResults.get(0).getLocation());
+                    params.put("full_name", queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName());
+
+                }
 
                 return params;
             }
