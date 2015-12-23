@@ -16,7 +16,10 @@ import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
+import com.urbangirlbakeryandroidapp.alignstech.controller.FacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
 
+    public static UserDetials userDetials;
     // Generate KeyHash Reference
     // http://stackoverflow.com/questions/5306009/facebook-android-generate-key-hash
 
@@ -188,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
 
-            UserDetials userDetials = new UserDetials();
+            userDetials = new UserDetials();
 
             userDetials.setFb_id(profile.getId());
             userDetials.setFirstName(profile.getFirstName());
@@ -202,6 +206,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userDetials.setLocation(profile.getLocale());
             userDetials.setProfilePicUrl(profile.getPicture());
 
+            handlingNullUserInfo(userDetials);
+
             String fb_id = userDetials.getFb_id();
             String firstName = userDetials.getFirstName();
             String lastName = userDetials.getLastName();
@@ -212,14 +218,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String zone = userDetials.getZone();
             String district = userDetials.getDistrict();
             String location  = userDetials.getLocation();
-            String picUrl = userDetials.getProfilePicUrl();
+            String profilePicUrl = userDetials.getProfilePicUrl();
 
-            
+            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
+            dataBase_userInfo.save();
+
+            FacebookUserDetials.postUserDetials(Apis.userDetialPostURl , getApplicationContext());
 
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
             intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
             startActivity(intent);
             finish();
+
+        }
+
+        private void handlingNullUserInfo(UserDetials userDetials){
+
+            if(userDetials.getFb_id() == null){
+                userDetials.setFb_id("Please Enter Your Id");
+            }if(userDetials.getFirstName() == null){
+                userDetials.setFirstName("Please Enter Your FirstName");
+            } if(userDetials.getLastName() == null){
+                userDetials.setLastName("Please Enter Your LastName");
+            } if(userDetials.getMobileNo() == null){
+                userDetials.setMobileNo("Please Enter Your MoboNo");
+            } if(userDetials.getEmail() == null){
+                userDetials.setEmail("Please Enter Your Email");
+            } if (userDetials.getDob() == null){
+                userDetials.setDob("Please Enter Your DOB");
+            } if(userDetials.getGender() == null){
+                userDetials.setGender("Please Enter Your Gender");
+            } if (userDetials.getZone() == null){
+                userDetials.setZone("Please Enter Your Zone");
+            } if(userDetials.getDistrict() == null){
+                userDetials.setDistrict("Please Enter Your District");
+            } if(userDetials.getLocation() == null){
+                userDetials.setLocation("Please Enter Your Location");
+            } if(userDetials.getProfilePicUrl() == null){
+                userDetials.setProfilePicUrl("Please Enter Your ProfilePicUrl");
+            }
 
         }
 
