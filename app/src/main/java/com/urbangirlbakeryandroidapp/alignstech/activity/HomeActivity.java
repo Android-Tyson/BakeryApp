@@ -39,7 +39,9 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     private void setUserProfilePicture(){
 
         List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
-        GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
+        if(queryResults.size() > 0) {
+            GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
+        }
 
     }
 
@@ -70,7 +72,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-        if(MyUtils.isUserLoggedIn(this) != null){
+        if(MyUtils.isUserLoggedIn(this)){
 
             List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
 

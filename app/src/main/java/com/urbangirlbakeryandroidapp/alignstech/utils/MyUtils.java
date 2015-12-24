@@ -38,12 +38,12 @@ public class MyUtils {
         }
     }
 
-    public static String isUserLoggedIn(Context context){
+    public static boolean isUserLoggedIn(Context context){
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
-        String result = sharedPreferences.getString("USER_LOGGED_IN", "");
-
-        return result;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+        Boolean result = sharedPreferences.getBoolean("USER_LOGGED_IN", false);
+        MyUtils.showLog(result.toString());
+        return sharedPreferences.getBoolean("USER_LOGGED_IN", false);
     }
 
 
