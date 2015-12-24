@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Created by Dell on 12/22/2015.
  */
-public class FacebookUserDetials {
+public class PostFacebookUserDetials {
 
     private static ProgressDialog progressDialog ;
 

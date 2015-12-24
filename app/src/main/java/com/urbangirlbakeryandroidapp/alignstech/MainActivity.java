@@ -16,7 +16,7 @@ import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
-import com.urbangirlbakeryandroidapp.alignstech.controller.FacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
             dataBase_userInfo.save();
 
-            FacebookUserDetials.postUserDetials(Apis.userDetialPostURl, getApplicationContext());
+            PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, getApplicationContext());
             GetProfilePicture.getProfilePicture(getApplicationContext() , userDetials.getProfilePicUrl());
 
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
