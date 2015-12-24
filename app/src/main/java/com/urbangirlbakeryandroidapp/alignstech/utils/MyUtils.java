@@ -18,14 +18,14 @@ import java.io.OutputStream;
 /**
  * Created by Dell on 12/22/2015.
  */
-public class MyUtils {
-
+public class MyUtils
+{
     public static String DIRECTORY_NAME = ".ugCake";
     public static String PICTURE_FILE_NAME = "profile_picture.png";
 
 
-    public static boolean isNetworkConnected(Context context) {
-
+    public static boolean isNetworkConnected(Context context)
+    {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
@@ -38,36 +38,33 @@ public class MyUtils {
         }
     }
 
-    public static boolean isUserLoggedIn(Context context){
 
+    public static boolean isUserLoggedIn(Context context)
+    {
         SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-        Boolean result = sharedPreferences.getBoolean("USER_LOGGED_IN", false);
-        MyUtils.showLog(result.toString());
         return sharedPreferences.getBoolean("USER_LOGGED_IN", false);
     }
 
 
-
-    public static void saveDataInPreferences(Context context , String key , String value){
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
+    public static void saveDataInPreferences(Context context, String key, String value)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key , value);
-        editor.commit();
-
+        editor.putString(key, value);
+        editor.apply();
     }
 
 
-        public static String checkDataFromPreferences(Context context , String key){
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
+    public static String checkDataFromPreferences(Context context, String key)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         String result = sharedPreferences.getString(key, "");
-
         return result;
     }
 
 
-    public static void saveProfilePicture(Bitmap bitmap) {
+    public static void saveProfilePicture(Bitmap bitmap)
+    {
         try {
             String dir = Environment.getExternalStorageDirectory().toString();
             File file = new File(dir, DIRECTORY_NAME);
@@ -101,7 +98,8 @@ public class MyUtils {
     }
 
 
-    public static Bitmap getProfilePicture() {
+    public static Bitmap getProfilePicture()
+    {
         Bitmap bitmap;
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -115,14 +113,16 @@ public class MyUtils {
     }
 
 
-    public static void showToast(Context context , String message){
+    public static void showToast(Context context, String message)
+    {
 
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
     }
 
 
-    public static void showLog(String message){
+    public static void showLog(String message)
+    {
         Log.i("APP_TAG", message);
     }
 
