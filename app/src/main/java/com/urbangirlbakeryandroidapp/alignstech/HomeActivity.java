@@ -7,20 +7,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.urbangirlbakeryandroidapp.alignstech.bus.UserProfilePic;
+import com.activeandroid.query.Select;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import java.util.List;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener, UserProfilePic {
+public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
 
     Bitmap bitmap;
     MaterialAccount account;
@@ -28,8 +30,6 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyUtils.response = this;
-        MyUtils.getProfilePicture(this);
     }
 
 
@@ -60,10 +60,13 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-
         if(MyUtils.checkDataFromPreferences(this , "") != null){
-            account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
-                    , R.mipmap.ic_launcher , R.drawable.drawer_bg);
+
+            List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+
+            account = new MaterialAccount(getResources(),
+                    queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""
+                    , MyUtils.getProfilePicture() , R.drawable.drawer_bg);
         }else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
                     , R.mipmap.ic_launcher, R.drawable.drawer_bg);
@@ -109,12 +112,4 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
-    @Override
-    public void userProfilePicBitmapResponse(Bitmap bitmap) {
-        AppLog.showLog(bitmap.toString());
-        AppLog.showLog(bitmap.toString());
-
-        MyUtils.getProfilePicBitmap(bitmap);
-
-    }
 }
