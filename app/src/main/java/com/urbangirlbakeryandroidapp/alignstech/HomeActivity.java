@@ -1,13 +1,13 @@
 package com.urbangirlbakeryandroidapp.alignstech;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
@@ -24,12 +24,13 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountLis
 
 public class HomeActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
 
-    Bitmap bitmap;
-    MaterialAccount account;
+    public static MaterialAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+        GetProfilePicture.getProfilePicture(this , queryResults.get(0).getProfilePicUrl());
     }
 
 
