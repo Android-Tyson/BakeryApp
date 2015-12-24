@@ -14,6 +14,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
@@ -30,8 +31,16 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setUserProfilePicture();
+
     }
 
+    private void setUserProfilePicture(){
+
+        List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
+        GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,7 +75,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""
-                    , R.drawable.check , R.drawable.drawer_bg);
+                    , null , R.drawable.drawer_bg);
         }else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
                     , R.mipmap.ic_launcher, R.drawable.drawer_bg);

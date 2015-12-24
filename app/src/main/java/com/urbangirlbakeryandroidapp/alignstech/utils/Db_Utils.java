@@ -22,4 +22,10 @@ public class Db_Utils {
 
     }
 
+    public static List<DataBase_UserInfo> getDatabaseList(){
+
+        return new Select().from(DataBase_UserInfo.class).execute();
+
+    }
+
 }

@@ -3,7 +3,6 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 
-import com.activeandroid.query.Select;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -52,7 +51,7 @@ public class PostFacebookUserDetials {
                 Map<String, String> params = new HashMap<>();
                 if(Db_Utils.isTableDataExists()){
 
-                    List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+                    List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
 
                     params.put("fb_id", queryResults.get(0).getFb_id());
                     params.put("mobile_no", queryResults.get(0).getMobileNo());
@@ -69,7 +68,7 @@ public class PostFacebookUserDetials {
                 return params;
             }
         };
-        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(40000,
+        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(context).addToRequestQueue(jsonStringRequest);

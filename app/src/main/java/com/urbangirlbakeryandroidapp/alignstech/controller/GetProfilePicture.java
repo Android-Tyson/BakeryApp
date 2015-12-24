@@ -3,7 +3,7 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.activeandroid.query.Select;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
@@ -33,10 +33,13 @@ public class GetProfilePicture {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         MyUtils.showLog(error.toString());
-                        List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+                        List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
                         GetProfilePicture.getProfilePicture(context, queryResults.get(0).getProfilePicUrl());
                     }
                 });
+                imageRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 MySingleton.getInstance(context).addToRequestQueue(imageRequest);
             }
         }
