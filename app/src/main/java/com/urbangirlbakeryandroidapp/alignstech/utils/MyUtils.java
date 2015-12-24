@@ -8,17 +8,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 
-import com.activeandroid.query.Select;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
 
 /**
  * Created by Dell on 12/22/2015.
@@ -27,7 +20,7 @@ public class MyUtils {
 
     public static String DIRECTORY_NAME = ".ugCake";
     public static String PICTURE_FILE_NAME = "profile_picture.png";
-    
+
     public static boolean isNetworkConnected(Context context) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -57,27 +50,6 @@ public class MyUtils {
         String result = sharedPreferences.getString(key, "");
 
         return result;
-    }
-
-    public static void getProfilePicture(Context context) {
-
-        if(Db_Utils.isTableDataExists()){
-            List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
-            ImageRequest imageRequest = new ImageRequest(queryResults.get(0).getProfilePicUrl(), new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap bitmapResponse) {
-                    saveProfilePicture(bitmapResponse);
-                    if(bitmapResponse != null){
-                    }
-                }
-            }, 50, 50, null, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    AppLog.showLog(error.toString());
-                }
-            });
-            MySingleton.getInstance(context).addToRequestQueue(imageRequest);
-        }
     }
 
     public static void saveProfilePicture(Bitmap bitmap) {
