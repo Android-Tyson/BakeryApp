@@ -21,8 +21,6 @@ import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppToast;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     simpleFacebook.login(onLoginListener);
 
                 } else {
-                    AppToast.showToast(this, "Please Check your Internet Connection And try again...");
+                    MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
                 }
 
                 break;
@@ -130,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
             // change the state of the button or do whatever you want
-            AppLog.showLog("Logged in");
+            MyUtils.showLog("Logged in");
 
             PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
             pictureAttributes.setHeight(500);
@@ -189,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     OnProfileListener onProfileListener = new OnProfileListener() {
         @Override
         public void onComplete(Profile profile) {
-            AppLog.showLog("My profile id =" + profile.getId());
+            MyUtils.showLog("My profile id =" + profile.getId());
 
             MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
 
@@ -282,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         simpleFacebook.onActivityResult(requestCode, resultCode, data);
-        AppLog.showLog(data.toString());
+        MyUtils.showLog(data.toString());
         super.onActivityResult(requestCode, resultCode, data);
     }
 

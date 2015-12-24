@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,4 +99,15 @@ public class MyUtils {
             return null;
         }
     }
+
+    public static void showToast(Context context , String message){
+
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public static void showLog(String message){
+        Log.i("APP_TAG", message);
+    }
+
 }

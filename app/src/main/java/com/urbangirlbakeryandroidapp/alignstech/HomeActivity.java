@@ -29,8 +29,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
-        GetProfilePicture.getProfilePicture(this , queryResults.get(0).getProfilePicUrl());
+
     }
 
 
@@ -67,7 +66,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""
-                    , MyUtils.getProfilePicture() , R.drawable.drawer_bg);
+                    , R.drawable.check , R.drawable.drawer_bg);
         }else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
                     , R.mipmap.ic_launcher, R.drawable.drawer_bg);

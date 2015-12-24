@@ -10,9 +10,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppLog;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +36,13 @@ public class PostFacebookUserDetials {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        AppLog.showLog(response);
+                        MyUtils.showLog(response);
 //                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AppLog.showLog(error.toString());
+                MyUtils.showLog(error.toString());
 //                progressDialog.dismiss();
             }
         }){

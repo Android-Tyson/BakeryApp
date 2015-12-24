@@ -19,7 +19,7 @@ public class AppUtils extends Application{
         configurationBuilder.addModelClass(DataBase_UserInfo.class);
         ActiveAndroid.initialize(configurationBuilder.create());
 
-        AppLog.showLog("Active android initialize");
+        MyUtils.showLog("Active android initialize");
     }
 
 }
