@@ -1,4 +1,4 @@
-package com.urbangirlbakeryandroidapp.alignstech;
+package com.urbangirlbakeryandroidapp.alignstech.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -68,7 +70,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-        if(MyUtils.isUserLoggedIn(this, "") != null){
+        if(MyUtils.isUserLoggedIn(this) != null){
 
             List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
 
