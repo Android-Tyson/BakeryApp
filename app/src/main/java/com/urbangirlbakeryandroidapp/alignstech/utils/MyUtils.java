@@ -23,6 +23,7 @@ public class MyUtils {
     public static String DIRECTORY_NAME = ".ugCake";
     public static String PICTURE_FILE_NAME = "profile_picture.png";
 
+
     public static boolean isNetworkConnected(Context context) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -37,6 +38,16 @@ public class MyUtils {
         }
     }
 
+    public static String isUserLoggedIn(Context context){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
+        String result = sharedPreferences.getString("USER_LOGGED_IN", "");
+
+        return result;
+    }
+
+
+
     public static void saveDataInPreferences(Context context , String key , String value){
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
@@ -46,13 +57,15 @@ public class MyUtils {
 
     }
 
-    public static String checkDataFromPreferences(Context context , String key){
+
+        public static String checkDataFromPreferences(Context context , String key){
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS" , Context.MODE_PRIVATE);
         String result = sharedPreferences.getString(key, "");
 
         return result;
     }
+
 
     public static void saveProfilePicture(Bitmap bitmap) {
         try {
@@ -87,6 +100,7 @@ public class MyUtils {
         }
     }
 
+
     public static Bitmap getProfilePicture() {
         Bitmap bitmap;
         try {
@@ -100,11 +114,13 @@ public class MyUtils {
         }
     }
 
+
     public static void showToast(Context context , String message){
 
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
     }
+
 
     public static void showLog(String message){
         Log.i("APP_TAG", message);

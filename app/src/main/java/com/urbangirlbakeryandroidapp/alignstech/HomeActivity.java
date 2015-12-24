@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -69,9 +68,9 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-        if(MyUtils.checkDataFromPreferences(this , "") != null){
+        if(MyUtils.isUserLoggedIn(this, "") != null){
 
-            List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
+            List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""

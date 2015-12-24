@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        if(MyUtils.checkDataFromPreferences(getApplicationContext(), "USER_LOGGED_IN") != null &&
-                !MyUtils.checkDataFromPreferences(getApplicationContext(), "USER_LOGGED_IN").isEmpty()){
+        if(MyUtils.isUserLoggedIn(getApplicationContext()) != null &&
+                !MyUtils.isUserLoggedIn(getApplicationContext()).isEmpty()){
 
             Intent intent = new Intent(this , HomeActivity.class);
             startActivity(intent);
