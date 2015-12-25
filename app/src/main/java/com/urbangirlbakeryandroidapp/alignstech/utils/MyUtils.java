@@ -42,7 +42,13 @@ public class MyUtils
     public static boolean isUserLoggedIn(Context context)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("USER_LOGGED_IN", false);
+        String check = sharedPreferences.getString("USER_LOGGED_IN", "");
+
+        if(!check.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
