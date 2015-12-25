@@ -26,23 +26,23 @@ public class PostFacebookUserDetials {
 
     public static void postUserDetials(String url , Context context){
 
-//        progressDialog = new ProgressDialog(context);
-//        progressDialog.setMessage("Posting Please Wait");
-//        progressDialog.setCancelable(false);
-//        progressDialog.show();
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Posting Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MyUtils.showLog(response);
-//                        progressDialog.dismiss();
+                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showLog(error.toString());
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         }){
             @Override
