@@ -232,34 +232,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        private void handlingNullUserInfo(UserDetials userDetials){
-
-            if(userDetials.getFb_id() == null){
-                userDetials.setFb_id("11a22ss33dd44ff");
-            }if(userDetials.getFirstName() == null){
-                userDetials.setFirstName("FirstName");
-            } if(userDetials.getLastName() == null){
-                userDetials.setLastName("LastName");
-            } if(userDetials.getMobileNo() == null){
-                userDetials.setMobileNo("9847092920");
-            } if(userDetials.getEmail() == null){
-                userDetials.setEmail("jazzbpn@gmial.com");
-            } if (userDetials.getDob() == null){
-                userDetials.setDob("2014-10-10");
-            } if(userDetials.getGender() == null){
-                userDetials.setGender("Male");
-            } if (userDetials.getZone() == null){
-                userDetials.setZone("Lumbini");
-            } if(userDetials.getDistrict() == null){
-                userDetials.setDistrict("Rupendehi");
-            } if(userDetials.getLocation() == null){
-                userDetials.setLocation("Butwal");
-            } if(userDetials.getProfilePicUrl() == null){
-                userDetials.setProfilePicUrl("http://www.google.com");
-            }
-
-        }
-
         @Override
         public void onException(Throwable throwable) {
             super.onException(throwable);
@@ -277,6 +249,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     };
 
+    private void handlingNullUserInfo(UserDetials userDetials){
+
+        if(userDetials.getFb_id() == null){
+            userDetials.setFb_id("11a22ss33dd44ff");
+        }if(userDetials.getFirstName() == null){
+            userDetials.setFirstName("FirstName");
+        } if(userDetials.getLastName() == null){
+            userDetials.setLastName("LastName");
+        } if(userDetials.getMobileNo() == null){
+            userDetials.setMobileNo("9847092920");
+        } if(userDetials.getEmail() == null){
+            userDetials.setEmail("jazzbpn@gmail.com");
+        } if (userDetials.getDob() == null){
+            userDetials.setDob("2014-10-10");
+        } if(userDetials.getGender() == null){
+            userDetials.setGender("Male");
+        } if (userDetials.getZone() == null){
+            userDetials.setZone("Lumbini");
+        } if(userDetials.getDistrict() == null){
+            userDetials.setDistrict("Rupendehi");
+        } if(userDetials.getLocation() == null){
+            userDetials.setLocation("Butwal");
+        } if(userDetials.getProfilePicUrl() == null){
+            userDetials.setProfilePicUrl("http://www.google.com");
+        }
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         simpleFacebook.onActivityResult(requestCode, resultCode, data);
@@ -290,4 +290,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         simpleFacebook = SimpleFacebook.getInstance(this);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(PostFacebookUserDetials.progressDialog != null){
+            if(PostFacebookUserDetials.progressDialog.isShowing()){
+                PostFacebookUserDetials.progressDialog.dismiss();
+            }
+        }
+    }
 }

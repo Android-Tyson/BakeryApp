@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class PostFacebookUserDetials {
 
-    private static ProgressDialog progressDialog ;
+    public static ProgressDialog progressDialog ;
 
     public static void postUserDetials(String url , Context context){
 
