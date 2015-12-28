@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -33,6 +33,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
 
         setUserProfilePicture();
+        GetNavigationList.getNavList(this);
 
     }
 
@@ -89,6 +90,9 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
+        addSection(newSection("Home Child" , new HomeFragment()));
+        addSection(newSection("Home Child", new HomeFragment()));
+
         addSection(newSection("Bakeries", R.mipmap.ic_launcher, new BakeryFragment()));
 
         addSubheader("Gifts");
@@ -100,16 +104,14 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection("Offers 2", R.mipmap.ic_launcher, new OfferFragment()));
 
         addSubheader("Profile");
-        addSection(newSection("Profile 1", R.mipmap.ic_launcher, new ProfileFragment()));
-        addSection(newSection("Profile 2", R.mipmap.ic_launcher, new ProfileFragment()));
+        addBottomSection(newSection("Profile 1", R.mipmap.ic_launcher, new ProfileFragment()));
+        addBottomSection(newSection("Profile 1", R.mipmap.ic_launcher, new ProfileFragment()));
 
     }
-
 
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
-        Toast.makeText(this, "onAccountOpening", Toast.LENGTH_SHORT).show();
         Bundle loginBundle = new Bundle();
         loginBundle.putBoolean("isDirectLogin", true);
         Intent loginIntent = new Intent(this, MainActivity.class);
