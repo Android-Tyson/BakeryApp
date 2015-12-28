@@ -23,7 +23,7 @@ public class GetProfilePicture {
     public static void getProfilePicture(final Context context , String url) {
 
         if (MyUtils.isNetworkConnected(context)) {
-            if (Db_Utils.isTableDataExists()) {
+            if (Db_Utils.isUserInfoDataExists()) {
                 ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
@@ -33,7 +33,7 @@ public class GetProfilePicture {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         MyUtils.showLog(error.toString());
-                        List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
+                        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
                         GetProfilePicture.getProfilePicture(context, queryResults.get(0).getProfilePicUrl());
                     }
                 });

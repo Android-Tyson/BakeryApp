@@ -39,7 +39,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private void setUserProfilePicture(){
 
-        List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
+        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
         if(queryResults.size() > 0) {
             GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
         }
@@ -75,7 +75,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(MyUtils.isUserLoggedIn(this)){
 
-            List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
+            List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""

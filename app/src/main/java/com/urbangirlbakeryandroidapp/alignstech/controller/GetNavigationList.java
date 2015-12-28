@@ -2,17 +2,22 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
+import com.activeandroid.query.Delete;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by Dell on 12/28/2015.
@@ -42,19 +47,22 @@ public class GetNavigationList {
             JSONObject jsonObject = new JSONObject(jsonObjStr);
             JSONObject jsonArray = jsonObject.getJSONObject("result");
             JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Accessories");
+
+            if(Db_Utils.getCakesList().size() > 0){
+                 new Delete().from(Cakes.class).execute();
+            }
+
             for (int i = 0 ; i < accessoriesObject.length() ; i++){
                 JSONObject jsonObject1 = (JSONObject) accessoriesObject.get(i);
                 String categoryName = jsonObject1.getString("category_name");
-
+                Cakes cakes = new Cakes(categoryName);
+                cakes.save();
                 MyUtils.showLog(jsonObject1.toString());
             }
 
-
-
-//            Object accessoriesObject  = jsonArray.get("Accessories");
-//            Object giftObject  = jsonArray.get("Gift");
-//            Object offersObject  = jsonArray.get("Offers");
-            MyUtils.showLog(jsonArray.toString());
+            List<Cakes> cakesList = Db_Utils.getCakesList();
+            MyUtils.showLog(cakesList.toString());
+            MyUtils.showLog(cakesList.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -49,9 +49,9 @@ public class PostFacebookUserDetials {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                if(Db_Utils.isTableDataExists()){
+                if(Db_Utils.isUserInfoDataExists()){
 
-                    List<DataBase_UserInfo> queryResults = Db_Utils.getDatabaseList();
+                    List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
 
                     params.put("fb_id", queryResults.get(0).getFb_id());
                     params.put("mobile_no", queryResults.get(0).getMobileNo());

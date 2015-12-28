@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
+import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
 /**
@@ -17,6 +18,7 @@ public class AppUtils extends Application{
 
         Configuration.Builder configurationBuilder = new Configuration.Builder(this).setDatabaseName("my_database.db");
         configurationBuilder.addModelClass(DataBase_UserInfo.class);
+        configurationBuilder.addModelClass(Cakes.class);
         ActiveAndroid.initialize(configurationBuilder.create());
 
         MyUtils.showLog("Active android initialize");

@@ -11,8 +11,10 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Cakes")
 public class Cakes extends Model{
 
-    @Column(name = "Category")
+    @Column(name = "Category" , onUniqueConflict = Column.ConflictAction.REPLACE)
     private String categoryName;
+
+    public Cakes(){ }
 
     public Cakes(String categoryName){
         this.categoryName = categoryName;
