@@ -5,6 +5,8 @@ package com.urbangirlbakeryandroidapp.alignstech.utils;
  */
 public class Apis {
 
-    public static String userDetialPostURl = "http://cake.yogeshojha.com.np/api/userRegister";
+    private static final String BASE_URL = "http://cake.yogeshojha.com.np/api/";
+    public static final String userDetialPostURl = BASE_URL + "userRegister";
+    public static final String nav_collection = BASE_URL + "collection";
 
 }
