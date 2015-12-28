@@ -48,9 +48,7 @@ public class GetNavigationList {
             JSONObject jsonArray = jsonObject.getJSONObject("result");
             JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Accessories");
 
-            if(Db_Utils.getCakesList().size() > 0){
-                 new Delete().from(Cakes.class).execute();
-            }
+            deletePreviouslySavedData();
 
             for (int i = 0 ; i < accessoriesObject.length() ; i++){
                 JSONObject jsonObject1 = (JSONObject) accessoriesObject.get(i);
@@ -64,8 +62,17 @@ public class GetNavigationList {
             MyUtils.showLog(cakesList.toString());
             MyUtils.showLog(cakesList.toString());
 
+
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private static void deletePreviouslySavedData() {
+
+        if(Db_Utils.getCakesList().size() > 0){
+            new Delete().from(Cakes.class).execute();
         }
 
     }

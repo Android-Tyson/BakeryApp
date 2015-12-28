@@ -43,7 +43,6 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         if(queryResults.size() > 0) {
             GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
         }
-
     }
 
     @Override
@@ -107,6 +106,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSubheader("Accessories");
         addSection(newSection("Accessories 1", R.mipmap.ic_launcher, new OfferFragment()));
         addSection(newSection("Accessories 2", R.mipmap.ic_launcher, new OfferFragment()));
+
+//        getSectionByTitle("home").setTitle("NewTitle");
 
         addSubheader("Profile");
         addBottomSection(newSection("Profile 1", R.mipmap.ic_launcher, new ProfileFragment()));
