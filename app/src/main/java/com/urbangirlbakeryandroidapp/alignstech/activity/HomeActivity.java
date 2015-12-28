@@ -90,18 +90,23 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
-        addSection(newSection("Home Child" , new HomeFragment()));
-        addSection(newSection("Home Child", new HomeFragment()));
+        addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
 
-        addSection(newSection("Bakeries", R.mipmap.ic_launcher, new BakeryFragment()));
+        addSubheader("Cake");
+        addSection(newSection("Cake 1", R.mipmap.ic_launcher, new HomeFragment()));
+        addSection(newSection("Cake 2", R.mipmap.ic_launcher, new HomeFragment()));
 
         addSubheader("Gifts");
-        addSection(newSection("Name 1", R.mipmap.ic_launcher, new GiftsFragment()));
-        addSection(newSection("Name 2", R.mipmap.ic_launcher, new GiftsFragment()));
+        addSection(newSection("Gifts 1", R.mipmap.ic_launcher, new BakeryFragment()));
+        addSection(newSection("Gifts 2", R.mipmap.ic_launcher, new BakeryFragment()));
 
         addSubheader("Offers");
-        addSection(newSection("Offers 1", R.mipmap.ic_launcher, new OfferFragment()));
-        addSection(newSection("Offers 2", R.mipmap.ic_launcher, new OfferFragment()));
+        addSection(newSection("Offers 1", R.mipmap.ic_launcher, new GiftsFragment()));
+        addSection(newSection("Offers 2", R.mipmap.ic_launcher, new GiftsFragment()));
+
+        addSubheader("Accessories");
+        addSection(newSection("Accessories 1", R.mipmap.ic_launcher, new OfferFragment()));
+        addSection(newSection("Accessories 2", R.mipmap.ic_launcher, new OfferFragment()));
 
         addSubheader("Profile");
         addBottomSection(newSection("Profile 1", R.mipmap.ic_launcher, new ProfileFragment()));

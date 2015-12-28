@@ -45,8 +45,6 @@ public class GetNavigationList {
             for (int i = 0 ; i < accessoriesObject.length() ; i++){
                 JSONObject jsonObject1 = (JSONObject) accessoriesObject.get(i);
                 String categoryName = jsonObject1.getString("category_name");
-                String productname = jsonObject1.getString("product_name");
-
 
                 MyUtils.showLog(jsonObject1.toString());
             }
