@@ -19,7 +19,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-    public CakesFragment newInstance(int number){
+    public static CakesFragment newInstance(int number){
 
         CakesFragment cakesFragment = new CakesFragment();
         Bundle bundle = new Bundle();

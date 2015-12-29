@@ -145,7 +145,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSubheader("Cake");
         for (int i = 0 ; i < cakesList.size() ; i++){
 
-            addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
+            addSection(newSection(cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
 
         }
 
