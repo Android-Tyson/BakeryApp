@@ -19,6 +19,15 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
+    public CakesFragment newInstance(int number){
+
+        CakesFragment cakesFragment = new CakesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("Number" , number);
+        cakesFragment.setArguments(bundle);
+
+        return cakesFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
