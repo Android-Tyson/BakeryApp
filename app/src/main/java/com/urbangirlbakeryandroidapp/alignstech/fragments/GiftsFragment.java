@@ -12,7 +12,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GiftsFragment extends Fragment {
+public class GiftsFragment extends android.support.v4.app.Fragment {
 
 
     public GiftsFragment() {

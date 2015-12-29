@@ -5,17 +5,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
+import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
@@ -31,6 +36,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyBus.getInstance().register(this);
 
         setUserProfilePicture();
         GetNavigationList.getNavList(this);
@@ -132,4 +138,18 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
+    @Subscribe
+    public void getCakeList(NavListResultEvent event){
+        List<Cakes> cakesList = event.getCakeList();
+        MyUtils.showLog(cakesList.toString());
+
+        for (int i = 0 ; i < cakesList.size() ; i++){
+
+            addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
+
+        }
+
+        MyUtils.showLog(cakesList.toString());
+
+    }
 }

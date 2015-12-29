@@ -7,9 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -46,7 +48,7 @@ public class GetNavigationList {
         try {
             JSONObject jsonObject = new JSONObject(jsonObjStr);
             JSONObject jsonArray = jsonObject.getJSONObject("result");
-            JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Accessories");
+            JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Cakes");
 
             deletePreviouslySavedData();
 
@@ -61,6 +63,7 @@ public class GetNavigationList {
             List<Cakes> cakesList = Db_Utils.getCakesList();
             MyUtils.showLog(cakesList.toString());
             MyUtils.showLog(cakesList.toString());
+            MyBus.getInstance().post(new NavListResultEvent(cakesList));
 
 
         } catch (JSONException e) {
