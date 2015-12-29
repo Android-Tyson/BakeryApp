@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.utils;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
@@ -35,5 +36,12 @@ public class Db_Utils {
 
     }
 
+    public static void deleteOldCakeListData() {
+
+        if(Db_Utils.getCakesList().size() > 0){
+            new Delete().from(Cakes.class).execute();
+        }
+
+    }
 
 }

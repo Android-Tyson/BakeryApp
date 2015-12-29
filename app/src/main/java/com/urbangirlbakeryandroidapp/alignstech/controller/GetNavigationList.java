@@ -2,7 +2,6 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
-import com.activeandroid.query.Delete;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -50,7 +49,7 @@ public class GetNavigationList {
             JSONObject jsonArray = jsonObject.getJSONObject("result");
             JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Cakes");
 
-            deletePreviouslySavedData();
+            Db_Utils.deleteOldCakeListData();
 
             for (int i = 0 ; i < accessoriesObject.length() ; i++){
                 JSONObject jsonObject1 = (JSONObject) accessoriesObject.get(i);
@@ -72,11 +71,4 @@ public class GetNavigationList {
 
     }
 
-    private static void deletePreviouslySavedData() {
-
-        if(Db_Utils.getCakesList().size() > 0){
-            new Delete().from(Cakes.class).execute();
-        }
-
-    }
 }
