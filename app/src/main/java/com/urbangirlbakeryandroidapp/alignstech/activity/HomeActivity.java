@@ -115,8 +115,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
-        addSubheader("Settings");
-        addBottomSection(newSection("Profile", R.mipmap.ic_launcher, new ProfileFragment()));
+
 
     }
 
@@ -142,12 +141,15 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         List<Cakes> cakesList = event.getCakeList();
         MyUtils.showLog(cakesList.toString());
 
-        addSubheader("Cake");
+        addSection(newSection("Cakes"  , R.mipmap.ic_launcher , CakesFragment.newInstance(0)));
         for (int i = 0 ; i < cakesList.size() ; i++){
 
-            addSection(newSection(cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
+            addSection(newSection("\t\t\t\t\t\t"+cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
 
         }
+
+        addSubheader("Settings");
+        addBottomSection(newSection("Profile", R.mipmap.ic_launcher, new ProfileFragment()));
 
         MyUtils.showLog(cakesList.toString());
 

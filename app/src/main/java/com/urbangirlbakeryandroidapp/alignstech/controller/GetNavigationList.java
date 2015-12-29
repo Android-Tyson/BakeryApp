@@ -59,10 +59,12 @@ public class GetNavigationList {
                 MyUtils.showLog(jsonObject1.toString());
             }
 
-            List<Cakes> cakesList = Db_Utils.getCakesList();
-            MyUtils.showLog(cakesList.toString());
-            MyUtils.showLog(cakesList.toString());
-            MyBus.getInstance().post(new NavListResultEvent(cakesList));
+            if(Db_Utils.isCakeListDataExists()) {
+                List<Cakes> cakesList = Db_Utils.getCakesList();
+                MyUtils.showLog(cakesList.toString());
+                MyBus.getInstance().post(new NavListResultEvent(cakesList));
+
+            }
 
 
         } catch (JSONException e) {

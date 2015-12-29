@@ -12,25 +12,37 @@ import java.util.List;
  */
 public class Db_Utils {
 
-    public static boolean isUserInfoDataExists(){
+    public static boolean isUserInfoDataExists() {
 
         List<DataBase_UserInfo> queryResults = new Select().from(DataBase_UserInfo.class).execute();
         boolean check = queryResults.isEmpty();
-        if(check){
+        if (check) {
             return false;
-        }else{
+        } else {
             return true;
         }
 
     }
 
-    public static List<DataBase_UserInfo> getUserInfoList(){
+    public static List<DataBase_UserInfo> getUserInfoList() {
 
         return new Select().from(DataBase_UserInfo.class).execute();
 
     }
 
-    public static List<Cakes> getCakesList(){
+    public static boolean isCakeListDataExists() {
+
+        List<Cakes> queryResults = new Select().from(Cakes.class).execute();
+        boolean check = queryResults.isEmpty();
+        if (check) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public static List<Cakes> getCakesList() {
 
         return new Select().from(Cakes.class).execute();
 
@@ -38,7 +50,7 @@ public class Db_Utils {
 
     public static void deleteOldCakeListData() {
 
-        if(Db_Utils.getCakesList().size() > 0){
+        if (Db_Utils.getCakesList().size() > 0) {
             new Delete().from(Cakes.class).execute();
         }
 
