@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -63,7 +63,7 @@ public class GetNavigationList {
 
             if(Db_Utils.isCakeListDataExists()) {
                 List<Cakes> cakesList = Db_Utils.getCakesList();
-                MyBus.getInstance().post(new NavListResultEvent(cakesList));
+                MyBus.getInstance().post(new CakeListResultEvent(cakesList));
             }
 
             // Gift Jobs

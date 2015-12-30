@@ -7,11 +7,11 @@ import java.util.List;
 /**
  * Created by Dell on 12/28/2015.
  */
-public class NavListResultEvent {
+public class CakeListResultEvent {
 
     List<Cakes> dataList;
 
-    public NavListResultEvent(List<Cakes> dataList){
+    public CakeListResultEvent(List<Cakes> dataList){
         this.dataList = dataList;
     }
 

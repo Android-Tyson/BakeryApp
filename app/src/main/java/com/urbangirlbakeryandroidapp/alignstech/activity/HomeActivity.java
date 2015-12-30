@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
@@ -136,7 +136,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     @Subscribe
-    public void getCakeList(NavListResultEvent event){
+    public void getCakeList(CakeListResultEvent event){
         List<Cakes> cakesList = event.getCakeList();
         MyUtils.showLog(cakesList.toString());
 
