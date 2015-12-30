@@ -14,11 +14,16 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
  */
 public class UserProfile extends Fragment {
 
-
     public UserProfile() {
         // Required empty public constructor
     }
 
+    public static UserProfile newInstance(){
+
+        UserProfile userProfile = new UserProfile();
+        return userProfile;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
