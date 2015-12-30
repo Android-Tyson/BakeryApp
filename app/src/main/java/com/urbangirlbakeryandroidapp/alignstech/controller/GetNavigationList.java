@@ -9,9 +9,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
+import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -93,25 +95,25 @@ public class GetNavigationList {
 
 
             // Offers Job
-//            JSONArray offerJsonArray  = (JSONArray) jsonObj.get("Offers");
-//            if(offerJsonArray != null && !offerJsonArray.toString().isEmpty()){
-//
-//                Db_Utils.deleteOldOfferListData();
-//
-//                for (int i = 0 ; i < offerJsonArray.length() ; i++){
-//                    JSONObject jsonObject1 = (JSONObject) offerJsonArray.get(i);
-//                    String categoryName = jsonObject1.getString("category_name");
-//                    Offers offers = new Offers(categoryName);
-//                    offers.save();
-//                }
-//
-//                if(Db_Utils.isOfferListDataExists()) {
-//                    List<Offers> offerList = Db_Utils.getOfferList();
-//                    MyBus.getInstance().post(new OfferListResultEvent(offerList));
-//                }
-//            }else {
-//                MyUtils.showLog("NullPointerException");
-//            }
+            JSONArray offerJsonArray  = (JSONArray) jsonObj.get("Offers");
+            if(offerJsonArray != null && !offerJsonArray.toString().isEmpty()){
+
+                Db_Utils.deleteOldOfferListData();
+
+                for (int i = 0 ; i < offerJsonArray.length() ; i++){
+                    JSONObject jsonObject1 = (JSONObject) offerJsonArray.get(i);
+                    String categoryName = jsonObject1.getString("category_name");
+                    Offers offers = new Offers(categoryName);
+                    offers.save();
+                }
+
+                if(Db_Utils.isOfferListDataExists()) {
+                    List<Offers> offerList = Db_Utils.getOfferList();
+                    MyBus.getInstance().post(new OfferListResultEvent(offerList));
+                }
+            }else {
+                MyUtils.showLog("NullPointerException");
+            }
 
 
 
