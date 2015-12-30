@@ -97,23 +97,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
         addSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
-
-
-//        addSubheader("Cake");
-//        addSection(newSection("Cake 1", R.mipmap.ic_launcher, new HomeFragment()));
-//        addSection(newSection("Cake 2", R.mipmap.ic_launcher, new HomeFragment()));
-//
-//        addSubheader("Gifts");
-//        addSection(newSection("Gifts 1", R.mipmap.ic_launcher, new BakeryFragment()));
-//        addSection(newSection("Gifts 2", R.mipmap.ic_launcher, new BakeryFragment()));
-//
-//        addSubheader("Offers");
-//        addSection(newSection("Offers 1", R.mipmap.ic_launcher, new GiftsFragment()));
-//        addSection(newSection("Offers 2", R.mipmap.ic_launcher, new GiftsFragment()));
-//
-//        addSubheader("Accessories");
-//        addSection(newSection("Accessories 1", R.mipmap.ic_launcher, new OfferFragment()));
-//        addSection(newSection("Accessories 2", R.mipmap.ic_launcher, new OfferFragment()));
+        addDivisor();
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
