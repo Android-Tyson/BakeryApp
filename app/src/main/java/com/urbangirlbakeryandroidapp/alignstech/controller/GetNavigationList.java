@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class GetNavigationList {
 
-    public static void getNavList(Context context){
+    public static void parseNavigationDrawerList(Context context){
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Apis.nav_collection, new Response.Listener<JSONObject>() {
             @Override

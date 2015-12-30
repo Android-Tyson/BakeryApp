@@ -43,7 +43,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         MyBus.getInstance().register(this);
 
         setUserProfilePicture();
-        GetNavigationList.getNavList(this);
+        GetNavigationList.parseNavigationDrawerList(this);
 
     }
 
