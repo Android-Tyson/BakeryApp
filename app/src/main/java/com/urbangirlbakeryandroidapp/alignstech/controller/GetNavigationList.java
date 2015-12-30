@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -58,7 +59,6 @@ public class GetNavigationList {
                 String categoryName = jsonObject1.getString("category_name");
                 Cakes cakes = new Cakes(categoryName);
                 cakes.save();
-                MyUtils.showLog(jsonObject1.toString());
             }
 
             if(Db_Utils.isCakeListDataExists()) {
@@ -68,22 +68,20 @@ public class GetNavigationList {
 
             // Gift Jobs
             JSONArray giftJsonArray  = (JSONArray) jsonObj.get("Gift");
-            Db_Utils.deleteOldCakeListData();
+            Db_Utils.deleteOldGiftListData();
 
             for (int i = 0 ; i < giftJsonArray.length() ; i++){
-                JSONObject jsonObject1 = (JSONObject) cakesJsonArray.get(i);
+                JSONObject jsonObject1 = (JSONObject) giftJsonArray.get(i);
                 String categoryName = jsonObject1.getString("category_name");
                 Gifts gifts = new Gifts(categoryName);
                 gifts.save();
-                MyUtils.showLog(jsonObject1.toString());
             }
 
-//            if(Db_Utils.isGiftListDataExists()) {
-//                List<Gifts> giftList = Db_Utils.getGiftList();
-//                MyBus.getInstance().post(new NavListResultEvent(giftList));
-//            }
+            if(Db_Utils.isGiftListDataExists()) {
+                List<Gifts> giftList = Db_Utils.getGiftList();
+                MyBus.getInstance().post(new GiftListResultEvent(giftList));
+            }
 
-            MyUtils.showLog(" ");
         } catch (JSONException e) {
             e.printStackTrace();
         }

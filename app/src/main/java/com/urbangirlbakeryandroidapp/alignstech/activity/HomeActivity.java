@@ -9,6 +9,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
@@ -17,6 +18,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -41,10 +43,10 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
-    private void setUserProfilePicture(){
+    private void setUserProfilePicture() {
 
         List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
-        if(queryResults.size() > 0) {
+        if (queryResults.size() > 0) {
             GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
         }
     }
@@ -76,14 +78,14 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
-        if(MyUtils.isUserLoggedIn(this)){
+        if (MyUtils.isUserLoggedIn(this)) {
 
             List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
 
             account = new MaterialAccount(getResources(),
-                    queryResults.get(0).getFirstName() + " "+ queryResults.get(0).getLastName(), ""
-                    , null , R.drawable.drawer_bg);
-        }else {
+                    queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName(), ""
+                    , null, R.drawable.drawer_bg);
+        } else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
                     , R.mipmap.ic_launcher, R.drawable.drawer_bg);
         }
@@ -136,18 +138,24 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     @Subscribe
-    public void getCakeList(CakeListResultEvent event){
+    public void getCakeList(CakeListResultEvent event) {
         List<Cakes> cakesList = event.getCakeList();
-        MyUtils.showLog(cakesList.toString());
 
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-        for (int i = 0 ; i < cakesList.size() ; i++){
-
-            addSection(newSection("\t\t\t"+cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
-
+        for (int i = 0; i < cakesList.size(); i++) {
+            addSection(newSection("\t\t\t" + cakesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
-        MyUtils.showLog(cakesList.toString());
+    }
+
+    @Subscribe
+    public void getGiftList(GiftListResultEvent event) {
+        List<Gifts> giftsList = event.getGiftList();
+
+        addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        for (int i = 0; i < giftsList.size(); i++) {
+            addSection(newSection("\t\t\t" + giftsList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+        }
 
     }
 }
