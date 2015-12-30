@@ -37,5 +37,5 @@
     <color name="editText_stroke_default_state">#D0D0D0</color>
     <color name="homescreenBackground">#f0f0f0</color>
     <color name="tabTextInactive">#f7f7f7</color>
-
+    <color name="textHint">#b3b3b3</color>
 </resources>
