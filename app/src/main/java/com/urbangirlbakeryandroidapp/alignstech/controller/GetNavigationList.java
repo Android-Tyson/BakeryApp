@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
+import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -46,13 +47,14 @@ public class GetNavigationList {
         MyUtils.showLog(jsonObjStr);
         try {
             JSONObject jsonObject = new JSONObject(jsonObjStr);
-            JSONObject jsonArray = jsonObject.getJSONObject("result");
-            JSONArray accessoriesObject  = (JSONArray) jsonArray.get("Cakes");
+            JSONObject jsonObj = jsonObject.getJSONObject("result");
 
+            // Cake Jobs
+            JSONArray cakesJsonArray  = (JSONArray) jsonObj.get("Cakes");
             Db_Utils.deleteOldCakeListData();
 
-            for (int i = 0 ; i < accessoriesObject.length() ; i++){
-                JSONObject jsonObject1 = (JSONObject) accessoriesObject.get(i);
+            for (int i = 0 ; i < cakesJsonArray.length() ; i++){
+                JSONObject jsonObject1 = (JSONObject) cakesJsonArray.get(i);
                 String categoryName = jsonObject1.getString("category_name");
                 Cakes cakes = new Cakes(categoryName);
                 cakes.save();
@@ -61,12 +63,27 @@ public class GetNavigationList {
 
             if(Db_Utils.isCakeListDataExists()) {
                 List<Cakes> cakesList = Db_Utils.getCakesList();
-                MyUtils.showLog(cakesList.toString());
                 MyBus.getInstance().post(new NavListResultEvent(cakesList));
-
             }
 
+            // Gift Jobs
+            JSONArray giftJsonArray  = (JSONArray) jsonObj.get("Gift");
+            Db_Utils.deleteOldCakeListData();
 
+            for (int i = 0 ; i < giftJsonArray.length() ; i++){
+                JSONObject jsonObject1 = (JSONObject) cakesJsonArray.get(i);
+                String categoryName = jsonObject1.getString("category_name");
+                Gifts gifts = new Gifts(categoryName);
+                gifts.save();
+                MyUtils.showLog(jsonObject1.toString());
+            }
+
+//            if(Db_Utils.isGiftListDataExists()) {
+//                List<Gifts> giftList = Db_Utils.getGiftList();
+//                MyBus.getInstance().post(new NavListResultEvent(giftList));
+//            }
+
+            MyUtils.showLog(" ");
         } catch (JSONException e) {
             e.printStackTrace();
         }
