@@ -12,11 +12,9 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
@@ -95,28 +93,27 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
-        addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
+        addSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
+        addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
 
-        addSubheader("Cake");
-        addSection(newSection("Cake 1", R.mipmap.ic_launcher, new HomeFragment()));
-        addSection(newSection("Cake 2", R.mipmap.ic_launcher, new HomeFragment()));
 
-        addSubheader("Gifts");
-        addSection(newSection("Gifts 1", R.mipmap.ic_launcher, new BakeryFragment()));
-        addSection(newSection("Gifts 2", R.mipmap.ic_launcher, new BakeryFragment()));
-
-        addSubheader("Offers");
-        addSection(newSection("Offers 1", R.mipmap.ic_launcher, new GiftsFragment()));
-        addSection(newSection("Offers 2", R.mipmap.ic_launcher, new GiftsFragment()));
-
-        addSubheader("Accessories");
-        addSection(newSection("Accessories 1", R.mipmap.ic_launcher, new OfferFragment()));
-        addSection(newSection("Accessories 2", R.mipmap.ic_launcher, new OfferFragment()));
+//        addSubheader("Cake");
+//        addSection(newSection("Cake 1", R.mipmap.ic_launcher, new HomeFragment()));
+//        addSection(newSection("Cake 2", R.mipmap.ic_launcher, new HomeFragment()));
+//
+//        addSubheader("Gifts");
+//        addSection(newSection("Gifts 1", R.mipmap.ic_launcher, new BakeryFragment()));
+//        addSection(newSection("Gifts 2", R.mipmap.ic_launcher, new BakeryFragment()));
+//
+//        addSubheader("Offers");
+//        addSection(newSection("Offers 1", R.mipmap.ic_launcher, new GiftsFragment()));
+//        addSection(newSection("Offers 2", R.mipmap.ic_launcher, new GiftsFragment()));
+//
+//        addSubheader("Accessories");
+//        addSection(newSection("Accessories 1", R.mipmap.ic_launcher, new OfferFragment()));
+//        addSection(newSection("Accessories 2", R.mipmap.ic_launcher, new OfferFragment()));
 
 //        getSectionByTitle("home").setTitle("NewTitle");
-
-        addSubheader("Settings");
-        addBottomSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
 
 
     }
@@ -146,7 +143,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0 ; i < cakesList.size() ; i++){
 
-            addSection(newSection("\t\t\t\t\t\t"+cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
+            addSection(newSection("\t\t\t"+cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
 
         }
 
