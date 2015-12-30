@@ -8,8 +8,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
+import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -52,35 +54,66 @@ public class GetNavigationList {
 
             // Cake Jobs
             JSONArray cakesJsonArray  = (JSONArray) jsonObj.get("Cakes");
-            Db_Utils.deleteOldCakeListData();
+            if(cakesJsonArray != null){
 
-            for (int i = 0 ; i < cakesJsonArray.length() ; i++){
-                JSONObject jsonObject1 = (JSONObject) cakesJsonArray.get(i);
-                String categoryName = jsonObject1.getString("category_name");
-                Cakes cakes = new Cakes(categoryName);
-                cakes.save();
+                Db_Utils.deleteOldCakeListData();
+
+                for (int i = 0 ; i < cakesJsonArray.length() ; i++){
+                    JSONObject jsonObject1 = (JSONObject) cakesJsonArray.get(i);
+                    String categoryName = jsonObject1.getString("category_name");
+                    Cakes cakes = new Cakes(categoryName);
+                    cakes.save();
+                }
+
+                if(Db_Utils.isCakeListDataExists()) {
+                    List<Cakes> cakesList = Db_Utils.getCakesList();
+                    MyBus.getInstance().post(new CakeListResultEvent(cakesList));
+                }
             }
 
-            if(Db_Utils.isCakeListDataExists()) {
-                List<Cakes> cakesList = Db_Utils.getCakesList();
-                MyBus.getInstance().post(new CakeListResultEvent(cakesList));
-            }
 
             // Gift Jobs
             JSONArray giftJsonArray  = (JSONArray) jsonObj.get("Gift");
-            Db_Utils.deleteOldGiftListData();
+            if(giftJsonArray != null){
 
-            for (int i = 0 ; i < giftJsonArray.length() ; i++){
-                JSONObject jsonObject1 = (JSONObject) giftJsonArray.get(i);
-                String categoryName = jsonObject1.getString("category_name");
-                Gifts gifts = new Gifts(categoryName);
-                gifts.save();
+                Db_Utils.deleteOldGiftListData();
+
+                for (int i = 0 ; i < giftJsonArray.length() ; i++){
+                    JSONObject jsonObject1 = (JSONObject) giftJsonArray.get(i);
+                    String categoryName = jsonObject1.getString("category_name");
+                    Gifts gifts = new Gifts(categoryName);
+                    gifts.save();
+                }
+
+                if(Db_Utils.isGiftListDataExists()) {
+                    List<Gifts> giftList = Db_Utils.getGiftList();
+                    MyBus.getInstance().post(new GiftListResultEvent(giftList));
+                }
             }
 
-            if(Db_Utils.isGiftListDataExists()) {
-                List<Gifts> giftList = Db_Utils.getGiftList();
-                MyBus.getInstance().post(new GiftListResultEvent(giftList));
+
+            // Offers Job
+            JSONArray offerJsonArray  = (JSONArray) jsonObj.get("Offers");
+            if(offerJsonArray != null && !offerJsonArray.toString().isEmpty()){
+
+                Db_Utils.deleteOldOfferListData();
+
+                for (int i = 0 ; i < offerJsonArray.length() ; i++){
+                    JSONObject jsonObject1 = (JSONObject) offerJsonArray.get(i);
+                    String categoryName = jsonObject1.getString("category_name");
+                    Offers offers = new Offers(categoryName);
+                    offers.save();
+                }
+
+                if(Db_Utils.isOfferListDataExists()) {
+                    List<Offers> offerList = Db_Utils.getOfferList();
+                    MyBus.getInstance().post(new OfferListResultEvent(offerList));
+                }
+            }else {
+                MyUtils.showLog("NullPointerException");
             }
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();

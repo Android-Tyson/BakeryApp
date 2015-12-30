@@ -10,6 +10,7 @@ import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
@@ -19,6 +20,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
+import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -139,6 +141,17 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < giftsList.size(); i++) {
             addSection(newSection("\t\t\t" + giftsList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+        }
+
+    }
+
+    @Subscribe
+    public void getOfferList(OfferListResultEvent event) {
+        List<Offers> offerList = event.getOfferList();
+
+        addSection(newSection("Offers", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        for (int i = 0; i < offerList.size(); i++) {
+            addSection(newSection("\t\t\t" + offerList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }

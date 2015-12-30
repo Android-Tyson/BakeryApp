@@ -5,6 +5,7 @@ import com.activeandroid.query.Select;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
+import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 
 import java.util.List;
 
@@ -79,6 +80,33 @@ public class Db_Utils {
 
         if (Db_Utils.getGiftList().size() > 0) {
             new Delete().from(Gifts.class).execute();
+        }
+
+    }
+
+
+    public static boolean isOfferListDataExists() {
+
+        List<Offers> queryResults = new Select().from(Offers.class).execute();
+        boolean check = queryResults.isEmpty();
+        if (check) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public static List<Offers> getOfferList() {
+
+        return new Select().from(Offers.class).execute();
+
+    }
+
+    public static void deleteOldOfferListData() {
+
+        if (Db_Utils.getOfferList().size() > 0 ) {
+            new Delete().from(Offers.class).execute();
         }
 
     }
