@@ -17,7 +17,7 @@
 
         <meta-data
             android:name="AA_MODEL"
-            android:value=".model.DataBase_UserInfo , .model.Cakes" />
+            android:value=".model.DataBase_UserInfo , .model.Cakes , .model.Gifts" />
 
         <meta-data
             android:name="AA_DB_VERSION"

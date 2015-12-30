@@ -14,8 +14,17 @@ public class Gifts extends Model{
     @Column(name = "Category")
     private String categoryName;
 
+    public Gifts(){ }
+
     public Gifts(String categoryName){
         this.categoryName = categoryName;
     }
-    
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
