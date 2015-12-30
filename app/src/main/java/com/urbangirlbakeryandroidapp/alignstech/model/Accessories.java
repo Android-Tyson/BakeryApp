@@ -14,8 +14,17 @@ public class Accessories extends Model{
     @Column(name = "Category")
     private String categoryName;
 
+    public Accessories(){ }
+
     public Accessories(String categoryName){
         this.categoryName = categoryName;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

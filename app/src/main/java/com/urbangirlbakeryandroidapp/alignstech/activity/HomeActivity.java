@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
@@ -17,6 +18,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
+import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
@@ -99,7 +101,6 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
         addSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
-        addDivisor();
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
@@ -127,6 +128,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     public void getCakeList(CakeListResultEvent event) {
         List<Cakes> cakesList = event.getCakeList();
 
+        addDivisor();
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < cakesList.size(); i++) {
             addSection(newSection("\t\t\t" + cakesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
@@ -138,6 +140,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     public void getGiftList(GiftListResultEvent event) {
         List<Gifts> giftsList = event.getGiftList();
 
+        addDivisor();
         addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < giftsList.size(); i++) {
             addSection(newSection("\t\t\t" + giftsList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
@@ -149,9 +152,22 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     public void getOfferList(OfferListResultEvent event) {
         List<Offers> offerList = event.getOfferList();
 
+        addDivisor();
         addSection(newSection("Offers", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < offerList.size(); i++) {
             addSection(newSection("\t\t\t" + offerList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+        }
+
+    }
+
+    @Subscribe
+    public void getOfferList(AccessoriesListResultEvent event) {
+        List<Accessories> accessoriesList = event.getAccessoriesList();
+
+        addDivisor();
+        addSection(newSection("Accessories", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        for (int i = 0; i < accessoriesList.size(); i++) {
+            addSection(newSection("\t\t\t" + accessoriesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }

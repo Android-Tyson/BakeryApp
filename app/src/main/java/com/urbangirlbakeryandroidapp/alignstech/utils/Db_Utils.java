@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.utils;
 
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
@@ -32,6 +33,8 @@ public class Db_Utils {
 
     }
 
+
+
     public static boolean isCakeListDataExists() {
 
         List<Cakes> queryResults = new Select().from(Cakes.class).execute();
@@ -58,6 +61,35 @@ public class Db_Utils {
 
     }
 
+
+
+    public static boolean isAccessoriesListDataExists() {
+
+        List<Accessories> queryResults = new Select().from(Accessories.class).execute();
+        boolean check = queryResults.isEmpty();
+        if (check) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public static List<Accessories> getAccessoriesList() {
+
+        return new Select().from(Accessories.class).execute();
+
+    }
+
+    public static void deleteOldAccessoriesListData() {
+
+        if (Db_Utils.getAccessoriesList().size() > 0) {
+            new Delete().from(Accessories.class).execute();
+        }
+
+    }
+
+
     public static boolean isGiftListDataExists() {
 
         List<Gifts> queryResults = new Select().from(Gifts.class).execute();
@@ -83,6 +115,7 @@ public class Db_Utils {
         }
 
     }
+
 
 
     public static boolean isOfferListDataExists() {
