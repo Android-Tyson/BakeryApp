@@ -11,12 +11,12 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NavListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.BakeryFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.ProfileFragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
@@ -115,6 +115,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
+        addSubheader("Settings");
+        addBottomSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
 
 
     }
@@ -141,15 +143,12 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         List<Cakes> cakesList = event.getCakeList();
         MyUtils.showLog(cakesList.toString());
 
-        addSection(newSection("Cakes"  , R.mipmap.ic_launcher , CakesFragment.newInstance(0)));
+        addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0 ; i < cakesList.size() ; i++){
 
             addSection(newSection("\t\t\t\t\t\t"+cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
 
         }
-
-        addSubheader("Settings");
-        addBottomSection(newSection("Profile", R.mipmap.ic_launcher, new ProfileFragment()));
 
         MyUtils.showLog(cakesList.toString());
 
