@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dataBase_userInfo.save();
 
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
-            GetProfilePicture.getProfilePicture(getApplicationContext() , userDetials.getProfilePicUrl());
+            GetProfilePicture.userProfilePicture(getApplicationContext(), userDetials.getProfilePicUrl());
 
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
             intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());

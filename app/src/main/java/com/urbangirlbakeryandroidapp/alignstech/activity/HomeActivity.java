@@ -13,10 +13,11 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
 import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
@@ -42,18 +43,14 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-        setUserProfilePicture();
-        GetNavigationList.parseNavigationDrawerList(this);
-
-    }
-
-    private void setUserProfilePicture() {
-
-        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
-        if (queryResults.size() > 0) {
-            GetProfilePicture.getProfilePicture(this, queryResults.get(0).getProfilePicUrl());
+        MyUtils.setUserProfilePicture(this);
+        if(!Db_Utils.isCakeListDataExists()) {
+            GetNavigationList.parseNavigationDrawerList(this);
         }
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,6 +101,10 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
+        if(Db_Utils.isCakeListDataExists()) {
+            initializeSavedNavigationDrawerList();
+        }
+
 
     }
 
@@ -121,6 +122,47 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     @Override
     public void onChangeAccount(MaterialAccount materialAccount) {
+
+    }
+
+
+    private void initializeSavedNavigationDrawerList(){
+
+        if(Db_Utils.isCakeListDataExists()){
+
+            addSubheader("Cakes");
+            List<Cakes> cakesList = Db_Utils.getCakesList();
+            for (int i = 0 ; i < cakesList.size() ; i++){
+                addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
+            }
+        }
+
+        if(Db_Utils.isGiftListDataExists()){
+
+            addSubheader("Gifts");
+            List<Gifts> giftsList = Db_Utils.getGiftList();
+            for (int i = 0 ; i < giftsList.size() ; i++){
+                addSection(newSection(giftsList.get(i).getCategoryName() , new GiftsFragment()));
+            }
+        }
+
+        if(Db_Utils.isOfferListDataExists()){
+
+            addSubheader("Offers");
+            List<Offers> offerList = Db_Utils.getOfferList();
+            for (int i = 0 ; i < offerList.size() ; i++){
+                addSection(newSection(offerList.get(i).getCategoryName() , new OfferFragment()));
+            }
+        }
+
+        if(Db_Utils.isAccessoriesListDataExists()){
+
+            addSubheader("Accessories");
+            List<Accessories> accessoriesList = Db_Utils.getAccessoriesList();
+            for (int i = 0 ; i < accessoriesList.size() ; i++){
+                addSection(newSection(accessoriesList.get(i).getCategoryName() , new OfferFragment()));
+            }
+        }
 
     }
 

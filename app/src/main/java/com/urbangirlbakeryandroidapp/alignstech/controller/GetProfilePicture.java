@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class GetProfilePicture {
 
-    public static void getProfilePicture(final Context context , String url) {
+    public static void userProfilePicture(final Context context, String url) {
 
         if (MyUtils.isNetworkConnected(context)) {
             if (Db_Utils.isUserInfoDataExists()) {
@@ -28,13 +29,14 @@ public class GetProfilePicture {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
                         HomeActivity.account.setPhoto(bitmapResponse);
+                        UserProfile.userProfilePicture.setImageBitmap(bitmapResponse);
                     }
                 }, 50, 50, null, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         MyUtils.showLog(error.toString());
                         List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
-                        GetProfilePicture.getProfilePicture(context, queryResults.get(0).getProfilePicUrl());
+                        GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
                     }
                 });
                 imageRequest.setRetryPolicy(new DefaultRetryPolicy(30000,

@@ -10,10 +10,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * Created by Dell on 12/22/2015.
@@ -23,6 +27,14 @@ public class MyUtils
     public static String DIRECTORY_NAME = ".ugCake";
     public static String PICTURE_FILE_NAME = "profile_picture.png";
 
+
+    public static void setUserProfilePicture(Context context) {
+
+        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+        if (queryResults.size() > 0) {
+            GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
+        }
+    }
 
     public static boolean isNetworkConnected(Context context)
     {
