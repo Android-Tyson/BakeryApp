@@ -15,8 +15,6 @@ import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -24,9 +22,6 @@ import java.util.List;
  */
 public class MyUtils
 {
-    public static String DIRECTORY_NAME = ".ugCake";
-    public static String PICTURE_FILE_NAME = "profile_picture.png";
-
 
     public static void setUserProfilePicture(Context context) {
 
@@ -81,55 +76,43 @@ public class MyUtils
     }
 
 
-    public static void saveProfilePicture(Bitmap bitmap)
+    public static void saveUserProfiePic(Bitmap finalBitmap)
     {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/.user_pic");
+        myDir.mkdirs();
+//        Random generator = new Random();
+//        int randomName = 10000;
+//        randomName = generator.nextInt(n);
+        String fname = "profile.jpg";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
         try {
-            String dir = Environment.getExternalStorageDirectory().toString();
-            File file = new File(dir, DIRECTORY_NAME);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-
-            File outputFile = new File(dir + File.separator + DIRECTORY_NAME + File.separator + PICTURE_FILE_NAME);
-            OutputStream outputStream = null;
-            try {
-                outputStream = new FileOutputStream(outputFile);
-                if (bitmap != null) {
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (outputStream != null) {
-                        outputStream.flush();
-                        outputStream.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    public static Bitmap getProfilePicture()
+    public static Bitmap getUserProfilePic()
     {
         Bitmap bitmap;
+        String root = Environment.getExternalStorageDirectory().toString() + "/.user_pic/profile.jpg";
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + File.separator + DIRECTORY_NAME + File.separator + PICTURE_FILE_NAME, options);
+            options.inSampleSize = 8;
+            bitmap = BitmapFactory.decodeFile(root  , options);
             return bitmap;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-
 
     public static void showToast(Context context, String message)
     {

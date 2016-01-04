@@ -28,7 +28,7 @@ public class GetProfilePicture {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
                         HomeActivity.account.setPhoto(bitmapResponse);
-//                        UserProfile.userProfilePicture.setImageBitmap(bitmapResponse);
+                        MyUtils.saveUserProfiePic(bitmapResponse);
                     }
                 }, 50, 50, null, new Response.ErrorListener() {
                     @Override

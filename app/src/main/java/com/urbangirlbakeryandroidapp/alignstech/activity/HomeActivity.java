@@ -85,7 +85,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName(), ""
-                    , null, R.drawable.drawer_bg);
+                    , MyUtils.getUserProfilePic(), R.drawable.drawer_bg);
         } else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
                     , R.mipmap.ic_launcher, R.drawable.drawer_bg);
