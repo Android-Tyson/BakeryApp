@@ -3,12 +3,15 @@ package com.urbangirlbakeryandroidapp.alignstech.fragment_profile;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.UpdateFacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 
 import butterknife.ButterKnife;
 
@@ -40,5 +43,9 @@ public class UserProfile extends android.support.v4.app.Fragment {
         return view;
     }
 
-
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        UpdateFacebookUserDetials.updateUserDetials(Apis.user_list , getActivity());
+    }
 }

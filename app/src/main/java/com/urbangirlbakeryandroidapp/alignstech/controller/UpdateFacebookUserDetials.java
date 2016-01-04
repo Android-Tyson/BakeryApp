@@ -3,6 +3,7 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.activeandroid.query.Select;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -14,7 +15,6 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +24,7 @@ public class UpdateFacebookUserDetials {
 
     public static ProgressDialog progressDialog ;
 
-    public static void postUserDetials(String url , final Context context){
+    public static void updateUserDetials(String url, final Context context){
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Posting Please Wait");
@@ -52,17 +52,19 @@ public class UpdateFacebookUserDetials {
                 Map<String, String> params = new HashMap<>();
                 if(Db_Utils.isUserInfoDataExists()){
 
-                    List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+                     DataBase_UserInfo userInfo = new Select().from(DataBase_UserInfo.class).where("Fb_id = ?", "892139110900517").executeSingle();
 
-                    params.put("fb_id", queryResults.get(0).getFb_id());
-                    params.put("mobile_no", queryResults.get(0).getMobileNo());
-                    params.put("email", queryResults.get(0).getEmail());
-                    params.put("dob", queryResults.get(0).getDob());
-                    params.put("gender", queryResults.get(0).getGender());
-                    params.put("zone", queryResults.get(0).getZone());
-                    params.put("district", queryResults.get(0).getDistrict());
-                    params.put("location", queryResults.get(0).getLocation());
-                    params.put("full_name", queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName());
+                    MyUtils.showLog(userInfo.toString());
+
+//                    params.put("fb_id", queryResults.get(0).getFb_id());
+//                    params.put("mobile_no", queryResults.get(0).getMobileNo());
+//                    params.put("email", queryResults.get(0).getEmail());
+//                    params.put("dob", queryResults.get(0).getDob());
+//                    params.put("gender", queryResults.get(0).getGender());
+//                    params.put("zone", queryResults.get(0).getZone());
+//                    params.put("district", queryResults.get(0).getDistrict());
+//                    params.put("location", queryResults.get(0).getLocation());
+//                    params.put("full_name", queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName());
 
                 }
 

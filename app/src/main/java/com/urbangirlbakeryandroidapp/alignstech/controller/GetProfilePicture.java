@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
-import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
@@ -29,7 +28,7 @@ public class GetProfilePicture {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
                         HomeActivity.account.setPhoto(bitmapResponse);
-                        UserProfile.userProfilePicture.setImageBitmap(bitmapResponse);
+//                        UserProfile.userProfilePicture.setImageBitmap(bitmapResponse);
                     }
                 }, 50, 50, null, new Response.ErrorListener() {
                     @Override
