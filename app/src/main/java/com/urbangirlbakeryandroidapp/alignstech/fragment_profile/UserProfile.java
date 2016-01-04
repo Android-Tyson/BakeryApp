@@ -2,16 +2,20 @@ package com.urbangirlbakeryandroidapp.alignstech.fragment_profile;
 
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,7 +26,7 @@ import butterknife.InjectView;
 public class UserProfile extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.imageView_profile_picture)
-    public ImageView userProfilePicture;
+    public NetworkImageView userProfilePicture;
 
     public UserProfile() {
         // Required empty public constructor
@@ -41,10 +45,10 @@ public class UserProfile extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         ButterKnife.inject(this, view);
-        Bitmap bitmap = MyUtils.getUserProfilePic();
-        MyUtils.showLog("");
-        if(MyUtils.getUserProfilePic() != null) {
-            userProfilePicture.setImageBitmap(MyUtils.getUserProfilePic());
+        if(!Db_Utils.getUserInfoList().isEmpty()) {
+            List<DataBase_UserInfo> list = Db_Utils.getUserInfoList();
+            String profilePicUrl = list.get(0).getProfilePicUrl();
+            userProfilePicture.setImageUrl(profilePicUrl , MySingleton.getInstance(getActivity()).getImageLoader());
         }else {
             MyUtils.showLog("");
         }

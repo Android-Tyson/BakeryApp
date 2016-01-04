@@ -222,8 +222,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
             dataBase_userInfo.save();
 
+            String user_fb_id = userDetials.getFb_id();
+            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
+
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
-            GetProfilePicture.userProfilePicture(getApplicationContext(), userDetials.getProfilePicUrl());
+            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
+
 
             Intent intent = new Intent(getApplicationContext() , HomeActivity.class);
             intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());

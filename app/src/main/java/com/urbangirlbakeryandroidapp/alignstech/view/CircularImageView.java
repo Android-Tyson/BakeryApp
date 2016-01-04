@@ -12,12 +12,12 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 
 
-public class CircularImageView extends ImageView {
+public class CircularImageView extends NetworkImageView {
     private int borderWidth;
     private int canvasSize;
     private Paint paint;
