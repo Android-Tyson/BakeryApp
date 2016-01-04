@@ -8,10 +8,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
-import com.urbangirlbakeryandroidapp.alignstech.view.CircularImageView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,7 +22,7 @@ import butterknife.InjectView;
 public class UserProfile extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.imageView_profile_picture)
-    public CircularImageView userProfilePicture;
+    public ImageView userProfilePicture;
 
     public UserProfile() {
         // Required empty public constructor

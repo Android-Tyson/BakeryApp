@@ -10,9 +10,6 @@
     <color name="myTextSecondaryColor">@color/background_material_light</color>
     <color name="voteButtonGreenColor">#43a896</color>
     <color name="voteButtonGreenPressedColor">#348375</color>
-    <color name="voteButtonRedColor">#ed382a</color>
-    <color name="voteButtonRedPressedColor">#D32112</color>
-    <color name="voteButtonNormalColor">#9B9B9B</color>
 
     <color name="facebook_blue">#3B5998</color>
     <color name="facebook_blue_light">#8b9dc3</color>
