@@ -79,7 +79,7 @@ public class MyUtils
     public static void saveUserProfiePic(Bitmap finalBitmap)
     {
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/.user_pic");
+        File myDir = new File(root + "/saved_images");
         myDir.mkdirs();
 //        Random generator = new Random();
 //        int randomName = 10000;
@@ -101,7 +101,7 @@ public class MyUtils
     public static Bitmap getUserProfilePic()
     {
         Bitmap bitmap;
-        String root = Environment.getExternalStorageDirectory().toString() + "/.user_pic/profile.jpg";
+        String root = Environment.getExternalStorageDirectory().toString() + "/saved_images/profile.jpg";
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
