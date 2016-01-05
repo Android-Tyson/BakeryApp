@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
 
-    @InjectView(R.id.btn_loginWithDirect)
-    Button btnDirectLogin;
+    @InjectView(R.id.btn_normal_login)
+    Button btnNormalLogin;
 
     public static UserDetials userDetials;
     // Generate KeyHash Reference
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnContinueWithoutLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
-        btnDirectLogin.setOnClickListener(this);
+        btnNormalLogin.setOnClickListener(this);
 
         Permission[] permissions = new Permission[]{
                 Permission.USER_PHOTOS,
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.btn_loginWithDirect:
+            case R.id.btn_normal_login:
                 MyUtils.showLog("Clicked Diret login");
 
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, NormalRegister.newInstance()).commit();
