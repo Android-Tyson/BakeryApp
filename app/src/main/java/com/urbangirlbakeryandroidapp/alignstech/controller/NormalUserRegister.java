@@ -12,16 +12,17 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Dell on 1/5/2016.
  */
-public class NormalRegister {
+public class NormalUserRegister {
 
     public static ProgressDialog progressDialog;
 
-    public static void postUserDetials(String url, Context context) {
+    public static void postUserDetials(String url, Context context , final List<String> userInfo) {
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Posting Please Wait");
@@ -47,15 +48,16 @@ public class NormalRegister {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("fb_id", "134535345341");
-                params.put("mobile_no", "9999999999");
-                params.put("email", "asa@gmail.com");
-                params.put("dob", "11-11-1111");
-                params.put("gender", "male");
-                params.put("zone", "myZone");
-                params.put("district", "myDistrict");
-                params.put("location", "myLocation");
-                params.put("full_name", "myFullName");
+                params.put("fb_id", userInfo.get(0));
+                params.put("mobile_no", userInfo.get(1));
+                params.put("email", userInfo.get(2));
+                params.put("dob", userInfo.get(3));
+                params.put("gender", userInfo.get(4));
+                params.put("zone", userInfo.get(5));
+                params.put("district", userInfo.get(6));
+                params.put("location", userInfo.get(7));
+                params.put("full_name", userInfo.get(8));
+                MyUtils.showLog(" ");
 
 
                 return params;

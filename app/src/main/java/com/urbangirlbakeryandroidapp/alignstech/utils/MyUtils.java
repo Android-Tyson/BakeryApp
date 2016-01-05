@@ -37,6 +37,7 @@ public class MyUtils
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo == null) {
+            showToast(context , "Please Check your internet connection and try again..");
             return false;
         } else {
             return networkInfo.getType() == ConnectivityManager.TYPE_WIFI ||
