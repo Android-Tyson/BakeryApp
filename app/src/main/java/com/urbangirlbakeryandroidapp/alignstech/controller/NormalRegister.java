@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class DirectRegister {
+public class NormalRegister {
 
     public static ProgressDialog progressDialog;
 
