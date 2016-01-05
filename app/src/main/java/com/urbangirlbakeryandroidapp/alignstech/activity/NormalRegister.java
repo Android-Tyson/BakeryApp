@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -113,14 +112,11 @@ public class NormalRegister extends AppCompatActivity {
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
-                    if (MyUtils.isEmailValid(email , this)) {
-                        if(isPhoneNumberValid(mobileNo , this)){
+                    if (MyUtils.isEmailValid(email , this) && MyUtils.isValidPhoneNumber(mobileNo , this)) {
                             NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
-                        }
                     }
                 }
             }
-
             return true;
         }
 
@@ -134,19 +130,5 @@ public class NormalRegister extends AppCompatActivity {
             return false;
         }
         return true;
-    }
-
-    public static boolean isPhoneNumberValid(String phoneNo , Context context) {
-        CharSequence target = phoneNo;
-        if (target == null) {
-            return false;
-        } else {
-            if (target.length() < 8 || target.length() > 13) {
-                MyUtils.showToast(context , "Please Enter a Valid Phone Number...");
-                return false;
-            } else {
-                return android.util.Patterns.PHONE.matcher(target).matches();
-            }
-        }
     }
 }

@@ -25,6 +25,20 @@ import java.util.regex.Pattern;
 public class MyUtils
 {
 
+    public static boolean isValidPhoneNumber(String phoneNo , Context context) {
+        CharSequence target = phoneNo;
+        if (target == null) {
+            return false;
+        } else {
+            if (target.length() < 8 || target.length() > 13) {
+                MyUtils.showToast(context , "Please Enter a Valid Phone Number...");
+                return false;
+            } else {
+                return android.util.Patterns.PHONE.matcher(target).matches();
+            }
+        }
+    }
+
     public static boolean isEmailValid(String email , Context context) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         CharSequence inputStr = email;
