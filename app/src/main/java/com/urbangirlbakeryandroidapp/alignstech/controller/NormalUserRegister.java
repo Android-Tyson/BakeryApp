@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -24,7 +25,7 @@ public class NormalUserRegister {
 
     public static ProgressDialog progressDialog;
 
-    public static void postUserDetials(String url, Context context , final List<String> userInfo) {
+    public static void postUserDetials(String url, final Context context , final List<String> userInfo) {
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Posting Please Wait");
@@ -36,13 +37,17 @@ public class NormalUserRegister {
                     @Override
                     public void onResponse(String response) {
                         MyUtils.showLog(response);
+                        MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
+                        DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , " ");
+                        dataBase_userInfo.save();
                         MyBus.getInstance().post(new NormalRegisterEventBus(response));
                         progressDialog.dismiss();
+                        
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showLog(error.toString());
+                MyUtils.showToast(context , "Please Check your internet Connection and try again...");
                 progressDialog.dismiss();
             }
         }) {

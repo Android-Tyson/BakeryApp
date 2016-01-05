@@ -135,8 +135,6 @@ public class GetNavigationList {
                     MyBus.getInstance().post(new AccessoriesListResultEvent(accessoriesList));
                 }
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

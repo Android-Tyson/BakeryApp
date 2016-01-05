@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +11,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -60,6 +60,9 @@ public class NormalRegister extends AppCompatActivity {
         ButterKnife.inject(this);
         initializeToolbar();
         MyBus.getInstance().register(this);
+
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+        MyUtils.showLog(" ");
 
     }
 
@@ -116,8 +119,8 @@ public class NormalRegister extends AppCompatActivity {
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
-                    if (MyUtils.isEmailValid(email , this) && MyUtils.isValidPhoneNumber(mobileNo , this)) {
-                            NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
+                    if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobileNo, this)) {
+                        NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
                     }
                 }
             }
@@ -137,11 +140,11 @@ public class NormalRegister extends AppCompatActivity {
     }
 
     @Subscribe
-    public void isSuccess(NormalRegisterEventBus eventBus){
-        if(!eventBus.getResponse().isEmpty()){
-          MyUtils.showToast(this , "Successfully Registered........");
-            Intent intent = new Intent(this , HomeActivity.class);
-            startActivity(intent);
+    public void isSuccess(NormalRegisterEventBus eventBus) {
+        if (!eventBus.getResponse().isEmpty()) {
+
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+
         }
     }
 
