@@ -118,12 +118,8 @@ public class NormalRegister extends AppCompatActivity {
 
                         NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
 
-                    } else {
-                        MyUtils.showToast(this, "Please enter a valid mail..");
                     }
                 }
-            } else {
-//                MyUtils.showToast(this, "Please Check TOur Internet Connection and try again..");
             }
 
             return true;
@@ -136,7 +132,7 @@ public class NormalRegister extends AppCompatActivity {
     private boolean checkIfAnyFieldsAreEmpty() {
         if (fullName.isEmpty() || email.isEmpty() || mobileNo.isEmpty() || dob.isEmpty()
                 || gender.isEmpty() || location.isEmpty() || zone.isEmpty() || district.isEmpty()) {
-            MyUtils.showToast(this , "Some of the Field are empty..");
+            MyUtils.showToast(this, "Some of the Field are empty..");
             return false;
         }
         return true;
@@ -152,6 +148,7 @@ public class NormalRegister extends AppCompatActivity {
         if (matcher.matches()) {
             return true;
         } else {
+            MyUtils.showToast(this, "Please enter a valid mail..");
             return false;
         }
     }
