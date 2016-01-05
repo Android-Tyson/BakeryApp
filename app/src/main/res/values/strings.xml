@@ -13,4 +13,5 @@
     <string name="app_id">709240645844749</string>
     <string name="normal_register">Register</string>
     <string name="skip_and_continue"><![CDATA[Skip & Continue     >]]></string>
+    <string name="user_info">User Profile</string>
 </resources>
