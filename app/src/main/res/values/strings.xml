@@ -11,4 +11,6 @@
     <string name="label_button_continue_without_login">Continue Without Login</string>
     <string name="title_activity_2">Activity2</string>
     <string name="app_id">709240645844749</string>
+    <string name="normal_register">Register</string>
+    <string name="skip_and_continue"><![CDATA[Skip & Continue     >]]></string>
 </resources>
