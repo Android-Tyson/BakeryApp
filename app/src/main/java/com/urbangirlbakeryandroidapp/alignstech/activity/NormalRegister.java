@@ -21,9 +21,14 @@ public class NormalRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal_register);
         ButterKnife.inject(this);
+        initializeToolbar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initializeToolbar() {
+
         toolbar.setTitle(R.string.user_info);
         setSupportActionBar(toolbar);
-
 
     }
 

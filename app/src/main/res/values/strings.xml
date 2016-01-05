@@ -15,4 +15,5 @@
     <string name="skip_and_continue"><![CDATA[Skip & Continue     >]]></string>
     <string name="user_info">User Profile</string>
     <string name="title_activity_normal_register">NormalRegister</string>
+    <string name="action_done">Done</string>
 </resources>

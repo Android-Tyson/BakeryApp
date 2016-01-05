@@ -51,7 +51,8 @@
         <activity
             android:name=".activity.NormalRegister"
             android:label="@string/title_activity_normal_register"
-            android:theme="@style/UGCakeTheme" >
+            android:theme="@style/UGCakeTheme"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 
