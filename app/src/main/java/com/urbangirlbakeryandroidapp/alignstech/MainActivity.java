@@ -17,8 +17,9 @@ import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
-import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.NormalRegister;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
+
+    @InjectView(R.id.btn_loginWithDirect)
+    Button btnDirectLogin;
 
     public static UserDetials userDetials;
     // Generate KeyHash Reference
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnContinueWithoutLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
+        btnDirectLogin.setOnClickListener(this);
 
         Permission[] permissions = new Permission[]{
                 Permission.USER_PHOTOS,
@@ -112,14 +117,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_loginWithFacebook:
 
                 if (MyUtils.isNetworkConnected(this)) {
-
                     simpleFacebook.login(onLoginListener);
-
                 } else {
                     MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
                 }
-
                 break;
+
+            case R.id.btn_loginWithDirect:
+                MyUtils.showLog("Clicked Diret login");
+
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, NormalRegister.newInstance()).commit();
+
+//                DirectRegister.postUserDetials(Apis.userDetialPostURl , this);
         }
     }
 
