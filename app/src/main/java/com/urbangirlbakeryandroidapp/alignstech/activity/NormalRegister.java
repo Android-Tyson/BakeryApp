@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,9 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -55,7 +59,7 @@ public class NormalRegister extends AppCompatActivity {
         setContentView(R.layout.activity_normal_register);
         ButterKnife.inject(this);
         initializeToolbar();
-
+        MyBus.getInstance().register(this);
 
     }
 
@@ -130,5 +134,20 @@ public class NormalRegister extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Subscribe
+    public void isSuccess(NormalRegisterEventBus eventBus){
+        if(!eventBus.getResponse().isEmpty()){
+          MyUtils.showToast(this , "Successfully Registered........");
+            Intent intent = new Intent(this , HomeActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
     }
 }

@@ -45,6 +45,7 @@
 
     <style name="CustomEditTextTheme">
         <item name="colorControlNormal">@color/myPrimaryColor</item>
+        <item name="android:textColor">@color/myTextColor2</item>
     </style>
 
 </resources>

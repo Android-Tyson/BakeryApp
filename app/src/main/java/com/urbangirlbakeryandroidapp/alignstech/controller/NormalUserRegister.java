@@ -8,6 +8,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -34,6 +36,7 @@ public class NormalUserRegister {
                     @Override
                     public void onResponse(String response) {
                         MyUtils.showLog(response);
+                        MyBus.getInstance().post(new NormalRegisterEventBus(response));
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
