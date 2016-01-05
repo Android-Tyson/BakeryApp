@@ -14,8 +14,6 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -114,7 +112,7 @@ public class NormalRegister extends AppCompatActivity {
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
-                    if (isEmailValid(email)) {
+                    if (MyUtils.isEmailValid(email , this)) {
 
                         NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
 
@@ -128,7 +126,6 @@ public class NormalRegister extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Check if any of the editText Field is empty
     private boolean checkIfAnyFieldsAreEmpty() {
         if (fullName.isEmpty() || email.isEmpty() || mobileNo.isEmpty() || dob.isEmpty()
                 || gender.isEmpty() || location.isEmpty() || zone.isEmpty() || district.isEmpty()) {
@@ -136,21 +133,6 @@ public class NormalRegister extends AppCompatActivity {
             return false;
         }
         return true;
-    }
-
-
-    // Check wether the entered mail is valid or not
-    public boolean isEmailValid(String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        CharSequence inputStr = email;
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-        if (matcher.matches()) {
-            return true;
-        } else {
-            MyUtils.showToast(this, "Please enter a valid mail..");
-            return false;
-        }
     }
 
 }

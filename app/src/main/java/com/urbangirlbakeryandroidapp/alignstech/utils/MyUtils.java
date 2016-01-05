@@ -16,12 +16,27 @@ import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Dell on 12/22/2015.
  */
 public class MyUtils
 {
+
+    public static boolean isEmailValid(String email , Context context) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email;
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            MyUtils.showToast(context, "Please enter a valid mail..");
+            return false;
+        }
+    }
 
     public static void setUserProfilePicture(Context context) {
 
