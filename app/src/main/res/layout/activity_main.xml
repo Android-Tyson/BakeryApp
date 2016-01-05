@@ -53,7 +53,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edittext_bg"
+            android:background="@drawable/custom_rect_colored_bg"
             android:padding="10dp"
             android:shadowColor="@color/background_material_dark"
             android:text="@string/skip_and_continue"
