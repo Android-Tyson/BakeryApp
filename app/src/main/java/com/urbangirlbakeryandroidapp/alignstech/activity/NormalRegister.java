@@ -1,13 +1,16 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.squareup.otto.Subscribe;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
@@ -148,20 +151,22 @@ public class NormalRegister extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//
-//            startActivity(new Intent(this , MainActivity.class));
-//
-//        } else if (keyCode == KeyEvent.KEYCODE_HOME) {
-//
-//            startActivity(new Intent(this, MainActivity.class));
-//
-//
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            startActivity(new Intent(this , MainActivity.class));
+            finish();
+
+        } else if (keyCode == KeyEvent.KEYCODE_HOME) {
+
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
     @Override
