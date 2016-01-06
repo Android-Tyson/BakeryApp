@@ -21,6 +21,7 @@
     <string name="user_name">Your Name</string>
     <string name="phoneDemo">98181-33233</string>
     <string name="mobile">Mobile</string>
-    <string name="mailDemo">mail_demo@gmial.com</string>
+    <string name="mailDemo">mail_demo@gmail.com</string>
     <string name="email">Primary</string>
+    <string name="go">GO</string>
 </resources>
