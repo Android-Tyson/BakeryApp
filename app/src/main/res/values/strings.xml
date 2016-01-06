@@ -11,7 +11,7 @@
     <string name="label_button_continue_without_login">Continue Without Login</string>
     <string name="title_activity_2">Activity2</string>
     <string name="app_id">709240645844749</string>
-    <string name="normal_register">Register</string>
+    <string name="normal_register">Register with us</string>
     <string name="skip_and_continue"><![CDATA[Skip & Continue     >]]></string>
     <string name="user_info">User Profile</string>
     <string name="title_activity_normal_register">NormalRegister</string>
@@ -24,4 +24,5 @@
     <string name="mailDemo">mail_demo@gmail.com</string>
     <string name="email">Primary</string>
     <string name="go">GO</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
 </resources>

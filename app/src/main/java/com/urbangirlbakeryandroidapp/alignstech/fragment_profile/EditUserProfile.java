@@ -23,18 +23,18 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserProfile extends android.support.v4.app.Fragment {
+public class EditUserProfile extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.imageView_profile_picture)
     public NetworkImageView userProfilePicture;
 
-    public UserProfile() {
+    public EditUserProfile() {
         // Required empty public constructor
     }
 
-    public static UserProfile newInstance(){
+    public static EditUserProfile newInstance(){
 
-        UserProfile userProfile = new UserProfile();
+        EditUserProfile userProfile = new EditUserProfile();
         return userProfile;
 
     }

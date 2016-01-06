@@ -13,7 +13,6 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
-import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
@@ -97,7 +96,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
-        addSection(newSection("Profile", R.mipmap.ic_launcher, new UserProfile()));
+        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this , EditProfile.class)));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
 
 //        getSectionByTitle("home").setTitle("NewTitle");
