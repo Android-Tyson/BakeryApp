@@ -61,8 +61,8 @@ public class NormalRegister extends AppCompatActivity {
         initializeToolbar();
         MyBus.getInstance().register(this);
 
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
-        MyUtils.showLog(" ");
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, new Welcome_Screen()).commit();
+
 
     }
 
