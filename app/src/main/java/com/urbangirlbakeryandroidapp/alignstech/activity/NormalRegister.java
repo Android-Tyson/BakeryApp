@@ -142,7 +142,9 @@ public class NormalRegister extends AppCompatActivity {
     public void isSuccess(NormalRegisterEventBus eventBus) {
         if (!eventBus.getResponse().isEmpty()) {
 
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+//            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+
+            new Welcome_Screen().show(getSupportFragmentManager() , "welcome_screen_tag");
 
         }
     }

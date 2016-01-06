@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,16 +25,22 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Welcome_Screen extends DialogFragment {
+public class Welcome_Screen extends DialogFragment implements View.OnClickListener {
 
     @InjectView(R.id.user_circular_imageView)
     CircularImageView user_pic;
+
+    @InjectView(R.id.user_name)
+    TextView user_name;
 
     @InjectView(R.id.user_phone)
     TextView user_phone;
 
     @InjectView(R.id.user_mail)
     TextView user_mail;
+
+    @InjectView(R.id.user_go)
+    TextView user_go;
 
     public static Welcome_Screen newInstance(){
 
@@ -57,6 +69,29 @@ public class Welcome_Screen extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         user_pic.setImageResource(R.drawable.drawer_bg);
+
+        if(Db_Utils.isUserInfoDataExists()){
+
+            List<DataBase_UserInfo> userDetials = Db_Utils.getUserInfoList();
+            String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
+            String userPhone = userDetials.get(0).getMobileNo();
+            String userEmail = userDetials.get(0).getEmail();
+
+            user_name.setText(userName);
+            user_mail.setText(userEmail);
+            user_phone.setText(userPhone);
+
+        }
+        user_go.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        Intent intent = new Intent(getActivity() , HomeActivity.class);
+        startActivity(intent);
+        getActivity().finish();
 
     }
 }
