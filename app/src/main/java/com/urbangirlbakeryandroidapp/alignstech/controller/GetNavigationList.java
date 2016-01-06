@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.controller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.android.volley.Request;
@@ -31,18 +32,26 @@ import java.util.List;
  */
 public class GetNavigationList {
 
+    public static ProgressDialog progressDialog;
     public static void parseNavigationDrawerList(Context context){
+
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Posting Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Apis.nav_collection, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 MyUtils.showLog(response.toString());
                 jsonJob(response.toString());
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showLog(error.toString());
+                progressDialog.dismiss();
             }
         });
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
