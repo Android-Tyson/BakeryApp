@@ -88,23 +88,23 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.7"
+                        android:background="@drawable/horizontal_line"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:background="@drawable/horizontal_line">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/user_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/phoneDemo"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/mobile"
-                            android:textSize="14sp"
-                            android:textColor="@color/myTextColor2"/>
+                            android:textColor="@color/myTextColor2"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -141,14 +141,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/mailDemo"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/email"
-                            android:textSize="14sp"
-                            android:textColor="@color/myTextColor2"/>
+                            android:textColor="@color/myTextColor2"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -158,17 +158,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="right|center">
+                    android:gravity="right|center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/user_go"
-                        android:textSize="20sp"
-                        android:paddingRight="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/go"
                         android:textColor="#8b2086"
-                        android:text="@string/go"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -193,20 +193,7 @@
         <!--android:src="@mipmap/ic_launcher"-->
         <!--android:layout_centerInParent="true"/>-->
 
-        <!--<com.mikhaellopez.circularimageview.CircularImageView-->
-            <!--android:id="@+id/user_circular_imageView"-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:src="@mipmap/ic_launcher"-->
-            <!--app:border_color="@color/myPrimaryDarkColor"-->
-            <!--app:border_width="0dp"-->
-            <!--app:shadow="true"-->
-            <!--app:shadow_color="@color/myPrimaryDarkColor"-->
-            <!--app:shadow_radius="10" />-->
-
-
-        <com.urbangirlbakeryandroidapp.alignstech.view.CircularImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_circular_imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -217,6 +204,19 @@
             app:shadow="true"
             app:shadow_color="@color/myPrimaryDarkColor"
             app:shadow_radius="10" />
+
+
+        <!--<com.urbangirlbakeryandroidapp.alignstech.view.CircularImageView-->
+        <!--android:id="@+id/user_circular_imageView"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:src="@mipmap/ic_launcher"-->
+        <!--app:border_color="@color/myPrimaryDarkColor"-->
+        <!--app:border_width="0dp"-->
+        <!--app:shadow="true"-->
+        <!--app:shadow_color="@color/myPrimaryDarkColor"-->
+        <!--app:shadow_radius="10" />-->
 
     </RelativeLayout>
 

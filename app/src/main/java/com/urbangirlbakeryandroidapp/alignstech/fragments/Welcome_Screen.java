@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
@@ -22,7 +22,7 @@ import butterknife.InjectView;
 public class Welcome_Screen extends DialogFragment {
 
     @InjectView(R.id.user_circular_imageView)
-    NetworkImageView user_pic;
+    CircularImageView user_pic;
 
     @InjectView(R.id.user_phone)
     TextView user_phone;
@@ -48,9 +48,15 @@ public class Welcome_Screen extends DialogFragment {
         // Inflate the layout for this fragment
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.fragment_welcome__screen, container, false);
-        user_pic.setImageUrl("PROFILE_URL", MySingleton.getInstance(getActivity()).getImageLoader());
+        ButterKnife.inject(this, view);
+//        user_pic.setImageUrl("http://sleepycabin.com/cabinshit/uploads/profile_builder/avatars/userID_2566_originalAvatar_profile_pic.png", MySingleton.getInstance(getActivity()).getImageLoader());
         return view;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        user_pic.setImageResource(R.drawable.drawer_bg);
 
+    }
 }
