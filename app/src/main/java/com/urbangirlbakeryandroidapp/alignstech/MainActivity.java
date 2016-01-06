@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MyUtils.showLog("Clicked Direct login");
                 Intent intent1 = new Intent(this , NormalRegister.class);
                 startActivity(intent1);
+                finish();
         }
     }
 
