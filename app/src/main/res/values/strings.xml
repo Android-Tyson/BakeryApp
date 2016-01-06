@@ -16,4 +16,11 @@
     <string name="user_info">User Profile</string>
     <string name="title_activity_normal_register">NormalRegister</string>
     <string name="action_done">Done</string>
+    <string name="thank_for_signing">Thanks for signing up!</string>
+    <string name="ready_to_rock">You are ready to rock now!</string>
+    <string name="user_name">Your Name</string>
+    <string name="phoneDemo">98181-33233</string>
+    <string name="mobile">Mobile</string>
+    <string name="mailDemo">mail_demo@gmial.com</string>
+    <string name="email">Primary</string>
 </resources>
