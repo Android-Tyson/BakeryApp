@@ -60,7 +60,9 @@ public class NormalRegister extends AppCompatActivity {
         ButterKnife.inject(this);
         initializeToolbar();
         MyBus.getInstance().register(this);
-        
+
+        new Welcome_Screen().show(getSupportFragmentManager() , "welcome_screen_tag");
+
     }
 
     private void initializeToolbar() {
