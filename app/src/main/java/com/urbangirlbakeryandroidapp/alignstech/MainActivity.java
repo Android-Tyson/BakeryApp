@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_normal_login:
-                MyUtils.showLog("Clicked Diret login");
+                MyUtils.showLog("Clicked Direct login");
                 Intent intent1 = new Intent(this , NormalRegister.class);
                 startActivity(intent1);
         }
