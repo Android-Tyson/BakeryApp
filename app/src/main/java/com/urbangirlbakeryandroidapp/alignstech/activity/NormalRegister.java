@@ -61,8 +61,6 @@ public class NormalRegister extends AppCompatActivity {
         initializeToolbar();
         MyBus.getInstance().register(this);
 
-        new Welcome_Screen().show(getSupportFragmentManager() , "welcome_screen_tag");
-
     }
 
     private void initializeToolbar() {
