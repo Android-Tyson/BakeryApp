@@ -200,5 +200,4 @@ public class EditProfile extends AppCompatActivity {
         MyBus.getInstance().unregister(this);
     }
 
-
 }
