@@ -56,7 +56,7 @@ public class EditProfile extends AppCompatActivity {
     @InjectView(R.id.user_district)
     EditText user_district;
 
-    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district;
+    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district , profilePicUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,10 @@ public class EditProfile extends AppCompatActivity {
         if(Db_Utils.isUserInfoDataExists()) {
 
             List<DataBase_UserInfo> userInfos = Db_Utils.getUserInfoList();
+
             fb_id = userInfos.get(0).getFb_id();
+            profilePicUrl = userInfos.get(0).getProfilePicUrl();
+
             user_full_name.setText(userInfos.get(0).getFirstName()+" "+userInfos.get(0).getLastName());
             user_email.setText(userInfos.get(0).getEmail());
             user_mobile.setText(userInfos.get(0).getMobileNo());
@@ -137,6 +140,7 @@ public class EditProfile extends AppCompatActivity {
             userInfo.add(zone);
             userInfo.add(district);
             userInfo.add(location);
+            userInfo.add(profilePicUrl);
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {

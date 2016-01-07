@@ -42,7 +42,6 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-        MyUtils.setUserProfilePicture(this);
         if(!Db_Utils.isCakeListDataExists()) {
             GetNavigationList.parseNavigationDrawerList(this);
         }
@@ -79,6 +78,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
 
+        MyUtils.setUserProfilePicture(this);
         if (MyUtils.isUserLoggedIn(this)) {
 
             List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
