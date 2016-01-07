@@ -19,7 +19,6 @@ import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
 import com.urbangirlbakeryandroidapp.alignstech.activity.NormalRegister;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
@@ -69,8 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Permission[] permissions = new Permission[]{
                 Permission.USER_PHOTOS,
+                Permission.USER_HOMETOWN,
+                Permission.USER_ABOUT_ME,
+                Permission.USER_LOCATION,
+                Permission.PUBLIC_PROFILE,
                 Permission.EMAIL,
-                Permission.PUBLISH_ACTION
         };
 
         SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
@@ -197,22 +199,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     OnProfileListener onProfileListener = new OnProfileListener() {
         @Override
         public void onComplete(Profile profile) {
-            MyUtils.showLog("My profile id =" + profile.getId());
 
             MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
 
             userDetials = new UserDetials();
 
             userDetials.setFb_id(profile.getId());
+            MyUtils.showLog("My profile id =" + profile.getId());
             userDetials.setFirstName(profile.getFirstName());
+            MyUtils.showLog(" " + profile.getFirstName());
             userDetials.setLastName(profile.getLastName());
+            MyUtils.showLog(" " + profile.getLastName());
             userDetials.setMobileNo(profile.getReligion());
+            MyUtils.showLog(" " + profile.getReligion());
             userDetials.setEmail(profile.getEmail());
+            MyUtils.showLog(" " + profile.getEmail());
             userDetials.setDob(profile.getBirthday());
+            MyUtils.showLog(" " + profile.getBirthday());
             userDetials.setGender(profile.getGender());
+            MyUtils.showLog(" " + profile.getGender());
             userDetials.setZone(profile.getLocale());
+            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setDistrict(profile.getLocale());
+            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setLocation(profile.getLocale());
+            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setProfilePicUrl(profile.getPicture());
 
             handlingNullUserInfo(userDetials);
@@ -232,11 +243,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
             dataBase_userInfo.save();
 
-            String user_fb_id = userDetials.getFb_id();
-            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
+//            String user_fb_id = userDetials.getFb_id();
+//            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
 
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
-            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
+//            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
 
 
             Intent intent = new Intent(getApplicationContext() , EditProfile.class);
@@ -273,9 +284,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } if(userDetials.getLastName() == null){
             userDetials.setLastName("LastName");
         } if(userDetials.getMobileNo() == null){
-            userDetials.setMobileNo("0000000000");
+            userDetials.setMobileNo("");
         } if(userDetials.getEmail() == null){
-            userDetials.setEmail("yourMail@gmail.com");
+            userDetials.setEmail("");
         } if (userDetials.getDob() == null){
             userDetials.setDob("0000-00-00");
         } if(userDetials.getGender() == null){

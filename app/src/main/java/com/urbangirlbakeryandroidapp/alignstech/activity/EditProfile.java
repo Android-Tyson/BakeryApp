@@ -12,7 +12,9 @@ import android.widget.EditText;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -59,7 +61,24 @@ public class EditProfile extends AppCompatActivity {
         ButterKnife.inject(this);
         initializeToolbar();
 //        MyBus.getInstance().register(this);
-        
+        setEditTextFields();
+    }
+
+    private void setEditTextFields() {
+
+        if(Db_Utils.isUserInfoDataExists()) {
+
+            List<DataBase_UserInfo> userInfos = Db_Utils.getUserInfoList();
+            user_full_name.setText(userInfos.get(0).getFirstName()+" "+userInfos.get(0).getLastName());
+            user_email.setText(userInfos.get(0).getEmail());
+            user_mobile.setText(userInfos.get(0).getMobileNo());
+            user_dob.setText(userInfos.get(0).getDob());
+            user_gender.setText(userInfos.get(0).getGender());
+            user_location.setText(userInfos.get(0).getLocation());
+            user_zone.setText(userInfos.get(0).getZone());
+            user_district.setText(userInfos.get(0).getDistrict());
+
+        }
     }
 
 
