@@ -96,7 +96,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
-        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this , EditProfile.class)));
+        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this , NormalRegister.class)));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
 
 //        getSectionByTitle("home").setTitle("NewTitle");
