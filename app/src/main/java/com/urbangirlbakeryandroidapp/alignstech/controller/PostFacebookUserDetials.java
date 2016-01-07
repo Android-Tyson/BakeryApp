@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -49,9 +49,9 @@ public class PostFacebookUserDetials {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                if(Db_Utils.isUserInfoDataExists()){
+                if(DataBase_Utils.isUserInfoDataExists()){
 
-                    List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+                    List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
 
                     params.put("fb_id", queryResults.get(0).getFb_id());
                     params.put("mobile_no", queryResults.get(0).getMobileNo());

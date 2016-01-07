@@ -9,7 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -23,7 +23,7 @@ public class GetProfilePicture {
     public static void userProfilePicture(final Context context, String url) {
 
         if (MyUtils.isNetworkConnected(context)) {
-            if (Db_Utils.isUserInfoDataExists()) {
+            if (DataBase_Utils.isUserInfoDataExists()) {
                 ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
@@ -34,7 +34,7 @@ public class GetProfilePicture {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         MyUtils.showLog(error.toString());
-                        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+                        List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
                         GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
                     }
                 });

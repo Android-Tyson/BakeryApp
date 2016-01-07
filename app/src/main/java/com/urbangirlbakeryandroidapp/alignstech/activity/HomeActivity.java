@@ -23,7 +23,7 @@ import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -42,7 +42,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-        if(!Db_Utils.isCakeListDataExists()) {
+        if(!DataBase_Utils.isCakeListDataExists()) {
             GetNavigationList.parseNavigationDrawerList(this);
         }
 
@@ -80,7 +80,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         MyUtils.setUserProfilePicture(this);
         if (MyUtils.isUserLoggedIn(this)) {
 
-            List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+            List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
 
             account = new MaterialAccount(getResources(),
                     queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName(), ""
@@ -100,7 +100,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
-        if(Db_Utils.isCakeListDataExists()) {
+        if(DataBase_Utils.isCakeListDataExists()) {
             initializeSavedNavigationDrawerList();
         }
 
@@ -127,41 +127,41 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private void initializeSavedNavigationDrawerList(){
 
-        if(Db_Utils.isCakeListDataExists()){
+        if(DataBase_Utils.isCakeListDataExists()){
 
             addDivisor();
             addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-            List<Cakes> cakesList = Db_Utils.getCakesList();
+            List<Cakes> cakesList = DataBase_Utils.getCakesList();
             for (int i = 0 ; i < cakesList.size() ; i++){
                 addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
             }
         }
 
-        if(Db_Utils.isGiftListDataExists()){
+        if(DataBase_Utils.isGiftListDataExists()){
 
             addDivisor();
             addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-            List<Gifts> giftsList = Db_Utils.getGiftList();
+            List<Gifts> giftsList = DataBase_Utils.getGiftList();
             for (int i = 0 ; i < giftsList.size() ; i++){
                 addSection(newSection(giftsList.get(i).getCategoryName() , new GiftsFragment()));
             }
         }
 
-        if(Db_Utils.isOfferListDataExists()){
+        if(DataBase_Utils.isOfferListDataExists()){
 
             addDivisor();
             addSection(newSection("Offers", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-            List<Offers> offerList = Db_Utils.getOfferList();
+            List<Offers> offerList = DataBase_Utils.getOfferList();
             for (int i = 0 ; i < offerList.size() ; i++){
                 addSection(newSection(offerList.get(i).getCategoryName() , new OfferFragment()));
             }
         }
 
-        if(Db_Utils.isAccessoriesListDataExists()){
+        if(DataBase_Utils.isAccessoriesListDataExists()){
 
             addDivisor();
             addSection(newSection("Accessories", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-            List<Accessories> accessoriesList = Db_Utils.getAccessoriesList();
+            List<Accessories> accessoriesList = DataBase_Utils.getAccessoriesList();
             for (int i = 0 ; i < accessoriesList.size() ; i++){
                 addSection(newSection(accessoriesList.get(i).getCategoryName() , new OfferFragment()));
             }

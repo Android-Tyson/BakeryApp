@@ -17,7 +17,7 @@ import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -70,9 +70,9 @@ public class EditProfile extends AppCompatActivity {
 
     private void setEditTextFields() {
 
-        if(Db_Utils.isUserInfoDataExists()) {
+        if(DataBase_Utils.isUserInfoDataExists()) {
 
-            List<DataBase_UserInfo> userInfos = Db_Utils.getUserInfoList();
+            List<DataBase_UserInfo> userInfos = DataBase_Utils.getUserInfoList();
 
             fb_id = userInfos.get(0).getFb_id();
             profilePicUrl = userInfos.get(0).getProfilePicUrl();

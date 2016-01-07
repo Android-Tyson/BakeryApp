@@ -15,7 +15,7 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 
 import java.util.List;
 
@@ -70,9 +70,9 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
         super.onActivityCreated(savedInstanceState);
         user_pic.setImageResource(R.drawable.drawer_bg);
 
-        if(Db_Utils.isUserInfoDataExists()){
+        if(DataBase_Utils.isUserInfoDataExists()){
 
-            List<DataBase_UserInfo> userDetials = Db_Utils.getUserInfoList();
+            List<DataBase_UserInfo> userDetials = DataBase_Utils.getUserInfoList();
             String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
             String userPhone = userDetials.get(0).getMobileNo();
             String userEmail = userDetials.get(0).getEmail();

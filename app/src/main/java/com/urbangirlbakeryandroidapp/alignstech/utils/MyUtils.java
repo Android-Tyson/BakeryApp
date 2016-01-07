@@ -54,7 +54,7 @@ public class MyUtils
 
     public static void setUserProfilePicture(Context context) {
 
-        List<DataBase_UserInfo> queryResults = Db_Utils.getUserInfoList();
+        List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
         if (queryResults.size() > 0) {
             GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
         }

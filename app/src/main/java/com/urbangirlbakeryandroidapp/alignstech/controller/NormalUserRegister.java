@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -39,7 +39,7 @@ public class NormalUserRegister {
                     public void onResponse(String response) {
                         MyUtils.showLog(response);
                         MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
-                        Db_Utils.deleteUserInfoList();
+                        DataBase_Utils.deleteUserInfoList();
                         DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9));
                         dataBase_userInfo.save();
                         MyBus.getInstance().post(new NormalRegisterEventBus(response));

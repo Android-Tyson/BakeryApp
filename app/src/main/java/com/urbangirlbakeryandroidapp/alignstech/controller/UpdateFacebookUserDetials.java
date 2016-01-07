@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -50,7 +50,7 @@ public class UpdateFacebookUserDetials {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                if(Db_Utils.isUserInfoDataExists()){
+                if(DataBase_Utils.isUserInfoDataExists()){
 
                      DataBase_UserInfo userInfo = new Select().from(DataBase_UserInfo.class).where("Fb_id = ?", "892139110900517").executeSingle();
 

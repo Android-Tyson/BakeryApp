@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Dell on 12/23/2015.
  */
-public class Db_Utils {
+public class DataBase_Utils {
 
     public static boolean isUserInfoDataExists() {
 
@@ -61,7 +61,7 @@ public class Db_Utils {
 
     public static void deleteOldCakeListData() {
 
-        if (Db_Utils.getCakesList().size() > 0) {
+        if (DataBase_Utils.getCakesList().size() > 0) {
             new Delete().from(Cakes.class).execute();
         }
 
@@ -89,7 +89,7 @@ public class Db_Utils {
 
     public static void deleteOldAccessoriesListData() {
 
-        if (Db_Utils.getAccessoriesList().size() > 0) {
+        if (DataBase_Utils.getAccessoriesList().size() > 0) {
             new Delete().from(Accessories.class).execute();
         }
 
@@ -116,7 +116,7 @@ public class Db_Utils {
 
     public static void deleteOldGiftListData() {
 
-        if (Db_Utils.getGiftList().size() > 0) {
+        if (DataBase_Utils.getGiftList().size() > 0) {
             new Delete().from(Gifts.class).execute();
         }
 
@@ -144,7 +144,7 @@ public class Db_Utils {
 
     public static void deleteOldOfferListData() {
 
-        if (Db_Utils.getOfferList().size() > 0 ) {
+        if (DataBase_Utils.getOfferList().size() > 0 ) {
             new Delete().from(Offers.class).execute();
         }
 
