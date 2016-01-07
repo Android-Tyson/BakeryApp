@@ -46,7 +46,6 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
             GetNavigationList.parseNavigationDrawerList(this);
         }
 
-
     }
 
 
@@ -130,7 +129,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(Db_Utils.isCakeListDataExists()){
 
-            addSubheader("Cakes");
+            addDivisor();
+            addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
             List<Cakes> cakesList = Db_Utils.getCakesList();
             for (int i = 0 ; i < cakesList.size() ; i++){
                 addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
@@ -139,7 +139,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(Db_Utils.isGiftListDataExists()){
 
-            addSubheader("Gifts");
+            addDivisor();
+            addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
             List<Gifts> giftsList = Db_Utils.getGiftList();
             for (int i = 0 ; i < giftsList.size() ; i++){
                 addSection(newSection(giftsList.get(i).getCategoryName() , new GiftsFragment()));
@@ -148,7 +149,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(Db_Utils.isOfferListDataExists()){
 
-            addSubheader("Offers");
+            addDivisor();
+            addSection(newSection("Offers", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
             List<Offers> offerList = Db_Utils.getOfferList();
             for (int i = 0 ; i < offerList.size() ; i++){
                 addSection(newSection(offerList.get(i).getCategoryName() , new OfferFragment()));
@@ -157,7 +159,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(Db_Utils.isAccessoriesListDataExists()){
 
-            addSubheader("Accessories");
+            addDivisor();
+            addSection(newSection("Accessories", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
             List<Accessories> accessoriesList = Db_Utils.getAccessoriesList();
             for (int i = 0 ; i < accessoriesList.size() ; i++){
                 addSection(newSection(accessoriesList.get(i).getCategoryName() , new OfferFragment()));
@@ -173,7 +176,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < cakesList.size(); i++) {
-            addSection(newSection("\t\t\t" + cakesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+            addSection(newSection(cakesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }
@@ -185,7 +188,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
         addSection(newSection("Gifts", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < giftsList.size(); i++) {
-            addSection(newSection("\t\t\t" + giftsList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+            addSection(newSection(giftsList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }
@@ -197,7 +200,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
         addSection(newSection("Offers", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < offerList.size(); i++) {
-            addSection(newSection("\t\t\t" + offerList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+            addSection(newSection(offerList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }
@@ -209,7 +212,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
         addSection(newSection("Accessories", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         for (int i = 0; i < accessoriesList.size(); i++) {
-            addSection(newSection("\t\t\t" + accessoriesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
+            addSection(newSection(accessoriesList.get(i).getCategoryName(), CakesFragment.newInstance(0)));
         }
 
     }

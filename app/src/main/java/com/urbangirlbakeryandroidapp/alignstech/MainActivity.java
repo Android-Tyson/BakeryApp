@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_continueWithoutLogin:
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.btn_loginWithFacebook:

@@ -54,7 +54,7 @@ public class NormalRegister extends AppCompatActivity {
     @InjectView(R.id.user_district)
     EditText user_district;
 
-    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district;
+    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district , profilePicUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class NormalRegister extends AppCompatActivity {
         location = user_location.getText().toString();
         zone = user_zone.getText().toString();
         district = user_district.getText().toString();
+        profilePicUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
 
     }
 
@@ -117,6 +118,8 @@ public class NormalRegister extends AppCompatActivity {
             userInfo.add(zone);
             userInfo.add(district);
             userInfo.add(location);
+            userInfo.add(profilePicUrl);
+
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
