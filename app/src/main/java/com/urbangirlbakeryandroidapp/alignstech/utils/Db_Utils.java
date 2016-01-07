@@ -33,6 +33,12 @@ public class Db_Utils {
 
     }
 
+    public static void deleteUserInfoList() {
+
+         new Delete().from(DataBase_UserInfo.class).execute();
+
+    }
+
 
 
     public static boolean isCakeListDataExists() {

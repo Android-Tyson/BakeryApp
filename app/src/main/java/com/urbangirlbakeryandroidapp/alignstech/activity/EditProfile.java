@@ -9,12 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -60,7 +64,7 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_normal_register);
         ButterKnife.inject(this);
         initializeToolbar();
-//        MyBus.getInstance().register(this);
+        MyBus.getInstance().register(this);
         setEditTextFields();
     }
 
@@ -69,6 +73,7 @@ public class EditProfile extends AppCompatActivity {
         if(Db_Utils.isUserInfoDataExists()) {
 
             List<DataBase_UserInfo> userInfos = Db_Utils.getUserInfoList();
+            fb_id = userInfos.get(0).getFb_id();
             user_full_name.setText(userInfos.get(0).getFirstName()+" "+userInfos.get(0).getLastName());
             user_email.setText(userInfos.get(0).getEmail());
             user_mobile.setText(userInfos.get(0).getMobileNo());
@@ -92,7 +97,7 @@ public class EditProfile extends AppCompatActivity {
 
     private void getEditTextFields() {
 
-        fb_id = user_email.getText().toString();
+//        fb_id = user_email.getText().toString();
         fullName = user_full_name.getText().toString();
         email = user_email.getText().toString();
         mobileNo = user_mobile.getText().toString();
@@ -155,16 +160,16 @@ public class EditProfile extends AppCompatActivity {
         return true;
     }
 
-//    @Subscribe
-//    public void isSuccess(NormalRegisterEventBus eventBus) {
-//        if (!eventBus.getResponse().isEmpty()) {
-//
-////            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
-//
-//            new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
-//
-//        }
-//    }
+    @Subscribe
+    public void isSuccess(NormalRegisterEventBus eventBus) {
+        if (!eventBus.getResponse().isEmpty()) {
+
+//            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+
+            new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
+
+        }
+    }
 
 
     @Override
@@ -185,11 +190,11 @@ public class EditProfile extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        MyBus.getInstance().unregister(this);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
+    }
 
 
 }
