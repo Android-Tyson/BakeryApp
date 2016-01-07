@@ -18,7 +18,7 @@ import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
@@ -54,7 +54,7 @@ public class GetNavigationList {
                 progressDialog.dismiss();
             }
         });
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 
     private static void jsonJob(String jsonObjStr){

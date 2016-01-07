@@ -10,7 +10,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Db_Utils;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MySingleton;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class GetProfilePicture {
                 imageRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
                         DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                MySingleton.getInstance(context).addToRequestQueue(imageRequest);
+                AppController.getInstance().addToRequestQueue(imageRequest);
             }
         }
     }
