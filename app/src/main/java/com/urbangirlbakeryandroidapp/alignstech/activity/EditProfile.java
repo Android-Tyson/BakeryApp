@@ -9,14 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -25,7 +21,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class NormalRegister extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -62,14 +58,14 @@ public class NormalRegister extends AppCompatActivity {
         setContentView(R.layout.activity_normal_register);
         ButterKnife.inject(this);
         initializeToolbar();
-        MyBus.getInstance().register(this);
-
+//        MyBus.getInstance().register(this);
+        
     }
 
 
     private void initializeToolbar() {
 
-        toolbar.setTitle(R.string.normal_register);
+        toolbar.setTitle(R.string.edit_profile);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -140,16 +136,16 @@ public class NormalRegister extends AppCompatActivity {
         return true;
     }
 
-    @Subscribe
-    public void isSuccess(NormalRegisterEventBus eventBus) {
-        if (!eventBus.getResponse().isEmpty()) {
-
-//            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
-
-            new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
-
-        }
-    }
+//    @Subscribe
+//    public void isSuccess(NormalRegisterEventBus eventBus) {
+//        if (!eventBus.getResponse().isEmpty()) {
+//
+////            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container_normal_register, Welcome_Screen.newInstance()).commit();
+//
+//            new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
+//
+//        }
+//    }
 
 
     @Override
@@ -170,11 +166,11 @@ public class NormalRegister extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        MyBus.getInstance().unregister(this);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        MyBus.getInstance().unregister(this);
+//    }
 
 
 }
