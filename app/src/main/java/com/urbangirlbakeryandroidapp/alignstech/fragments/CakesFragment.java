@@ -43,14 +43,21 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-    public static CakesFragment newInstance(int number){
+    public static CakesFragment newInstance(int position){
 
         CakesFragment cakesFragment = new CakesFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("Number" , number);
+        bundle.putInt("POSITION" , position);
         cakesFragment.setArguments(bundle);
 
         return cakesFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int position = getArguments().getInt("POSITION" , 1);
+        MyUtils.showLog(position+ " ");
     }
 
     @Override

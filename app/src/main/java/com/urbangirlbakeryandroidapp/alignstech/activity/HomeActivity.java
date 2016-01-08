@@ -133,7 +133,7 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
             addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
             List<Cakes> cakesList = DataBase_Utils.getCakesList();
             for (int i = 0 ; i < cakesList.size() ; i++){
-                addSection(newSection(cakesList.get(i).getCategoryName() , new CakesFragment()));
+                addSection(newSection(cakesList.get(i).getCategoryName() , CakesFragment.newInstance(0)));
             }
         }
 
