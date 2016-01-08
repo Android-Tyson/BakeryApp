@@ -35,4 +35,6 @@
     <color name="homescreenBackground">#f0f0f0</color>
     <color name="tabTextInactive">#f7f7f7</color>
     <color name="textHint">#b3b3b3</color>
+
+    <color name="layout_background">#e8e8e8</color>
 </resources>
