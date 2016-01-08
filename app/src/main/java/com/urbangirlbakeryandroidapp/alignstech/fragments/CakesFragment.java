@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
     private static final String url = "http://api.androidhive.info/json/movies.json";
     private CustomListAdapter adapter;
     private List<Product> productList = new ArrayList<>();
+    private ProgressDialog progressDialog;
 
     public CakesFragment() {
         // Required empty public constructor
@@ -71,6 +73,10 @@ public class CakesFragment extends android.support.v4.app.Fragment {
 
     private void jsonJob() {
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading Please wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         // Creating volley request obj
         JsonArrayRequest movieReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
@@ -95,11 +101,13 @@ public class CakesFragment extends android.support.v4.app.Fragment {
 
                         }
                         adapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showLog(" ");
+                MyUtils.showToast(getActivity() , "Please Check your internet connection and try again..");
+                progressDialog.dismiss();
             }
         });
 
