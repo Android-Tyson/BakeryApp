@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
@@ -24,7 +25,7 @@ public class PostFacebookUserDetials {
 
     public static MaterialDialog materialDialog ;
 
-    public static void postUserDetials(String url , Context context){
+    public static void postUserDetials(String url , final Context context){
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
 
@@ -38,7 +39,7 @@ public class PostFacebookUserDetials {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showLog(error.toString());
+                MyUtils.showToast(context, context.getResources().getString(R.string.network_error));
                 materialDialog.dismiss();
             }
         }){

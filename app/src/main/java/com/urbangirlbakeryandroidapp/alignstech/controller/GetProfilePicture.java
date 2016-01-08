@@ -33,7 +33,6 @@ public class GetProfilePicture {
                 }, 50, 50, null, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        MyUtils.showLog(error.toString());
                         List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
                         GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
                     }

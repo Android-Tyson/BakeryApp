@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
@@ -33,7 +34,7 @@ import java.util.List;
 public class GetNavigationList {
 
     private static MaterialDialog materialDialog;
-    public static void parseNavigationDrawerList(Context context){
+    public static void parseNavigationDrawerList(final Context context){
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
 
@@ -47,7 +48,7 @@ public class GetNavigationList {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showLog(error.toString());
+                MyUtils.showToast(context, context.getResources().getString(R.string.network_error));
                 materialDialog.dismiss();
             }
         });

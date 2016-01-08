@@ -318,9 +318,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStop() {
         super.onStop();
-        if(PostFacebookUserDetials.progressDialog != null){
-            if(PostFacebookUserDetials.progressDialog.isShowing()){
-                PostFacebookUserDetials.progressDialog.dismiss();
+        if(PostFacebookUserDetials.materialDialog != null){
+            if(PostFacebookUserDetials.materialDialog.isShowing()){
+                PostFacebookUserDetials.materialDialog.dismiss();
             }
         }
     }
