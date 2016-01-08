@@ -4,7 +4,16 @@
     android:layout_height="match_parent"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.CakeFragment">
 
-    <include
-        layout="@layout/single_row_tiem_view"/>
+    <!--<include-->
+        <!--layout="@layout/single_row_tiem_view"/>-->
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gridView"
+        android:numColumns="2"
+        android:layout_gravity="center" />
+
+
 
 </FrameLayout>
