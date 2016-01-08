@@ -44,7 +44,5 @@ dependencies {
     compile 'com.squareup:otto:1.3.5'
     compile 'com.mikhaellopez:circularimageview:2.1.1'
     compile 'com.android.support:cardview-v7:23.0.0'
-
-
-//    compile 'com.afollestad:material-dialogs:0.7.6.0'
+    compile 'com.afollestad:material-dialogs:0.7.6.0'
 }
