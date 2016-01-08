@@ -1,8 +1,8 @@
 package com.urbangirlbakeryandroidapp.alignstech.controller;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -10,9 +10,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
@@ -24,14 +24,11 @@ import java.util.Map;
  */
 public class NormalUserRegister {
 
-    public static ProgressDialog progressDialog;
+    private static MaterialDialog materialDialog;
 
     public static void postUserDetials(String url, final Context context , final List<String> userInfo) {
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Posting Please Wait");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -43,14 +40,14 @@ public class NormalUserRegister {
                         DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9));
                         dataBase_userInfo.save();
                         MyBus.getInstance().post(new NormalRegisterEventBus(response));
-                        progressDialog.dismiss();
+                        materialDialog.dismiss();
                         
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context , "Please Check your internet Connection and try again...");
-                progressDialog.dismiss();
+                materialDialog.dismiss();
             }
         }) {
             @Override

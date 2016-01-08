@@ -1,8 +1,8 @@
 package com.urbangirlbakeryandroidapp.alignstech.controller;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -16,9 +16,9 @@ import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
 import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
@@ -32,26 +32,23 @@ import java.util.List;
  */
 public class GetNavigationList {
 
-    public static ProgressDialog progressDialog;
+    private static MaterialDialog materialDialog;
     public static void parseNavigationDrawerList(Context context){
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Posting Please Wait");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Apis.nav_collection, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 MyUtils.showLog(response.toString());
                 jsonJob(response.toString());
-                progressDialog.dismiss();
+                materialDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showLog(error.toString());
-                progressDialog.dismiss();
+                materialDialog.dismiss();
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);

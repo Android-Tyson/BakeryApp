@@ -1,16 +1,16 @@
 package com.urbangirlbakeryandroidapp.alignstech.controller;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
@@ -22,27 +22,24 @@ import java.util.Map;
  */
 public class PostFacebookUserDetials {
 
-    public static ProgressDialog progressDialog ;
+    public static MaterialDialog materialDialog ;
 
     public static void postUserDetials(String url , Context context){
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Posting Please Wait");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MyUtils.showLog(response);
-                        progressDialog.dismiss();
+                        materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showLog(error.toString());
-                progressDialog.dismiss();
+                materialDialog.dismiss();
             }
         }){
             @Override
