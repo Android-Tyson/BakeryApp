@@ -19,6 +19,15 @@ public class GiftsFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
+    public static GiftsFragment newInstance(int position){
+
+        GiftsFragment giftsFragment = new GiftsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("POSITION" , position);
+        giftsFragment.setArguments(bundle);
+
+        return giftsFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

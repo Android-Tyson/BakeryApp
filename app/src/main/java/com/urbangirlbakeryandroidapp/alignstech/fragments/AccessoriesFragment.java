@@ -12,28 +12,28 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OfferFragment extends android.support.v4.app.Fragment {
+public class AccessoriesFragment extends Fragment {
 
 
-    public OfferFragment() {
+    public AccessoriesFragment() {
         // Required empty public constructor
     }
 
-    public static OfferFragment newInstance(int position){
+    public static AccessoriesFragment newInstance(int position){
 
-        OfferFragment offerFragment = new OfferFragment();
+        AccessoriesFragment accessoriesFragment = new AccessoriesFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("POSITION" , position);
-        offerFragment.setArguments(bundle);
+        accessoriesFragment.setArguments(bundle);
 
-        return offerFragment;
+        return accessoriesFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_offer, container, false);
+        return inflater.inflate(R.layout.fragment_accessories, container, false);
     }
 
 
