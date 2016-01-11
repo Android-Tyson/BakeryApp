@@ -87,10 +87,15 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
-        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this , EditProfile.class)));
+        addDivisor();
+        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
+        addDivisor();
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        addDivisor();
         addSection(newSection("Gifts", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+        addDivisor();
         addSection(newSection("Offers", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+        addDivisor();
         addSection(newSection("Accessories", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
 
