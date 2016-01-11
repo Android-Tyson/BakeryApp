@@ -13,7 +13,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
-import com.urbangirlbakeryandroidapp.alignstech.controller.NormalUserRegister;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostNormalUserRegister;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -145,7 +145,7 @@ public class EditProfile extends AppCompatActivity {
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
                     if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobileNo, this)) {
-                        NormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
+                        PostNormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
                     }
                 }
             }

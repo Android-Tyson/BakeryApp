@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class NormalUserRegister {
+public class PostNormalUserRegister {
 
     private static MaterialDialog materialDialog;
 
