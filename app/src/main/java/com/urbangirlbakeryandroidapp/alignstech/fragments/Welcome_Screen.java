@@ -12,8 +12,8 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 
@@ -89,7 +89,7 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
 
-        Intent intent = new Intent(getActivity() , HomeActivity.class);
+        Intent intent = new Intent(getActivity() , MainActivity.class);
         startActivity(intent);
         getActivity().finish();
 

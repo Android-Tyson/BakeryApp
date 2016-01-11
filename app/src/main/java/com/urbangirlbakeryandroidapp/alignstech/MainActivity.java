@@ -2,94 +2,49 @@ package com.urbangirlbakeryandroidapp.alignstech;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.sromku.simple.fb.Permission;
-import com.sromku.simple.fb.SimpleFacebook;
-import com.sromku.simple.fb.SimpleFacebookConfiguration;
-import com.sromku.simple.fb.entities.Profile;
-import com.sromku.simple.fb.listeners.OnLoginListener;
-import com.sromku.simple.fb.listeners.OnProfileListener;
-import com.sromku.simple.fb.utils.Attributes;
-import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
-import com.urbangirlbakeryandroidapp.alignstech.activity.HomeActivity;
-import com.urbangirlbakeryandroidapp.alignstech.activity.NormalRegister;
-import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.activity.Login;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
+import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
 
-    @InjectView(R.id.button_continueWithoutLogin)
-    Button btnContinueWithoutLogin;
-
-    @InjectView(R.id.btn_loginWithFacebook)
-    Button btnLoginWithFacebook;
-
-    @InjectView(R.id.btn_normal_login)
-    Button btnNormalLogin;
-
-    public static UserDetials userDetials;
-    // Generate KeyHash Reference
-    // http://stackoverflow.com/questions/5306009/facebook-android-generate-key-hash
-
-    private SimpleFacebook simpleFacebook;
+    public static MaterialAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        MyBus.getInstance().register(this);
 
-
-        if(MyUtils.isUserLoggedIn(getApplicationContext())){
-
-            Intent intent = new Intent(this , HomeActivity.class);
-            startActivity(intent);
-            finish();
-
-        }
-
-        btnContinueWithoutLogin.setOnClickListener(this);
-        btnLoginWithFacebook.setOnClickListener(this);
-        btnNormalLogin.setOnClickListener(this);
-
-        Permission[] permissions = new Permission[]{
-                Permission.USER_PHOTOS,
-                Permission.USER_HOMETOWN,
-                Permission.USER_ABOUT_ME,
-                Permission.USER_LOCATION,
-                Permission.PUBLIC_PROFILE,
-                Permission.EMAIL,
-        };
-
-        SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
-                .setAppId(getResources().getString(R.string.app_id))
-                .setNamespace("BakeryApp")
-                .setPermissions(permissions)
-                .build();
-
-        simpleFacebook.setConfiguration(configuration);
+//        if(!DataBase_Utils.isCakeListDataExists()) {
+//            GetNavigationList.parseNavigationDrawerList(this);
+//        }
 
     }
+
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_activity2, menu);
         return true;
     }
 
@@ -109,219 +64,159 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
+    public void init(Bundle bundle) {
 
-        switch (view.getId()) {
-            case R.id.button_continueWithoutLogin:
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                break;
+        allowArrowAnimation();
 
-            case R.id.btn_loginWithFacebook:
+        MyUtils.setUserProfilePicture(this);
+        if (MyUtils.isUserLoggedIn(this)) {
 
-                if (MyUtils.isNetworkConnected(this)) {
-                    simpleFacebook.login(onLoginListener);
-                } else {
-                    MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
-                }
-                break;
+            List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
 
-            case R.id.btn_normal_login:
-                MyUtils.showLog("Clicked Direct login");
-                Intent intent1 = new Intent(this , NormalRegister.class);
-                startActivity(intent1);
-                finish();
+            account = new MaterialAccount(getResources(),
+                    queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName(), ""
+                    , MyUtils.getUserProfilePic(), R.drawable.drawer_bg);
+        } else {
+            account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
+                    , R.mipmap.ic_launcher, R.drawable.drawer_bg);
         }
+
+        addAccount(account);
+        setAccountListener(this);
+        setDrawerHeaderImage(R.drawable.drawer_bg);
+
+        addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
+        addDivisor();
+        addSection(newSection("Login", R.mipmap.ic_launcher, new Intent(this, Login.class)));
+        addDivisor();
+        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
+        addDivisor();
+        addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        addDivisor();
+        addSection(newSection("Gifts", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+        addDivisor();
+        addSection(newSection("Offers", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+        addDivisor();
+        addSection(newSection("Accessories", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+        addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
+
+//        getSectionByTitle("home").setTitle("NewTitle");
+
+//        if(DataBase_Utils.isCakeListDataExists()) {
+//            initializeSavedNavigationDrawerList();
+//        }
+
+
     }
 
-    OnLoginListener onLoginListener = new OnLoginListener() {
+    @Override
+    public void onAccountOpening(MaterialAccount materialAccount) {
 
-        @Override
-        public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
-            // change the state of the button or do whatever you want
-            MyUtils.showLog("Logged in");
+        Bundle loginBundle = new Bundle();
+        loginBundle.putBoolean("isDirectLogin", true);
+        Intent loginIntent = new Intent(this, Login.class);
+        loginIntent.putExtras(loginBundle);
+        startActivity(loginIntent);
+        finish();
 
-            PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
-            pictureAttributes.setHeight(500);
-            pictureAttributes.setWidth(500);
-            pictureAttributes.setType(PictureAttributes.PictureType.SQUARE);
+    }
 
-            Profile.Properties properties = new Profile.Properties.Builder()
-                    .add(Profile.Properties.ID)
-                    .add(Profile.Properties.FIRST_NAME)
-                    .add(Profile.Properties.LAST_NAME)
-                    .add(Profile.Properties.EMAIL)
-                    .add(Profile.Properties.COVER)
-                    .add(Profile.Properties.BIO)
-                    .add(Profile.Properties.BIRTHDAY)
-                    .add(Profile.Properties.GENDER)
-                    .add(Profile.Properties.HOMETOWN)
-                    .add(Profile.Properties.WORK)
-                    .add(Profile.Properties.LOCATION)
-                    .add(Profile.Properties.PICTURE, pictureAttributes)
-                    .build();
+    @Override
+    public void onChangeAccount(MaterialAccount materialAccount) {
 
-            simpleFacebook.getProfile(properties , onProfileListener);
+    }
 
-        }
 
-        @Override
-        public void onCancel() {
-            // user canceled the dialog
-        }
-
-        @Override
-        public void onFail(String reason) {
-            // failed to login
-        }
-
-        @Override
-        public void onException(Throwable throwable) {
-            // exception from facebook
-        }
-
-    };
-
-//    Logging Out
+//    private void initializeSavedNavigationDrawerList(){
 //
-//    OnLogoutListener onLogoutListener = new OnLogoutListener() {
+//        if(DataBase_Utils.isCakeListDataExists()){
 //
-//        @Override
-//        public void onLogout() {
-//            AppLog.showLog("You are logged out");
+//            addDivisor();
+//            addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+//            List<Cakes> cakesList = DataBase_Utils.getCakesList();
+//            for (int i = 0 ; i < cakesList.size() ; i++){
+//                addSection(newSection(cakesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
+//            }
 //        }
 //
-//    };
-//     simpleFacebook.logout(onLogoutListener);
+//        if(DataBase_Utils.isGiftListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+//            List<Gifts> giftsList = DataBase_Utils.getGiftList();
+//            for (int i = 0 ; i < giftsList.size() ; i++){
+//                addSection(newSection(giftsList.get(i).getCategoryName() ,R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
+//            }
+//        }
+//
+//        if(DataBase_Utils.isOfferListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+//            List<Offers> offerList = DataBase_Utils.getOfferList();
+//            for (int i = 0 ; i < offerList.size() ; i++){
+//                addSection(newSection(offerList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//            }
+//        }
+//
+//        if(DataBase_Utils.isAccessoriesListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+//            List<Accessories> accessoriesList = DataBase_Utils.getAccessoriesList();
+//            for (int i = 0 ; i < accessoriesList.size() ; i++){
+//                addSection(newSection(accessoriesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//            }
+//        }
+//
+//    }
 
+//    @Subscribe
+//    public void getCakeList(CakeListResultEvent event) {
+//        List<Cakes> cakesList = event.getCakeList();
+//
+//        addDivisor();
+//        addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+//        for (int i = 0; i < cakesList.size(); i++) {
+//            addSection(newSection(cakesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
+//        }
+//
+//    }
 
-    OnProfileListener onProfileListener = new OnProfileListener() {
-        @Override
-        public void onComplete(Profile profile) {
+//    @Subscribe
+//    public void getGiftList(GiftListResultEvent event) {
+//        List<Gifts> giftsList = event.getGiftList();
+//
+//        addDivisor();
+//        addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+//        for (int i = 0; i < giftsList.size(); i++) {
+//            addSection(newSection(giftsList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
+//        }
+//
+//    }
 
-            MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
+//    @Subscribe
+//    public void getOfferList(OfferListResultEvent event) {
+//        List<Offers> offerList = event.getOfferList();
+//
+//        addDivisor();
+//        addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+//        for (int i = 0; i < offerList.size(); i++) {
+//            addSection(newSection(offerList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//        }
+//
+//    }
 
-            userDetials = new UserDetials();
-
-            userDetials.setFb_id(profile.getId());
-            MyUtils.showLog("My profile id =" + profile.getId());
-            userDetials.setFirstName(profile.getFirstName());
-            MyUtils.showLog(" " + profile.getFirstName());
-            userDetials.setLastName(profile.getLastName());
-            MyUtils.showLog(" " + profile.getLastName());
-            userDetials.setMobileNo(profile.getReligion());
-            MyUtils.showLog(" " + profile.getReligion());
-            userDetials.setEmail(profile.getEmail());
-            MyUtils.showLog(" " + profile.getEmail());
-            userDetials.setDob(profile.getBirthday());
-            MyUtils.showLog(" " + profile.getBirthday());
-            userDetials.setGender(profile.getGender());
-            MyUtils.showLog(" " + profile.getGender());
-            userDetials.setZone(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
-            userDetials.setDistrict(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
-            userDetials.setLocation(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
-            userDetials.setProfilePicUrl(profile.getPicture());
-
-            handlingNullUserInfo(userDetials);
-
-            String fb_id = userDetials.getFb_id();
-            String firstName = userDetials.getFirstName();
-            String lastName = userDetials.getLastName();
-            String mobileNo = userDetials.getMobileNo();
-            String email = userDetials.getEmail();
-            String dob = userDetials.getDob();
-            String gender = userDetials.getGender();
-            String zone = userDetials.getZone();
-            String district = userDetials.getDistrict();
-            String location  = userDetials.getLocation();
-            String profilePicUrl = userDetials.getProfilePicUrl();
-
-            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
-            dataBase_userInfo.save();
-
-//            String user_fb_id = userDetials.getFb_id();
-//            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
-
-            PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
-//            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
-
-
-            Intent intent = new Intent(getApplicationContext() , EditProfile.class);
-//            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
-            intent.putExtra("FacebookIntent" , "FB_DATA");
-            startActivity(intent);
-            finish();
-
-        }
-
-        @Override
-        public void onException(Throwable throwable) {
-            super.onException(throwable);
-        }
-
-        @Override
-        public void onFail(String reason) {
-            super.onFail(reason);
-        }
-
-        @Override
-        public void onThinking() {
-            super.onThinking();
-        }
-
-    };
-
-    private void handlingNullUserInfo(UserDetials userDetials){
-
-        if(userDetials.getFb_id() == null){
-            userDetials.setFb_id("010101010101");
-        }if(userDetials.getFirstName() == null){
-            userDetials.setFirstName("FirstName");
-        } if(userDetials.getLastName() == null){
-            userDetials.setLastName("LastName");
-        } if(userDetials.getMobileNo() == null){
-            userDetials.setMobileNo("");
-        } if(userDetials.getEmail() == null){
-            userDetials.setEmail("");
-        } if (userDetials.getDob() == null){
-            userDetials.setDob("0000-00-00");
-        } if(userDetials.getGender() == null){
-            userDetials.setGender("");
-        } if (userDetials.getZone() == null){
-            userDetials.setZone("");
-        } if(userDetials.getDistrict() == null){
-            userDetials.setDistrict("");
-        } if(userDetials.getLocation() == null){
-            userDetials.setLocation("");
-        } if(userDetials.getProfilePicUrl() == null){
-            userDetials.setProfilePicUrl("http://www.google.com");
-        }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        simpleFacebook.onActivityResult(requestCode, resultCode, data);
-        MyUtils.showLog(data.toString());
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        simpleFacebook = SimpleFacebook.getInstance(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(PostFacebookUserDetials.materialDialog != null){
-            if(PostFacebookUserDetials.materialDialog.isShowing()){
-                PostFacebookUserDetials.materialDialog.dismiss();
-            }
-        }
-    }
+//    @Subscribe
+//    public void getAccessoriesList(AccessoriesListResultEvent event) {
+//        List<Accessories> accessoriesList = event.getAccessoriesList();
+//
+//        addDivisor();
+//        addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+//        for (int i = 0; i < accessoriesList.size(); i++) {
+//            addSection(newSection(accessoriesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, AccessoriesFragment.newInstance(0)));
+//        }
+//
+//    }
 }
+

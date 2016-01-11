@@ -16,6 +16,7 @@ import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
@@ -54,7 +55,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         if(MyUtils.isUserLoggedIn(getApplicationContext())){
 
-            Intent intent = new Intent(this , HomeActivity.class);
+            Intent intent = new Intent(this , MainActivity.class);
             startActivity(intent);
             finish();
 
@@ -111,7 +112,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.button_continueWithoutLogin:
-                Intent intent = new Intent(this, HomeActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
 
