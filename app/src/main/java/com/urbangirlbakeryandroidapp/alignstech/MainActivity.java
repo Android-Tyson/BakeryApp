@@ -87,10 +87,15 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
         addDivisor();
-        addSection(newSection("Login", R.mipmap.ic_launcher, new Intent(this, Login.class)));
-        addDivisor();
-        addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
-        addDivisor();
+
+        if(MyUtils.isUserLoggedIn(this)){
+            addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
+            addDivisor();
+        }else{
+            addSection(newSection("Login", R.mipmap.ic_launcher, new Intent(this, Login.class)));
+            addDivisor();
+        }
+
         addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         addDivisor();
         addSection(newSection("Gifts", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));

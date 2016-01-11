@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ButterKnife.inject(this);
 
 
-        if(MyUtils.isUserLoggedIn(getApplicationContext())){
+        if(MyUtils.isUserLoggedIn(this)){
 
             Intent intent = new Intent(this , MainActivity.class);
             startActivity(intent);
