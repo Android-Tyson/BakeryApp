@@ -5,13 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
-import com.urbangirlbakeryandroidapp.alignstech.bus.CakeListResultEvent;
-import com.urbangirlbakeryandroidapp.alignstech.bus.GiftListResultEvent;
-import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
@@ -19,11 +14,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
-import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
-import com.urbangirlbakeryandroidapp.alignstech.model.Cakes;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
-import com.urbangirlbakeryandroidapp.alignstech.model.Gifts;
-import com.urbangirlbakeryandroidapp.alignstech.model.Offers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -95,15 +86,19 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setAccountListener(this);
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
-        addSection(newSection("Home", R.mipmap.ic_launcher, new HomeFragment()));
+        addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
         addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this , EditProfile.class)));
+        addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        addSection(newSection("Gifts", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+        addSection(newSection("Offers", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+        addSection(newSection("Accessories", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
         addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
 
 //        getSectionByTitle("home").setTitle("NewTitle");
 
-        if(DataBase_Utils.isCakeListDataExists()) {
-            initializeSavedNavigationDrawerList();
-        }
+//        if(DataBase_Utils.isCakeListDataExists()) {
+//            initializeSavedNavigationDrawerList();
+//        }
 
 
     }
@@ -126,95 +121,95 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
 
-    private void initializeSavedNavigationDrawerList(){
+//    private void initializeSavedNavigationDrawerList(){
+//
+//        if(DataBase_Utils.isCakeListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+//            List<Cakes> cakesList = DataBase_Utils.getCakesList();
+//            for (int i = 0 ; i < cakesList.size() ; i++){
+//                addSection(newSection(cakesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
+//            }
+//        }
+//
+//        if(DataBase_Utils.isGiftListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+//            List<Gifts> giftsList = DataBase_Utils.getGiftList();
+//            for (int i = 0 ; i < giftsList.size() ; i++){
+//                addSection(newSection(giftsList.get(i).getCategoryName() ,R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
+//            }
+//        }
+//
+//        if(DataBase_Utils.isOfferListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+//            List<Offers> offerList = DataBase_Utils.getOfferList();
+//            for (int i = 0 ; i < offerList.size() ; i++){
+//                addSection(newSection(offerList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//            }
+//        }
+//
+//        if(DataBase_Utils.isAccessoriesListDataExists()){
+//
+//            addDivisor();
+//            addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+//            List<Accessories> accessoriesList = DataBase_Utils.getAccessoriesList();
+//            for (int i = 0 ; i < accessoriesList.size() ; i++){
+//                addSection(newSection(accessoriesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//            }
+//        }
+//
+//    }
 
-        if(DataBase_Utils.isCakeListDataExists()){
+//    @Subscribe
+//    public void getCakeList(CakeListResultEvent event) {
+//        List<Cakes> cakesList = event.getCakeList();
+//
+//        addDivisor();
+//        addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+//        for (int i = 0; i < cakesList.size(); i++) {
+//            addSection(newSection(cakesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
+//        }
+//
+//    }
 
-            addDivisor();
-            addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-            List<Cakes> cakesList = DataBase_Utils.getCakesList();
-            for (int i = 0 ; i < cakesList.size() ; i++){
-                addSection(newSection(cakesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
-            }
-        }
+//    @Subscribe
+//    public void getGiftList(GiftListResultEvent event) {
+//        List<Gifts> giftsList = event.getGiftList();
+//
+//        addDivisor();
+//        addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+//        for (int i = 0; i < giftsList.size(); i++) {
+//            addSection(newSection(giftsList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
+//        }
+//
+//    }
 
-        if(DataBase_Utils.isGiftListDataExists()){
+//    @Subscribe
+//    public void getOfferList(OfferListResultEvent event) {
+//        List<Offers> offerList = event.getOfferList();
+//
+//        addDivisor();
+//        addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+//        for (int i = 0; i < offerList.size(); i++) {
+//            addSection(newSection(offerList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
+//        }
+//
+//    }
 
-            addDivisor();
-            addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
-            List<Gifts> giftsList = DataBase_Utils.getGiftList();
-            for (int i = 0 ; i < giftsList.size() ; i++){
-                addSection(newSection(giftsList.get(i).getCategoryName() ,R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
-            }
-        }
-
-        if(DataBase_Utils.isOfferListDataExists()){
-
-            addDivisor();
-            addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
-            List<Offers> offerList = DataBase_Utils.getOfferList();
-            for (int i = 0 ; i < offerList.size() ; i++){
-                addSection(newSection(offerList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-            }
-        }
-
-        if(DataBase_Utils.isAccessoriesListDataExists()){
-
-            addDivisor();
-            addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
-            List<Accessories> accessoriesList = DataBase_Utils.getAccessoriesList();
-            for (int i = 0 ; i < accessoriesList.size() ; i++){
-                addSection(newSection(accessoriesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-            }
-        }
-
-    }
-
-    @Subscribe
-    public void getCakeList(CakeListResultEvent event) {
-        List<Cakes> cakesList = event.getCakeList();
-
-        addDivisor();
-        addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-        for (int i = 0; i < cakesList.size(); i++) {
-            addSection(newSection(cakesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
-        }
-
-    }
-
-    @Subscribe
-    public void getGiftList(GiftListResultEvent event) {
-        List<Gifts> giftsList = event.getGiftList();
-
-        addDivisor();
-        addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
-        for (int i = 0; i < giftsList.size(); i++) {
-            addSection(newSection(giftsList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
-        }
-
-    }
-
-    @Subscribe
-    public void getOfferList(OfferListResultEvent event) {
-        List<Offers> offerList = event.getOfferList();
-
-        addDivisor();
-        addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
-        for (int i = 0; i < offerList.size(); i++) {
-            addSection(newSection(offerList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-        }
-
-    }
-
-    @Subscribe
-    public void getAccessoriesList(AccessoriesListResultEvent event) {
-        List<Accessories> accessoriesList = event.getAccessoriesList();
-
-        addDivisor();
-        addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
-        for (int i = 0; i < accessoriesList.size(); i++) {
-            addSection(newSection(accessoriesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, AccessoriesFragment.newInstance(0)));
-        }
-
-    }
+//    @Subscribe
+//    public void getAccessoriesList(AccessoriesListResultEvent event) {
+//        List<Accessories> accessoriesList = event.getAccessoriesList();
+//
+//        addDivisor();
+//        addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+//        for (int i = 0; i < accessoriesList.size(); i++) {
+//            addSection(newSection(accessoriesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, AccessoriesFragment.newInstance(0)));
+//        }
+//
+//    }
 }

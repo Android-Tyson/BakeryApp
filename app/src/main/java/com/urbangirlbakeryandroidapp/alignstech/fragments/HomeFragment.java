@@ -14,6 +14,15 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
  */
 public class HomeFragment extends android.support.v4.app.Fragment {
 
+    public static HomeFragment newInstance(int position){
+
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("POSITION" , position);
+        homeFragment.setArguments(bundle);
+
+        return homeFragment;
+    }
 
     public HomeFragment() {
         // Required empty public constructor
