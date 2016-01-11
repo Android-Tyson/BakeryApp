@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -34,9 +33,9 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-        if(!DataBase_Utils.isCakeListDataExists()) {
-            GetNavigationList.parseNavigationDrawerList(this);
-        }
+//        if(!DataBase_Utils.isCakeListDataExists()) {
+//            GetNavigationList.parseNavigationDrawerList(this);
+//        }
 
     }
 
@@ -87,6 +86,8 @@ public class HomeActivity extends MaterialNavigationDrawer implements MaterialAc
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
         addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
+        addDivisor();
+        addSection(newSection("Login", R.mipmap.ic_launcher, new Intent(this, Login.class)));
         addDivisor();
         addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
         addDivisor();
