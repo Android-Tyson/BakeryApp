@@ -1,8 +1,8 @@
 package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +35,4 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-
-
 }

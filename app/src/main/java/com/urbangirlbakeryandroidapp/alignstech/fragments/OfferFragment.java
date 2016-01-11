@@ -3,11 +3,14 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,5 +39,13 @@ public class OfferFragment extends android.support.v4.app.Fragment {
         return inflater.inflate(R.layout.fragment_offer, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(!DataBase_Utils.isOfferListDataExists()) {
+            GetNavigationList.parseNavigationDrawerList(getActivity());
+        }else {
 
+        }
+    }
 }

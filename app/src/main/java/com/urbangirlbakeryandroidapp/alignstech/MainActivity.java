@@ -33,9 +33,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-//        if(!DataBase_Utils.isCakeListDataExists()) {
-//            GetNavigationList.parseNavigationDrawerList(this);
-//        }
 
     }
 
