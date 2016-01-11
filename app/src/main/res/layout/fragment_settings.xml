@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Settings"
-    android:background="@color/accent_material_light">
+    android:background="#9531ff">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

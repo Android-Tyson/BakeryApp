@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment"
-    android:background="@color/voteButtonGreenPressedColor">
+    android:background="#f45949">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
