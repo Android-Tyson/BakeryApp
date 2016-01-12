@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetNavigationList;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetChildCollectionList;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 
 /**
@@ -43,7 +43,7 @@ public class GiftsFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(!DataBase_Utils.isGiftListDataExists()) {
-            GetNavigationList.parseNavigationDrawerList(getActivity());
+            GetChildCollectionList.parseNavigationDrawerList(getActivity());
         }else {
 
         }

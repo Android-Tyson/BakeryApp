@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by Dell on 12/28/2015.
  */
-public class GetNavigationList {
+public class GetChildCollectionList {
 
     private static MaterialDialog materialDialog;
     public static void parseNavigationDrawerList(final Context context){

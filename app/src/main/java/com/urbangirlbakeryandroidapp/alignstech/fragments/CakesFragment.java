@@ -66,7 +66,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cake, container, false);
         listView = (GridView) view.findViewById(R.id.gridView);
-//        ButterKnife.inject(getActivity(), view);
+//        ButterKnife.inject(this, view);
         return view;
     }
 
