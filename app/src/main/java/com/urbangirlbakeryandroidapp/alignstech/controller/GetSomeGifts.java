@@ -30,7 +30,7 @@ public class GetSomeGifts {
                 GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list);
             }
         });
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "SOME_CATEGORIES_TAG");
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");
 
     }
 

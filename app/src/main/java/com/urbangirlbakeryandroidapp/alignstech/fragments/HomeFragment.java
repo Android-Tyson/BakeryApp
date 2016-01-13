@@ -17,6 +17,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
@@ -58,11 +59,11 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     @InjectView(R.id.see_more_gift)
     RelativeLayout see_more_gift;
 
-    public static HomeFragment newInstance(int position){
+    public static HomeFragment newInstance(int position) {
 
         HomeFragment homeFragment = new HomeFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("POSITION" , position);
+        bundle.putInt("POSITION", position);
         homeFragment.setArguments(bundle);
 
         return homeFragment;
@@ -90,33 +91,33 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(MyUtils.isNetworkConnected(getActivity())){
+        if (MyUtils.isNetworkConnected(getActivity())) {
             GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list);
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list);
         }
     }
 
     @Subscribe
-    public void getSomeCategoriesList(SomeCategoriesEventBus event){
+    public void getSomeCategoriesList(SomeCategoriesEventBus event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForCategories(jsonObject);
     }
 
     @Subscribe
-    public void getSomeGiftList(SomeGiftEventBus event){
+    public void getSomeGiftList(SomeGiftEventBus event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForGifts(jsonObject);
     }
 
-    private void performJsonTaskForCategories(JSONObject jsonObject){
+    private void performJsonTaskForCategories(JSONObject jsonObject) {
 
         ArrayList<String> categoriesChildList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
-            for(int i = 0 ; i < jsonArray.length() ; i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
                 categoriesChildList.add(singleChildname);
@@ -130,13 +131,13 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
     }
 
-    private void performJsonTaskForGifts(JSONObject jsonObject){
+    private void performJsonTaskForGifts(JSONObject jsonObject) {
 
         ArrayList<String> giftChildList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
-            for(int i = 0 ; i < jsonArray.length() ; i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
                 giftChildList.add(singleChildname);
@@ -148,4 +149,12 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             e.printStackTrace();
         }
 
-    }}
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(getActivity());
+        AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
+    }
+}
