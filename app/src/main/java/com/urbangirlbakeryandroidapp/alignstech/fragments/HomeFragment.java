@@ -92,8 +92,8 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (MyUtils.isNetworkConnected(getActivity())) {
-            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list);
-            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list);
+            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list , getActivity());
+            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list , getActivity());
         }
     }
 
