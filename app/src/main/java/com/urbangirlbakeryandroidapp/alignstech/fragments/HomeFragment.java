@@ -3,13 +3,23 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -57,13 +67,39 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyBus.getInstance().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.inject(this , view);
+        ButterKnife.inject(this, view);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(MyUtils.isNetworkConnected(getActivity())){
+//            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list);
+            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list);
+        }
+    }
+
+    @Subscribe
+    public void getSomeCategoriesList(SomeCategoriesEventBus event){
+        JSONObject jsonObject = event.getJsonObject();
+        MyUtils.showLog(jsonObject.toString());
+    }
+
+    @Subscribe
+    public void getSomeGiftList(SomeGiftEventBus event){
+        JSONObject jsonObject = event.getJsonObject();
+        MyUtils.showLog(jsonObject.toString());
     }
 }

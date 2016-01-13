@@ -16,7 +16,7 @@ import org.json.JSONObject;
  */
 public class GetSomeCategories {
 
-    private static void parseSomeCategoriesList(String url){
+    public static void parseSomeCategoriesList(String url){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {

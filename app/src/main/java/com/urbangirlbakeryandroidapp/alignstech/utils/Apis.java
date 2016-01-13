@@ -9,7 +9,7 @@ public class Apis {
     public static final String userDetialPostURl = BASE_URL + "userRegister";
     public static final String nav_collection = BASE_URL + "collection";
     public static final String user_list = BASE_URL + "userlist";
-    public static final String some_categories_list = BASE_URL + "userlist";
-    public static final String some_gift_list = BASE_URL + "userlist";
+    public static final String some_categories_list = "http://cake.yogeshojha.com.np/api/child-categories/5";
+    public static final String some_gift_list = "http://cake.yogeshojha.com.np/api/child-categories/3";
 
 }
