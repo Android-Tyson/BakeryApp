@@ -6,306 +6,329 @@
     android:background="@color/layout_background"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <!-- Categories Sector -->
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_margin="10dp"
-            card_view:cardCornerRadius="5dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <com.daimajia.slider.library.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
+
+            </RelativeLayout>
+
+            <!-- Categories Sector -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="210dp"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/myPrimaryColor"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:text="@string/categories"
-                        android:textColor="@color/myWindowBackground"
-                        android:textSize="@dimen/categoriesTextSize" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingRight="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
+                        android:background="@color/myPrimaryColor"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_categories_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/categoriesDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_categories_1"
-                            android:layout_alignEnd="@+id/textView_categories_1"
-                            android:layout_alignRight="@+id/textView_categories_1"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
-
-                        <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_categories_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/categoriesDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_categories_2"
-                            android:layout_alignEnd="@+id/textView_categories_2"
-                            android:layout_alignRight="@+id/textView_categories_2"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
-
-                        <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_categories_3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/categoriesDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_categories_3"
-                            android:layout_alignEnd="@+id/textView_categories_3"
-                            android:layout_alignRight="@+id/textView_categories_3"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="3dp"
-                        android:id="@+id/see_more_categories">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:paddingBottom="10dp"
                             android:paddingTop="10dp"
-                            android:text="@string/see_more"
-                            android:textColor="@color/myPrimaryColor"
-                            android:textSize="@dimen/textSizeSeeMore" />
+                            android:text="@string/categories"
+                            android:textColor="@color/myWindowBackground"
+                            android:textSize="@dimen/categoriesTextSize" />
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="20sp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
 
-                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingRight="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_categories_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/categoriesDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_categories_1"
+                                android:layout_alignEnd="@+id/textView_categories_1"
+                                android:layout_alignRight="@+id/textView_categories_1"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_categories_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/categoriesDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_categories_2"
+                                android:layout_alignEnd="@+id/textView_categories_2"
+                                android:layout_alignRight="@+id/textView_categories_2"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_categories_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/categoriesDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_categories_3"
+                                android:layout_alignEnd="@+id/textView_categories_3"
+                                android:layout_alignRight="@+id/textView_categories_3"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/see_more_categories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:paddingTop="10dp"
+                                android:text="@string/see_more"
+                                android:textColor="@color/myPrimaryColor"
+                                android:textSize="@dimen/textSizeSeeMore" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/ic_launcher" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
-
-        <!-- Gift Sector -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_margin="10dp"
-            card_view:cardCornerRadius="5dp">
-
-            <LinearLayout
+            <!-- Gift Sector -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="210dp"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/myPrimaryColor"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:text="@string/gifts"
-                        android:textColor="@color/myWindowBackground"
-                        android:textSize="@dimen/categoriesTextSize" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingRight="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
+                        android:background="@color/myPrimaryColor"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_gift_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/giftDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_gift_1"
-                            android:layout_alignEnd="@+id/textView_gift_1"
-                            android:layout_alignRight="@+id/textView_gift_1"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
-
-                        <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_gift_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/giftDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_gift_2"
-                            android:layout_alignEnd="@+id/textView_gift_2"
-                            android:layout_alignRight="@+id/textView_gift_2"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/Categories_padding">
-
-                        <TextView
-                            android:padding="@dimen/Categories_padding"
-                            android:id="@+id/textView_gift_3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center|left"
-                            android:text="@string/giftDemo"
-                            android:textColor="@color/myTextColor"
-                            android:textSize="@dimen/textSizeCategoriesItem" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignBottom="@+id/textView_gift_3"
-                            android:layout_alignEnd="@+id/textView_gift_3"
-                            android:layout_alignRight="@+id/textView_gift_3"
-                            android:background="@color/myAccentColor" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="3dp"
-                        android:id="@+id/see_more_gift">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:paddingBottom="10dp"
                             android:paddingTop="10dp"
-                            android:text="@string/see_more"
-                            android:textColor="@color/myPrimaryColor"
-                            android:textSize="@dimen/textSizeSeeMore" />
+                            android:text="@string/gifts"
+                            android:textColor="@color/myWindowBackground"
+                            android:textSize="@dimen/categoriesTextSize" />
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="20sp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
 
-                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingRight="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_gift_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/giftDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_gift_1"
+                                android:layout_alignEnd="@+id/textView_gift_1"
+                                android:layout_alignRight="@+id/textView_gift_1"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_gift_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/giftDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_gift_2"
+                                android:layout_alignEnd="@+id/textView_gift_2"
+                                android:layout_alignRight="@+id/textView_gift_2"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/Categories_padding">
+
+                            <TextView
+                                android:id="@+id/textView_gift_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:gravity="center|left"
+                                android:padding="@dimen/Categories_padding"
+                                android:text="@string/giftDemo"
+                                android:textColor="@color/myTextColor"
+                                android:textSize="@dimen/textSizeCategoriesItem" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignBottom="@+id/textView_gift_3"
+                                android:layout_alignEnd="@+id/textView_gift_3"
+                                android:layout_alignRight="@+id/textView_gift_3"
+                                android:background="@color/myAccentColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/see_more_gift"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:paddingTop="10dp"
+                                android:text="@string/see_more"
+                                android:textColor="@color/myPrimaryColor"
+                                android:textSize="@dimen/textSizeSeeMore" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/ic_launcher" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
