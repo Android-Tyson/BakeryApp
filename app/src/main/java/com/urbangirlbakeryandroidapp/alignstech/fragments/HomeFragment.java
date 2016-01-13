@@ -14,12 +14,17 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -86,7 +91,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(MyUtils.isNetworkConnected(getActivity())){
-//            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list);
+            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list);
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list);
         }
     }
@@ -95,11 +100,52 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public void getSomeCategoriesList(SomeCategoriesEventBus event){
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
+        performJsonTaskForCategories(jsonObject);
     }
 
     @Subscribe
     public void getSomeGiftList(SomeGiftEventBus event){
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
+        performJsonTaskForGifts(jsonObject);
     }
-}
+
+    private void performJsonTaskForCategories(JSONObject jsonObject){
+
+        ArrayList<String> categoriesChildList = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for(int i = 0 ; i < jsonArray.length() ; i++){
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String singleChildname = jsonObj.getString("name");
+                categoriesChildList.add(singleChildname);
+            }
+            categories_1.setText(categoriesChildList.get(0));
+            categories_2.setText(categoriesChildList.get(1));
+            categories_3.setText(categoriesChildList.get(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void performJsonTaskForGifts(JSONObject jsonObject){
+
+        ArrayList<String> giftChildList = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for(int i = 0 ; i < jsonArray.length() ; i++){
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String singleChildname = jsonObj.getString("name");
+                giftChildList.add(singleChildname);
+            }
+            gift_1.setText(giftChildList.get(0));
+            gift_2.setText(giftChildList.get(1));
+            gift_3.setText(giftChildList.get(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }}
