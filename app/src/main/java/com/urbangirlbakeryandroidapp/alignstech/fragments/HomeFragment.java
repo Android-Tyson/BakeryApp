@@ -18,10 +18,10 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderImageSlider;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -103,10 +103,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (MyUtils.isNetworkConnected(getActivity())) {
-            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list , getActivity());
-            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list , getActivity());
+//            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list , getActivity());
+//            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list , getActivity());
+            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider , getActivity());
         }
-        imageSliderjob();
     }
 
     @Subscribe
@@ -121,6 +121,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForGifts(jsonObject);
+    }
+
+    @Subscribe
+    public void getHeaderImageSlider(HeaderImageSliderEventBus event) {
+        JSONObject jsonObject = event.getJsonObject();
+        MyUtils.showLog(jsonObject.toString());
+        performJsonTaskForHeaderImages(jsonObject);
     }
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
@@ -163,6 +170,30 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
+
+    private void performJsonTaskForHeaderImages(JSONObject jsonObject) {
+
+        ArrayList<String> headerImageTitleList = new ArrayList<>();
+        ArrayList<String> headerImageUrlList = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String headerImageTitle = jsonObj.getString("product_name");
+                String path = jsonObj.getString("path");
+                String headerImageUrl = Apis.BASE_URL + "images/" +path;
+                headerImageTitleList.add(headerImageTitle);
+                headerImageUrlList.add(headerImageUrl);
+            }
+            imageSliderJob(headerImageTitleList , headerImageUrlList);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -191,13 +222,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         Toast.makeText(getActivity(), baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
-    private void imageSliderjob(){
+    private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
 
         HashMap<String,String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        url_maps.put(imageTitle.get(0), imageUrlLink.get(1));
+        url_maps.put(imageTitle.get(1), imageUrlLink.get(2));
+        url_maps.put(imageTitle.get(2), imageUrlLink.get(3));
+        url_maps.put(imageTitle.get(4), imageUrlLink.get(4));
+//        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
+//        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
+//        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("Hannibal",R.drawable.drawer_bg);
