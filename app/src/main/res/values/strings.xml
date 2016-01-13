@@ -27,4 +27,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="network_error">Please Check your internet connection and try again ...</string>
     <string name="title_activity_login">Login</string>
+    <string name="categories">Categories</string>
+    <string name="categoriesDemo">Categories 1</string>
+    <string name="see_more">See More</string>
 </resources>
