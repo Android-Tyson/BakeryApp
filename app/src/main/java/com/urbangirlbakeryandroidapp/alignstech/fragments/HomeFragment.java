@@ -4,6 +4,8 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +20,14 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.RecyclerViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderImageSlider;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
+import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -35,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,6 +48,9 @@ import butterknife.InjectView;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends android.support.v4.app.Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+
+    @InjectView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
     @InjectView(R.id.textView_categories_1)
     TextView categories_1;
@@ -70,6 +78,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @InjectView(R.id.slider)
     SliderLayout mDemoSlider;
+
+    private List<RecyclerViewModel> urgentCakeList;
 
 
     public static HomeFragment newInstance(int position) {
@@ -107,9 +117,35 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (MyUtils.isNetworkConnected(getActivity())) {
             GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider , getActivity());
+            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, getActivity());
         }
+        recyclerViewJob();
     }
+
+    private void recyclerViewJob() {
+        initializeData();
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new RecyclerViewAdapter(urgentCakeList));
+    }
+
+    private void initializeData(){
+        urgentCakeList = new ArrayList<>();
+        urgentCakeList.add(new RecyclerViewModel("Emma ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lavery ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lillie ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lavery", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lillie ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Emma ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lillie ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lavery ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Emma ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lillie ", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Emma", R.mipmap.ic_launcher));
+        urgentCakeList.add(new RecyclerViewModel("Lillie", R.mipmap.ic_launcher));
+    }
+
 
     @Subscribe
     public void getSomeCategoriesList(SomeCategoriesEventBus event) {
