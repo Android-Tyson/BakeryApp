@@ -120,34 +120,22 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, getActivity());
-            GetUgrentCakes.parseUrgentCakes(Apis.urgent_cake , getActivity());
+            GetUgrentCakes.parseUrgentCakes(Apis.urgent_cake, getActivity());
         }
-        urgentCakeHorizontalScrollViewJob();
     }
 
-    private void urgentCakeHorizontalScrollViewJob() {
-        initializeData();
+
+    private void initializeDataForUrgentCake(ArrayList<String>  titleList , ArrayList<String> imageUrlList){
+        urgentCakeList = new ArrayList<>();
+        for(int i = 0 ; i < titleList.size() ; i++){
+            urgentCakeList.add(new RecyclerViewModel(titleList.get(i) , imageUrlList.get(i)));
+        }
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new RecyclerViewAdapter(urgentCakeList));
-    }
 
-    private void initializeData(){
-        urgentCakeList = new ArrayList<>();
-        String url = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
-        urgentCakeList.add(new RecyclerViewModel("Emma ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lavery ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lillie ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lavery", url));
-        urgentCakeList.add(new RecyclerViewModel("Lillie ", url));
-        urgentCakeList.add(new RecyclerViewModel("Emma ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lillie ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lavery ", url));
-        urgentCakeList.add(new RecyclerViewModel("Emma ", url));
-        urgentCakeList.add(new RecyclerViewModel("Lillie ", url));
-        urgentCakeList.add(new RecyclerViewModel("Emma", url));
-        urgentCakeList.add(new RecyclerViewModel("Lillie", url));
     }
 
 
@@ -231,7 +219,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String headerImageTitle = jsonObj.getString("product_name");
                 String path = jsonObj.getString("path");
-                String headerImageUrl = Apis.BASE_URL + "images/" +path;
+                String headerImageUrl ;
+                if(path.equals("null")){
+                    headerImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
+                }else {
+                    headerImageUrl = Apis.BASE_URL + "images/" +path;
+                }
                 headerImageTitleList.add(headerImageTitle);
                 headerImageUrlList.add(headerImageUrl);
             }
@@ -245,8 +238,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForUrgentCakes(JSONObject jsonObject) {
 
-        ArrayList<String> headerImageTitleList = new ArrayList<>();
-        ArrayList<String> headerImageUrlList = new ArrayList<>();
+        ArrayList<String> cakeTitleList = new ArrayList<>();
+        ArrayList<String> cakeUrlList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -260,9 +253,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 }else {
                     headerImageUrl = Apis.BASE_URL + "images/" +path;
                 }
-                headerImageTitleList.add(headerImageTitle);
-                headerImageUrlList.add(headerImageUrl);
+                cakeTitleList.add(headerImageTitle);
+                cakeUrlList.add(headerImageUrl);
             }
+            initializeDataForUrgentCake( cakeTitleList , cakeUrlList);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -293,11 +287,11 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
 
-        HashMap<String,String> url_maps = new HashMap<String, String>();
+        HashMap<String,String> url_maps = new HashMap<>();
         url_maps.put(imageTitle.get(0), imageUrlLink.get(0));
         url_maps.put(imageTitle.get(1), imageUrlLink.get(1));
         url_maps.put(imageTitle.get(2), imageUrlLink.get(2));
-//        url_maps.put(imageTitle.get(3), imageUrlLink.get(3));
+        url_maps.put(imageTitle.get(3), imageUrlLink.get(3));
 
         for(String name : url_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());

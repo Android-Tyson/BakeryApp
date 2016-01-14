@@ -33,10 +33,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
 
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,21 +90,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             addDivisor();
         }
 
-        addSection(newSection("Cakes", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
         addDivisor();
-        addSection(newSection("Gifts", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
         addDivisor();
-        addSection(newSection("Offers", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.offers), R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
         addDivisor();
-        addSection(newSection("Accessories", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
-        addBottomSection(newSection("Setting", R.mipmap.ic_launcher, new Settings()));
-
-//        getSectionByTitle("home").setTitle("NewTitle");
-
-//        if(DataBase_Utils.isCakeListDataExists()) {
-//            initializeSavedNavigationDrawerList();
-//        }
-
+        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.ic_launcher, new Settings()));
 
     }
 
@@ -128,97 +118,5 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
-
-//    private void initializeSavedNavigationDrawerList(){
-//
-//        if(DataBase_Utils.isCakeListDataExists()){
-//
-//            addDivisor();
-//            addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-//            List<Cakes> cakesList = DataBase_Utils.getCakesList();
-//            for (int i = 0 ; i < cakesList.size() ; i++){
-//                addSection(newSection(cakesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
-//            }
-//        }
-//
-//        if(DataBase_Utils.isGiftListDataExists()){
-//
-//            addDivisor();
-//            addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
-//            List<Gifts> giftsList = DataBase_Utils.getGiftList();
-//            for (int i = 0 ; i < giftsList.size() ; i++){
-//                addSection(newSection(giftsList.get(i).getCategoryName() ,R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
-//            }
-//        }
-//
-//        if(DataBase_Utils.isOfferListDataExists()){
-//
-//            addDivisor();
-//            addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
-//            List<Offers> offerList = DataBase_Utils.getOfferList();
-//            for (int i = 0 ; i < offerList.size() ; i++){
-//                addSection(newSection(offerList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-//            }
-//        }
-//
-//        if(DataBase_Utils.isAccessoriesListDataExists()){
-//
-//            addDivisor();
-//            addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
-//            List<Accessories> accessoriesList = DataBase_Utils.getAccessoriesList();
-//            for (int i = 0 ; i < accessoriesList.size() ; i++){
-//                addSection(newSection(accessoriesList.get(i).getCategoryName() , R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-//            }
-//        }
-//
-//    }
-
-//    @Subscribe
-//    public void getCakeList(CakeListResultEvent event) {
-//        List<Cakes> cakesList = event.getCakeList();
-//
-//        addDivisor();
-//        addSection(newSection("CAKES", R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
-//        for (int i = 0; i < cakesList.size(); i++) {
-//            addSection(newSection(cakesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, CakesFragment.newInstance(0)));
-//        }
-//
-//    }
-
-//    @Subscribe
-//    public void getGiftList(GiftListResultEvent event) {
-//        List<Gifts> giftsList = event.getGiftList();
-//
-//        addDivisor();
-//        addSection(newSection("GIFTS", R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
-//        for (int i = 0; i < giftsList.size(); i++) {
-//            addSection(newSection(giftsList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, GiftsFragment.newInstance(0)));
-//        }
-//
-//    }
-
-//    @Subscribe
-//    public void getOfferList(OfferListResultEvent event) {
-//        List<Offers> offerList = event.getOfferList();
-//
-//        addDivisor();
-//        addSection(newSection("OFFERS", R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
-//        for (int i = 0; i < offerList.size(); i++) {
-//            addSection(newSection(offerList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, OfferFragment.newInstance(0)));
-//        }
-//
-//    }
-
-//    @Subscribe
-//    public void getAccessoriesList(AccessoriesListResultEvent event) {
-//        List<Accessories> accessoriesList = event.getAccessoriesList();
-//
-//        addDivisor();
-//        addSection(newSection("ACCESSORIES", R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
-//        for (int i = 0; i < accessoriesList.size(); i++) {
-//            addSection(newSection(accessoriesList.get(i).getCategoryName(), R.mipmap.ic_drawer_blank_icon, AccessoriesFragment.newInstance(0)));
-//        }
-//
-//    }
 }
 
