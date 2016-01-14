@@ -22,6 +22,8 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderImageSlider;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -103,8 +105,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (MyUtils.isNetworkConnected(getActivity())) {
-//            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list , getActivity());
-//            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list , getActivity());
+            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
+            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider , getActivity());
         }
     }
