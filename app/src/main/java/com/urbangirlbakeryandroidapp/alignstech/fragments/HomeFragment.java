@@ -119,10 +119,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, getActivity());
         }
-        recyclerViewJob();
+        urgentCakeHorizontalScrollViewJob();
     }
 
-    private void recyclerViewJob() {
+    private void urgentCakeHorizontalScrollViewJob() {
         initializeData();
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -240,23 +240,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     }
 
     @Override
-    public void onPageScrolled(int i, float v, int i1) {
-
-    }
+    public void onPageScrolled(int i, float v, int i1) {   }
 
     @Override
-    public void onPageSelected(int i) {
-
-    }
+    public void onPageSelected(int i) {   }
 
     @Override
-    public void onPageScrollStateChanged(int i) {
-
-    }
+    public void onPageScrollStateChanged(int i) {  }
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-//        Toast.makeText(this, mDemoSlider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
         Toast.makeText(getActivity(), baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
@@ -267,15 +260,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         url_maps.put(imageTitle.get(1), imageUrlLink.get(2));
         url_maps.put(imageTitle.get(2), imageUrlLink.get(3));
         url_maps.put(imageTitle.get(4), imageUrlLink.get(4));
-//        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-//        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-//        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
-
-        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Hannibal",R.drawable.drawer_bg);
-        file_maps.put("Big Bang Theory",R.drawable.drawer_bg);
-        file_maps.put("House of Cards",R.drawable.drawer_bg);
-        file_maps.put("Game of Thrones", R.drawable.drawer_bg);
 
         for(String name : url_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());
@@ -298,15 +282,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
-//        ListView l = (ListView)findViewById(R.id.transformers);
-//        l.setAdapter(new TransformerAdapter(this));
-//        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-//                Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 
