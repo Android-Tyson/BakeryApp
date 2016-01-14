@@ -5,9 +5,9 @@ package com.urbangirlbakeryandroidapp.alignstech.model;
  */
 public class RecyclerViewModel {
     public String cakeName;
-    public int cakePhoto;
+    public String cakePhoto;
 
-    public RecyclerViewModel(String cakeName, int cakePhoto) {
+    public RecyclerViewModel(String cakeName, String cakePhoto) {
         this.cakeName = cakeName;
         this.cakePhoto = cakePhoto;
     }

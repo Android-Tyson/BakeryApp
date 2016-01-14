@@ -4,10 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+
 import java.util.List;
 
 /**
@@ -30,9 +34,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(UrgentCakeViewHolder personViewHolder, int i) {
-        personViewHolder.cakeName.setText(urgentCakeList.get(i).cakeName);
-        personViewHolder.cakePhoto.setImageResource(urgentCakeList.get(i).cakePhoto);
 
+        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+        personViewHolder.cakeName.setText(urgentCakeList.get(i).cakeName);
+//        personViewHolder.cakePhoto.setImageResource(urgentCakeList.get(i).cakePhoto);
+        personViewHolder.cakePhoto.setImageUrl(urgentCakeList.get(i).cakePhoto , imageLoader);
     }
 
     @Override
@@ -43,12 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class UrgentCakeViewHolder extends RecyclerView.ViewHolder {
 
         TextView cakeName;
-        ImageView cakePhoto;
+        NetworkImageView cakePhoto;
 
         public UrgentCakeViewHolder(View itemView) {
             super(itemView);
             cakeName = (TextView) itemView.findViewById(R.id.cake_title);
-            cakePhoto = (ImageView) itemView.findViewById(R.id.cake_photo);
+            cakePhoto = (NetworkImageView) itemView.findViewById(R.id.cake_photo);
         }
 
     }

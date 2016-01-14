@@ -12,5 +12,6 @@ public class Apis {
     public static final String some_categories_list = "http://cake.yogeshojha.com.np/api/child-categories/5";
     public static final String some_gift_list = "http://cake.yogeshojha.com.np/api/child-categories/3";
     public static final String headerImageSlider = "http://cake.yogeshojha.com.np/api/categories";
+    public static final String urgent_cake = "http://cake.yogeshojha.com.np/api/urgent-cake";
 
 }
