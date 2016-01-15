@@ -53,6 +53,10 @@ public class CustomListChildAdapter extends BaseAdapter {
         String product = childList.get(position);
         productTitle.setText(product);
 
+        if (position % 2 == 1) {
+            convertView.setBackgroundColor(context.getResources().getColor(R.color.layout_background));
+        }
+
         return convertView;
     }
 }
