@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -80,7 +80,7 @@ public class SeeAllGifts extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new ArrayAdapter<String>(this , android.R.layout.simple_list_item_1 , giftChildList));
+        listView.setAdapter(new CustomListChildAdapter(this , giftChildList));
     }
 
     @Override

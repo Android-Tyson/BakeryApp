@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategories;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -69,7 +70,7 @@ public class SeeAllCategories extends AppCompatActivity {
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
 
-        ArrayList<String> giftChildList = new ArrayList<>();
+        List<String> giftChildList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -81,7 +82,7 @@ public class SeeAllCategories extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, giftChildList));
+        listView.setAdapter(new CustomListChildAdapter(this , giftChildList));
     }
 
     @Override
