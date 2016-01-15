@@ -70,19 +70,19 @@ public class SeeAllCategories extends AppCompatActivity {
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
 
-        List<String> giftChildList = new ArrayList<>();
+        List<String> categoriesChldList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
-                giftChildList.add(singleChildname);
+                categoriesChldList.add(singleChildname);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(this , giftChildList));
+        listView.setAdapter(new CustomListChildAdapter(this , categoriesChldList));
     }
 
     @Override
