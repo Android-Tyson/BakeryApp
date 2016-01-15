@@ -25,7 +25,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,6 +58,18 @@
         <activity
             android:name=".activity.Login"
             android:label="@string/title_activity_login"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
+        <activity
+            android:name=".activity.SeeAllCategories"
+            android:label="@string/title_activity_see_all_categories"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
+        <activity
+            android:name=".activity.SeeAllGifts"
+            android:label="@string/title_activity_see_all_gifts"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/UGCakeTheme" >
 
         </activity>

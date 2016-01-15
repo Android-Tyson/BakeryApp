@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout_background"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment">
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment"
+    android:id="@+id/fragment_home">
 
     <ScrollView
         android:layout_width="match_parent"

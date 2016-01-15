@@ -36,6 +36,8 @@
     <string name="accessories">Accessories</string>
     <string name="offers">Offers</string>
     <string name="cakes">Cakes</string>
+    <string name="title_activity_see_all_categories">SeeAllCategories</string>
+    <string name="title_activity_see_all_gifts">SeeAllGifts</string>
 
 
 </resources>

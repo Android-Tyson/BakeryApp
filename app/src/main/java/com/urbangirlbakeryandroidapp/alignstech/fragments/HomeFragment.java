@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.RecyclerViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
@@ -49,7 +52,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends android.support.v4.app.Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+public class HomeFragment extends android.support.v4.app.Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -110,6 +113,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, view);
+        see_more_gift.setOnClickListener(this);
+        see_more_categories.setOnClickListener(this);
         return view;
     }
 
@@ -321,5 +326,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onStop() {
         mDemoSlider.stopAutoCycle();
         super.onStop();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.see_more_categories){
+            startActivity(new Intent(getActivity() , SeeAllCategories.class));
+        }  else if(view.getId() == R.id.see_more_gift){
+            startActivity(new Intent(getActivity() , SeeAllGifts.class));
+        }
     }
 }
