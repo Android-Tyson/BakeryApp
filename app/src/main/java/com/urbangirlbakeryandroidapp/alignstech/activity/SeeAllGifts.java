@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,6 +25,7 @@ public class SeeAllGifts extends AppCompatActivity {
         setContentView(R.layout.activity_see_all_gifts);
         ButterKnife.inject(this);
         initializeToolbar();
+        parseAllGifts();
     }
 
     private void initializeToolbar() {
@@ -30,6 +34,12 @@ public class SeeAllGifts extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    private void parseAllGifts(){
+        if(MyUtils.isNetworkConnected(this)){
+            GetAllGifts.parseAllGiftList(Apis.see_all_gifts , this);
+        }
     }
 
     @Override

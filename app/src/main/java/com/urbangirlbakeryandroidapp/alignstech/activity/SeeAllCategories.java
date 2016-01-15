@@ -1,12 +1,15 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,6 +25,7 @@ public class SeeAllCategories extends AppCompatActivity {
         setContentView(R.layout.activity_see_all_categories);
         ButterKnife.inject(this);
         initializeToolbar();
+        parseAllCategories();
     }
 
     private void initializeToolbar() {
@@ -30,6 +34,12 @@ public class SeeAllCategories extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    private void parseAllCategories(){
+        if(MyUtils.isNetworkConnected(this)){
+            GetAllCategories.parseAllCategoriesList(Apis.see_all_gifts, this);
+        }
     }
 
     @Override
