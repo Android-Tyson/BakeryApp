@@ -1,15 +1,21 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,6 +29,7 @@ public class SeeAllGifts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_all_gifts);
+        MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
         parseAllGifts();
@@ -38,8 +45,16 @@ public class SeeAllGifts extends AppCompatActivity {
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(this)){
-            GetAllGifts.parseAllGiftList(Apis.see_all_gifts , this);
+            GetAllGifts.parseAllGiftList(Apis.see_all_gifts, this);
         }
+    }
+
+    @Subscribe
+    public void seeAllGifts(SeeAllGiftsEvent event){
+
+        JSONObject jsonObject = event.getJsonObject();
+        MyUtils.showLog(jsonObject.toString());
+
     }
 
     @Override
@@ -62,5 +77,12 @@ public class SeeAllGifts extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
+        AppController.getInstance().cancelPendingRequests("GET_ALL_GIFT_TAG");
     }
 }

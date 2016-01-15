@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -28,7 +28,7 @@ public class GetAllGifts {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        MyBus.getInstance().post(new SomeGiftEventBus(response));
+                        MyBus.getInstance().post(new SeeAllGiftsEvent(response));
                         materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {

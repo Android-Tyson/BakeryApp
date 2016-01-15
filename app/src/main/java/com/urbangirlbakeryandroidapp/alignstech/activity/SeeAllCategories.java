@@ -6,10 +6,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategories;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,6 +29,7 @@ public class SeeAllCategories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_all_categories);
+        MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
         parseAllCategories();
@@ -38,8 +45,16 @@ public class SeeAllCategories extends AppCompatActivity {
 
     private void parseAllCategories(){
         if(MyUtils.isNetworkConnected(this)){
-            GetAllCategories.parseAllCategoriesList(Apis.see_all_gifts, this);
+            GetAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
         }
+    }
+
+    @Subscribe
+    public void seeAllCategories(SeeAllCategoriesEvent event){
+
+        JSONObject jsonObject = event.getJsonObject();
+        MyUtils.showLog(jsonObject.toString());
+
     }
 
     @Override
@@ -62,5 +77,12 @@ public class SeeAllCategories extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
+        AppController.getInstance().cancelPendingRequests("GET_ALL_CATEGORIES_TAG");
     }
 }
