@@ -13,7 +13,6 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetGiftList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -95,7 +94,7 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/"+childIdList.get(i) , this);
+//        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/"+childIdList.get(i) , this);
 
     }
 

@@ -13,8 +13,8 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetGiftList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Items;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -49,6 +49,7 @@ public class SeeAllCategories extends AppCompatActivity implements AdapterView.O
         initializeToolbar();
         parseAllCategories();
         listView.setOnItemClickListener(this);
+
     }
 
     private void initializeToolbar() {
@@ -125,7 +126,9 @@ public class SeeAllCategories extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/" + childIdList.get(i), this);
-
+//        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/" + childIdList.get(i), this);
+//        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.listView, new All_Items()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.listView, new All_Items()).commit();
     }
 }
