@@ -13,6 +13,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetGiftList;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -35,6 +36,8 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
 
     @InjectView(R.id.listView)
     ListView listView;
+
+    private ArrayList<String> childIdList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +82,9 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
+                String singleChildId = jsonObj.getString("id");
                 giftChildList.add(singleChildname);
+                childIdList.add(singleChildId);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -90,7 +95,7 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/"+childIdList.get(i) , this);
 
     }
 
