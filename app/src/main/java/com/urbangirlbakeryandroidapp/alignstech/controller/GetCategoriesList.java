@@ -17,7 +17,7 @@ import org.json.JSONObject;
 /**
  * Created by Dell on 1/13/2016.
  */
-public class GetAllGifts {
+public class GetCategoriesList {
 
     private static MaterialDialog materialDialog;
     public static void parseAllGiftList(String url , final Context context){
@@ -34,7 +34,7 @@ public class GetAllGifts {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                GetAllGifts.parseAllGiftList(Apis.some_gift_list, context);
+                GetCategoriesList.parseAllGiftList(Apis.some_gift_list, context);
                 materialDialog.dismiss();
             }
         });

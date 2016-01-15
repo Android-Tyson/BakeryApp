@@ -5,13 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SeeAllGifts extends AppCompatActivity {
+public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -42,6 +44,8 @@ public class SeeAllGifts extends AppCompatActivity {
         ButterKnife.inject(this);
         initializeToolbar();
         parseAllGifts();
+
+        listView.setOnItemClickListener(this);
     }
 
     private void initializeToolbar() {
@@ -54,7 +58,7 @@ public class SeeAllGifts extends AppCompatActivity {
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(this)){
-            GetAllGifts.parseAllGiftList(Apis.see_all_gifts, this);
+            GetSeeAllGifts.parseAllGiftList(Apis.see_all_gifts, this);
         }
     }
 
@@ -80,7 +84,14 @@ public class SeeAllGifts extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(this , giftChildList));
+        listView.setAdapter(new CustomListChildAdapter(this, giftChildList));
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
     }
 
     @Override
@@ -111,4 +122,5 @@ public class SeeAllGifts extends AppCompatActivity {
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("GET_ALL_GIFT_TAG");
     }
+
 }

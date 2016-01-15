@@ -11,7 +11,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -55,7 +55,7 @@ public class SeeAllCategories extends AppCompatActivity {
 
     private void parseAllCategories(){
         if(MyUtils.isNetworkConnected(this)){
-            GetAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
+            GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
         }
     }
 
