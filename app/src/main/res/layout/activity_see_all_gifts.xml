@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.activity.SeeAllGifts"
-    android:background="#555">
+    android:orientation="vertical">
 
     <include
         layout="@layout/app_toolbar"/>
@@ -11,6 +11,6 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView2" />
+        android:id="@+id/listView" />
 
 </LinearLayout>
