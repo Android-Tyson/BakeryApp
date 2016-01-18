@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.GridView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemView;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
@@ -74,6 +76,10 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         View view = inflater.inflate(R.layout.fragment_all__items, container, false);
         ButterKnife.inject(this, view);
         gridView.setOnItemClickListener(this);
+
+        Toolbar refTool = ((MainActivity)getActivity()).getToolbar();
+        refTool.setTitle("blahhhh");
+
         return view;
     }
 
