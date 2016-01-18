@@ -17,11 +17,11 @@ import java.util.List;
 /**
  * Created by Dell on 1/12/2016.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.UrgentCakeViewHolder> {
+public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<CustomHorizontalCakeViewAdapter.UrgentCakeViewHolder> {
 
     public List<RecyclerViewModel> urgentCakeList;
 
-    public RecyclerViewAdapter(List<RecyclerViewModel> urgentCakeList) {
+    public CustomHorizontalCakeViewAdapter(List<RecyclerViewModel> urgentCakeList) {
         this.urgentCakeList = urgentCakeList;
     }
 

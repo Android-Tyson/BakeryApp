@@ -23,7 +23,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.RecyclerViewAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalCakeViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
@@ -139,7 +139,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new RecyclerViewAdapter(urgentCakeList));
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(urgentCakeList));
 
     }
 
