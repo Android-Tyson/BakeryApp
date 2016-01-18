@@ -126,8 +126,6 @@ public class SeeAllCategories extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/" + childIdList.get(i), this);
-//        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.listView, new All_Items()).commit();
         String API_NAME = "Apis.BASE_URL "+ "api/products/" + childIdList.get(i);
         switch (i){
             case 0:
