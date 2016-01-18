@@ -113,6 +113,6 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
         String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
 
-        
+
     }
 }
