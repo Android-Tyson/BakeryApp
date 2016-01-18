@@ -72,7 +72,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         View view = inflater.inflate(R.layout.fragment_all__items, container, false);
         ButterKnife.inject(this, view);
         gridView.setOnItemClickListener(this);
-        
+
         return view;
     }
 
@@ -107,9 +107,10 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//        Intent intent = new Intent(getActivity() , SingleItemView.class);
-//        String api_name = "http://www.google.com";
-//        intent.putExtra("API_NAME" , api_name);
-//        startActivity(intent);
+
+//        String TITLE_NAME = "";
+//        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container, Single_Item_View.newInstance("API_NAME", "SINGLE_ITEM_TITLE_NAME")).commit();
+
     }
 }
