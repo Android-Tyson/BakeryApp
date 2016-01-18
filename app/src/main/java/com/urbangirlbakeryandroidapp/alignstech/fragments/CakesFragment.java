@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import butterknife.ButterKnife;
 
@@ -38,8 +37,6 @@ public class CakesFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int position = getArguments().getInt("POSITION" , 1);
-        MyUtils.showLog(position+ " ");
     }
 
     @Override
