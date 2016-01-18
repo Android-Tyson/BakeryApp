@@ -2,16 +2,19 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemView;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -29,7 +32,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
+public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.gridView)
     GridView gridView;
@@ -70,6 +73,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all__items, container, false);
         ButterKnife.inject(this, view);
+        gridView.setOnItemClickListener(this);
         return view;
     }
 
@@ -100,5 +104,13 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("GET_ALL_ITEMS");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(getActivity() , SingleItemView.class);
+        String api_name = "http://www.google.com";
+        intent.putExtra("API_NAME" , api_name);
+        startActivity(intent);
     }
 }

@@ -38,6 +38,8 @@
     <string name="cakes">Cakes</string>
     <string name="title_activity_see_all_categories">SeeAllCategories</string>
     <string name="title_activity_see_all_gifts">SeeAllGifts</string>
+    <string name="title_activity_single_item_view">SingleItemView</string>
+    <string name="single_item">Single Item</string>
 
 
 </resources>
