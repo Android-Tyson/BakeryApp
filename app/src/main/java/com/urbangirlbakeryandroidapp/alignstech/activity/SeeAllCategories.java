@@ -132,7 +132,6 @@ public class SeeAllCategories extends AppCompatActivity implements AdapterView.O
         switch (i){
             case 0:
                 getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_ItemsFragment.newInstance(API_NAME)).commit();
-                MyUtils.showToast(this , "Clicked");
                 break;
         }
     }

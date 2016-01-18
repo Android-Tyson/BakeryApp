@@ -1,22 +1,43 @@
 package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
+import com.urbangirlbakeryandroidapp.alignstech.model.Product;
+import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class All_ItemsFragment extends android.support.v4.app.Fragment {
 
+    @InjectView(R.id.gridView)
+    GridView gridView;
+
+    private static final String url = "http://api.androidhive.info/json/movies.json";
+    private CustomListAdapter adapter;
+    private List<Product> productList = new ArrayList<>();
+    private MaterialDialog materialDialog;
 
     public All_ItemsFragment() {
         // Required empty public constructor
@@ -30,6 +51,12 @@ public class All_ItemsFragment extends android.support.v4.app.Fragment {
         fragObject.setArguments(args);
 
         return  fragObject;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyBus.getInstance().register(this);
     }
 
     public String getApi() {
@@ -48,5 +75,32 @@ public class All_ItemsFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        adapter = new CustomListAdapter(getActivity() , productList);
+        gridView.setAdapter(adapter);
+        if(MyUtils.isNetworkConnected(getActivity())){
+            materialDialog = new MaterialDialog.Builder(getActivity()).content("Loading Please wait...").progress(true , 0).show();
+            GetAllItems.parseAppItems(getActivity() , url);
+        }
+    }
 
+    @Subscribe
+    public void getAllItemList(AllItemsResultEvent event){
+
+        productList = event.getAllItemList();
+        gridView.setAdapter(new CustomListAdapter(getActivity() , productList) );
+        adapter.notifyDataSetChanged();
+        materialDialog.dismiss();
+        MyUtils.showLog(adapter.toString());
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
+        AppController.getInstance().cancelPendingRequests("GET_ALL_ITEMS");
+    }
 }

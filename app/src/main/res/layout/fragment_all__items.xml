@@ -2,13 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.All_ItemsFragment"
-    android:background="#555">
+    android:background="#555"
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.All_ItemsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"
+        android:background="@color/layout_background"
+        android:numColumns="2" />
 
 </FrameLayout>
