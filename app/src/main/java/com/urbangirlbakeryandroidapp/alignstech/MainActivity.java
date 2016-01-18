@@ -90,13 +90,13 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             addDivisor();
         }
 
-        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.ic_launcher, CakesFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.ic_launcher, new CakesFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.ic_launcher, GiftsFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.ic_launcher, new GiftsFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.offers), R.mipmap.ic_launcher, OfferFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.offers), R.mipmap.ic_launcher, new OfferFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.ic_launcher, AccessoriesFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.ic_launcher, new AccessoriesFragment()));
         addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.ic_launcher, new Settings()));
 
     }

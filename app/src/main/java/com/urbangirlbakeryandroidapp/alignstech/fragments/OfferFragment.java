@@ -22,16 +22,6 @@ public class OfferFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-    public static OfferFragment newInstance(int position){
-
-        OfferFragment offerFragment = new OfferFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("POSITION" , position);
-        offerFragment.setArguments(bundle);
-
-        return offerFragment;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

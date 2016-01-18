@@ -17,19 +17,8 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
  */
 public class AccessoriesFragment extends Fragment {
 
-
     public AccessoriesFragment() {
         // Required empty public constructor
-    }
-
-    public static AccessoriesFragment newInstance(int position){
-
-        AccessoriesFragment accessoriesFragment = new AccessoriesFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("POSITION" , position);
-        accessoriesFragment.setArguments(bundle);
-
-        return accessoriesFragment;
     }
 
     @Override
