@@ -26,13 +26,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CakesFragment extends android.support.v4.app.Fragment {
 
-//    @InjectView(R.id.listView)
-    private GridView listView;
+    @InjectView(R.id.gridView)
+    GridView gridView;
 
     private static final String url = "http://api.androidhive.info/json/movies.json";
     private CustomListAdapter adapter;
@@ -65,8 +68,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cake, container, false);
-        listView = (GridView) view.findViewById(R.id.gridView);
-//        ButterKnife.inject(this, view);
+        ButterKnife.inject(this, view);
         return view;
     }
 
@@ -74,7 +76,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adapter = new CustomListAdapter(getActivity() , productList);
-        listView.setAdapter(adapter);
+        gridView.setAdapter(adapter);
         jsonJob();
     }
 

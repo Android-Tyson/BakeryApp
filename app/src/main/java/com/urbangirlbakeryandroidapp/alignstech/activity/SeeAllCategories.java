@@ -14,7 +14,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Items;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.All_ItemsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -128,7 +128,12 @@ public class SeeAllCategories extends AppCompatActivity implements AdapterView.O
 
 //        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/" + childIdList.get(i), this);
 //        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.listView, new All_Items()).commit();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.listView, new All_Items()).commit();
+        String API_NAME = "Apis.BASE_URL "+ "api/products/" + childIdList.get(i);
+        switch (i){
+            case 0:
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_ItemsFragment.newInstance(API_NAME)).commit();
+                MyUtils.showToast(this , "Clicked");
+                break;
+        }
     }
 }
