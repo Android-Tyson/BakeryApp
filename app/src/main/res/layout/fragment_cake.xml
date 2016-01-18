@@ -4,12 +4,9 @@
     android:layout_height="match_parent"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.CakeFragment">
 
-    <GridView
-        android:id="@+id/gridView"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/layout_background"
-        android:numColumns="2" />
+        android:id="@+id/listView" />
 
 </FrameLayout>
