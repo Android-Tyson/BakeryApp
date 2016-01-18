@@ -12,10 +12,10 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Settings extends android.support.v4.app.Fragment {
+public class Settings_Fragment extends android.support.v4.app.Fragment {
 
 
-    public Settings() {
+    public Settings_Fragment() {
         // Required empty public constructor
     }
 

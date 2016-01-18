@@ -61,13 +61,13 @@
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
-            android:name=".activity.SeeAllCategories"
+            android:name=".activity.SeeMoreCategories"
             android:label="@string/title_activity_see_all_categories"
             android:parentActivityName=".MainActivity"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
-            android:name=".activity.SeeAllGifts"
+            android:name=".activity.SeeMoreGifts"
             android:label="@string/title_activity_see_all_gifts"
             android:parentActivityName=".MainActivity"
             android:theme="@style/UGCakeTheme" >

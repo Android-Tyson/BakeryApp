@@ -12,7 +12,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings_Fragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -97,7 +97,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.ic_launcher, new OfferFragment()));
         addDivisor();
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.ic_launcher, new AccessoriesFragment()));
-        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.ic_launcher, new Settings()));
+        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.ic_launcher, new Settings_Fragment()));
 
     }
 

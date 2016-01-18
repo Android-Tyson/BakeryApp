@@ -12,8 +12,9 @@ import android.widget.ListView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -24,11 +25,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class SeeMoreCategories extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -41,40 +43,41 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_all_gifts);
+        setContentView(R.layout.activity_see_all_categories);
         MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
-        parseAllGifts();
-
+        parseAllCategories();
         listView.setOnItemClickListener(this);
+
     }
 
     private void initializeToolbar() {
 
-        toolbar.setTitle(R.string.gifts);
+        toolbar.setTitle(R.string.categories);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
-    private void parseAllGifts(){
+    private void parseAllCategories(){
         if(MyUtils.isNetworkConnected(this)){
-            GetSeeAllGifts.parseAllGiftList(Apis.see_all_gifts, this);
+            GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
         }
     }
 
     @Subscribe
-    public void seeAllGifts(SeeAllGiftsEvent event){
+    public void seeAllCategories(SeeAllCategoriesEvent event){
 
         JSONObject jsonObject = event.getJsonObject();
-        performJsonTaskForGifts(jsonObject);
+        MyUtils.showLog(jsonObject.toString());
+        performJsonTaskForCategories(jsonObject);
 
     }
 
-    private void performJsonTaskForGifts(JSONObject jsonObject) {
+    private void performJsonTaskForCategories(JSONObject jsonObject) {
 
-        ArrayList<String> giftChildList = new ArrayList<>();
+        List<String> categoriesChldList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -82,26 +85,19 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
                 String singleChildId = jsonObj.getString("id");
-                giftChildList.add(singleChildname);
+                categoriesChldList.add(singleChildname);
                 childIdList.add(singleChildId);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(this, giftChildList));
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-//        GetGiftList.parseGiftList(Apis.BASE_URL + "api/products/"+childIdList.get(i) , this);
-
+        listView.setAdapter(new CustomListChildAdapter(this , categoriesChldList));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_see_all_gifts, menu);
+        getMenuInflater().inflate(R.menu.menu_see_all_categories, menu);
         return true;
     }
 
@@ -124,7 +120,17 @@ public class SeeAllGifts extends AppCompatActivity implements AdapterView.OnItem
     protected void onDestroy() {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
-        AppController.getInstance().cancelPendingRequests("GET_ALL_GIFT_TAG");
+        AppController.getInstance().cancelPendingRequests("GET_ALL_CATEGORIES_TAG");
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        String API_NAME = "Apis.BASE_URL "+ "api/products/" + childIdList.get(i);
+        switch (i){
+            case 0:
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
+                break;
+        }
+    }
 }

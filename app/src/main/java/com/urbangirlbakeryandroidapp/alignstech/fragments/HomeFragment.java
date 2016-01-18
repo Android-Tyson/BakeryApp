@@ -21,8 +21,8 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SeeAllCategories;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SeeAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.RecyclerViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
@@ -331,9 +331,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.see_more_categories){
-            startActivity(new Intent(getActivity() , SeeAllCategories.class));
+            startActivity(new Intent(getActivity() , SeeMoreCategories.class));
         }  else if(view.getId() == R.id.see_more_gift){
-            startActivity(new Intent(getActivity() , SeeAllGifts.class));
+            startActivity(new Intent(getActivity() , SeeMoreGifts.class));
         }
     }
 }

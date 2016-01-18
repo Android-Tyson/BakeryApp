@@ -29,7 +29,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class All_ItemsFragment extends android.support.v4.app.Fragment {
+public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.gridView)
     GridView gridView;
@@ -39,12 +39,12 @@ public class All_ItemsFragment extends android.support.v4.app.Fragment {
     private List<Product> productList = new ArrayList<>();
     private MaterialDialog materialDialog;
 
-    public All_ItemsFragment() {
+    public All_Item_Grid_Fragment() {
         // Required empty public constructor
     }
 
-    public static All_ItemsFragment newInstance(String apiName){
-        All_ItemsFragment fragObject = new All_ItemsFragment();
+    public static All_Item_Grid_Fragment newInstance(String apiName){
+        All_Item_Grid_Fragment fragObject = new All_Item_Grid_Fragment();
 
         Bundle args = new Bundle();
         args.putString("API", apiName);
@@ -69,7 +69,7 @@ public class All_ItemsFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all__items, container, false);
-        ButterKnife.inject(this , view);
+        ButterKnife.inject(this, view);
         return view;
     }
 
