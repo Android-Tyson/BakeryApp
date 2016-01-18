@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment;
@@ -91,7 +91,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(this , categoriesChldList));
+        listView.setAdapter(new CustomListItemAdapter(this , categoriesChldList));
     }
 
     @Override

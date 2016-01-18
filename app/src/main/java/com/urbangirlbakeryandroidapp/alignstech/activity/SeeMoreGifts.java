@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -88,7 +88,7 @@ public class SeeMoreGifts extends AppCompatActivity implements AdapterView.OnIte
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(this, giftChildList));
+        listView.setAdapter(new CustomListItemAdapter(this, giftChildList));
     }
 
     @Override

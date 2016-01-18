@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListChildAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -95,7 +95,7 @@ public class GiftsFragment extends android.support.v4.app.Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListChildAdapter(getActivity(), giftChildList));
+        listView.setAdapter(new CustomListItemAdapter(getActivity(), giftChildList));
     }
 
     @Override

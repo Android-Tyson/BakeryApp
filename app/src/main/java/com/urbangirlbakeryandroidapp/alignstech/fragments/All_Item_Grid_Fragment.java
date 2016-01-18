@@ -12,7 +12,7 @@ import android.widget.GridView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
 import com.urbangirlbakeryandroidapp.alignstech.model.Product;
@@ -35,7 +35,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
     GridView gridView;
 
     private static final String url = "http://api.androidhive.info/json/movies.json";
-    private CustomListAdapter adapter;
+    private CustomGridViewAdapter adapter;
     private List<Product> productList = new ArrayList<>();
     private MaterialDialog materialDialog;
 
@@ -76,7 +76,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter = new CustomListAdapter(getActivity() , productList);
+        adapter = new CustomGridViewAdapter(getActivity() , productList);
         gridView.setAdapter(adapter);
         if(MyUtils.isNetworkConnected(getActivity())){
             materialDialog = new MaterialDialog.Builder(getActivity()).content("Loading Please wait...").progress(true , 0).show();
@@ -88,7 +88,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment {
     public void getAllItemList(AllItemsResultEvent event){
 
         productList = event.getAllItemList();
-        gridView.setAdapter(new CustomListAdapter(getActivity() , productList) );
+        gridView.setAdapter(new CustomGridViewAdapter(getActivity() , productList) );
         adapter.notifyDataSetChanged();
         materialDialog.dismiss();
         MyUtils.showLog(adapter.toString());

@@ -14,13 +14,13 @@ import java.util.List;
 /**
  * Created by Dell on 1/7/2016.
  */
-public class CustomListChildAdapter extends BaseAdapter {
+public class CustomListItemAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private List<String> childList;
 
-    public CustomListChildAdapter(Context context, List<String> productList) {
+    public CustomListItemAdapter(Context context, List<String> productList) {
         this.context = context;
         this.childList = productList;
     }

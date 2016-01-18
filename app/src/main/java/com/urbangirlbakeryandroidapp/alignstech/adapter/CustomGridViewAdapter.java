@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * Created by Dell on 1/7/2016.
  */
-public class CustomListAdapter extends BaseAdapter {
+public class CustomGridViewAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private List<Product> productList;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Context context, List<Product> productList) {
+    public CustomGridViewAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
     }
