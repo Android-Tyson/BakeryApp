@@ -79,6 +79,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
 
         Toolbar refTool = ((MainActivity)getActivity()).getToolbar();
         refTool.setTitle("blahhhh");
+        refTool.setBackgroundColor(getResources().getColor(R.color.abc_search_url_text));
 
         return view;
     }
