@@ -2,10 +2,8 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +12,7 @@ import android.widget.GridView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
-import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemView;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -76,11 +72,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         View view = inflater.inflate(R.layout.fragment_all__items, container, false);
         ButterKnife.inject(this, view);
         gridView.setOnItemClickListener(this);
-
-        Toolbar refTool = ((MainActivity)getActivity()).getToolbar();
-        refTool.setTitle("blahhhh");
-        refTool.setBackgroundColor(getResources().getColor(R.color.abc_search_url_text));
-
+        
         return view;
     }
 
@@ -115,9 +107,9 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = new Intent(getActivity() , SingleItemView.class);
-        String api_name = "http://www.google.com";
-        intent.putExtra("API_NAME" , api_name);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity() , SingleItemView.class);
+//        String api_name = "http://www.google.com";
+//        intent.putExtra("API_NAME" , api_name);
+//        startActivity(intent);
     }
 }

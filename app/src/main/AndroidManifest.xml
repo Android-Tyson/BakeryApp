@@ -72,12 +72,6 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/UGCakeTheme" >
         </activity>
-        <activity
-            android:name=".activity.SingleItemView"
-            android:label="@string/title_activity_single_item_view"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/UGCakeTheme" >
-        </activity>
     </application>
 
 </manifest>
