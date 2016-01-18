@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
@@ -31,7 +32,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CakesFragment extends android.support.v4.app.Fragment {
+public class CakesFragment extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.listView)
     ListView listView;
@@ -54,6 +55,7 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cake, container, false);
         ButterKnife.inject(this, view);
+        listView.setOnItemClickListener(this);
         return view;
     }
 
@@ -103,5 +105,13 @@ public class CakesFragment extends android.support.v4.app.Fragment {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("GET_ALL_GIFT_TAG");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
+
     }
 }

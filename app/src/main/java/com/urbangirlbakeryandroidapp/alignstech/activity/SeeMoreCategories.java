@@ -60,14 +60,14 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
 
     }
 
-    private void parseAllCategories(){
-        if(MyUtils.isNetworkConnected(this)){
+    private void parseAllCategories() {
+        if (MyUtils.isNetworkConnected(this)) {
             GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
         }
     }
 
     @Subscribe
-    public void seeAllCategories(SeeAllCategoriesEvent event){
+    public void seeAllCategories(SeeAllCategoriesEvent event) {
 
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
@@ -91,7 +91,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new CustomListItemAdapter(this , categoriesChldList));
+        listView.setAdapter(new CustomListItemAdapter(this, categoriesChldList));
     }
 
     @Override
@@ -126,11 +126,8 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        String API_NAME = "Apis.BASE_URL "+ "api/products/" + childIdList.get(i);
-        switch (i){
-            case 0:
-                getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
-                break;
-        }
+        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
     }
 }
+
