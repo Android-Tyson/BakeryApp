@@ -29,7 +29,7 @@ public class PostNormalUserRegister {
 
     public static void postUserDetials(String url, final Context context , final List<String> userInfo) {
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

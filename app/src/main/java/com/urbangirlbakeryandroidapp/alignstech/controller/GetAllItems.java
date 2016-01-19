@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -23,7 +24,9 @@ import java.util.List;
  */
 public class GetAllItems {
 
+    public static MaterialDialog materialDialog;
     public static void parseAppItems(final Context context , String url){
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         final JsonArrayRequest movieReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
@@ -47,11 +50,13 @@ public class GetAllItems {
                             }
 
                         }
+                        materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, "Please Check your internet connection and try again..");
+                materialDialog.dismiss();
             }
         });
 

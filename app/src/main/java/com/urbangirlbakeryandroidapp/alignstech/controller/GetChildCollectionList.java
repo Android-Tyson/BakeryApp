@@ -36,7 +36,7 @@ public class GetChildCollectionList {
     private static MaterialDialog materialDialog;
     public static void parseNavigationDrawerList(final Context context){
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Apis.nav_collection, new Response.Listener<JSONObject>() {
             @Override

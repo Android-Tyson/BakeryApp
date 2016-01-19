@@ -22,7 +22,7 @@ public class GetSeeAllCategories {
     private static MaterialDialog materialDialog;
     public static void parseAllCategoriesList(String url , final Context context){
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").progress(true , 0).show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {
