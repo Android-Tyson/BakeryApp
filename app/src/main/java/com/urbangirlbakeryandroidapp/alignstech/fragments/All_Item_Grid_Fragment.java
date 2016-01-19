@@ -107,7 +107,8 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
 
 //        String TITLE_NAME = "";
 //        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container, Single_Item_View.newInstance("API_NAME", "SINGLE_ITEM_TITLE_NAME")).commit();
+//        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container, Single_Item_View.newInstance("API_NAME", "SINGLE_ITEM_TITLE_NAME")).commit();
+
 
     }
 }
