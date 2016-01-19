@@ -276,27 +276,27 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private void handlingNullUserInfo(UserDetials userDetials){
 
         if(userDetials.getFb_id() == null){
-            userDetials.setFb_id("010101010101");
+            userDetials.setFb_id("yourmail@gmail.com");
         }if(userDetials.getFirstName() == null){
-            userDetials.setFirstName("FirstName");
+//            userDetials.setFirstName("Full");
         } if(userDetials.getLastName() == null){
-            userDetials.setLastName("LastName");
+//            userDetials.setLastName("Name");
         } if(userDetials.getMobileNo() == null){
-            userDetials.setMobileNo("");
+//            userDetials.setMobileNo("");
         } if(userDetials.getEmail() == null){
-            userDetials.setEmail("");
+//            userDetials.setEmail("yourmail@gmail.com");
         } if (userDetials.getDob() == null){
-            userDetials.setDob("0000-00-00");
+//            userDetials.setDob("");
         } if(userDetials.getGender() == null){
-            userDetials.setGender("");
+//            userDetials.setGender("");
         } if (userDetials.getZone() == null){
-            userDetials.setZone("");
+//            userDetials.setZone("");
         } if(userDetials.getDistrict() == null){
-            userDetials.setDistrict("");
+//            userDetials.setDistrict("");
         } if(userDetials.getLocation() == null){
-            userDetials.setLocation("");
+//            userDetials.setLocation("");
         } if(userDetials.getProfilePicUrl() == null){
-            userDetials.setProfilePicUrl("http://www.google.com");
+            userDetials.setProfilePicUrl(Apis.defaultImageUrl);
         }
 
     }

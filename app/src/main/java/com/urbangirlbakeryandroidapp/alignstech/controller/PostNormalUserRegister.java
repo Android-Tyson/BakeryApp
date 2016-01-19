@@ -67,7 +67,6 @@ public class PostNormalUserRegister {
                 params.put("full_name", userInfo.get(8));
                 MyUtils.showLog(" ");
 
-
                 return params;
             }
         };
