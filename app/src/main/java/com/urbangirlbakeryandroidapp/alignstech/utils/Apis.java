@@ -14,5 +14,7 @@ public class Apis {
     public static final String urgent_cake = BASE_URL + "api/urgent-cake";
     public static final String see_all_categories = BASE_URL + "api/child-categories/5";
     public static final String see_all_gifts = BASE_URL + "api/child-categories/3";
+    public static final String see_all_child_items = BASE_URL + "api/products/66";
+    public static final String defaultImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
 
 }

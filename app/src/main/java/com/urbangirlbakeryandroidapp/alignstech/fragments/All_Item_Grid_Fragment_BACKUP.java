@@ -16,7 +16,6 @@ import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
 import com.urbangirlbakeryandroidapp.alignstech.model.Product;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -30,7 +29,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
+public class All_Item_Grid_Fragment_BACKUP extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.gridView)
     GridView gridView;
@@ -39,12 +38,12 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
     private CustomGridViewAdapter adapter;
     private List<Product> productList = new ArrayList<>();
 
-    public All_Item_Grid_Fragment() {
+    public All_Item_Grid_Fragment_BACKUP() {
         // Required empty public constructor
     }
 
-    public static All_Item_Grid_Fragment newInstance(String apiName){
-        All_Item_Grid_Fragment fragObject = new All_Item_Grid_Fragment();
+    public static All_Item_Grid_Fragment_BACKUP newInstance(String apiName){
+        All_Item_Grid_Fragment_BACKUP fragObject = new All_Item_Grid_Fragment_BACKUP();
 
         Bundle args = new Bundle();
         args.putString("API", apiName);
@@ -81,7 +80,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         adapter = new CustomGridViewAdapter(getActivity() , productList);
         gridView.setAdapter(adapter);
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetAllItems.parseAppItems(getActivity() , Apis.see_all_child_items);
+            GetAllItems.parseAppItems(getActivity() , url);
         }
     }
 

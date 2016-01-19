@@ -226,7 +226,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 String path = jsonObj.getString("path");
                 String headerImageUrl ;
                 if(path.equals("null")){
-                    headerImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
+                    headerImageUrl = Apis.defaultImageUrl;
                 }else {
                     headerImageUrl = Apis.BASE_URL + "images/" +path;
                 }
