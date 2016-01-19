@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.GridView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -109,6 +111,11 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
 //        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
 //        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container, Single_Item_View.newInstance("API_NAME", "SINGLE_ITEM_TITLE_NAME")).commit();
 
+        Intent intent = new Intent(getActivity() , SingleItemDetails.class);
+        String titleName = "MyTitle"; String apiName = "ApiLink";
+        intent.putExtra("TITLE_NAME" , titleName);
+        intent.putExtra("API_NAME" , apiName);
+        startActivity(intent);
 
     }
 }

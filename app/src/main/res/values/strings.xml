@@ -40,6 +40,7 @@
     <string name="title_activity_see_all_gifts">SeeAllGifts</string>
     <string name="title_activity_single_item_view">SingleItemView</string>
     <string name="single_item">Single Item</string>
+    <string name="title_activity_single_item_detils">SingleItemDetils</string>
 
 
 </resources>
