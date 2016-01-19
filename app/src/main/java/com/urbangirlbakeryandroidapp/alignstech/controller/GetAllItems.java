@@ -69,7 +69,7 @@ public class GetAllItems {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showToast(context, "Please Check your internet connection and try again..");
+                MyUtils.showToast(context, error.toString());
                 materialDialog.dismiss();
             }
         });

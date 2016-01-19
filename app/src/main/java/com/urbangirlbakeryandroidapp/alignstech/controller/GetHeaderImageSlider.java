@@ -10,6 +10,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -29,6 +30,7 @@ public class GetHeaderImageSlider {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                MyUtils.showToast(context, error.toString());
                 GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, context);
             }
         });

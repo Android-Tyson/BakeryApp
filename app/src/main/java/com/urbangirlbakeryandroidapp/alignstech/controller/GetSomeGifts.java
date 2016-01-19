@@ -11,6 +11,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ public class GetSomeGifts {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                MyUtils.showToast(context, error.toString());
                 GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list , context);
                 materialDialog.dismiss();
             }

@@ -11,6 +11,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ public class GetSeeAllCategories {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                MyUtils.showToast(context, error.toString());
                 GetSeeAllCategories.parseAllCategoriesList(Apis.some_categories_list, context);
                 materialDialog.dismiss();
             }
