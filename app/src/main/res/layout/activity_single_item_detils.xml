@@ -7,157 +7,75 @@
 
     <include layout="@layout/app_toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5">
-
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/imageViewProduct"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/myPrimaryColor"
-                android:scaleType="fitXY" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="0.5">
 
-                <!-- First Section-->
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/imageViewProduct"
+                    android:layout_width="match_parent"
+                    android:minHeight="200dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/myPrimaryColor"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.35"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp">
+                    android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Product Name | Attribute"
-                        android:textColor="@color/myTextColor"
-                        android:textSize="23sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="NRs. 1234.00"
-                        android:textColor="@color/myTextColor"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sweet and Simple Product Description"
-                        android:textColor="@color/myTextColor"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/myDividerColor" />
-
-                <!-- Second Section-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.2"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp">
-
+                    <!-- First Section-->
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <Spinner
-                            android:id="@+id/spinner1"
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp">
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Product Name | Attribute"
+                            android:textColor="@color/myTextColor"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-                        </Spinner>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="NRs. 1234.00"
+                            android:textColor="@color/myAccentColor"
+                            android:textSize="26sp" />
+
                     </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="fill_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:background="@color/myDividerColor" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <Spinner
-                            android:id="@+id/spinner2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                        </Spinner>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/myDividerColor" />
-
-                <!-- Third Section-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.2"
-                    android:paddingLeft="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center|left"
-                        android:text="You May also Need ? "
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/myDividerColor" />
-
-                <!-- Fourth Section-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.25"
-                    android:paddingLeft="10dp">
-
+                    <!--Second Section-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -166,60 +84,156 @@
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <LinearLayout
+                            <Spinner
+                                android:id="@+id/spinner1"
                                 android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            </Spinner>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/myDividerColor" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <Spinner
+                                android:id="@+id/spinner2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                            </Spinner>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/myDividerColor" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Sweet and Simple Product Description"
+                        android:textColor="@color/myTextColor"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/myDividerColor" />
+
+                    <!--Third Section-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|left"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:text="You May also Need ? "
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/myDividerColor" />
+
+                    <!--Fourth Section-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:text="Candles"
+                                        android:textSize="20sp" />
+
+                                    <CheckBox
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:paddingBottom="10dp"
+                                android:paddingTop="10dp">
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:text="Candles"
+                                    android:text="Knife"
                                     android:textSize="20sp" />
 
                                 <CheckBox
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:gravity="center" />
-
 
                             </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:text="Knife"
-                                android:textSize="20sp" />
-
-                            <CheckBox
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"
-                                android:gravity="center" />
-
-                        </LinearLayout>
-
                     </LinearLayout>
 
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/button_bg"
+                        android:src="@mipmap/order_now"/>
+
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
