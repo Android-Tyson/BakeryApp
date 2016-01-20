@@ -99,7 +99,7 @@
                                 android:layout_alignBottom="@+id/textView_categories_1"
                                 android:layout_alignEnd="@+id/textView_categories_1"
                                 android:layout_alignRight="@+id/textView_categories_1"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
@@ -125,7 +125,7 @@
                                 android:layout_alignBottom="@+id/textView_categories_2"
                                 android:layout_alignEnd="@+id/textView_categories_2"
                                 android:layout_alignRight="@+id/textView_categories_2"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
@@ -151,7 +151,7 @@
                                 android:layout_alignBottom="@+id/textView_categories_3"
                                 android:layout_alignEnd="@+id/textView_categories_3"
                                 android:layout_alignRight="@+id/textView_categories_3"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
@@ -247,7 +247,7 @@
                                 android:layout_alignBottom="@+id/textView_gift_1"
                                 android:layout_alignEnd="@+id/textView_gift_1"
                                 android:layout_alignRight="@+id/textView_gift_1"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
@@ -273,7 +273,7 @@
                                 android:layout_alignBottom="@+id/textView_gift_2"
                                 android:layout_alignEnd="@+id/textView_gift_2"
                                 android:layout_alignRight="@+id/textView_gift_2"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
@@ -299,7 +299,7 @@
                                 android:layout_alignBottom="@+id/textView_gift_3"
                                 android:layout_alignEnd="@+id/textView_gift_3"
                                 android:layout_alignRight="@+id/textView_gift_3"
-                                android:background="@color/myAccentColor" />
+                                android:background="@color/myDividerColor" />
 
                         </RelativeLayout>
 
