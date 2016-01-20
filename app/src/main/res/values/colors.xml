@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="myPrimaryColor">#44a897</color>
-    <color name="myPrimaryDarkColor">#ff3e806e</color>
-    <color name="myAccentColor">#9ecfbf</color>
+    <color name="myPrimaryDarkColor">#800743</color>
+    <color name="myPrimaryColor">#a80254</color>
+    <color name="myAccentColor">#bc1266</color>
     <color name="myDividerColor">#D2D2D2</color>
     <color name="myWindowBackground">#FFFFFF</color>
     <color name="myTextPrimaryColor">#4d4d4d</color>

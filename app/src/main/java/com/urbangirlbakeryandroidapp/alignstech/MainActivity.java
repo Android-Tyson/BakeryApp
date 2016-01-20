@@ -79,25 +79,25 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         setAccountListener(this);
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
-        addSection(newSection("Home", R.mipmap.ic_launcher, HomeFragment.newInstance(0)));
+        addSection(newSection("Home", R.mipmap.home, HomeFragment.newInstance(0)));
         addDivisor();
 
         if(MyUtils.isUserLoggedIn(this)){
-            addSection(newSection("Profile", R.mipmap.ic_launcher, new Intent(this, EditProfile.class)));
+            addSection(newSection("Profile", R.mipmap.profile, new Intent(this, EditProfile.class)));
             addDivisor();
         }else{
-            addSection(newSection("Login", R.mipmap.ic_launcher, new Intent(this, Login.class)));
+            addSection(newSection("Login", R.mipmap.login, new Intent(this, Login.class)));
             addDivisor();
         }
 
-        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.ic_launcher, new CakesFragment()));
+        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.ic_launcher, new GiftsFragment()));
+        addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.offers), R.mipmap.ic_launcher, new OfferFragment()));
+        addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
         addDivisor();
-        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.ic_launcher, new AccessoriesFragment()));
-        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.ic_launcher, new Settings_Fragment()));
+        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
+        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, new Settings_Fragment()));
 
     }
 
