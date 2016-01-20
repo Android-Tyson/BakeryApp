@@ -44,7 +44,7 @@
     </style>
 
     <style name="CustomEditTextTheme">
-        <item name="colorControlNormal">@color/myPrimaryColor</item>
+        <item name="colorControlNormal">@color/myDividerColor</item>
         <item name="android:textColor">@color/myTextColor2</item>
     </style>
 
