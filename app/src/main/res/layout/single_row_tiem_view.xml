@@ -39,15 +39,17 @@
 
                     <TextView
                         android:id="@+id/textViewProduct"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
                         android:padding="5dp"
                         android:layout_alignParentBottom="true"
                         android:text="Demo Text"
                         android:textColor="#ffffff"
-                        android:textSize="18sp" />
+                        android:gravity="center"
+                        android:background="#99000000"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -57,15 +59,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.23"
-                android:background="#f2f2f2"
+                android:background="#4290fb"
                 android:gravity="center">
 
                 <ImageView
                     android:id="@+id/imageViewAddToCart"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="124dp"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/add_to_cart" />
 
             </LinearLayout>
 
