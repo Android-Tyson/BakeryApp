@@ -30,7 +30,6 @@ public class GetHeaderImageSlider {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, error.toString());
-//                GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, context);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");

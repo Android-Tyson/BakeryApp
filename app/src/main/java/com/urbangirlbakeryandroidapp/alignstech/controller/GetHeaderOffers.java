@@ -16,9 +16,9 @@ import org.json.JSONObject;
 /**
  * Created by Dell on 1/13/2016.
  */
-public class GetUgrentCakes {
+public class GetHeaderOffers {
 
-    public static void parseUrgentCakes(String url , final Context context){
+    public static void parseheaderOffers(String url, final Context context){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {
@@ -30,7 +30,6 @@ public class GetUgrentCakes {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, error.toString());
-//                GetUgrentCakes.parseUrgentCakes(Apis.headerImageSlider, context);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");

@@ -31,7 +31,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderImageSlider;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetUgrentCakes;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderOffers;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -124,8 +124,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (MyUtils.isNetworkConnected(getActivity())) {
             GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
             GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, getActivity());
-            GetUgrentCakes.parseUrgentCakes(Apis.urgent_cake, getActivity());
+            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
+            GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
         }
         recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(urgentCakeList));
 
@@ -161,14 +161,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     }
 
     @Subscribe
-    public void getHeaderImageSlider(HeaderImageSliderEventBus event) {
+    public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForHeaderImages(jsonObject);
     }
 
     @Subscribe
-    public void getUrgentCakeList(GetUrgentCakesEvent event) {
+    public void getOffersScrollList(GetUrgentCakesEvent event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForUrgentCakes(jsonObject);
@@ -224,7 +224,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                String headerImageTitle = jsonObj.getString("product_name");
+                String headerImageTitle = jsonObj.getString("name");
                 String path = jsonObj.getString("path");
                 String headerImageUrl ;
                 if(path.equals("null")){
@@ -252,7 +252,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                String headerImageTitle = jsonObj.getString("name");
+                String headerImageTitle = jsonObj.getString("product_name");
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
                 if(path.equals("null")){
@@ -297,8 +297,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         HashMap<String,String> url_maps = new HashMap<>();
         url_maps.put(imageTitle.get(0), imageUrlLink.get(0));
         url_maps.put(imageTitle.get(1), imageUrlLink.get(1));
-        url_maps.put(imageTitle.get(2), imageUrlLink.get(2));
-        url_maps.put(imageTitle.get(3), imageUrlLink.get(3));
+//        url_maps.put(imageTitle.get(2), imageUrlLink.get(2));
+//        url_maps.put(imageTitle.get(3), imageUrlLink.get(3));
 
         for(String name : url_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());
