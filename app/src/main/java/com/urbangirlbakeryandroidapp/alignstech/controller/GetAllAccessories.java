@@ -17,10 +17,10 @@ import org.json.JSONObject;
 /**
  * Created by Dell on 1/13/2016.
  */
-public class GetGiftList {
+public class GetAllAccessories {
 
     private static MaterialDialog materialDialog;
-    public static void parseGiftList(String url , final Context context){
+    public static void parseAllGiftList(String url , final Context context){
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 

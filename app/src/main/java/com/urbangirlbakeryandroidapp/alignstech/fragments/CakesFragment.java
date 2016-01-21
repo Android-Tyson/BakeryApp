@@ -14,7 +14,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -69,7 +69,7 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetSeeAllGifts.parseAllGiftList(Apis.see_all_categories_cake, getActivity());
+            GetAllGifts.parseAllGiftList(Apis.see_all_categories_cake, getActivity());
         }
     }
 

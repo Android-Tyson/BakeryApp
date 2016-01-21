@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -17,10 +17,10 @@ import org.json.JSONObject;
 /**
  * Created by Dell on 1/13/2016.
  */
-public class GetSeeAllGifts {
+public class GetAllCategoriesCake {
 
     private static MaterialDialog materialDialog;
-    public static void parseAllGiftList(String url , final Context context){
+    public static void parseAllCategoriesList(String url , final Context context){
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
@@ -28,7 +28,7 @@ public class GetSeeAllGifts {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        MyBus.getInstance().post(new SeeAllGiftsEvent(response));
+                        MyBus.getInstance().post(new SeeAllCategoriesEvent(response));
                         materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -38,7 +38,7 @@ public class GetSeeAllGifts {
                 materialDialog.dismiss();
             }
         });
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "GET_ALL_GIFT_TAG");
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "GET_ALL_CATEGORIES_TAG");
 
     }
 

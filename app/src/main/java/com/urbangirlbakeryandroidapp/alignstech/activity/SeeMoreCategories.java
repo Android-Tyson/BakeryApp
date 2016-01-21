@@ -13,7 +13,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetSeeAllCategories;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategoriesCake;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -62,7 +62,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
 
     private void parseAllCategories() {
         if (MyUtils.isNetworkConnected(this)) {
-            GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories_cake, this);
+            GetAllCategoriesCake.parseAllCategoriesList(Apis.see_all_categories_cake, this);
         }
     }
 
