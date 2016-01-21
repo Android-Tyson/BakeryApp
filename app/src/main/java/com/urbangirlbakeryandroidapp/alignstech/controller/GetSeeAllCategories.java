@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -36,7 +35,6 @@ public class GetSeeAllCategories {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, error.toString());
-                GetSeeAllCategories.parseAllCategoriesList(Apis.some_categories_list, context);
                 materialDialog.dismiss();
             }
         });

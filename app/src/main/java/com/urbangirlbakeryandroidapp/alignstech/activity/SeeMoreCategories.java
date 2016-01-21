@@ -62,7 +62,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
 
     private void parseAllCategories() {
         if (MyUtils.isNetworkConnected(this)) {
-            GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories, this);
+            GetSeeAllCategories.parseAllCategoriesList(Apis.see_all_categories_cake, this);
         }
     }
 

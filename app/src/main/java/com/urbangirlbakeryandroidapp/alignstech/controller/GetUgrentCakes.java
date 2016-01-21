@@ -7,7 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -31,7 +30,7 @@ public class GetUgrentCakes {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, error.toString());
-                GetUgrentCakes.parseUrgentCakes(Apis.headerImageSlider, context);
+//                GetUgrentCakes.parseUrgentCakes(Apis.headerImageSlider, context);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");
