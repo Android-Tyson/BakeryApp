@@ -295,10 +295,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
 
         HashMap<String,String> url_maps = new HashMap<>();
-        url_maps.put(imageTitle.get(0), imageUrlLink.get(0));
-        url_maps.put(imageTitle.get(1), imageUrlLink.get(1));
-//        url_maps.put(imageTitle.get(2), imageUrlLink.get(2));
-//        url_maps.put(imageTitle.get(3), imageUrlLink.get(3));
+        for(int i = 0 ; i < imageTitle.size() ; i++){
+            url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
+        }
 
         for(String name : url_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());
