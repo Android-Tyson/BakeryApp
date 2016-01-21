@@ -84,7 +84,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @InjectView(R.id.slider)
     SliderLayout mDemoSlider;
 
-    private List<RecyclerViewModel> urgentCakeList;
+    private List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
 
 
     public static HomeFragment newInstance(int position) {
@@ -127,11 +127,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider, getActivity());
             GetUgrentCakes.parseUrgentCakes(Apis.urgent_cake, getActivity());
         }
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(urgentCakeList));
+
     }
 
 
     private void initializeDataForUrgentCake(ArrayList<String>  titleList , ArrayList<String> imageUrlList){
-        urgentCakeList = new ArrayList<>();
+
         for(int i = 0 ; i < titleList.size() ; i++){
             urgentCakeList.add(new RecyclerViewModel(titleList.get(i) , imageUrlList.get(i)));
         }

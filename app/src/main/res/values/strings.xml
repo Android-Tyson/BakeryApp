@@ -41,6 +41,9 @@
     <string name="title_activity_single_item_view">SingleItemView</string>
     <string name="single_item">Single Item</string>
     <string name="title_activity_single_item_detils">SingleItemDetils</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
 
 
 </resources>

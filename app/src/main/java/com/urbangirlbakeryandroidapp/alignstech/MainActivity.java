@@ -79,14 +79,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         setAccountListener(this);
         setDrawerHeaderImage(R.drawable.drawer_bg);
 
-        addSection(newSection("Home", R.mipmap.home, HomeFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.home), R.mipmap.home, HomeFragment.newInstance(0)));
         addDivisor();
 
         if(MyUtils.isUserLoggedIn(this)){
-            addSection(newSection("Profile", R.mipmap.profile, new Intent(this, EditProfile.class)));
+            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, EditProfile.class)));
             addDivisor();
         }else{
-            addSection(newSection("Login", R.mipmap.login, new Intent(this, Login.class)));
+            addSection(newSection(getResources().getString(R.string.login), R.mipmap.login, new Intent(this, Login.class)));
             addDivisor();
         }
 
