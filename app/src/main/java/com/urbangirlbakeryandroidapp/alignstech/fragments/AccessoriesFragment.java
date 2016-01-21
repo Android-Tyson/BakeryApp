@@ -12,8 +12,8 @@ import android.widget.ListView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -61,12 +61,12 @@ public class AccessoriesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetAllGifts.parseAllGiftList(Apis.see_all_accessories, getActivity());
+            GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, getActivity());
         }
     }
 
     @Subscribe
-    public void seeAllGifts(SeeAllGiftsEvent event){
+    public void seeAllAccessories(AccessoriesListResultEvent event){
 
         JSONObject jsonObject = event.getJsonObject();
         performJsonTaskForGifts(jsonObject);
@@ -81,7 +81,7 @@ public class AccessoriesFragment extends Fragment {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                String singleChildname = jsonObj.getString("name");
+                String singleChildname = jsonObj.getString("product_name");
                 String singleChildId = jsonObj.getString("id");
                 giftChildList.add(singleChildname);
                 childIdList.add(singleChildId);

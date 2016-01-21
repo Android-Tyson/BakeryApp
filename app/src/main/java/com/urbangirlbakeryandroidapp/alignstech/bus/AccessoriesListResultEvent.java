@@ -1,21 +1,20 @@
 package com.urbangirlbakeryandroidapp.alignstech.bus;
 
-import com.urbangirlbakeryandroidapp.alignstech.model.Accessories;
-
-import java.util.List;
+import org.json.JSONObject;
 
 /**
  * Created by Dell on 12/28/2015.
  */
 public class AccessoriesListResultEvent {
 
-    List<Accessories> dataList;
+    JSONObject jsonObject;
 
-    public AccessoriesListResultEvent(List<Accessories> dataList){
-        this.dataList = dataList;
+    public AccessoriesListResultEvent(JSONObject jsonObject){
+        this.jsonObject = jsonObject;
     }
 
-    public List<Accessories> getAccessoriesList(){
-        return  dataList;
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
+
 }

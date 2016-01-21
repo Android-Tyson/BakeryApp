@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class GetAllAccessories {
 
     private static MaterialDialog materialDialog;
-    public static void parseAllGiftList(String url , final Context context){
+    public static void parseAllAccessoriesList(String url, final Context context){
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
@@ -28,7 +28,7 @@ public class GetAllAccessories {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        MyBus.getInstance().post(new SeeAllGiftsEvent(response));
+                        MyBus.getInstance().post(new AccessoriesListResultEvent(response));
                         materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
