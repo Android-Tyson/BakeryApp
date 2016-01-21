@@ -69,7 +69,7 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetSeeAllGifts.parseAllGiftList(Apis.see_all_gifts, getActivity());
+            GetSeeAllGifts.parseAllGiftList(Apis.see_all_categories_cake, getActivity());
         }
     }
 

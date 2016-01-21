@@ -67,7 +67,7 @@ public class OfferFragment extends android.support.v4.app.Fragment {
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetSeeAllGifts.parseAllGiftList(Apis.see_all_gifts, getActivity());
+            GetSeeAllGifts.parseAllGiftList(Apis.see_all_offers, getActivity());
         }
     }
 

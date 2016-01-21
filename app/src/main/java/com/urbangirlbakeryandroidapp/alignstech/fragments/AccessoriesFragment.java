@@ -67,7 +67,7 @@ public class AccessoriesFragment extends Fragment {
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetSeeAllGifts.parseAllGiftList(Apis.see_all_gifts, getActivity());
+            GetSeeAllGifts.parseAllGiftList(Apis.see_all_accessories, getActivity());
         }
     }
 

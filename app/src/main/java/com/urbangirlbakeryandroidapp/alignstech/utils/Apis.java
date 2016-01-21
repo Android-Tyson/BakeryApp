@@ -18,6 +18,8 @@ public class Apis {
 
     public static final String see_all_categories_cake = BASE_URL + "api/child-categories/5";
     public static final String see_all_gifts = BASE_URL + "api/child-categories/3";
+    public static final String see_all_offers = BASE_URL + "api/child-categories/4";
+    public static final String see_all_accessories = BASE_URL + "NO_API";
 
     public static final String see_all_child_items = BASE_URL + "api/products/66";
 
