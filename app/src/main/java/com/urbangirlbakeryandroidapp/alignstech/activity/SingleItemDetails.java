@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -53,6 +54,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.spinner_pound)
     Spinner spinner_pound;
 
+    @InjectView(R.id.order_now)
+    LinearLayout orderNow;
+
     private String product_price;
     private String pound;
     private String per_pound_price;
@@ -65,7 +69,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         initializeToolbar();
         MyBus.getInstance().register(this);
         parsingJob();
-
+        orderNow.setOnClickListener(this);
     }
 
     private void initializeToolbar() {
@@ -163,15 +167,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private  int priceCalculation(){
+    private  double priceCalculation(){
 
-        int base_price = Integer.parseInt(product_price);
-        int pound_ = Integer.parseInt(pound);
-        int perPoundPrice = Integer.parseInt(per_pound_price);
+        double base_price = Double.parseDouble(product_price);
+        double pound_ = Double.parseDouble(pound);
+        double perPoundPrice = Double.parseDouble(per_pound_price);
 
-        int totalPrice = base_price + (pound_ * perPoundPrice);
-
-        return totalPrice;
+        return  base_price + (pound_ * perPoundPrice);
 
     }
 
@@ -221,5 +223,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        priceCalculation();
+        MyUtils.showToast(this , "Your Total Price will be: "+ priceCalculation());
     }
 }
