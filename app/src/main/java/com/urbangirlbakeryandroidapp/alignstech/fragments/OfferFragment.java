@@ -12,8 +12,8 @@ import android.widget.ListView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
-import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OfferListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllOffers;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -67,12 +67,12 @@ public class OfferFragment extends android.support.v4.app.Fragment {
 
     private void parseAllGifts(){
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetAllGifts.parseAllGiftList(Apis.see_all_offers, getActivity());
+            GetAllOffers.parseAllOffersList(Apis.see_all_offers, getActivity());
         }
     }
 
     @Subscribe
-    public void seeAllGifts(SeeAllGiftsEvent event){
+    public void seeAllOffers(OfferListResultEvent event){
 
         JSONObject jsonObject = event.getJsonObject();
         performJsonTaskForGifts(jsonObject);
