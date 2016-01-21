@@ -5,13 +5,22 @@ package com.urbangirlbakeryandroidapp.alignstech.model;
  */
 public class Product {
 
-    private String productName , productImageUrl;
+    private String product_id, productName , productImageUrl;
 
     public Product(){ }
 
-    public Product(String productName, String productUrl) {
+    public Product(String product_id , String productName, String productUrl) {
+        this.product_id = product_id;
         this.productName = productName;
         this.productImageUrl = productUrl;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getProductName() {

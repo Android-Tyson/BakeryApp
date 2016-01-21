@@ -48,6 +48,7 @@ public class GetAllItems {
                                     } else {
                                         product.setProductName(obj.getString("product_name"));
                                         imageUrl = Apis.BASE_URL + "images/" + obj.getString("path");
+                                        product.setProduct_id(obj.getString("id"));
 
                                     }
                                     product.setProductImageUrl(imageUrl);

@@ -107,14 +107,14 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//        String TITLE_NAME = "";
-//        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
-//        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container, Single_Item_View.newInstance("API_NAME", "SINGLE_ITEM_TITLE_NAME")).commit();
+        Product product = (Product) adapterView.getAdapter().getItem(i);
+        String product_id = product.getProduct_id();
+        String product_name = product.getProductName();
+        String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
         Intent intent = new Intent(getActivity() , SingleItemDetails.class);
-        String titleName = "MyTitle"; String apiName = "ApiLink";
-        intent.putExtra("TITLE_NAME" , titleName);
-        intent.putExtra("API_NAME" , apiName);
+        intent.putExtra("TITLE_NAME" , product_name);
+        intent.putExtra("API_NAME" , api_name);
         startActivity(intent);
 
     }

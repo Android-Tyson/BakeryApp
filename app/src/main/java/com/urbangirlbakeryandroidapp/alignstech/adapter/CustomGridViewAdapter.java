@@ -59,11 +59,13 @@ public class CustomGridViewAdapter extends BaseAdapter {
 
         NetworkImageView productImageView = (NetworkImageView) convertView.findViewById(R.id.imageViewProduct);
         TextView productTitle = (TextView) convertView.findViewById(R.id.textViewProduct);
+        TextView productId = (TextView) convertView.findViewById(R.id.product_id);
 
         Product product = productList.get(position);
 
         productImageView.setImageUrl(product.getProductImageUrl() , imageLoader);
         productTitle.setText(product.getProductName());
+        productId.setText(product.getProduct_id());
 
         return convertView;
     }
