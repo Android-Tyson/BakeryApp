@@ -5,11 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -23,10 +30,32 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SingleItemDetails extends AppCompatActivity {
+public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
+
+    @InjectView(R.id.product_image)
+    NetworkImageView iv_product_image;
+
+    @InjectView(R.id.product_name)
+    TextView tv_product_name;
+
+    @InjectView(R.id.product_price)
+    TextView tv_product_price;
+
+    @InjectView(R.id.product_description)
+    TextView tv_product_description;
+
+    @InjectView(R.id.spinner_flavour)
+    Spinner spinner_flavour;
+
+    @InjectView(R.id.spinner_pound)
+    Spinner spinner_pound;
+
+    private String product_price;
+    private String pound;
+    private String per_pound_price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,19 +110,69 @@ public class SingleItemDetails extends AppCompatActivity {
                 String product_name = jsonObj.getString("product_name");
                 String starting_pound = jsonObj.getString("starting_pound");
                 String ending_pound = jsonObj.getString("ending_pound");
-                String price = jsonObj.getString("price");
+                product_price = jsonObj.getString("price");
+                String product_description = jsonObj.getString("description");
+
+                String path = jsonObj.getString("path");
+                String product_image_url ;
+                if(path.equals("null")){
+                    product_image_url = Apis.defaultImageUrl;
+                }else {
+                    product_image_url = Apis.BASE_URL + "images/" +path;
+                }
+
                 JSONArray flavorArray = jsonObj.getJSONArray("flavor");
+                ArrayList<String> flavour = new ArrayList<>();
+                flavour.add("Select Flavour");
+
                 for(int j = 0 ; j < flavorArray.length() ; j++){
                     JSONObject flavorObject = flavorArray.getJSONObject(i);
                     String flavor_id = flavorObject.getString("id");
                     String flavor = flavorObject.getString("flavor");
-                    String per_pound_price = flavorObject.getString("per_pound_price");
-                    MyUtils.showLog(" ");
+                    per_pound_price = flavorObject.getString("per_pound_price");
+                    flavour.add(flavor);
                 }
+                setDataToSpinner(flavour , starting_pound , ending_pound);
+                tv_product_name.setText(product_name);
+                tv_product_price.setText(product_price);
+                tv_product_description.setText(product_description);
+                iv_product_image.setImageUrl(product_image_url , AppController.getInstance().getImageLoader());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void setDataToSpinner(ArrayList<String> flavour , String starting_pounds , String ending_pound){
+
+        int start_pound = Integer.parseInt(starting_pounds);
+        int end_pound = Integer.parseInt(ending_pound);
+
+        ArrayList<String> pound = new ArrayList<>();
+        pound.add("Select Pound");
+        for(int i = start_pound ; i < end_pound ; i++ ){
+            pound.add(i+"");
+        }
+
+        spinner_flavour.setAdapter(new ArrayAdapter<String>(this , android.R.layout.simple_spinner_dropdown_item , flavour));
+        spinner_pound.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pound));
+
+        spinner_flavour.setOnItemSelectedListener(this);
+        spinner_pound.setOnItemSelectedListener(this);
+
+    }
+
+    private  int priceCalculation(){
+
+        int base_price = Integer.parseInt(product_price);
+        int pound_ = Integer.parseInt(pound);
+        int perPoundPrice = Integer.parseInt(per_pound_price);
+
+        int totalPrice = base_price + (pound_ * perPoundPrice);
+
+        return totalPrice;
+
     }
 
     @Override
@@ -123,5 +202,24 @@ public class SingleItemDetails extends AppCompatActivity {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("PRODUCT_DETAILS");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.spinner_flavour){
+            String selectedItem = adapterView.getItemAtPosition(i).toString();
+            MyUtils.showLog(" ");
+        }else if(spinner.getId() == R.id.spinner_pound){
+            pound = adapterView.getItemAtPosition(i).toString();
+            MyUtils.showLog(" ");
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

@@ -27,7 +27,7 @@ public class GetAllItems {
 
     public static MaterialDialog materialDialog;
 
-    public static void parseAppItems(final Context context, String url) {
+    public static void parseAllItems(final Context context, String url) {
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
         final JsonObjectRequest movieReq = new JsonObjectRequest(url,
