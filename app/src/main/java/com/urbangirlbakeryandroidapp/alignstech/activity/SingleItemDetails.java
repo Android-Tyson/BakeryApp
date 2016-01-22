@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -59,9 +60,16 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.order_now)
     LinearLayout orderNow;
 
+    @InjectView(R.id.checkbox_candle)
+    CheckBox checkbox_candle;
+
+    @InjectView(R.id.checkbox_knife)
+    CheckBox checkbox_knife;
+
     private String product_price;
     private String pound;
     private String per_pound_price;
+    private String candle_price , knife_price ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,11 +180,33 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private  double priceCalculation(){
 
-        double base_price = Double.parseDouble(product_price);
-        double pound_ = Double.parseDouble(pound);
-        double perPoundPrice = Double.parseDouble(per_pound_price);
+        double base_price = 0.00 , pound_ = 0.00 , perPoundPrice = 0.00 , candle = 0.00 , knife = 0.00;
+        if(product_price != null){
+            base_price = Double.parseDouble(product_price);
+        }
 
-        return  base_price + (pound_ * perPoundPrice);
+        if(pound != null){
+            if(pound.equals("Select Pound"))
+                pound = "1.00";
+                pound_ = Double.parseDouble(pound);
+        }
+
+        if(per_pound_price != null){
+            perPoundPrice = Double.parseDouble(per_pound_price);
+        }
+
+        if(checkbox_candle.isChecked()){
+            if(candle_price != null){
+                candle = Double.parseDouble(candle_price);
+            }
+        }
+
+        if(checkbox_knife.isChecked()){
+            if(knife_price != null){
+                knife = Double.parseDouble(knife_price);
+            }
+        }
+        return  base_price + (pound_ * perPoundPrice) +candle + knife;
 
     }
 
@@ -190,7 +220,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void performJsonTaskForAccessories(JSONObject jsonObject) {
 
         ArrayList<String> giftChildList = new ArrayList<>();
-        String candle_price , knife_price ;
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -260,5 +289,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onClick(View view) {
         priceCalculation();
         MyUtils.showToast(this , "Your Total Price will be: "+ priceCalculation());
+    }
+
+    private void orderSelectedProduct(){
+
+
+
     }
 }
