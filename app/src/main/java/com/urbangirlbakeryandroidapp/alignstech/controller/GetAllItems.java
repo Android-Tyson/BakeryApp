@@ -3,6 +3,7 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.content.Context;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -30,7 +31,7 @@ public class GetAllItems {
     public static void parseAllItems(final Context context, String url) {
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
-        final JsonObjectRequest movieReq = new JsonObjectRequest(url,
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -74,7 +75,9 @@ public class GetAllItems {
                 materialDialog.dismiss();
             }
         });
-
-        AppController.getInstance().addToRequestQueue(movieReq, "GET_ALL_ITEMS");
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, "GET_ALL_ITEMS");
     }
 }

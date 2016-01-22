@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,6 +33,9 @@ public class GetHeaderImageSlider {
                 MyUtils.showToast(context, error.toString());
             }
         });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");
 
     }

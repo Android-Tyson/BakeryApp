@@ -31,7 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -297,33 +299,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
     private void orderSelectedProduct() {
-//        {
-        String user_id = "6";
-        String order_date = "2015-12-23";
-        String total = "8350";
-        //        "order_details":[
-        //        {
-        String orders_id = "31";
-        String product_id = "200";
-        String price = "4200";
-        String qty = "2";
-//                },
-//                {
-//                    String orders_id = "31";
-//                    String product_id = "200";
-//                    String price = "4200";
-//                    String qty = "2";
-//                }
-//                ]
-//          }
 
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject2 = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         try {
             jsonObject.put("user_id", "1");
-            jsonObject.put("order_date", "2015-12-23");
-            jsonObject.put("total", "20000");
+            jsonObject.put("order_date", getCurrentDate());
+            jsonObject.put("total", priceCalculation());
 
             jsonObject2.put("order_id", "12");
             jsonObject2.put("product_id", "21212");
@@ -349,10 +332,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Subscribe
     public void orderProductResponse(OrderEventBus eventBus) {
 
-        if ((eventBus.getResponse()).equals("success")) {
+        if ((eventBus.getResponse()).equals("success"))
             MyUtils.showToast(this, "Successfully Ordered");
-        }
+
 
     }
 
+    private String getCurrentDate(){
+
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+    }
 }
