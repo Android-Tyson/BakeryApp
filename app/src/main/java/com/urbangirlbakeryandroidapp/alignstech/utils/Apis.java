@@ -21,7 +21,8 @@ public class Apis {
     public static final String see_all_child_items = BASE_URL + "api/products/66";
 
     public static final String defaultImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
-
     public static final String nav_collection = BASE_URL + "collection";
+
+    public static final String product_order = "http://cake.yogeshojha.com.np/api/order";
 
 }

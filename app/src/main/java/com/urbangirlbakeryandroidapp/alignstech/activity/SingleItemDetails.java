@@ -17,9 +17,11 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -66,10 +68,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.checkbox_knife)
     CheckBox checkbox_knife;
 
-    private String product_price;
-    private String pound;
-    private String per_pound_price;
-    private String candle_price , knife_price ;
+    private String product_price , pound , per_pound_price , candle_price, knife_price;
+    int no_of_product = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         MyBus.getInstance().register(this);
         parsingJob();
         orderNow.setOnClickListener(this);
+
     }
 
     private void initializeToolbar() {
@@ -90,23 +91,23 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private void parsingJob(){
-        if(MyUtils.isNetworkConnected(this)){
-            GetProductDetials.parseProductDetials(getApiName() , this);
-            GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories , this);
+    private void parsingJob() {
+        if (MyUtils.isNetworkConnected(this)) {
+            GetProductDetials.parseProductDetials(getApiName(), this);
+            GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
         }
     }
 
-    private String getApiName(){
+    private String getApiName() {
         return getIntent().getStringExtra("API_NAME");
     }
 
-    private String getItemTitle(){
+    private String getItemTitle() {
         return getIntent().getStringExtra("TITLE_NAME");
     }
 
     @Subscribe
-    public void getSingleProductDetials(ProductDetialsEvent event){
+    public void getSingleProductDetials(ProductDetialsEvent event) {
 
         JSONObject jsonObject = event.getJsonObject();
         performJsonTaskForGifts(jsonObject);
@@ -129,29 +130,29 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 String product_description = jsonObj.getString("description");
 
                 String path = jsonObj.getString("path");
-                String product_image_url ;
-                if(path.equals("null")){
+                String product_image_url;
+                if (path.equals("null")) {
                     product_image_url = Apis.defaultImageUrl;
-                }else {
-                    product_image_url = Apis.BASE_URL + "images/" +path;
+                } else {
+                    product_image_url = Apis.BASE_URL + "images/" + path;
                 }
 
                 JSONArray flavorArray = jsonObj.getJSONArray("flavor");
                 ArrayList<String> flavour = new ArrayList<>();
                 flavour.add("Select Flavour");
 
-                for(int j = 0 ; j < flavorArray.length() ; j++){
+                for (int j = 0; j < flavorArray.length(); j++) {
                     JSONObject flavorObject = flavorArray.getJSONObject(i);
                     String flavor_id = flavorObject.getString("id");
                     String flavor = flavorObject.getString("flavor");
                     per_pound_price = flavorObject.getString("per_pound_price");
                     flavour.add(flavor);
                 }
-                setDataToSpinner(flavour , starting_pound , ending_pound);
+                setDataToSpinner(flavour, starting_pound, ending_pound);
                 tv_product_name.setText(product_name);
                 tv_product_price.setText(product_price);
                 tv_product_description.setText(product_description);
-                iv_product_image.setImageUrl(product_image_url , AppController.getInstance().getImageLoader());
+                iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -159,18 +160,18 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
 
-    private void setDataToSpinner(ArrayList<String> flavour , String starting_pounds , String ending_pound){
+    private void setDataToSpinner(ArrayList<String> flavour, String starting_pounds, String ending_pound) {
 
         int start_pound = Integer.parseInt(starting_pounds);
         int end_pound = Integer.parseInt(ending_pound);
 
         ArrayList<String> pound = new ArrayList<>();
         pound.add("Select Pound");
-        for(int i = start_pound ; i < end_pound ; i++ ){
-            pound.add(i+"");
+        for (int i = start_pound; i < end_pound; i++) {
+            pound.add(i + "");
         }
 
-        spinner_flavour.setAdapter(new ArrayAdapter<String>(this , android.R.layout.simple_spinner_dropdown_item , flavour));
+        spinner_flavour.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, flavour));
         spinner_pound.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pound));
 
         spinner_flavour.setOnItemSelectedListener(this);
@@ -178,40 +179,42 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private  double priceCalculation(){
+    private double priceCalculation() {
 
-        double base_price = 0.00 , pound_ = 0.00 , perPoundPrice = 0.00 , candle = 0.00 , knife = 0.00;
-        if(product_price != null){
+        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
+        if (product_price != null) {
             base_price = Double.parseDouble(product_price);
         }
 
-        if(pound != null){
-            if(pound.equals("Select Pound"))
+        if (pound != null) {
+            if (pound.equals("Select Pound"))
                 pound = "1.00";
-                pound_ = Double.parseDouble(pound);
+            pound_ = Double.parseDouble(pound);
         }
 
-        if(per_pound_price != null){
+        if (per_pound_price != null) {
             perPoundPrice = Double.parseDouble(per_pound_price);
         }
 
-        if(checkbox_candle.isChecked()){
-            if(candle_price != null){
+        if (checkbox_candle.isChecked()) {
+            no_of_product = no_of_product + 1;
+            if (candle_price != null) {
                 candle = Double.parseDouble(candle_price);
             }
         }
 
-        if(checkbox_knife.isChecked()){
-            if(knife_price != null){
+        if (checkbox_knife.isChecked()) {
+            no_of_product = no_of_product + 1;
+            if (knife_price != null) {
                 knife = Double.parseDouble(knife_price);
             }
         }
-        return  base_price + (pound_ * perPoundPrice) +candle + knife;
+        return base_price + (pound_ * perPoundPrice) + candle + knife;
 
     }
 
     @Subscribe
-    public void getAllAccessories(AccessoriesListResultEvent event){
+    public void getAllAccessories(AccessoriesListResultEvent event) {
 
         performJsonTaskForAccessories(event.getJsonObject());
 
@@ -226,9 +229,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String id = jsonObj.getString("id");
                 String product_name = jsonObj.getString("product_name");
-                if(product_name.equals("knife")){
+                if (product_name.equals("knife")) {
                     candle_price = jsonObj.getString("price");
-                }else if(product_name.equals("candle")){
+                } else if (product_name.equals("candle")) {
                     knife_price = jsonObj.getString("price");
                 }
             }
@@ -270,10 +273,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         Spinner spinner = (Spinner) adapterView;
-        if(spinner.getId() == R.id.spinner_flavour){
+        if (spinner.getId() == R.id.spinner_flavour) {
             String selectedItem = adapterView.getItemAtPosition(i).toString();
             MyUtils.showLog(" ");
-        }else if(spinner.getId() == R.id.spinner_pound){
+        } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
             MyUtils.showLog(" ");
         }
@@ -288,12 +291,68 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
         priceCalculation();
-        MyUtils.showToast(this , "Your Total Price will be: "+ priceCalculation());
-    }
-
-    private void orderSelectedProduct(){
-
-
+        MyUtils.showToast(this, "Your Total Price will be: " + priceCalculation());
+        orderSelectedProduct();
 
     }
+
+    private void orderSelectedProduct() {
+//        {
+        String user_id = "6";
+        String order_date = "2015-12-23";
+        String total = "8350";
+        //        "order_details":[
+        //        {
+        String orders_id = "31";
+        String product_id = "200";
+        String price = "4200";
+        String qty = "2";
+//                },
+//                {
+//                    String orders_id = "31";
+//                    String product_id = "200";
+//                    String price = "4200";
+//                    String qty = "2";
+//                }
+//                ]
+//          }
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        try {
+            jsonObject.put("user_id", "1");
+            jsonObject.put("order_date", "2015-12-23");
+            jsonObject.put("total", "20000");
+
+            jsonObject2.put("order_id", "12");
+            jsonObject2.put("product_id", "21212");
+            jsonObject2.put("price", "20000");
+            jsonObject2.put("qty", "1");
+
+            for (int i = 0 ; i < no_of_product ; i++){
+                jsonArray.put(jsonObject2);
+            }
+            jsonObject.put("order_details" , jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        MyUtils.showLog(jsonObject.toString());
+        MyUtils.showLog(jsonArray.toString());
+        MyUtils.showLog(jsonObject.toString());
+
+        PostOrderProduct.postOrderProduct(Apis.product_order , this , jsonObject.toString());
+
+    }
+
+    @Subscribe
+    public void orderProductResponse(OrderEventBus eventBus) {
+
+        if ((eventBus.getResponse()).equals("success")) {
+            MyUtils.showToast(this, "Successfully Ordered");
+        }
+
+    }
+
 }
