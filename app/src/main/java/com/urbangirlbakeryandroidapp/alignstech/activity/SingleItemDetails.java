@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -83,6 +85,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob(){
         if(MyUtils.isNetworkConnected(this)){
             GetProductDetials.parseProductDetials(getApiName() , this);
+            GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories , this);
         }
     }
 
@@ -175,6 +178,34 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         return  base_price + (pound_ * perPoundPrice);
 
+    }
+
+    @Subscribe
+    public void getAllAccessories(AccessoriesListResultEvent event){
+
+        performJsonTaskForAccessories(event.getJsonObject());
+
+    }
+
+    private void performJsonTaskForAccessories(JSONObject jsonObject) {
+
+        ArrayList<String> giftChildList = new ArrayList<>();
+        String candle_price , knife_price ;
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String id = jsonObj.getString("id");
+                String product_name = jsonObj.getString("product_name");
+                if(product_name.equals("knife")){
+                    candle_price = jsonObj.getString("price");
+                }else if(product_name.equals("candle")){
+                    knife_price = jsonObj.getString("price");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
