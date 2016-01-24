@@ -83,7 +83,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         adapter = new CustomGridViewAdapter(getActivity() , productList);
         gridView.setAdapter(adapter);
         if(MyUtils.isNetworkConnected(getActivity())){
-            GetAllItems.parseAllItems(getActivity(), Apis.see_all_child_items);
+            GetAllItems.parseAllItems(getActivity(), getApi());
         }
     }
 
