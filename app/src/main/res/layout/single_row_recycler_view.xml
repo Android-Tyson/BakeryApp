@@ -32,12 +32,13 @@
                 <TextView
                     android:id="@+id/cake_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
                     android:text="title"
+                    android:background="#99000000"
                     android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:textSize="14sp" />
 
             </RelativeLayout>
         </LinearLayout>

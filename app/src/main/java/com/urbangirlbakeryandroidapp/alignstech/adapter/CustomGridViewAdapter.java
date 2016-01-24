@@ -52,7 +52,7 @@ public class CustomGridViewAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(convertView == null)
-            convertView = inflater.inflate(R.layout.single_row_tiem_view , null);
+            convertView = inflater.inflate(R.layout.single_row_item_view_grid, null);
 
         if(imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
