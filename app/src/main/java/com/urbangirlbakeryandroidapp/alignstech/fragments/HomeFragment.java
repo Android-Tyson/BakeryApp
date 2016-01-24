@@ -23,6 +23,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalCakeViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
@@ -85,6 +86,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     SliderLayout mDemoSlider;
 
     private List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
+    private List<String> categoryIdList = new ArrayList<>();
+    private List<String> giftIdList = new ArrayList<>();
+    private ArrayList<String> someCategoryList = new ArrayList<>();
+    private ArrayList<String> someGiftList = new ArrayList<>();
 
 
     public static HomeFragment newInstance(int position) {
@@ -115,6 +120,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         ButterKnife.inject(this, view);
         see_more_gift.setOnClickListener(this);
         see_more_categories.setOnClickListener(this);
+        categories_1.setOnClickListener(this);
+        categories_2.setOnClickListener(this);
+        categories_3.setOnClickListener(this);
+        gift_1.setOnClickListener(this);
+        gift_2.setOnClickListener(this);
+        gift_3.setOnClickListener(this);
         return view;
     }
 
@@ -176,18 +187,17 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
 
-        ArrayList<String> categoriesChildList = new ArrayList<>();
-
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
-                categoriesChildList.add(singleChildname);
+                categoryIdList.add(jsonObj.getString("id"));
+                someCategoryList.add(singleChildname);
             }
-            categories_1.setText(categoriesChildList.get(0));
-            categories_2.setText(categoriesChildList.get(1));
-            categories_3.setText(categoriesChildList.get(2));
+            categories_1.setText(someCategoryList.get(0));
+            categories_2.setText(someCategoryList.get(1));
+            categories_3.setText(someCategoryList.get(2));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -196,18 +206,17 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForGifts(JSONObject jsonObject) {
 
-        ArrayList<String> giftChildList = new ArrayList<>();
-
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
-                giftChildList.add(singleChildname);
+                giftIdList.add(jsonObj.getString("id"));
+                someGiftList.add(singleChildname);
             }
-            gift_1.setText(giftChildList.get(0));
-            gift_2.setText(giftChildList.get(1));
-            gift_3.setText(giftChildList.get(2));
+            gift_1.setText(someGiftList.get(0));
+            gift_2.setText(someGiftList.get(1));
+            gift_3.setText(someGiftList.get(2));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -335,6 +344,33 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             startActivity(new Intent(getActivity() , SeeMoreCategories.class));
         }  else if(view.getId() == R.id.see_more_gift){
             startActivity(new Intent(getActivity() , SeeMoreGifts.class));
+
+        } else if(view.getId() == R.id.textView_categories_1){
+            someItemListClickJob(categoryIdList.get(0) , someCategoryList.get(0));
+        }else if(view.getId() == R.id.textView_categories_2){
+            someItemListClickJob(categoryIdList.get(1) , someCategoryList.get(1));
+        }else if(view.getId() == R.id.textView_categories_3){
+            someItemListClickJob(categoryIdList.get(2) , someCategoryList.get(2));
+
+        }else if(view.getId() == R.id.textView_gift_1){
+            someItemListClickJob(giftIdList.get(0) , someGiftList.get(0));
+        }else if(view.getId() == R.id.textView_gift_2){
+            someItemListClickJob(giftIdList.get(1) , someGiftList.get(1));
+        }else if(view.getId() == R.id.textView_gift_3){
+            someItemListClickJob(giftIdList.get(2) , someGiftList.get(2));
+        }
+    }
+
+
+    private void someItemListClickJob(String productId , String productName){
+
+        if(productId != null && productName != null) {
+            String api_name = Apis.BASE_URL + "api/product-details/" + productId;
+
+            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+            intent.putExtra("TITLE_NAME", productName);
+            intent.putExtra("API_NAME", api_name);
+            startActivity(intent);
         }
     }
 }
