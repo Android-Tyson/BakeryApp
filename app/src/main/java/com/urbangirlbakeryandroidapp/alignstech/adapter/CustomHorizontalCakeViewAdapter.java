@@ -38,7 +38,6 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
         personViewHolder.cakeName.setText(urgentCakeList.get(i).cakeName);
-//        personViewHolder.cakePhoto.setImageResource(urgentCakeList.get(i).cakePhoto);
         personViewHolder.cakePhoto.setImageUrl(urgentCakeList.get(i).cakePhoto , imageLoader);
     }
 

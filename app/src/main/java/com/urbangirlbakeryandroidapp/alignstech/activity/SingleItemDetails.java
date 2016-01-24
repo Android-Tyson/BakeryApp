@@ -2,13 +2,14 @@ package com.urbangirlbakeryandroidapp.alignstech.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessoriesAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
@@ -64,14 +66,21 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.order_now)
     LinearLayout orderNow;
 
-    @InjectView(R.id.checkbox_candle)
-    CheckBox checkbox_candle;
+//    @InjectView(R.id.checkbox_candle)
+//    CheckBox checkbox_candle;
+//
+//    @InjectView(R.id.checkbox_knife)
+//    CheckBox checkbox_knife;
 
-    @InjectView(R.id.checkbox_knife)
-    CheckBox checkbox_knife;
+    @InjectView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
-    private String product_price , pound , per_pound_price , candle_price, knife_price;
+    private String product_price , pound , per_pound_price ;
+    private String candle_price, knife_price;
     int no_of_product = 1;
+
+    private ArrayList<String> accessoriesNameList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         MyBus.getInstance().register(this);
         parsingJob();
         orderNow.setOnClickListener(this);
+        initializeDataForAccessories();
 
     }
 
@@ -198,19 +208,19 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             perPoundPrice = Double.parseDouble(per_pound_price);
         }
 
-        if (checkbox_candle.isChecked()) {
-            no_of_product = no_of_product + 1;
+//        if (checkbox_candle.isChecked()) {
+//            no_of_product = no_of_product + 1;
             if (candle_price != null) {
                 candle = Double.parseDouble(candle_price);
             }
-        }
+//        }
 
-        if (checkbox_knife.isChecked()) {
-            no_of_product = no_of_product + 1;
+//        if (checkbox_knife.isChecked()) {
+//            no_of_product = no_of_product + 1;
             if (knife_price != null) {
                 knife = Double.parseDouble(knife_price);
             }
-        }
+//        }
         return base_price + (pound_ * perPoundPrice) + candle + knife;
 
     }
@@ -224,13 +234,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private void performJsonTaskForAccessories(JSONObject jsonObject) {
 
-        ArrayList<String> giftChildList = new ArrayList<>();
+        ArrayList<String> accessoryIdList = new ArrayList<>();
+        ArrayList<String> accessoriesPriceList = new ArrayList<>();
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String id = jsonObj.getString("id");
                 String product_name = jsonObj.getString("product_name");
+                accessoriesNameList.add(product_name);
                 if (product_name.equals("knife")) {
                     candle_price = jsonObj.getString("price");
                 } else if (product_name.equals("candle")) {
@@ -240,6 +252,16 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        initializeDataForAccessories();
+    }
+
+    private void initializeDataForAccessories(){
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new CustomHorizontalAccessoriesAdapter(accessoriesNameList));
+
     }
 
     @Override
@@ -332,9 +354,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Subscribe
     public void orderProductResponse(OrderEventBus eventBus) {
 
-        if ((eventBus.getResponse()).equals("success"))
-            MyUtils.showToast(this, "Successfully Ordered");
+        try {
+            JSONObject jsonObject = new JSONObject(eventBus.getResponse());
+            String result = jsonObject.getString("result");
+            if (result.equals("success"))
+                MyUtils.showToast(this, "Successfully Ordered");
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
