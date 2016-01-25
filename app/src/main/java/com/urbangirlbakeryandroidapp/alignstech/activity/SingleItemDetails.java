@@ -236,6 +236,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void performJsonTaskForAccessories(JSONObject jsonObject) {
 
         ArrayList<String> accessoryIdList = new ArrayList<>();
+        ArrayList<String> accessoryNameList = new ArrayList<>();
         ArrayList<String> accessoriesPriceList = new ArrayList<>();
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -262,6 +263,58 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new CustomHorizontalAccessoriesAdapter(accessoriesNameList));
+
+    }
+
+    private void orderSelectedProduct() {
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        try {
+            jsonObject.put("user_id", "1");
+            jsonObject.put("order_date", getCurrentDate());
+            jsonObject.put("total", priceCalculation());
+
+            jsonObject2.put("order_id", "12");
+            jsonObject2.put("product_id", "21212");
+            jsonObject2.put("price", "20000");
+            jsonObject2.put("qty", "1");
+
+            for (int i = 0 ; i < no_of_product ; i++){
+                jsonArray.put(jsonObject2);
+            }
+            jsonObject.put("order_details" , jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        MyUtils.showLog(jsonObject.toString());
+        MyUtils.showLog(jsonArray.toString());
+        MyUtils.showLog(jsonObject.toString());
+
+        PostOrderProduct.postOrderProduct(Apis.product_order , this , jsonObject.toString());
+
+    }
+
+    @Subscribe
+    public void orderProductResponse(OrderEventBus eventBus) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(eventBus.getResponse());
+            String result = jsonObject.getString("result");
+            if (result.equals("success"))
+                MyUtils.showToast(this, "Successfully Ordered");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String getCurrentDate(){
+
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     }
 
@@ -318,58 +371,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         priceCalculation();
         MyUtils.showToast(this, "Your Total Price will be: " + priceCalculation());
         orderSelectedProduct();
-
-    }
-
-    private void orderSelectedProduct() {
-
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject2 = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        try {
-            jsonObject.put("user_id", "1");
-            jsonObject.put("order_date", getCurrentDate());
-            jsonObject.put("total", priceCalculation());
-
-            jsonObject2.put("order_id", "12");
-            jsonObject2.put("product_id", "21212");
-            jsonObject2.put("price", "20000");
-            jsonObject2.put("qty", "1");
-
-            for (int i = 0 ; i < no_of_product ; i++){
-                jsonArray.put(jsonObject2);
-            }
-            jsonObject.put("order_details" , jsonArray);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        MyUtils.showLog(jsonObject.toString());
-        MyUtils.showLog(jsonArray.toString());
-        MyUtils.showLog(jsonObject.toString());
-
-        PostOrderProduct.postOrderProduct(Apis.product_order , this , jsonObject.toString());
-
-    }
-
-    @Subscribe
-    public void orderProductResponse(OrderEventBus eventBus) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(eventBus.getResponse());
-            String result = jsonObject.getString("result");
-            if (result.equals("success"))
-                MyUtils.showToast(this, "Successfully Ordered");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private String getCurrentDate(){
-
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     }
 }
