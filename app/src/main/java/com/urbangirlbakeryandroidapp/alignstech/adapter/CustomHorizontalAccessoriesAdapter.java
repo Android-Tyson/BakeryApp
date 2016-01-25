@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
 
@@ -33,6 +35,14 @@ public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<Cus
     public void onBindViewHolder(AccessoriesViewHolder personViewHolder, int i) {
 
         personViewHolder.accessoriesName.setText(accessoryNameList.get(i));
+        personViewHolder.accessorisCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                int position = compoundButton.getId();
+                MyUtils.showLog("      ");
+                MyUtils.showLog("      ");
+            }
+        });
 
     }
 
