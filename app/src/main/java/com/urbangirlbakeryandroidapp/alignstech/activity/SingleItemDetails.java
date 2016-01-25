@@ -106,6 +106,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob() {
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
+            String apiName = getApiName();
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
         }
     }
