@@ -37,7 +37,6 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
     @InjectView(R.id.gridView)
     GridView gridView;
 
-    private static final String url = "http://api.androidhive.info/json/movies.json";
     private CustomGridViewAdapter adapter;
     private List<Product> productList = new ArrayList<>();
 
@@ -83,6 +82,7 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         adapter = new CustomGridViewAdapter(getActivity() , productList);
         gridView.setAdapter(adapter);
         if(MyUtils.isNetworkConnected(getActivity())){
+            String url = getApi();
             GetAllItems.parseAllItems(getActivity(), getApi());
         }
     }

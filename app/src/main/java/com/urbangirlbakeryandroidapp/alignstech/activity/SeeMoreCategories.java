@@ -126,8 +126,9 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        String API_NAME = "Apis.BASE_URL " + "api/products/" + childIdList.get(i);
+        String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
+
     }
 }
 
