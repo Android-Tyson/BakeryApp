@@ -364,12 +364,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private void someItemListClickJob(String productId , String productName){
 
         if(productId != null && productName != null) {
-//            String api_name = Apis.BASE_URL + "api/product-details/" + productId;
-//
-//            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
-//            intent.putExtra("TITLE_NAME", productName);
-//            intent.putExtra("API_NAME", api_name);
-//            startActivity(intent);
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
             getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
