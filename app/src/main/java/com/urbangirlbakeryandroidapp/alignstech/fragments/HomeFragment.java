@@ -137,7 +137,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
             GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
         }
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(urgentCakeList));
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity() , urgentCakeList));
 
     }
 
@@ -151,7 +151,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(urgentCakeList));
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity() , urgentCakeList));
 
     }
 

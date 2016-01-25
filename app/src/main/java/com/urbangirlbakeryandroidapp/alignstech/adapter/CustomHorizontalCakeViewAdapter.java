@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,12 @@ import java.util.List;
  */
 public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<CustomHorizontalCakeViewAdapter.UrgentCakeViewHolder> {
 
-    public List<RecyclerViewModel> urgentCakeList;
+    private List<RecyclerViewModel> urgentCakeList;
+    private Context context;
 
-    public CustomHorizontalCakeViewAdapter(List<RecyclerViewModel> urgentCakeList) {
+    public CustomHorizontalCakeViewAdapter(Context context , List<RecyclerViewModel> urgentCakeList ) {
         this.urgentCakeList = urgentCakeList;
+        this.context = context;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
         return urgentCakeList.size();
     }
 
-    public class UrgentCakeViewHolder extends RecyclerView.ViewHolder {
+    public class UrgentCakeViewHolder extends RecyclerView.ViewHolder{
 
         TextView cakeName;
         NetworkImageView cakePhoto;
@@ -56,6 +59,5 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
             cakeName = (TextView) itemView.findViewById(R.id.cake_title);
             cakePhoto = (NetworkImageView) itemView.findViewById(R.id.cake_photo);
         }
-
     }
 }
