@@ -178,7 +178,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_forward" />
+                                android:src="@mipmap/ic_forward_head" />
 
                         </RelativeLayout>
 
@@ -326,7 +326,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_forward" />
+                                android:src="@mipmap/ic_forward_head" />
 
                         </RelativeLayout>
 
