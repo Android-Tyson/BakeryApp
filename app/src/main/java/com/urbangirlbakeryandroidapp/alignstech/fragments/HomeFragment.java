@@ -23,16 +23,15 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalCakeViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeGiftEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderImageSlider;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderOffers;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeCategories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetSomeGifts;
-import com.urbangirlbakeryandroidapp.alignstech.controller.GetHeaderOffers;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -365,12 +364,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private void someItemListClickJob(String productId , String productName){
 
         if(productId != null && productName != null) {
-            String api_name = Apis.BASE_URL + "api/product-details/" + productId;
+//            String api_name = Apis.BASE_URL + "api/product-details/" + productId;
+//
+//            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+//            intent.putExtra("TITLE_NAME", productName);
+//            intent.putExtra("API_NAME", api_name);
+//            startActivity(intent);
 
-            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
-            intent.putExtra("TITLE_NAME", productName);
-            intent.putExtra("API_NAME", api_name);
-            startActivity(intent);
+            String API_NAME = Apis.BASE_URL + "api/products/" + productId;
+            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
+
         }
     }
 }
