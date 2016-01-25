@@ -297,7 +297,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-        Toast.makeText(getActivity(), baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), baseSliderView.getBundle().getInt("position") + "", Toast.LENGTH_SHORT).show();
+
     }
 
     private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
@@ -307,9 +308,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
         }
 
+        int position = 0;
         for(String name : url_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
+            TextSliderView textSliderView = new TextSliderView(getActivity());
             textSliderView
                     .description(name)
                     .image(url_maps.get(name))
@@ -318,11 +320,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
             //add your extra information
             textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra",name);
+            textSliderView.getBundle().putString("extra", name);
+            textSliderView.getBundle().putInt("position", position);
+            position++;
 
             mDemoSlider.addSlider(textSliderView);
         }
+
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
