@@ -67,7 +67,7 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
 
         @Override
         public void onClick(View view) {
-            
+
             String product_id = HomeFragment.urgentCakeIdList.get(getAdapterPosition());
             String product_name = HomeFragment.urgentCakeTitleList.get(getAdapterPosition());
             String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
