@@ -10,7 +10,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<Cus
     public List<String> accessoryNameList;
     private Context context;
 
-    public CustomHorizontalAccessoriesAdapter(Context context , List<String> accessoryNameList) {
+    public CustomHorizontalAccessoriesAdapter(Context context, List<String> accessoryNameList) {
         this.accessoryNameList = accessoryNameList;
         this.context = context;
     }
@@ -35,17 +37,21 @@ public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<Cus
     }
 
     @Override
-    public void onBindViewHolder(AccessoriesViewHolder personViewHolder, int i) {
+    public void onBindViewHolder(AccessoriesViewHolder personViewHolder, final int i) {
 
         personViewHolder.accessoriesName.setText(accessoryNameList.get(i));
         personViewHolder.accessorisCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                int position = compoundButton.getId();
-                MyUtils.showLog("      ");
-                MyUtils.showLog("      ");
+
+                if(compoundButton.isChecked())
+                MyBus.getInstance().post(new CheckBoxEventBus(i));
+
+                if(!compoundButton.isChecked())
+                    MyBus.getInstance().post(new CheckBoxFalseEventBus(i));
             }
         });
+
 
     }
 
@@ -54,21 +60,17 @@ public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<Cus
         return accessoryNameList.size();
     }
 
-    public class AccessoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public class AccessoriesViewHolder extends RecyclerView.ViewHolder {
 
         TextView accessoriesName;
         CheckBox accessorisCheckBox;
 
         public AccessoriesViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             accessoriesName = (TextView) itemView.findViewById(R.id.accessory_name);
             accessorisCheckBox = (CheckBox) itemView.findViewById(R.id.accessory_checkbox);
-        }
 
-        @Override
-        public void onClick(View view) {
-            MyUtils.showToast(context , "Click");
         }
     }
 }

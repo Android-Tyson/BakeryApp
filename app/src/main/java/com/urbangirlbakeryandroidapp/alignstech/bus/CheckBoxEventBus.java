@@ -5,14 +5,14 @@ package com.urbangirlbakeryandroidapp.alignstech.bus;
  */
 public class CheckBoxEventBus {
 
-    boolean errorResponse;
+    int position;
 
-    public CheckBoxEventBus(boolean errorResponse) {
-        this.errorResponse = errorResponse;
+    public CheckBoxEventBus(int position) {
+        this.position = position;
     }
 
-    public boolean isErrorResponse() {
-        return errorResponse;
+    public int getPosition() {
+        return position;
     }
 
 }

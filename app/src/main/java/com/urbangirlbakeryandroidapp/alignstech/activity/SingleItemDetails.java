@@ -19,6 +19,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessoriesAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
@@ -74,6 +75,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
     private ArrayList<String> accessoriesPriceList = new ArrayList<>();
+
+    private ArrayList<Integer> checkedPosition = new ArrayList<>();
 
     private CustomHorizontalAccessoriesAdapter adapter;
 
@@ -366,4 +369,20 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         orderSelectedProduct();
 
     }
+
+    @Subscribe
+    public void getCheckedItems(CheckBoxEventBus eventBus){
+
+        checkedPosition.add(eventBus.getPosition());
+        MyUtils.showToast(this , "Checked at: "+eventBus.getPosition());
+
+    }
+
+//    @Subscribe
+//    public void removeUncheckedItems(CheckBoxFalseEventBus eventBus){
+//
+//        checkedPosition.remove(eventBus.getPosition());
+//        MyUtils.showToast(this , "UncheckedChecked at: "+eventBus.getPosition());
+//
+//    }
 }
