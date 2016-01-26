@@ -12,6 +12,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
 
@@ -49,15 +50,24 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
         return urgentCakeList.size();
     }
 
-    public class UrgentCakeViewHolder extends RecyclerView.ViewHolder{
+    public class UrgentCakeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView cakeName;
         NetworkImageView cakePhoto;
 
         public UrgentCakeViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             cakeName = (TextView) itemView.findViewById(R.id.cake_title);
             cakePhoto = (NetworkImageView) itemView.findViewById(R.id.cake_photo);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            MyUtils.showToast(context , getAdapterPosition()+" ");
+
+
         }
     }
 }
