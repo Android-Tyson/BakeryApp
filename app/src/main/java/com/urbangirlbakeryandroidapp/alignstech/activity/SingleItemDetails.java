@@ -83,7 +83,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_single_item_detils);
         ButterKnife.inject(this);
         initializeToolbar();
-        adapter = new CustomHorizontalAccessoriesAdapter(accessoryNameList);
+        adapter = new CustomHorizontalAccessoriesAdapter(this , accessoryNameList);
         MyBus.getInstance().register(this);
         parsingJob();
         orderNow.setOnClickListener(this);

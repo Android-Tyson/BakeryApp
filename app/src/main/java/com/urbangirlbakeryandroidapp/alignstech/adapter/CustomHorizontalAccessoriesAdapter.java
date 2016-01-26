@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,11 @@ import java.util.List;
 public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<CustomHorizontalAccessoriesAdapter.AccessoriesViewHolder> {
 
     public List<String> accessoryNameList;
+    private Context context;
 
-    public CustomHorizontalAccessoriesAdapter(List<String> accessoryNameList) {
+    public CustomHorizontalAccessoriesAdapter(Context context , List<String> accessoryNameList) {
         this.accessoryNameList = accessoryNameList;
+        this.context = context;
     }
 
     @Override
@@ -51,16 +54,21 @@ public class CustomHorizontalAccessoriesAdapter extends RecyclerView.Adapter<Cus
         return accessoryNameList.size();
     }
 
-    public class AccessoriesViewHolder extends RecyclerView.ViewHolder {
+    public class AccessoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView accessoriesName;
         CheckBox accessorisCheckBox;
 
         public AccessoriesViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             accessoriesName = (TextView) itemView.findViewById(R.id.accessory_name);
             accessorisCheckBox = (CheckBox) itemView.findViewById(R.id.accessory_checkbox);
         }
 
+        @Override
+        public void onClick(View view) {
+            MyUtils.showToast(context , "Click");
+        }
     }
 }
