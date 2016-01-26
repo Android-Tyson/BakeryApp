@@ -20,6 +20,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessoriesAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
@@ -270,16 +271,57 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("order_date", getCurrentDate());
             jsonObject.put("total", priceCalculation());
 
-            for (int i = 0 ; i < accessoryIdList.size() ; i++){
+
+
+            for (int i = 0 ; i < checkedPosition.size() ; i++){
+
+                int position = checkedPosition.get(i);
                 JSONObject jsonObject2 = new JSONObject();
-                jsonObject2.put("order_id", "11111");
-                jsonObject2.put("product_id", accessoryIdList.get(i));
-                jsonObject2.put("price", accessoryIdList.get(i));
-                jsonObject2.put("product_name" , accessoryNameList.get(i));
-                jsonObject2.put("qty", "1");
-                jsonArray.put(jsonObject2);
+                switch (position){
+                    case 0:
+                        jsonObject2.put("order_id", "11111");
+                        jsonObject2.put("product_id", accessoryIdList.get(0));
+                        jsonObject2.put("price", accessoryIdList.get(0));
+                        jsonObject2.put("product_name" , accessoryNameList.get(0));
+                        jsonObject2.put("qty", "1");
+                        jsonArray.put(jsonObject2);
+                        break;
+                    case 1:
+                        jsonObject2.put("order_id", "11111");
+                        jsonObject2.put("product_id", accessoryIdList.get(1));
+                        jsonObject2.put("price", accessoryIdList.get(1));
+                        jsonObject2.put("product_name" , accessoryNameList.get(1));
+                        jsonObject2.put("qty", "1");
+                        jsonArray.put(jsonObject2);
+                        break;
+                    case 2:
+                        jsonObject2.put("order_id", "11111");
+                        jsonObject2.put("product_id", accessoryIdList.get(2));
+                        jsonObject2.put("price", accessoryIdList.get(2));
+                        jsonObject2.put("product_name" , accessoryNameList.get(2));
+                        jsonObject2.put("qty", "1");
+                        jsonArray.put(jsonObject2);
+                        break;
+                    case 3:
+                        jsonObject2.put("order_id", "11111");
+                        jsonObject2.put("product_id", accessoryIdList.get(3));
+                        jsonObject2.put("price", accessoryIdList.get(3));
+                        jsonObject2.put("product_name" , accessoryNameList.get(3));
+                        jsonObject2.put("qty", "1");
+                        jsonArray.put(jsonObject2);
+                        break;
+                }
+
+//                JSONObject jsonObject2 = new JSONObject();
+//                jsonObject2.put("order_id", "11111");
+//                jsonObject2.put("product_id", accessoryIdList.get(i));
+//                jsonObject2.put("price", accessoryIdList.get(i));
+//                jsonObject2.put("product_name" , accessoryNameList.get(i));
+//                jsonObject2.put("qty", "1");
+//                jsonArray.put(jsonObject2);
+
             }
-            jsonObject.put("order_details" , jsonArray);
+            jsonObject.put("order_details", jsonArray);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -288,7 +330,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         MyUtils.showLog(jsonArray.toString());
 //        MyUtils.showLog(jsonObject2.toString());
 
-        PostOrderProduct.postOrderProduct(Apis.product_order , this , jsonObject.toString());
+        PostOrderProduct.postOrderProduct(Apis.product_order, this, jsonObject.toString());
 
     }
 
@@ -374,15 +416,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void getCheckedItems(CheckBoxEventBus eventBus){
 
         checkedPosition.add(eventBus.getPosition());
-        MyUtils.showToast(this , "Checked at: "+eventBus.getPosition());
 
     }
 
-//    @Subscribe
-//    public void removeUncheckedItems(CheckBoxFalseEventBus eventBus){
-//
-//        checkedPosition.remove(eventBus.getPosition());
-//        MyUtils.showToast(this , "UncheckedChecked at: "+eventBus.getPosition());
-//
-//    }
+    @Subscribe
+    public void removeUncheckedItems(CheckBoxFalseEventBus eventBus){
+
+        checkedPosition.remove(eventBus.getPosition());
+        MyUtils.showToast(this , "UncheckedChecked at: "+eventBus.getPosition());
+
+    }
 }
