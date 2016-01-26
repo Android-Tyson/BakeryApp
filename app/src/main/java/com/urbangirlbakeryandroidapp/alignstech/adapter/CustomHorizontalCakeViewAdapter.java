@@ -12,11 +12,10 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
-import com.urbangirlbakeryandroidapp.alignstech.model.Product;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.List;
 
@@ -68,12 +67,10 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
 
         @Override
         public void onClick(View view) {
-
-            MyUtils.showToast(context , getAdapterPosition()+" ");
-
-//            String product_id = product.getProduct_id();
-//            String product_name = product.getProductName();
-//            String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
+            
+            String product_id = HomeFragment.urgentCakeIdList.get(getAdapterPosition());
+            String product_name = HomeFragment.urgentCakeTitleList.get(getAdapterPosition());
+            String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
             Intent intent = new Intent(context , SingleItemDetails.class);
             intent.putExtra("TITLE_NAME" , product_name);
