@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -23,6 +22,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalCakeViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
@@ -85,10 +85,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     SliderLayout mDemoSlider;
 
     private List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
-    private List<String> categoryIdList = new ArrayList<>();
-    private List<String> giftIdList = new ArrayList<>();
+    private List<String> someCategoryIdList = new ArrayList<>();
+    private List<String> someGiftIdList = new ArrayList<>();
+
     private ArrayList<String> someCategoryList = new ArrayList<>();
     private ArrayList<String> someGiftList = new ArrayList<>();
+
+    private ArrayList<String> headerImageIdList = new ArrayList<>();
+    private ArrayList<String> headerImageTitleList = new ArrayList<>();
 
 
     public static HomeFragment newInstance(int position) {
@@ -137,7 +141,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
             GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
         }
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity() , urgentCakeList));
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList));
 
     }
 
@@ -151,7 +155,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity() , urgentCakeList));
+        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList));
 
     }
 
@@ -191,7 +195,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
-                categoryIdList.add(jsonObj.getString("id"));
+                someCategoryIdList.add(jsonObj.getString("id"));
                 someCategoryList.add(singleChildname);
             }
             categories_1.setText(someCategoryList.get(0));
@@ -210,7 +214,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String singleChildname = jsonObj.getString("name");
-                giftIdList.add(jsonObj.getString("id"));
+                someGiftIdList.add(jsonObj.getString("id"));
                 someGiftList.add(singleChildname);
             }
             gift_1.setText(someGiftList.get(0));
@@ -225,13 +229,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForHeaderImages(JSONObject jsonObject) {
 
-        ArrayList<String> headerImageTitleList = new ArrayList<>();
         ArrayList<String> headerImageUrlList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String headerImageId = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("name");
                 String path = jsonObj.getString("path");
                 String headerImageUrl ;
@@ -240,6 +244,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 }else {
                     headerImageUrl = Apis.BASE_URL + "images/" +path;
                 }
+                headerImageIdList.add(headerImageId);
                 headerImageTitleList.add(headerImageTitle);
                 headerImageUrlList.add(headerImageUrl);
             }
@@ -264,7 +269,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
                 if(path.equals("null")){
-                    headerImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
+                    headerImageUrl = Apis.defaultImageUrl;
                 }else {
                     headerImageUrl = Apis.BASE_URL + "images/" +path;
                 }
@@ -297,18 +302,36 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-        Toast.makeText(getActivity(), baseSliderView.getBundle().getInt("position") + "", Toast.LENGTH_SHORT).show();
+
+        String name = (String) baseSliderView.getBundle().get("extra");
+        String productId = null;
+        for (int i = 0 ; i < headerImageTitleList.size() ; i++) {
+            if(name.equals(headerImageTitleList.get(i))){
+                productId = headerImageIdList.get(i);
+            }
+
+        }
+
+        if(productId != null){
+
+            String api_name = Apis.BASE_URL + "api/product-details/" + productId;
+
+            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+            intent.putExtra("TITLE_NAME", name);
+            intent.putExtra("API_NAME", api_name);
+            startActivity(intent);
+
+        }
 
     }
 
     private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
 
         HashMap<String,String> url_maps = new HashMap<>();
-        for(int i = 0 ; i < imageTitle.size() ; i++){
+        for(int i = 0 ; i < imageUrlLink.size() ; i++){
             url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
         }
 
-        int position = 0;
         for(String name : url_maps.keySet()){
             // initialize a SliderLayout
             TextSliderView textSliderView = new TextSliderView(getActivity());
@@ -321,8 +344,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle().putString("extra", name);
-            textSliderView.getBundle().putInt("position", position);
-            position++;
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -330,7 +351,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(4000);
+        mDemoSlider.setDuration(2000);
         mDemoSlider.addOnPageChangeListener(this);
 
     }
@@ -349,18 +370,18 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             startActivity(new Intent(getActivity() , SeeMoreGifts.class));
 
         } else if(view.getId() == R.id.textView_categories_1){
-            someItemListClickJob(categoryIdList.get(0) , someCategoryList.get(0));
+            someItemListClickJob(someCategoryIdList.get(0) , someCategoryList.get(0));
         }else if(view.getId() == R.id.textView_categories_2){
-            someItemListClickJob(categoryIdList.get(1) , someCategoryList.get(1));
+            someItemListClickJob(someCategoryIdList.get(1) , someCategoryList.get(1));
         }else if(view.getId() == R.id.textView_categories_3){
-            someItemListClickJob(categoryIdList.get(2) , someCategoryList.get(2));
+            someItemListClickJob(someCategoryIdList.get(2) , someCategoryList.get(2));
 
         }else if(view.getId() == R.id.textView_gift_1){
-            someItemListClickJob(giftIdList.get(0) , someGiftList.get(0));
+            someItemListClickJob(someGiftIdList.get(0) , someGiftList.get(0));
         }else if(view.getId() == R.id.textView_gift_2){
-            someItemListClickJob(giftIdList.get(1) , someGiftList.get(1));
+            someItemListClickJob(someGiftIdList.get(1) , someGiftList.get(1));
         }else if(view.getId() == R.id.textView_gift_3){
-            someItemListClickJob(giftIdList.get(2) , someGiftList.get(2));
+            someItemListClickJob(someGiftIdList.get(2) , someGiftList.get(2));
         }
     }
 
