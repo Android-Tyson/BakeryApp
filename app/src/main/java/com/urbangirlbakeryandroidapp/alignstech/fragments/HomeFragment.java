@@ -85,15 +85,17 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     SliderLayout mDemoSlider;
 
     private List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
-    private List<String> someCategoryIdList = new ArrayList<>();
-    private List<String> someGiftIdList = new ArrayList<>();
-
-    private ArrayList<String> someCategoryList = new ArrayList<>();
-    private ArrayList<String> someGiftList = new ArrayList<>();
 
     private ArrayList<String> headerImageIdList = new ArrayList<>();
     private ArrayList<String> headerImageTitleList = new ArrayList<>();
 
+    public static ArrayList<String> urgentCakeIdList = new ArrayList<>();
+    public static ArrayList<String> urgentCakeTitleList = new ArrayList<>();
+
+    private List<String> someCategoryIdList = new ArrayList<>();
+    private List<String> someGiftIdList = new ArrayList<>();
+    private ArrayList<String> someCategoryList = new ArrayList<>();
+    private ArrayList<String> someGiftList = new ArrayList<>();
 
     public static HomeFragment newInstance(int position) {
 
@@ -258,13 +260,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForUrgentCakes(JSONObject jsonObject) {
 
-        ArrayList<String> cakeTitleList = new ArrayList<>();
-        ArrayList<String> cakeUrlList = new ArrayList<>();
+        ArrayList<String> urgentCakeUrlList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
+                String id = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("product_name");
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
@@ -273,10 +275,11 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 }else {
                     headerImageUrl = Apis.BASE_URL + "images/" +path;
                 }
-                cakeTitleList.add(headerImageTitle);
-                cakeUrlList.add(headerImageUrl);
+                urgentCakeIdList.add(id);
+                urgentCakeTitleList.add(headerImageTitle);
+                urgentCakeUrlList.add(headerImageUrl);
             }
-            initializeDataForUrgentCake( cakeTitleList , cakeUrlList);
+            initializeDataForUrgentCake( urgentCakeTitleList , urgentCakeUrlList);
 
         } catch (JSONException e) {
             e.printStackTrace();
