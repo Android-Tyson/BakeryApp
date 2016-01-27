@@ -103,8 +103,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
-        MyUtils.showToast(this, "account opening");
-
         Bundle loginBundle = new Bundle();
         loginBundle.putBoolean("isDirectLogin", true);
         Intent loginIntent = new Intent(this, Login.class);

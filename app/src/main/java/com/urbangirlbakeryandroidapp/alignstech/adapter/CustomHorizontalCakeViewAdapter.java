@@ -1,7 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 
 import java.util.List;
@@ -68,14 +64,14 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
         @Override
         public void onClick(View view) {
 
-            String product_id = HomeFragment.urgentCakeIdList.get(getAdapterPosition());
-            String product_name = HomeFragment.urgentCakeTitleList.get(getAdapterPosition());
-            String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
-
-            Intent intent = new Intent(context , SingleItemDetails.class);
-            intent.putExtra("TITLE_NAME" , product_name);
-            intent.putExtra("API_NAME" , api_name);
-            context.startActivity(intent);
+//            String product_id = HomeFragment.urgentCakeIdList.get(getAdapterPosition());
+//            String product_name = HomeFragment.urgentCakeTitleList.get(getAdapterPosition());
+//            String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
+//
+//            Intent intent = new Intent(context , SingleItemDetails.class);
+//            intent.putExtra("TITLE_NAME" , product_name);
+//            intent.putExtra("API_NAME" , api_name);
+//            context.startActivity(intent);
 
 
         }

@@ -89,14 +89,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private ArrayList<String> headerImageIdList = new ArrayList<>();
     private ArrayList<String> headerImageTitleList = new ArrayList<>();
 
-    public static ArrayList<String> urgentCakeIdList = new ArrayList<>();
-    public static ArrayList<String> urgentCakeTitleList = new ArrayList<>();
-
     private List<String> someCategoryIdList = new ArrayList<>();
     private List<String> someGiftIdList = new ArrayList<>();
     private ArrayList<String> someCategoryList = new ArrayList<>();
     private ArrayList<String> someGiftList = new ArrayList<>();
 
+    private CustomHorizontalCakeViewAdapter adapter;
     public static HomeFragment newInstance(int position) {
 
         HomeFragment homeFragment = new HomeFragment();
@@ -143,21 +141,25 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
             GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
         }
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList));
-
+        initializeUrgentCakeRecyclerView();
     }
 
+    private void initializeUrgentCakeRecyclerView(){
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList);
+        recyclerView.setAdapter(adapter);
+
+    }
 
     private void initializeDataForUrgentCake(ArrayList<String>  titleList , ArrayList<String> imageUrlList){
 
         for(int i = 0 ; i < titleList.size() ; i++){
             urgentCakeList.add(new RecyclerViewModel(titleList.get(i) , imageUrlList.get(i)));
         }
-
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList));
+       initializeUrgentCakeRecyclerView();
 
     }
 
@@ -260,6 +262,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     private void performJsonTaskForUrgentCakes(JSONObject jsonObject) {
 
+        ArrayList<String> urgentCakeIdList = new ArrayList<>();
+        ArrayList<String> urgentCakeTitleList = new ArrayList<>();
         ArrayList<String> urgentCakeUrlList = new ArrayList<>();
 
         try {

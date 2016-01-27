@@ -114,6 +114,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             case R.id.button_continueWithoutLogin:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                finish();
                 break;
 
             case R.id.btn_loginWithFacebook:
