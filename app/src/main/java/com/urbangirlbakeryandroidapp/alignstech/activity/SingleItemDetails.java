@@ -81,6 +81,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private HashMap<Integer, Integer> checkedPosition = new HashMap<>();
 
     private CustomHorizontalAccessoriesAdapter adapter;
+    private double accessoriesTotalPrice = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,39 +194,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private double priceCalculation() {
-
-        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
-        if (product_price != null) {
-            base_price = Double.parseDouble(product_price);
-        }
-
-        if (pound != null) {
-            if (pound.equals("Select Pound"))
-                pound = "1.00";
-            pound_ = Double.parseDouble(pound);
-        }
-
-        if (per_pound_price != null) {
-            perPoundPrice = Double.parseDouble(per_pound_price);
-        }
-
-//        if (checkbox_candle.isChecked()) {
-//            no_of_product = no_of_product + 1;
-//            if (candle_price != null) {
-//                candle = Double.parseDouble(candle_price);
-//            }
-//        }
-
-//        if (checkbox_knife.isChecked()) {
-//            no_of_product = no_of_product + 1;
-//            if (knife_price != null) {
-//                knife = Double.parseDouble(knife_price);
-//            }
-//        }
-        return base_price + (pound_ * perPoundPrice) + candle + knife;
-
-    }
 
     @Subscribe
     public void getAllAccessories(AccessoriesListResultEvent event) {
@@ -263,14 +231,39 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
+    private double priceCalculation() {
+
+        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
+        if (product_price != null) {
+            base_price = Double.parseDouble(product_price);
+        }
+
+        if (pound != null) {
+            if (pound.equals("Select Pound"))
+                pound = "1.00";
+            pound_ = Double.parseDouble(pound);
+        }
+
+        if (per_pound_price != null) {
+            perPoundPrice = Double.parseDouble(per_pound_price);
+        }
+
+        for (Integer key : checkedPosition.keySet()) {
+            Integer posi = checkedPosition.get(key);
+        }
+
+
+
+        return base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
+
+    }
+
+
     private void orderSelectedProduct() {
 
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         try {
-            jsonObject.put("user_id", "1");
-            jsonObject.put("order_date", getCurrentDate());
-            jsonObject.put("total", priceCalculation());
 
             for (int i = 0; i < accessoryIdList.size(); i++) {
 
@@ -281,7 +274,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         case 0:
                             jsonObject2.put("order_id", "11111");
                             jsonObject2.put("product_id", accessoryIdList.get(0));
-                            jsonObject2.put("price", accessoryIdList.get(0));
+                            jsonObject2.put("price", accessoriesPriceList.get(0));
+                            accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(0));
                             jsonObject2.put("product_name", accessoryNameList.get(0));
                             jsonObject2.put("qty", "1");
                             jsonArray.put(jsonObject2);
@@ -289,7 +283,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         case 1:
                             jsonObject2.put("order_id", "11111");
                             jsonObject2.put("product_id", accessoryIdList.get(1));
-                            jsonObject2.put("price", accessoryIdList.get(1));
+                            jsonObject2.put("price", accessoriesPriceList.get(1));
+                            accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(1));
                             jsonObject2.put("product_name", accessoryNameList.get(1));
                             jsonObject2.put("qty", "1");
                             jsonArray.put(jsonObject2);
@@ -297,7 +292,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         case 2:
                             jsonObject2.put("order_id", "11111");
                             jsonObject2.put("product_id", accessoryIdList.get(2));
-                            jsonObject2.put("price", accessoryIdList.get(2));
+                            jsonObject2.put("price", accessoriesPriceList.get(2));
+                            accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(2));
                             jsonObject2.put("product_name", accessoryNameList.get(2));
                             jsonObject2.put("qty", "1");
                             jsonArray.put(jsonObject2);
@@ -305,7 +301,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         case 3:
                             jsonObject2.put("order_id", "11111");
                             jsonObject2.put("product_id", accessoryIdList.get(3));
-                            jsonObject2.put("price", accessoryIdList.get(3));
+                            jsonObject2.put("price", accessoriesPriceList.get(3));
+                            accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(3));
                             jsonObject2.put("product_name", accessoryNameList.get(3));
                             jsonObject2.put("qty", "1");
                             jsonArray.put(jsonObject2);
@@ -314,8 +311,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
                 }
             }
+
+            jsonObject.put("user_id", "1");
+            jsonObject.put("order_date", getCurrentDate());
+            jsonObject.put("total", priceCalculation());
+
             jsonObject.put("order_details", jsonArray);
 
+            MyUtils.showToast(this , "Total Price is:"+priceCalculation());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -398,8 +401,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-        priceCalculation();
-        MyUtils.showToast(this, "Your Total Price will be: " + priceCalculation());
         orderSelectedProduct();
 
     }
