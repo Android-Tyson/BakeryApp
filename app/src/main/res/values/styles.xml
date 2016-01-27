@@ -11,6 +11,7 @@
         <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
         <item name="android:textColorSecondary">@color/myTextColor2</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="singleAccount">true</item>
         <item name="android:windowBackground">@color/myWindowBackground</item>
     </style>
 

@@ -24,8 +24,6 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountLis
 
 public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
 
-    public static MaterialAccount account;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +57,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public void init(Bundle bundle) {
 
         allowArrowAnimation();
+        addMultiPaneSupport();
+
+        MaterialAccount account;
 
         MyUtils.setUserProfilePicture(this);
         if (MyUtils.isUserLoggedIn(this)) {
@@ -101,6 +102,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
+
+        MyUtils.showToast(this, "account opening");
 
         Bundle loginBundle = new Bundle();
         loginBundle.putBoolean("isDirectLogin", true);

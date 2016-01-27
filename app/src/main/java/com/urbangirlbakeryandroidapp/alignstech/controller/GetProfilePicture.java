@@ -7,7 +7,6 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
@@ -27,7 +26,7 @@ public class GetProfilePicture {
                 ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
-                        MainActivity.account.setPhoto(bitmapResponse);
+//                        MainActivity.account.setPhoto(bitmapResponse);
                         MyUtils.saveUserProfiePic(bitmapResponse);
                     }
                 }, 50, 50, null, new Response.ErrorListener() {
