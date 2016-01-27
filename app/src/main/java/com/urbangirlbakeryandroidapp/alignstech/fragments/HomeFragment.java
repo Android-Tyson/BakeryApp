@@ -408,4 +408,5 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
         }
     }
+
 }
