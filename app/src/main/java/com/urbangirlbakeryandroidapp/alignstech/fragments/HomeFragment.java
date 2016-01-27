@@ -94,6 +94,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private ArrayList<String> someCategoryList = new ArrayList<>();
     private ArrayList<String> someGiftList = new ArrayList<>();
 
+    public static ArrayList<String> urgentCakeName = new ArrayList<>();
+    public static ArrayList<String> urgentCakeId = new ArrayList<>();
+
+
     private CustomHorizontalCakeViewAdapter adapter;
     public static HomeFragment newInstance(int position) {
 
@@ -284,6 +288,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 urgentCakeUrlList.add(headerImageUrl);
             }
             initializeDataForUrgentCake( urgentCakeTitleList , urgentCakeUrlList);
+            urgentCakeName = urgentCakeTitleList;
+            urgentCakeId = urgentCakeIdList;
 
         } catch (JSONException e) {
             e.printStackTrace();
