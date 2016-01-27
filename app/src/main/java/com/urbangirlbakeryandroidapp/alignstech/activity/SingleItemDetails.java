@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -71,13 +72,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private String product_price , pound , per_pound_price ;
+    private String product_price, pound, per_pound_price;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
     private ArrayList<String> accessoriesPriceList = new ArrayList<>();
 
-    private ArrayList<Integer> checkedPosition = new ArrayList<>();
+    private HashMap<Integer, Integer> checkedPosition = new HashMap<>();
 
     private CustomHorizontalAccessoriesAdapter adapter;
 
@@ -87,7 +88,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_single_item_detils);
         ButterKnife.inject(this);
         initializeToolbar();
-        adapter = new CustomHorizontalAccessoriesAdapter(this , accessoryNameList);
+        adapter = new CustomHorizontalAccessoriesAdapter(this, accessoryNameList);
         MyBus.getInstance().register(this);
         parsingJob();
         orderNow.setOnClickListener(this);
@@ -253,7 +254,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         initializeDataForAccessories();
     }
 
-    private void initializeDataForAccessories(){
+    private void initializeDataForAccessories() {
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -271,47 +272,47 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("order_date", getCurrentDate());
             jsonObject.put("total", priceCalculation());
 
+            for (int i = 0; i < accessoryIdList.size(); i++) {
 
+                if (checkedPosition.get(i) != null) {
+                    int position = checkedPosition.get(i);
+                    JSONObject jsonObject2 = new JSONObject();
+                    switch (position) {
+                        case 0:
+                            jsonObject2.put("order_id", "11111");
+                            jsonObject2.put("product_id", accessoryIdList.get(0));
+                            jsonObject2.put("price", accessoryIdList.get(0));
+                            jsonObject2.put("product_name", accessoryNameList.get(0));
+                            jsonObject2.put("qty", "1");
+                            jsonArray.put(jsonObject2);
+                            break;
+                        case 1:
+                            jsonObject2.put("order_id", "11111");
+                            jsonObject2.put("product_id", accessoryIdList.get(1));
+                            jsonObject2.put("price", accessoryIdList.get(1));
+                            jsonObject2.put("product_name", accessoryNameList.get(1));
+                            jsonObject2.put("qty", "1");
+                            jsonArray.put(jsonObject2);
+                            break;
+                        case 2:
+                            jsonObject2.put("order_id", "11111");
+                            jsonObject2.put("product_id", accessoryIdList.get(2));
+                            jsonObject2.put("price", accessoryIdList.get(2));
+                            jsonObject2.put("product_name", accessoryNameList.get(2));
+                            jsonObject2.put("qty", "1");
+                            jsonArray.put(jsonObject2);
+                            break;
+                        case 3:
+                            jsonObject2.put("order_id", "11111");
+                            jsonObject2.put("product_id", accessoryIdList.get(3));
+                            jsonObject2.put("price", accessoryIdList.get(3));
+                            jsonObject2.put("product_name", accessoryNameList.get(3));
+                            jsonObject2.put("qty", "1");
+                            jsonArray.put(jsonObject2);
+                            break;
+                    }
 
-            for (int i = 0 ; i < checkedPosition.size() ; i++){
-
-                int position = checkedPosition.get(i);
-                JSONObject jsonObject2 = new JSONObject();
-                switch (position){
-                    case 0:
-                        jsonObject2.put("order_id", "11111");
-                        jsonObject2.put("product_id", accessoryIdList.get(0));
-                        jsonObject2.put("price", accessoryIdList.get(0));
-                        jsonObject2.put("product_name" , accessoryNameList.get(0));
-                        jsonObject2.put("qty", "1");
-                        jsonArray.put(jsonObject2);
-                        break;
-                    case 1:
-                        jsonObject2.put("order_id", "11111");
-                        jsonObject2.put("product_id", accessoryIdList.get(1));
-                        jsonObject2.put("price", accessoryIdList.get(1));
-                        jsonObject2.put("product_name" , accessoryNameList.get(1));
-                        jsonObject2.put("qty", "1");
-                        jsonArray.put(jsonObject2);
-                        break;
-                    case 2:
-                        jsonObject2.put("order_id", "11111");
-                        jsonObject2.put("product_id", accessoryIdList.get(2));
-                        jsonObject2.put("price", accessoryIdList.get(2));
-                        jsonObject2.put("product_name" , accessoryNameList.get(2));
-                        jsonObject2.put("qty", "1");
-                        jsonArray.put(jsonObject2);
-                        break;
-                    case 3:
-                        jsonObject2.put("order_id", "11111");
-                        jsonObject2.put("product_id", accessoryIdList.get(3));
-                        jsonObject2.put("price", accessoryIdList.get(3));
-                        jsonObject2.put("product_name" , accessoryNameList.get(3));
-                        jsonObject2.put("qty", "1");
-                        jsonArray.put(jsonObject2);
-                        break;
                 }
-
             }
             jsonObject.put("order_details", jsonArray);
 
@@ -340,7 +341,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private String getCurrentDate(){
+    private String getCurrentDate() {
 
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
@@ -404,17 +405,16 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
     @Subscribe
-    public void getCheckedItems(CheckBoxEventBus eventBus){
+    public void getCheckedItems(CheckBoxEventBus eventBus) {
 
-        checkedPosition.add(eventBus.getPosition());
+        checkedPosition.put(eventBus.getPosition(), eventBus.getPosition());
 
     }
 
     @Subscribe
-    public void removeUncheckedItems(CheckBoxFalseEventBus eventBus){
+    public void removeUncheckedItems(CheckBoxFalseEventBus eventBus) {
 
         checkedPosition.remove(eventBus.getPosition());
-        MyUtils.showToast(this , "UncheckedChecked at: "+eventBus.getPosition());
 
     }
 }
