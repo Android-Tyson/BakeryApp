@@ -320,7 +320,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         }
         MyUtils.showLog(jsonObject.toString());
         MyUtils.showLog(jsonArray.toString());
-//        MyUtils.showLog(jsonObject2.toString());
 
         PostOrderProduct.postOrderProduct(Apis.product_order, this, jsonObject.toString());
 
