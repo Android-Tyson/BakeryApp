@@ -83,6 +83,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private CustomHorizontalAccessoriesAdapter adapter;
     private double accessoriesTotalPrice = 0.00;
 
+    private ArrayList<String> singleProductDetailsList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +110,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob() {
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
-            String apiName = getApiName();
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
         }
     }
@@ -125,13 +126,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void getSingleProductDetials(ProductDetialsEvent event) {
 
         JSONObject jsonObject = event.getJsonObject();
-        performJsonTaskForGifts(jsonObject);
+        performJsonTaskForSingleProductDetails(jsonObject);
 
     }
 
-    private void performJsonTaskForGifts(JSONObject jsonObject) {
-
-        ArrayList<String> giftChildList = new ArrayList<>();
+    private void performJsonTaskForSingleProductDetails(JSONObject jsonObject) {
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -143,6 +142,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 String ending_pound = jsonObj.getString("ending_pound");
                 product_price = jsonObj.getString("price");
                 String product_description = jsonObj.getString("description");
+
+                singleProductDetailsList.add(product_id);
+                singleProductDetailsList.add(product_name);
+                singleProductDetailsList.add(product_price);
 
                 String path = jsonObj.getString("path");
                 String product_image_url;
@@ -253,7 +256,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         }
 
 
-
         return base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
 
     }
@@ -266,10 +268,25 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         try {
 
             for (int i = 0; i < accessoryIdList.size(); i++) {
+                JSONObject jsonObjSingleProduct = new JSONObject();
 
+                switch (i) {
+                    case 0:
+                        jsonObjSingleProduct.put("order_id", "11111");
+                        jsonObjSingleProduct.put("product_id", singleProductDetailsList.get(0));
+                        jsonObjSingleProduct.put("product_name", singleProductDetailsList.get(1));
+                        jsonObjSingleProduct.put("price", singleProductDetailsList.get(2));
+//                    accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(0));
+                        jsonObjSingleProduct.put("qty", "1");
+                        MyUtils.showLog(singleProductDetailsList.toString());
+                        jsonArray.put(jsonObjSingleProduct);
+
+                        break;
+                }
+
+                JSONObject jsonObject2 = new JSONObject();
                 if (checkedPosition.get(i) != null) {
                     int position = checkedPosition.get(i);
-                    JSONObject jsonObject2 = new JSONObject();
                     switch (position) {
                         case 0:
                             jsonObject2.put("order_id", "11111");
@@ -318,7 +335,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             jsonObject.put("order_details", jsonArray);
 
-            MyUtils.showToast(this , "Total Price is:"+priceCalculation());
+            MyUtils.showToast(this, "Total Price is:" + priceCalculation());
         } catch (JSONException e) {
             e.printStackTrace();
         }
