@@ -89,7 +89,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/categoriesDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -115,7 +114,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/categoriesDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -141,7 +139,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/categoriesDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -237,7 +234,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/giftDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -263,7 +259,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/giftDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -289,7 +284,6 @@
                                 android:layout_alignParentTop="true"
                                 android:gravity="center|left"
                                 android:padding="@dimen/Categories_padding"
-                                android:text="@string/giftDemo"
                                 android:textColor="@color/myTextColor"
                                 android:textSize="@dimen/textSizeCategoriesItem" />
 

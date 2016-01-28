@@ -84,8 +84,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @InjectView(R.id.slider)
     SliderLayout mDemoSlider;
 
-    private List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
-
     private ArrayList<String> headerImageIdList = new ArrayList<>();
     private ArrayList<String> headerImageTitleList = new ArrayList<>();
 
@@ -99,6 +97,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
 
     private CustomHorizontalCakeViewAdapter adapter;
+
     public static HomeFragment newInstance(int position) {
 
         HomeFragment homeFragment = new HomeFragment();
@@ -148,23 +147,24 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         initializeUrgentCakeRecyclerView();
     }
 
-    private void initializeUrgentCakeRecyclerView(){
+    private void initializeUrgentCakeRecyclerView() {
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList);
-        recyclerView.setAdapter(adapter);
 
     }
 
-    private void initializeDataForUrgentCake(ArrayList<String>  titleList , ArrayList<String> imageUrlList){
+    private void initializeDataForUrgentCake(ArrayList<String> titleList, ArrayList<String> imageUrlList) {
 
-        for(int i = 0 ; i < titleList.size() ; i++){
-            urgentCakeList.add(new RecyclerViewModel(titleList.get(i) , imageUrlList.get(i)));
+        List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
+
+        for (int i = 0; i < titleList.size(); i++) {
+            urgentCakeList.add(new RecyclerViewModel(titleList.get(i), imageUrlList.get(i)));
         }
-       initializeUrgentCakeRecyclerView();
-
+        initializeUrgentCakeRecyclerView();
+        adapter = new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList);
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -246,11 +246,11 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 String headerImageId = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("name");
                 String path = jsonObj.getString("path");
-                String headerImageUrl ;
-                if(path.equals("null")){
+                String headerImageUrl;
+                if (path.equals("null")) {
                     headerImageUrl = Apis.defaultImageUrl;
-                }else {
-                    headerImageUrl = Apis.BASE_URL + "images/" +path;
+                } else {
+                    headerImageUrl = Apis.BASE_URL + "images/" + path;
                 }
                 headerImageIdList.add(headerImageId);
                 headerImageTitleList.add(headerImageTitle);
@@ -278,16 +278,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 String headerImageTitle = jsonObj.getString("product_name");
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
-                if(path.equals("null")){
+                if (path.equals("null")) {
                     headerImageUrl = Apis.defaultImageUrl;
-                }else {
-                    headerImageUrl = Apis.BASE_URL + "images/" +path;
+                } else {
+                    headerImageUrl = Apis.BASE_URL + "images/" + path;
                 }
                 urgentCakeIdList.add(id);
                 urgentCakeTitleList.add(headerImageTitle);
                 urgentCakeUrlList.add(headerImageUrl);
             }
-            initializeDataForUrgentCake( urgentCakeTitleList , urgentCakeUrlList);
+            initializeDataForUrgentCake(urgentCakeTitleList, urgentCakeUrlList);
             urgentCakeName = urgentCakeTitleList;
             urgentCakeId = urgentCakeIdList;
 
@@ -305,27 +305,30 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     }
 
     @Override
-    public void onPageScrolled(int i, float v, int i1) {   }
+    public void onPageScrolled(int i, float v, int i1) {
+    }
 
     @Override
-    public void onPageSelected(int i) {   }
+    public void onPageSelected(int i) {
+    }
 
     @Override
-    public void onPageScrollStateChanged(int i) {  }
+    public void onPageScrollStateChanged(int i) {
+    }
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
 
         String name = (String) baseSliderView.getBundle().get("extra");
         String productId = null;
-        for (int i = 0 ; i < headerImageTitleList.size() ; i++) {
-            if(name.equals(headerImageTitleList.get(i))){
+        for (int i = 0; i < headerImageTitleList.size(); i++) {
+            if (name.equals(headerImageTitleList.get(i))) {
                 productId = headerImageIdList.get(i);
             }
 
         }
 
-        if(productId != null){
+        if (productId != null) {
 
             String api_name = Apis.BASE_URL + "api/product-details/" + productId;
 
@@ -338,14 +341,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
-    private void imageSliderJob(ArrayList<String> imageTitle , ArrayList<String> imageUrlLink){
+    private void imageSliderJob(ArrayList<String> imageTitle, ArrayList<String> imageUrlLink) {
 
-        HashMap<String,String> url_maps = new HashMap<>();
-        for(int i = 0 ; i < imageUrlLink.size() ; i++){
+        HashMap<String, String> url_maps = new HashMap<>();
+        for (int i = 0; i < imageUrlLink.size(); i++) {
             url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
         }
 
-        for(String name : url_maps.keySet()){
+        for (String name : url_maps.keySet()) {
             // initialize a SliderLayout
             TextSliderView textSliderView = new TextSliderView(getActivity());
             textSliderView
@@ -377,31 +380,31 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.see_more_categories){
-            startActivity(new Intent(getActivity() , SeeMoreCategories.class));
-        }  else if(view.getId() == R.id.see_more_gift){
-            startActivity(new Intent(getActivity() , SeeMoreGifts.class));
+        if (view.getId() == R.id.see_more_categories) {
+            startActivity(new Intent(getActivity(), SeeMoreCategories.class));
+        } else if (view.getId() == R.id.see_more_gift) {
+            startActivity(new Intent(getActivity(), SeeMoreGifts.class));
 
-        } else if(view.getId() == R.id.textView_categories_1){
-            someItemListClickJob(someCategoryIdList.get(0) , someCategoryList.get(0));
-        }else if(view.getId() == R.id.textView_categories_2){
-            someItemListClickJob(someCategoryIdList.get(1) , someCategoryList.get(1));
-        }else if(view.getId() == R.id.textView_categories_3){
-            someItemListClickJob(someCategoryIdList.get(2) , someCategoryList.get(2));
+        } else if (view.getId() == R.id.textView_categories_1) {
+            someItemListClickJob(someCategoryIdList.get(0), someCategoryList.get(0));
+        } else if (view.getId() == R.id.textView_categories_2) {
+            someItemListClickJob(someCategoryIdList.get(1), someCategoryList.get(1));
+        } else if (view.getId() == R.id.textView_categories_3) {
+            someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
 
-        }else if(view.getId() == R.id.textView_gift_1){
-            someItemListClickJob(someGiftIdList.get(0) , someGiftList.get(0));
-        }else if(view.getId() == R.id.textView_gift_2){
-            someItemListClickJob(someGiftIdList.get(1) , someGiftList.get(1));
-        }else if(view.getId() == R.id.textView_gift_3){
-            someItemListClickJob(someGiftIdList.get(2) , someGiftList.get(2));
+        } else if (view.getId() == R.id.textView_gift_1) {
+            someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
+        } else if (view.getId() == R.id.textView_gift_2) {
+            someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
+        } else if (view.getId() == R.id.textView_gift_3) {
+            someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
         }
     }
 
 
-    private void someItemListClickJob(String productId , String productName){
+    private void someItemListClickJob(String productId, String productName) {
 
-        if(productId != null && productName != null) {
+        if (productId != null && productName != null) {
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
             getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
