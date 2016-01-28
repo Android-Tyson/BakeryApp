@@ -39,6 +39,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         allowArrowAnimation();
         addMultiPaneSupport();
+        disableLearningPattern();
 
         MyUtils.setUserProfilePicture(this);
         if (MyUtils.isUserLoggedIn(this)) {
@@ -96,5 +97,15 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
 }
 

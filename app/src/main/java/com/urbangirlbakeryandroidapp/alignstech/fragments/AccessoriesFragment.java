@@ -31,7 +31,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccessoriesFragment extends Fragment {
+public class AccessoriesFragment extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.listView)
     ListView listView;
