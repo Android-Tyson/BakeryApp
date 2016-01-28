@@ -32,7 +32,6 @@ public class PostFacebookUserDetials {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MyUtils.showLog(response);
                         materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {

@@ -34,7 +34,6 @@ public class PostNormalUserRegister {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MyUtils.showLog(response);
                         MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
                         DataBase_Utils.deleteUserInfoList();
                         DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9));
