@@ -39,6 +39,7 @@ public class MyUtils
         }
     }
 
+
     public static boolean isEmailValid(String email , Context context) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         CharSequence inputStr = email;
@@ -52,6 +53,7 @@ public class MyUtils
         }
     }
 
+
     public static void setUserProfilePicture(Context context) {
 
         List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
@@ -59,6 +61,7 @@ public class MyUtils
             GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
         }
     }
+
 
     public static boolean isNetworkConnected(Context context)
     {
@@ -128,6 +131,7 @@ public class MyUtils
         }
     }
 
+
     public static Bitmap getUserProfilePic()
     {
         Bitmap bitmap;
@@ -143,6 +147,7 @@ public class MyUtils
             return null;
         }
     }
+
 
     public static void showToast(Context context, String message)
     {
