@@ -41,6 +41,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         allowArrowAnimation();
         addMultiPaneSupport();
         disableLearningPattern();
+        setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
 
         MyUtils.setUserProfilePicture(this);
         if (MyUtils.isUserLoggedIn(this)) {
