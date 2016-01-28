@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.Login;
@@ -76,7 +77,10 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
         addDivisor();
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
-        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, new Settings_Fragment()));
+
+        Fragment fragment_wwwwww = new Settings_Fragment();
+
+        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, fragment_wwwwww));
 
     }
 

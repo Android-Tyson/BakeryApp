@@ -187,11 +187,17 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         ArrayList<String> pound = new ArrayList<>();
         pound.add("Select Pound");
-        for (int i = start_pound; i < end_pound; i++) {
+        for (int i = start_pound; i <= end_pound; i++) {
             pound.add(i + "");
         }
 
-        spinner_flavour.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, flavour));
+        ArrayList<String> flavour_list = new ArrayList<>();
+        for(int i= 0 ; i < flavour.size() ; i++){
+            flavour_list.add(flavour.get(i));
+        }
+
+
+        spinner_flavour.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, flavour_list));
         spinner_pound.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pound));
 
         spinner_flavour.setOnItemSelectedListener(this);
