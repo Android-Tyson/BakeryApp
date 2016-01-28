@@ -162,7 +162,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 flavour.add("Select Flavour");
 
                 for (int j = 0; j < flavorArray.length(); j++) {
-                    JSONObject flavorObject = flavorArray.getJSONObject(i);
+                    JSONObject flavorObject = flavorArray.getJSONObject(j);
                     String flavor_id = flavorObject.getString("id");
                     String flavor = flavorObject.getString("flavor");
                     per_pound_price = flavorObject.getString("per_pound_price");
