@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessoriesAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
@@ -251,12 +253,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             perPoundPrice = Double.parseDouble(per_pound_price);
         }
 
-        for (Integer key : checkedPosition.keySet()) {
-            Integer posi = checkedPosition.get(key);
-        }
 
-
-        return base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
+        double total = base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
+        return total;
 
     }
 
@@ -276,9 +275,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         jsonObjSingleProduct.put("product_id", singleProductDetailsList.get(0));
                         jsonObjSingleProduct.put("product_name", singleProductDetailsList.get(1));
                         jsonObjSingleProduct.put("price", singleProductDetailsList.get(2));
-//                    accessoriesTotalPrice += Double.parseDouble(accessoriesPriceList.get(0));
                         jsonObjSingleProduct.put("qty", "1");
-                        MyUtils.showLog(singleProductDetailsList.toString());
                         jsonArray.put(jsonObjSingleProduct);
 
                         break;
@@ -332,10 +329,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("user_id", "1");
             jsonObject.put("order_date", getCurrentDate());
             jsonObject.put("total", priceCalculation());
-
             jsonObject.put("order_details", jsonArray);
 
-            MyUtils.showToast(this, "Total Price is:" + priceCalculation());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -353,7 +348,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             JSONObject jsonObject = new JSONObject(eventBus.getResponse());
             String result = jsonObject.getString("result");
             if (result.equals("success"))
-                MyUtils.showToast(this, "Successfully Ordered");
+                MyUtils.showToast(this, "Successfully Ordered and your total price is: "+ priceCalculation());
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
 
         } catch (JSONException e) {
             e.printStackTrace();
