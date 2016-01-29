@@ -43,7 +43,7 @@
             <!-- Categories Sector -->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5dp">
 
@@ -61,10 +61,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
                             android:text="@string/categories"
                             android:textColor="@color/myWindowBackground"
                             android:textSize="@dimen/categoriesTextSize" />
@@ -175,7 +175,8 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:src="@mipmap/ic_forward_head" />
+                                android:src="@mipmap/ic_forward_head"
+                                android:tint="@color/myPrimaryColor"/>
 
                         </RelativeLayout>
 
@@ -188,7 +189,7 @@
             <!-- Gift Sector -->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5dp">
 
@@ -206,10 +207,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
                             android:text="@string/gifts"
                             android:textColor="@color/myWindowBackground"
                             android:textSize="@dimen/categoriesTextSize" />
@@ -320,6 +321,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
+                                android:tint="@color/myPrimaryColor"
                                 android:src="@mipmap/ic_forward_head" />
 
                         </RelativeLayout>
@@ -329,6 +331,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
 
     </ScrollView>

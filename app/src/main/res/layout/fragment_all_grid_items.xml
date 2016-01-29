@@ -6,6 +6,7 @@
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment">
 
     <GridView
+        android:padding="10dp"
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

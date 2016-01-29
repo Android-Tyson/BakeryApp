@@ -115,6 +115,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         MyBus.getInstance().register(this);
     }
 
@@ -380,24 +381,26 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.see_more_categories) {
-            startActivity(new Intent(getActivity(), SeeMoreCategories.class));
-        } else if (view.getId() == R.id.see_more_gift) {
-            startActivity(new Intent(getActivity(), SeeMoreGifts.class));
+        if(!someGiftList.isEmpty() && !someCategoryList.isEmpty()) {
+            if (view.getId() == R.id.see_more_categories) {
+                startActivity(new Intent(getActivity(), SeeMoreCategories.class));
+            } else if (view.getId() == R.id.see_more_gift) {
+                startActivity(new Intent(getActivity(), SeeMoreGifts.class));
 
-        } else if (view.getId() == R.id.textView_categories_1) {
-            someItemListClickJob(someCategoryIdList.get(0), someCategoryList.get(0));
-        } else if (view.getId() == R.id.textView_categories_2) {
-            someItemListClickJob(someCategoryIdList.get(1), someCategoryList.get(1));
-        } else if (view.getId() == R.id.textView_categories_3) {
-            someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
+            } else if (view.getId() == R.id.textView_categories_1) {
+                someItemListClickJob(someCategoryIdList.get(0), someCategoryList.get(0));
+            } else if (view.getId() == R.id.textView_categories_2) {
+                someItemListClickJob(someCategoryIdList.get(1), someCategoryList.get(1));
+            } else if (view.getId() == R.id.textView_categories_3) {
+                someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
 
-        } else if (view.getId() == R.id.textView_gift_1) {
-            someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
-        } else if (view.getId() == R.id.textView_gift_2) {
-            someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
-        } else if (view.getId() == R.id.textView_gift_3) {
-            someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
+            } else if (view.getId() == R.id.textView_gift_1) {
+                someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
+            } else if (view.getId() == R.id.textView_gift_2) {
+                someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
+            } else if (view.getId() == R.id.textView_gift_3) {
+                someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
+            }
         }
     }
 
