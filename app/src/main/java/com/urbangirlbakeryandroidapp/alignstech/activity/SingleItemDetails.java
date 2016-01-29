@@ -182,12 +182,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private void setDataToSpinner(ArrayList<String> flavour, String starting_pounds, String ending_pound) {
 
-        int start_pound = Integer.parseInt(starting_pounds);
-        int end_pound = Integer.parseInt(ending_pound);
+        double start_pound = Double.parseDouble(starting_pounds);
+        double end_pound = Double.parseDouble(ending_pound);
 
         ArrayList<String> pound = new ArrayList<>();
         pound.add("Select Pound");
-        for (int i = start_pound; i <= end_pound; i++) {
+        for (double i = start_pound; i <= end_pound; i++) {
             pound.add(i + "");
         }
 
