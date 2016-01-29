@@ -139,6 +139,11 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.gifts);
         }
 
+        android.support.v4.app.Fragment fragment_home = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_home);
+        if (fragment_home instanceof All_Item_Grid_Fragment) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.home);
+        }
+
         android.support.v4.app.Fragment fragment_cake = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_cake);
         if (fragment_cake instanceof All_Item_Grid_Fragment) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.cakes);
