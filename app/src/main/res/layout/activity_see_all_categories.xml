@@ -9,7 +9,7 @@
         layout="@layout/app_toolbar"/>
 
     <FrameLayout
-        android:id="@+id/frame_container_see_all"
+        android:id="@+id/frame_container_gift"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

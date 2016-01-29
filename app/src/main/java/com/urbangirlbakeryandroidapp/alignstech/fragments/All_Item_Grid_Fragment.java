@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.GridView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
@@ -44,14 +47,15 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         // Required empty public constructor
     }
 
-    public static All_Item_Grid_Fragment newInstance(String apiName){
+    public static All_Item_Grid_Fragment newInstance(String apiName, String titleName) {
         All_Item_Grid_Fragment fragObject = new All_Item_Grid_Fragment();
 
         Bundle args = new Bundle();
         args.putString("API", apiName);
+        args.putString("TITLE_NAME", titleName);
         fragObject.setArguments(args);
 
-        return  fragObject;
+        return fragObject;
     }
 
     @Override
@@ -64,6 +68,9 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         return getArguments().getString("API");
     }
 
+    public String getTitleName() {
+        return getArguments().getString("TITLE_NAME");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,24 +78,26 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_grid_items, container, false);
         ButterKnife.inject(this, view);
-        gridView.setOnItemClickListener(this);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getTitleName());
 
+        gridView.setOnItemClickListener(this);
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter = new CustomGridViewAdapter(getActivity() , productList);
+        adapter = new CustomGridViewAdapter(getActivity(), productList);
         gridView.setAdapter(adapter);
-        if(MyUtils.isNetworkConnected(getActivity())){
+        if (MyUtils.isNetworkConnected(getActivity())) {
             String url = getApi();
             GetAllItems.parseAllItems(getActivity(), getApi());
         }
     }
 
     @Subscribe
-    public void getAllItemList(AllItemsResultEvent event){
+    public void getAllItemList(AllItemsResultEvent event) {
 
         productList = event.getAllItemList();
         gridView.setAdapter(new CustomGridViewAdapter(getActivity(), productList));
@@ -112,10 +121,42 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         String product_name = product.getProductName();
         String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
-        Intent intent = new Intent(getActivity() , SingleItemDetails.class);
-        intent.putExtra("TITLE_NAME" , product_name);
-        intent.putExtra("API_NAME" , api_name);
+        Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+        intent.putExtra("TITLE_NAME", product_name);
+        intent.putExtra("API_NAME", api_name);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        if (getActivity() instanceof SeeMoreCategories) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.categories);
+        }
+        if (getActivity() instanceof SeeMoreGifts) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.gifts);
+        }
+
+        android.support.v4.app.Fragment fragment_cake = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_cake);
+        if (fragment_cake instanceof All_Item_Grid_Fragment) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.cakes);
+        }
+
+        android.support.v4.app.Fragment fragment_gift = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_gift);
+        if (fragment_gift instanceof All_Item_Grid_Fragment) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.gifts);
+        }
+
+        android.support.v4.app.Fragment fragment_offers = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_offer);
+        if (fragment_offers instanceof All_Item_Grid_Fragment) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.offers);
+        }
+
+        android.support.v4.app.Fragment fragment_accessories = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_accessories);
+        if (fragment_accessories instanceof All_Item_Grid_Fragment) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.accessories);
+        }
     }
 }

@@ -38,6 +38,7 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
     ListView listView;
 
     private ArrayList<String> childIdList = new ArrayList<>();
+    private ArrayList<String> childNameList = new ArrayList<>();
 
     public CakesFragment() {
         // Required empty public constructor
@@ -93,6 +94,7 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
                 String singleChildId = jsonObj.getString("id");
                 giftChildList.add(singleChildname);
                 childIdList.add(singleChildId);
+                childNameList.add(singleChildname);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -111,7 +113,8 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_see_all, All_Item_Grid_Fragment.newInstance(API_NAME)).commit();
+        String product_title = childNameList.get(i);
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_cake, All_Item_Grid_Fragment.newInstance(API_NAME , product_title)).commit();
 
 
     }
