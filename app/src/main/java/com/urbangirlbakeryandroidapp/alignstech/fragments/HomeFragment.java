@@ -97,6 +97,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
 
     private CustomHorizontalCakeViewAdapter adapter;
+    public static HashMap<String , Boolean> isGift = new HashMap<>();
 
     public static HomeFragment newInstance(int position) {
 
@@ -395,10 +396,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
 
             } else if (view.getId() == R.id.textView_gift_1) {
+                isGift.put("GiftClick" , true);
                 someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
             } else if (view.getId() == R.id.textView_gift_2) {
+                isGift.put("GiftClick" , true);
                 someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
             } else if (view.getId() == R.id.textView_gift_3) {
+                isGift.put("GiftClick" , true);
                 someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
             }
         }

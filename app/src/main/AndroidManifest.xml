@@ -79,6 +79,12 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/UGCakeTheme" >
         </activity>
+        <activity
+            android:name=".activity.SingleItemGiftDetails"
+            android:label="@string/title_activity_single_item_detils"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
     </application>
 
 </manifest>

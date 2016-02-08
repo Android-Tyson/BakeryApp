@@ -17,6 +17,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemGiftDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -121,10 +122,24 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         String product_name = product.getProductName();
         String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
-        Intent intent = new Intent(getActivity(), SingleItemDetails.class);
-        intent.putExtra("TITLE_NAME", product_name);
-        intent.putExtra("API_NAME", api_name);
-        startActivity(intent);
+        android.support.v4.app.Fragment fragment_gift = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_gift);
+        if (fragment_gift instanceof All_Item_Grid_Fragment ||
+                HomeFragment.isGift.containsKey("GiftClick")) {
+
+            HomeFragment.isGift.clear();
+            Intent intent = new Intent(getActivity(), SingleItemGiftDetails.class);
+            intent.putExtra("TITLE_NAME", product_name);
+            intent.putExtra("API_NAME", api_name);
+            startActivity(intent);
+
+        }else{
+
+            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+            intent.putExtra("TITLE_NAME", product_name);
+            intent.putExtra("API_NAME", api_name);
+            startActivity(intent);
+
+        }
 
     }
 
