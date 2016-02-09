@@ -16,6 +16,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostNormalUserRegister;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.Profile;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -180,7 +181,7 @@ public class EditProfile extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-            startActivity(new Intent(this , MainActivity.class));
+            startActivity(new Intent(this , Profile.class));
             finish();
 
         } else if (keyCode == KeyEvent.KEYCODE_HOME) {

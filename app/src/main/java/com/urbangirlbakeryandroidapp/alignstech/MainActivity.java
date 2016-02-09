@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.Login;
+import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -64,7 +64,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
 
         if(MyUtils.isUserLoggedIn(this)){
-            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, EditProfile.class)));
+//            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, EditProfile.class)));
+            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, UserProfile.class)));
             addDivisor();
         }else{
             addSection(newSection(getResources().getString(R.string.login), R.mipmap.login, new Intent(this, Login.class)));

@@ -24,6 +24,7 @@
     <color name="textHint">#b3b3b3</color>
 
     <color name="layout_background">#e8e8e8</color>
+    <color name="layout_background2">#d4d4d4</color>
     <color name="white">#ffffff</color>
     <color name="light_blue">#4290fb</color>
 </resources>
