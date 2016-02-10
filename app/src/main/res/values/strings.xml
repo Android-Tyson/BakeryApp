@@ -10,7 +10,8 @@
     <string name="faceboook_login">Facebook Login</string>
     <string name="label_button_continue_without_login">Continue Without Login</string>
     <string name="title_activity_2">Activity2</string>
-    <string name="app_id">709240645844749</string>
+    <!--<string name="app_id">709240645844749</string>-->
+    <string name="app_id">1692881424284413</string>
     <string name="normal_register">Register with us</string>
     <string name="skip_and_continue"><![CDATA[Skip & Continue     >]]></string>
     <string name="title_activity_normal_register">NormalRegister</string>
@@ -47,6 +48,5 @@
     <string name="title_activity_single_item_gift_details">SingleItemGiftDetails</string>
     <string name="title_activity_profile">Profile</string>
     <string name="action_edit">Edit Profile</string>
-
 
 </resources>

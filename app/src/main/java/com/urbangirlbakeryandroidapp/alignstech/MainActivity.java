@@ -64,7 +64,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
 
         if(MyUtils.isUserLoggedIn(this)){
-//            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, EditProfile.class)));
             addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, UserProfile.class)));
             addDivisor();
         }else{

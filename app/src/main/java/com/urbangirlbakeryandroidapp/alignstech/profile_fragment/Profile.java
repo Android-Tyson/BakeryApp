@@ -29,8 +29,7 @@ public class Profile extends android.support.v4.app.Fragment {
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private ProfileDataListAdapter adapter;
-    private List<String> titleList, userInfoList;
+    private List<String> titleList, infoList;
 
     public Profile() {
         // Required empty public constructor
@@ -49,8 +48,23 @@ public class Profile extends android.support.v4.app.Fragment {
 
     private void initializeRecyclerView() {
 
+        initializeListData();
+        ProfileDataListAdapter adapter = new ProfileDataListAdapter(getActivity(), titleList, infoList);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(
+                new HorizontalDividerItemDecoration.Builder(getActivity())
+                        .color(getResources().getColor(R.color.layout_background))
+                        .build());
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    private void initializeListData(){
+
         titleList = new ArrayList<>();
-        userInfoList = new ArrayList<>();
+        infoList = new ArrayList<>();
 
         titleList.add("First Name");
         titleList.add("Last Name");
@@ -94,28 +108,16 @@ public class Profile extends android.support.v4.app.Fragment {
             }
 
 
-            userInfoList.add(firstName);
-            userInfoList.add(lastName);
-            userInfoList.add(email);
-            userInfoList.add(primaryPhone);
-            userInfoList.add(secondaryPhone);
-            userInfoList.add(billingAddress);
-            userInfoList.add(sippingAddress);
+            this.infoList.add(firstName);
+            this.infoList.add(lastName);
+            this.infoList.add(email);
+            this.infoList.add(primaryPhone);
+            this.infoList.add(secondaryPhone);
+            this.infoList.add(billingAddress);
+            this.infoList.add(sippingAddress);
 
 
         }
 
-
-        adapter = new ProfileDataListAdapter(getActivity(), titleList, userInfoList);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(getActivity())
-                        .color(getResources().getColor(R.color.layout_background))
-                        .build());
-        recyclerView.setAdapter(adapter);
-
     }
-
 }
