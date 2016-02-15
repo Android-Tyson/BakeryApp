@@ -48,5 +48,6 @@
     <string name="title_activity_single_item_gift_details">SingleItemGiftDetails</string>
     <string name="title_activity_profile">Profile</string>
     <string name="action_edit">Edit Profile</string>
+    <string name="title_activity_setting">Setting</string>
 
 </resources>

@@ -2,16 +2,15 @@ package com.urbangirlbakeryandroidapp.alignstech;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.urbangirlbakeryandroidapp.alignstech.activity.Login;
+import com.urbangirlbakeryandroidapp.alignstech.activity.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Settings_Fragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -79,9 +78,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addDivisor();
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
 
-        Fragment fragment_wwwwww = new Settings_Fragment();
-
-        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, fragment_wwwwww));
+        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, new Intent(this, Settings.class)));
 
     }
 

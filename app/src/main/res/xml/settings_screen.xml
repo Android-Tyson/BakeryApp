@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="developerKey"
+        android:title="Profile">
+
+        <Preference
+            android:key="edit_profile"
+            android:summary="Edit Current Account"
+            android:title="Edit Profile" />
+
+        <Preference
+            android:key="logout_profile"
+            android:summary="Logout Current Account"
+            android:title="Logout" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category"
+        android:title="General Setting">
+
+        <!--<Preference-->
+            <!--android:key="pref_key_sms_delete_limit"-->
+            <!--android:summary="Edit Current Account" />-->
+
+        <Preference
+            android:key="share_app"
+            android:summary="Share App"/>
+
+        <Preference
+            android:key="about_bakery_app"
+            android:summary="About Bakery App"/>
+
+        <Preference
+            android:key="help_and_faqs"
+            android:summary="Help and FAQs"/>
+
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory-->
+        <!--android:key="category"-->
+        <!--android:title="Notification">-->
+
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="checkboxKey2"-->
+            <!--android:summary="Notify Before Loadshedding ON/OFF"-->
+            <!--android:title="Notify" />-->
+
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="checkboxKey3"-->
+            <!--android:summary="Notification with Vibrate"-->
+            <!--android:title="Vibrate" />-->
+
+    <!--</PreferenceCategory>-->
+
+    <PreferenceCategory
+        android:key="developerKey"
+        android:title="Developer">
+
+        <Preference
+            android:key="about_aligns_tech"
+            android:summary="About Us"
+            android:title="AlignsTech Nepal" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
