@@ -3,7 +3,6 @@ package com.urbangirlbakeryandroidapp.alignstech.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -36,6 +35,8 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.solovyev.android.views.llm.DividerItemDecoration;
+import org.solovyev.android.views.llm.LinearLayoutManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.product_image)
     NetworkImageView iv_product_image;
 
-    @InjectView(R.id.product_name)
-    TextView tv_product_name;
+//    @InjectView(R.id.product_name)
+//    TextView tv_product_name;
 
     @InjectView(R.id.product_price)
     TextView tv_product_price;
@@ -169,7 +170,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     flavour.add(flavor);
                 }
                 setDataToSpinner(flavour, starting_pound, ending_pound);
-                tv_product_name.setText(product_name);
+//                tv_product_name.setText(product_name);
                 tv_product_price.setText(product_price);
                 tv_product_description.setText(product_description);
                 iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
@@ -235,10 +236,19 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private void initializeDataForAccessories() {
 
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        LinearLayoutManager layoutManager = new org.solovyev.android.views.llm.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
         recyclerView.setAdapter(adapter);
+
+//        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setHasFixedSize(false);
+////        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(new WrappingLinearLayoutManager(this));
+//
+//
+//        recyclerView.setAdapter(adapter);
 
     }
 

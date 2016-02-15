@@ -31,8 +31,8 @@ import butterknife.InjectView;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    @InjectView(R.id.button_continueWithoutLogin)
-    Button btnContinueWithoutLogin;
+//    @InjectView(R.id.button_continueWithoutLogin)
+//    Button btnContinueWithoutLogin;
 
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        btnContinueWithoutLogin.setOnClickListener(this);
+//        btnContinueWithoutLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
         btnNormalLogin.setOnClickListener(this);
 
@@ -111,11 +111,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.button_continueWithoutLogin:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
+//            case R.id.button_continueWithoutLogin:
+//                Intent intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//                break;
 
             case R.id.btn_loginWithFacebook:
 

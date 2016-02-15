@@ -49,5 +49,7 @@
     <string name="title_activity_profile">Profile</string>
     <string name="action_edit">Edit Profile</string>
     <string name="title_activity_setting">Setting</string>
+    <string name="dealAndOffers"><![CDATA[Deals & Offers]]></string>
+    <string name="urgentCakes">Urgent Cakes</string>
 
 </resources>

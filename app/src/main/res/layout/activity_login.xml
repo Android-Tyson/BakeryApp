@@ -45,19 +45,19 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_continueWithoutLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_rect_colored_bg"
-            android:padding="10dp"
-            android:shadowColor="@color/background_material_dark"
-            android:text="@string/skip_and_continue"
-            android:textColor="@color/myTextColor"
-            android:textSize="16sp" />
+        <!--<Button-->
+            <!--android:id="@+id/button_continueWithoutLogin"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@drawable/custom_rect_colored_bg"-->
+            <!--android:padding="10dp"-->
+            <!--android:shadowColor="@color/background_material_dark"-->
+            <!--android:text="@string/skip_and_continue"-->
+            <!--android:textColor="@color/myTextColor"-->
+            <!--android:textSize="16sp" />-->
 
     </LinearLayout>
 
