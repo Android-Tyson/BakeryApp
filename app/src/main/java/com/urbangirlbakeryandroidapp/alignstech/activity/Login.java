@@ -13,7 +13,6 @@ import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
-import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
@@ -32,9 +31,6 @@ import butterknife.InjectView;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-//    @InjectView(R.id.button_continueWithoutLogin)
-//    Button btnContinueWithoutLogin;
-
     @InjectView(R.id.btn_loginWithFacebook)
     Button btnLoginWithFacebook;
 
@@ -42,7 +38,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Button btnNormalLogin;
 
     public static UserDetials userDetials;
-    // Generate KeyHash Reference
+    // Generate DEBUG KeyHash Reference
     // http://stackoverflow.com/questions/5306009/facebook-android-generate-key-hash
 
     private SimpleFacebook simpleFacebook;
@@ -62,7 +58,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-//        btnContinueWithoutLogin.setOnClickListener(this);
         btnLoginWithFacebook.setOnClickListener(this);
         btnNormalLogin.setOnClickListener(this);
 
@@ -95,9 +90,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -108,15 +101,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
-//            case R.id.button_continueWithoutLogin:
-//                Intent intent = new Intent(this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//                break;
 
             case R.id.btn_loginWithFacebook:
 
@@ -183,18 +172,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     };
 
-//    Logging Out
-//
-//    OnLogoutListener onLogoutListener = new OnLogoutListener() {
-//
-//        @Override
-//        public void onLogout() {
-//            AppLog.showLog("You are logged out");
-//        }
-//
-//    };
-//     simpleFacebook.logout(onLogoutListener);
-
 
     OnProfileListener onProfileListener = new OnProfileListener() {
         @Override
@@ -254,6 +231,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
             intent.putExtra("FacebookIntent", "FB_DATA");
             startActivity(intent);
+            MyUtils.showToast(getApplicationContext() , "You are Successfully Logged in. Please Fill All the info..");
             finish();
 
         }
@@ -275,14 +253,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     };
 
-    OnLogoutListener onLogoutListener = new OnLogoutListener() {
-
-        @Override
-        public void onLogout() {
-            MyUtils.showLog("");
-        }
-
-    };
 
     private void handlingNullUserInfo(UserDetials userDetials) {
 

@@ -51,5 +51,6 @@
     <string name="title_activity_setting">Setting</string>
     <string name="dealAndOffers"><![CDATA[Deals & Offers]]></string>
     <string name="urgentCakes">Urgent Cakes</string>
+    <string name="action_logout">Logout</string>
 
 </resources>

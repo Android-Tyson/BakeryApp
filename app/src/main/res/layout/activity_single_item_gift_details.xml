@@ -72,9 +72,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        >
 
                         <TextView
+                            android:padding="15dp"
                             android:id="@+id/product_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -92,7 +93,7 @@
                             android:id="@+id/order_now"
                             android:layout_width="match_parent"
                             android:layout_height="44dp"
-                            android:background="@drawable/button_bg"
+                            android:background="@color/light_blue"
                             android:gravity="center">
 
                             <ImageView
