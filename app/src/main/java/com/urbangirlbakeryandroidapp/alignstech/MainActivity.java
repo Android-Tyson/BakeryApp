@@ -33,7 +33,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
-
     @Override
     public void init(Bundle bundle) {
 
@@ -82,6 +81,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
+
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
@@ -93,13 +93,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             startActivity(loginIntent);
             finish();
         }
-
     }
+
 
     @Override
     public void onChangeAccount(MaterialAccount materialAccount) {
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -111,5 +112,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             getSupportFragmentManager().popBackStack();
         }
     }
+
 }
 

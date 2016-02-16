@@ -1,6 +1,10 @@
 package com.urbangirlbakeryandroidapp.alignstech.utils;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +14,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.sromku.simple.fb.SimpleFacebook;
+import com.sromku.simple.fb.listeners.OnLogoutListener;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
@@ -162,4 +169,32 @@ public class MyUtils
         Log.i("APP_TAG", message);
     }
 
+
+    public static void logOut(final Activity context)
+    {
+        SimpleFacebook.getInstance(context).logout(new OnLogoutListener() {
+            @Override
+            public void onLogout() {
+                MyUtils.showLog("");
+                SharedPreferences settings = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                settings.edit().remove("USER_LOGGED_IN").commit();
+                DataBase_Utils.deleteUserInfoList();
+                Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(i);
+            }
+        });
+
+    }
+
+    public static void restartApplication(Context context)
+    {
+        Intent mStartActivity = new Intent(context, MainActivity.class);
+        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

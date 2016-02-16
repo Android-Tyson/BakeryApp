@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileViewPagerAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import butterknife.ButterKnife;
@@ -32,7 +36,7 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         ButterKnife.inject(this);
         initializeToolbar();
-        ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(getSupportFragmentManager() , this , 3);
+        ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(getSupportFragmentManager(), this, 3);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
 
@@ -94,10 +98,46 @@ public class UserProfile extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_edit) {
-            startActivity(new Intent(this , EditProfile.class));
-            return true;
+            startActivity(new Intent(this, EditProfile.class));
+        }else if(id == R.id.action_logout){
+
+            new MaterialDialog.Builder(this)
+                    .title("Log out!")
+                    .content("Are you sure you want to log out?")
+                    .positiveText("Yes")
+                    .negativeText("No")
+                    .autoDismiss(true)
+                    .positiveColorRes(R.color.myPrimaryColor)
+                    .negativeColorRes(R.color.myPrimaryColor)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            super.onPositive(dialog);
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Logging out...", Toast.LENGTH_SHORT).show();
+                            MyUtils.logOut(UserProfile.this);
+                        }
+
+                        @Override
+                        public void onNegative(MaterialDialog dialog) {
+                            super.onNegative(dialog);
+                            dialog.dismiss();
+                        }
+                    })
+                    .build()
+                    .show();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(this , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

@@ -21,7 +21,8 @@ import org.json.JSONObject;
 public class GetSomeCategories {
 
     private static MaterialDialog materialDialog;
-    public static void parseSomeCategoriesList(String url , final Context context){
+    public static void parseSomeCategoriesList(String url , final Context context)
+    {
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 

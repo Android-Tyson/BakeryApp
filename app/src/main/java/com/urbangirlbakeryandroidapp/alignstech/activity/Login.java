@@ -13,6 +13,7 @@ import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
+import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
@@ -53,9 +54,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ButterKnife.inject(this);
 
 
-        if(MyUtils.isUserLoggedIn(this)){
+        if (MyUtils.isUserLoggedIn(this)) {
 
-            Intent intent = new Intent(this , MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
 
@@ -128,7 +129,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.btn_normal_login:
                 MyUtils.showLog("Clicked Direct login");
-                Intent intent1 = new Intent(this , NormalRegister.class);
+                Intent intent1 = new Intent(this, NormalRegister.class);
                 startActivity(intent1);
                 finish();
         }
@@ -161,7 +162,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     .add(Profile.Properties.PICTURE, pictureAttributes)
                     .build();
 
-            simpleFacebook.getProfile(properties , onProfileListener);
+            simpleFacebook.getProfile(properties, onProfileListener);
 
         }
 
@@ -236,10 +237,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             String gender = userDetials.getGender();
             String zone = userDetials.getZone();
             String district = userDetials.getDistrict();
-            String location  = userDetials.getLocation();
+            String location = userDetials.getLocation();
             String profilePicUrl = userDetials.getProfilePicUrl();
 
-            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id , firstName , lastName , mobileNo , email , dob , gender , zone , district , location , profilePicUrl);
+            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl);
             dataBase_userInfo.save();
 
 //            String user_fb_id = userDetials.getFb_id();
@@ -249,9 +250,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
 
 
-            Intent intent = new Intent(getApplicationContext() , EditProfile.class);
+            Intent intent = new Intent(getApplicationContext(), UserProfile.class);
 //            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
-            intent.putExtra("FacebookIntent" , "FB_DATA");
+            intent.putExtra("FacebookIntent", "FB_DATA");
             startActivity(intent);
             finish();
 
@@ -274,29 +275,48 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     };
 
-    private void handlingNullUserInfo(UserDetials userDetials){
+    OnLogoutListener onLogoutListener = new OnLogoutListener() {
 
-        if(userDetials.getFb_id() == null){
+        @Override
+        public void onLogout() {
+            MyUtils.showLog("");
+        }
+
+    };
+
+    private void handlingNullUserInfo(UserDetials userDetials) {
+
+        if (userDetials.getFb_id() == null) {
             userDetials.setFb_id("yourmail@gmail.com");
-        }if(userDetials.getFirstName() == null){
+        }
+        if (userDetials.getFirstName() == null) {
 //            userDetials.setFirstName("Full");
-        } if(userDetials.getLastName() == null){
+        }
+        if (userDetials.getLastName() == null) {
 //            userDetials.setLastName("Name");
-        } if(userDetials.getMobileNo() == null){
+        }
+        if (userDetials.getMobileNo() == null) {
 //            userDetials.setMobileNo("");
-        } if(userDetials.getEmail() == null){
+        }
+        if (userDetials.getEmail() == null) {
 //            userDetials.setEmail("yourmail@gmail.com");
-        } if (userDetials.getDob() == null){
+        }
+        if (userDetials.getDob() == null) {
 //            userDetials.setDob("");
-        } if(userDetials.getGender() == null){
+        }
+        if (userDetials.getGender() == null) {
 //            userDetials.setGender("");
-        } if (userDetials.getZone() == null){
+        }
+        if (userDetials.getZone() == null) {
 //            userDetials.setZone("");
-        } if(userDetials.getDistrict() == null){
+        }
+        if (userDetials.getDistrict() == null) {
 //            userDetials.setDistrict("");
-        } if(userDetials.getLocation() == null){
+        }
+        if (userDetials.getLocation() == null) {
 //            userDetials.setLocation("");
-        } if(userDetials.getProfilePicUrl() == null){
+        }
+        if (userDetials.getProfilePicUrl() == null) {
             userDetials.setProfilePicUrl(Apis.defaultImageUrl);
         }
 
@@ -317,10 +337,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if(PostFacebookUserDetials.materialDialog != null){
-            if(PostFacebookUserDetials.materialDialog.isShowing()){
+        if (PostFacebookUserDetials.materialDialog != null) {
+            if (PostFacebookUserDetials.materialDialog.isShowing()) {
                 PostFacebookUserDetials.materialDialog.dismiss();
             }
         }
     }
+
 }
