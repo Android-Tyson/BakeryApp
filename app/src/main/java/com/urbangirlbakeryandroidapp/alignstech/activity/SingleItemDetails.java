@@ -160,7 +160,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
                 JSONArray flavorArray = jsonObj.getJSONArray("flavor");
                 ArrayList<String> flavour = new ArrayList<>();
-                flavour.add("Select Flavour");
 
                 for (int j = 0; j < flavorArray.length(); j++) {
                     JSONObject flavorObject = flavorArray.getJSONObject(j);
@@ -187,7 +186,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         double end_pound = Double.parseDouble(ending_pound);
 
         ArrayList<String> pound = new ArrayList<>();
-        pound.add("Select Pound");
         for (double i = start_pound; i <= end_pound; i++) {
             pound.add(i + "");
         }

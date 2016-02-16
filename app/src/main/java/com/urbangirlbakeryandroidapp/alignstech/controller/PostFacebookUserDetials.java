@@ -3,7 +3,6 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 import android.content.Context;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -11,7 +10,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +20,11 @@ import java.util.Map;
  */
 public class PostFacebookUserDetials {
 
-    public static MaterialDialog materialDialog ;
+    public static MaterialDialog materialDialog;
 
-    public static void postUserDetials(String url , final Context context){
+    public static void postUserDetials(String url, final Context context) {
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -37,7 +35,6 @@ public class PostFacebookUserDetials {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showToast(context, error.toString());
                 materialDialog.dismiss();
             }
         }){
@@ -46,28 +43,26 @@ public class PostFacebookUserDetials {
 
                 Map<String, String> params = new HashMap<>();
                 if(DataBase_Utils.isUserInfoDataExists()){
-
+//
                     List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
-
+//
                     params.put("fb_id", queryResults.get(0).getFb_id());
-                    params.put("mobile_no", queryResults.get(0).getMobileNo());
-                    params.put("email", queryResults.get(0).getEmail());
-                    params.put("dob", queryResults.get(0).getDob());
-                    params.put("gender", queryResults.get(0).getGender());
-                    params.put("zone", queryResults.get(0).getZone());
-                    params.put("district", queryResults.get(0).getDistrict());
-                    params.put("location", queryResults.get(0).getLocation());
+//                    params.put("mobile_no", queryResults.get(0).getMobileNo());
+//                    params.put("email", queryResults.get(0).getEmail());
+//                    params.put("dob", queryResults.get(0).getDob());
+//                    params.put("gender", queryResults.get(0).getGender());
+//                    params.put("zone", queryResults.get(0).getZone());
+//                    params.put("district", queryResults.get(0).getDistrict());
+//                    params.put("location", queryResults.get(0).getLocation());
                     params.put("full_name", queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName());
-
+//
                 }
 
                 return params;
             }
         };
-        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(jsonStringRequest);
+
+        AppController.getInstance().addToRequestQueue(jsonStringRequest, "POST_TAG");
 
     }
 }

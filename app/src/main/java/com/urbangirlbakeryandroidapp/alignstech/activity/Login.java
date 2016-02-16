@@ -305,7 +305,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         simpleFacebook.onActivityResult(requestCode, resultCode, data);
-        MyUtils.showLog(data.toString());
         super.onActivityResult(requestCode, resultCode, data);
     }
 
