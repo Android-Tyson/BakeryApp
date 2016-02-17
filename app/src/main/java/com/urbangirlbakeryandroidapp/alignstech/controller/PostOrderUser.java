@@ -8,25 +8,23 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
-import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedUserDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
-import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Dell on 1/5/2016.
  */
-public class PostNormalUserRegister {
+public class PostOrderUser {
 
     private static MaterialDialog materialDialog;
 
-    public static void postUserDetials(String url, final Context context , final List<String> userInfo) {
+    public static void postOrderUserDetails(String url, final Context context, final ArrayList<String> orderedUserDetail) {
 
         materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
@@ -34,12 +32,7 @@ public class PostNormalUserRegister {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
-                        MyUtils.saveDataInPreferences(context, "USER_ID", userInfo.get(0));
-                        DataBase_Utils.deleteUserInfoList();
-                        DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9));
-                        dataBase_userInfo.save();
-                        MyBus.getInstance().post(new NormalRegisterEventBus(response));
+                        MyBus.getInstance().post(new OrderedUserDetailsEvent(response));
                         materialDialog.dismiss();
                         
                     }
@@ -55,15 +48,12 @@ public class PostNormalUserRegister {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("fb_id", userInfo.get(0));
-                params.put("mobile_no", userInfo.get(1));
-                params.put("email", userInfo.get(2));
-                params.put("dob", userInfo.get(3));
-                params.put("gender", userInfo.get(4));
-                params.put("zone", userInfo.get(5));
-                params.put("district", userInfo.get(6));
-                params.put("location", userInfo.get(7));
-                params.put("full_name", userInfo.get(8));
+                params.put("delivery_address", orderedUserDetail.get(0));
+                params.put("contact_person_name", orderedUserDetail.get(1));
+                params.put("phone_no1", orderedUserDetail.get(2));
+                params.put("phone_no2", orderedUserDetail.get(3));
+                params.put("date_time", orderedUserDetail.get(4));
+                params.put("message_on_cake", orderedUserDetail.get(5));
                 MyUtils.showLog(" ");
 
                 return params;

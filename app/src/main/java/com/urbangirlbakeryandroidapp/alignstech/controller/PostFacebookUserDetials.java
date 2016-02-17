@@ -43,9 +43,9 @@ public class PostFacebookUserDetials {
 
                 Map<String, String> params = new HashMap<>();
                 if(DataBase_Utils.isUserInfoDataExists()){
-//
+
                     List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
-//
+
                     params.put("fb_id", queryResults.get(0).getFb_id());
 //                    params.put("mobile_no", queryResults.get(0).getMobileNo());
 //                    params.put("email", queryResults.get(0).getEmail());
@@ -55,7 +55,7 @@ public class PostFacebookUserDetials {
 //                    params.put("district", queryResults.get(0).getDistrict());
 //                    params.put("location", queryResults.get(0).getLocation());
                     params.put("full_name", queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName());
-//
+
                 }
 
                 return params;

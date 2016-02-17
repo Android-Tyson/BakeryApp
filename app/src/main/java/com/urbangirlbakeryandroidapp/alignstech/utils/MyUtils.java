@@ -22,6 +22,8 @@ import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,7 +110,7 @@ public class MyUtils
     }
 
 
-    public static String checkDataFromPreferences(Context context, String key)
+    public static String getDataFromPreferences(Context context, String key)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         String result = sharedPreferences.getString(key, "");
@@ -136,6 +138,13 @@ public class MyUtils
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static String getCurrentDate() {
+
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
     }
 
 
@@ -176,15 +185,15 @@ public class MyUtils
             @Override
             public void onLogout() {
                 MyUtils.showLog("");
-                SharedPreferences settings = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-                settings.edit().remove("USER_LOGGED_IN").commit();
+                SharedPreferences userInfo = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                userInfo.edit().remove("USER_LOGGED_IN").commit();
+                userInfo.edit().remove("USER_ID").commit();
                 DataBase_Utils.deleteUserInfoList();
                 Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(i);
             }
         });
-
     }
 
     public static void restartApplication(Context context)

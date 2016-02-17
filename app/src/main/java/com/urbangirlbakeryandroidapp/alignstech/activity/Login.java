@@ -226,12 +226,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, Login.this);
 //            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
 
+            MyUtils.saveDataInPreferences(getApplicationContext(), "USER_ID", fb_id);
 
             Intent intent = new Intent(getApplicationContext(), UserProfile.class);
 //            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
             intent.putExtra("FacebookIntent", "FB_DATA");
             startActivity(intent);
-            MyUtils.showToast(getApplicationContext() , "You are Successfully Logged in. Please Fill All the info..");
+            MyUtils.showToast(getApplicationContext(), "You are Successfully Logged in. Please Fill All the info..");
             finish();
 
         }

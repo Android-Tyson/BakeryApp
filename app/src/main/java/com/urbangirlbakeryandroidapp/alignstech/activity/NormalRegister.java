@@ -124,6 +124,7 @@ public class NormalRegister extends AppCompatActivity {
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
                     if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobileNo, this)) {
+
                         PostNormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
                     }
                 }

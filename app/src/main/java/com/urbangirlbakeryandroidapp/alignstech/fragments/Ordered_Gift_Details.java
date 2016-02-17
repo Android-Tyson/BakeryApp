@@ -37,7 +37,7 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
     @InjectView(R.id.receiverAddress)
     EditText receiverAddress;
 
-    @InjectView(R.id.message)
+    @InjectView(R.id.short_message)
     EditText message;
 
     @InjectView(R.id.order_gift)

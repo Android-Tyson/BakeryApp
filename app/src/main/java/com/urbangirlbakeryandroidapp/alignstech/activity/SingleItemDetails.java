@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
@@ -23,10 +25,12 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedUserDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Details;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -38,9 +42,7 @@ import org.json.JSONObject;
 import org.solovyev.android.views.llm.DividerItemDecoration;
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
@@ -53,9 +55,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     @InjectView(R.id.product_image)
     NetworkImageView iv_product_image;
-
-//    @InjectView(R.id.product_name)
-//    TextView tv_product_name;
 
     @InjectView(R.id.product_price)
     TextView tv_product_price;
@@ -169,7 +168,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     flavour.add(flavor);
                 }
                 setDataToSpinner(flavour, starting_pound, ending_pound);
-//                tv_product_name.setText(product_name);
                 tv_product_price.setText(product_price);
                 tv_product_description.setText(product_description);
                 iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
@@ -191,7 +189,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         }
 
         ArrayList<String> flavour_list = new ArrayList<>();
-        for(int i= 0 ; i < flavour.size() ; i++){
+        for (int i = 0; i < flavour.size(); i++) {
             flavour_list.add(flavour.get(i));
         }
 
@@ -239,14 +237,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
         recyclerView.setAdapter(adapter);
-
-//        recyclerView.setNestedScrollingEnabled(false);
-//        recyclerView.setHasFixedSize(false);
-////        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(new WrappingLinearLayoutManager(this));
-//
-//
-//        recyclerView.setAdapter(adapter);
 
     }
 
@@ -340,8 +330,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 }
             }
 
-            jsonObject.put("user_id", "1");
-            jsonObject.put("order_date", getCurrentDate());
+            jsonObject.put("user_id", getUserId());
+            jsonObject.put("order_date", MyUtils.getCurrentDate());
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
 
@@ -355,6 +345,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
+
     @Subscribe
     public void orderProductResponse(OrderEventBus eventBus) {
 
@@ -362,7 +353,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             JSONObject jsonObject = new JSONObject(eventBus.getResponse());
             String result = jsonObject.getString("result");
             if (result.equals("success"))
-                MyUtils.showToast(this, "Successfully Ordered and your total price is: "+ priceCalculation());
+                MyUtils.showToast(this, "Successfully Ordered and your total price is: " + priceCalculation());
             startActivity(new Intent(this, MainActivity.class));
             finish();
 
@@ -372,11 +363,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private String getCurrentDate() {
+    @Subscribe
+    public void orderUserDetails(OrderedUserDetailsEvent event) {
 
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        orderSelectedProduct();
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -384,6 +378,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         getMenuInflater().inflate(R.menu.menu_single_item_detils, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -400,12 +395,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("PRODUCT_DETAILS");
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -421,17 +418,57 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+
     @Override
     public void onClick(View view) {
 
-        orderSelectedProduct();
+        if (MyUtils.isUserLoggedIn(this)) {
+            new Ordered_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
+//            orderSelectedProduct();
+
+        } else {
+
+            dialogIfNotLoggedIn(this);
+        }
 
     }
+
+    private void dialogIfNotLoggedIn(final Context context) {
+
+        new MaterialDialog.Builder(this)
+                .title("Please Login")
+                .content("You Are not Logged In. Please login to continue..")
+                .positiveText("Login")
+                .negativeText("Later")
+                .autoDismiss(true)
+                .positiveColorRes(R.color.myPrimaryColor)
+                .negativeColorRes(R.color.myPrimaryColor)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        dialog.dismiss();
+                        startActivity(new Intent(context, Login.class));
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        super.onNegative(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
+
+    }
+
 
     @Subscribe
     public void getCheckedItems(CheckBoxEventBus eventBus) {
@@ -440,10 +477,18 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
+
     @Subscribe
     public void removeUncheckedItems(CheckBoxFalseEventBus eventBus) {
 
         checkedPosition.remove(eventBus.getPosition());
+
+    }
+
+
+    private String getUserId() {
+
+        return MyUtils.getDataFromPreferences(this, "USER_ID");
 
     }
 }
