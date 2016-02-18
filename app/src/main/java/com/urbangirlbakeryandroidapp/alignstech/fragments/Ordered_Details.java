@@ -39,8 +39,8 @@ public class Ordered_Details extends android.support.v4.app.DialogFragment imple
     @InjectView(R.id.phone_2)
     EditText phone_2;
 
-    @InjectView(R.id.dateTime)
-    EditText dateTime;
+//    @InjectView(R.id.dateTime)
+//    EditText dateTime;
 
     @InjectView(R.id.short_message)
     EditText shortMessage;
@@ -82,14 +82,14 @@ public class Ordered_Details extends android.support.v4.app.DialogFragment imple
         String contact_Name = contactPersonName.getText().toString();
         String phone1 = phone_1.getText().toString();
         String phone2 = phone_2.getText().toString();
-        String date_time = dateTime.getText().toString();
+//        String date_time = dateTime.getText().toString();
         String short_message = shortMessage.getText().toString();
 
         if (!del_address.isEmpty()
                 && !contact_Name.isEmpty()
                 && !phone1.isEmpty()
                 && !phone2.isEmpty()
-                && !date_time.isEmpty()
+//                && !date_time.isEmpty()
                 && !short_message.isEmpty()
                 ) {
 
