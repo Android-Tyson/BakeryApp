@@ -38,6 +38,7 @@ public class UserProfile extends AppCompatActivity {
         initializeToolbar();
         ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(getSupportFragmentManager(), this, 3);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         indicator.setViewPager(viewPager);
 
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
