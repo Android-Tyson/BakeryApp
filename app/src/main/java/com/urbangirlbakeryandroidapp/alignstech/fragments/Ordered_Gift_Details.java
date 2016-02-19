@@ -12,7 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderGiftDetails;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,6 +47,8 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
     @InjectView(R.id.order_gift)
     Button order_gift;
 
+    private ArrayList<String> userPostDetails = new ArrayList<>();
+
     public Ordered_Gift_Details() {
         // Required empty public constructor
     }
@@ -72,7 +78,10 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
             getDialog().dismiss();
         }else if(view.getId() == R.id.order_gift){
             if(fieldsAreNotEmpty()) {
-                MyUtils.showToast(getActivity(), "clk..");
+                PostOrderGiftDetails.postOrderUserDetails(Apis.cake_order_details, getActivity(), userPostDetails);
+                getDialog().dismiss();
+            }else {
+                MyUtils.showToast(getActivity(), "Some Fields are empty...");
             }
         }
 
@@ -80,8 +89,24 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
 
     public boolean fieldsAreNotEmpty(){
 
-        if(!sender.getText().toString().isEmpty() && !receiver.getText().toString().isEmpty() &&
-                !senderAddress.getText().toString().isEmpty() && !receiverAddress.getText().toString().isEmpty()){
+        String sender_name = sender.getText().toString();
+        String receiver_name = receiver.getText().toString();
+        String sender_addr = senderAddress.getText().toString();
+        String receiver_addr = receiverAddress.getText().toString();
+        String short_message = message.getText().toString();
+
+        if(!sender_name.isEmpty() && !receiver_name.isEmpty() &&
+                !sender_addr.isEmpty() && !receiver_addr.isEmpty() &&
+                !short_message.isEmpty()){
+
+            userPostDetails.add(sender_name);
+            userPostDetails.add(receiver_name);
+            userPostDetails.add(sender_addr);
+            userPostDetails.add(receiver_addr);
+            userPostDetails.add(short_message);
+
+
+
             return true;
         }else{
             MyUtils.showToast(getActivity() , "Please Fill all the fields..");

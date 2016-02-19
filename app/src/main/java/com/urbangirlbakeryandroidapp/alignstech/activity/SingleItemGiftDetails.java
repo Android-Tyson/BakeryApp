@@ -13,6 +13,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedGiftDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
@@ -149,7 +150,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 JSONObject jsonObjSingleProduct = new JSONObject();
 
                 if (i == 0) {
-                    jsonObjSingleProduct.put("order_id", "11111");
+                    jsonObjSingleProduct.put("order_id", MyUtils.getDataFromPreferences(this , "USER_ID"));
                     jsonObjSingleProduct.put("product_id", singleProductDetailsList.get(0));
                     jsonObjSingleProduct.put("product_name", singleProductDetailsList.get(1));
                     jsonObjSingleProduct.put("price", singleProductDetailsList.get(2));
@@ -188,6 +189,13 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Subscribe
+    public void orderUserDetails(OrderedGiftDetailsEvent event) {
+
+        orderSelectedProduct();
 
     }
 

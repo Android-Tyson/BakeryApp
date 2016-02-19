@@ -3,11 +3,11 @@ package com.urbangirlbakeryandroidapp.alignstech.bus;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class OrderedUserDetailsEvent {
+public class OrderedCakeDetailsEvent {
 
     String response;
 
-    public OrderedUserDetailsEvent(String response){
+    public OrderedCakeDetailsEvent(String response){
         this.response = response;
     }
 

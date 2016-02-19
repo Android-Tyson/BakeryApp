@@ -116,7 +116,7 @@ public class Ordered_Details extends android.support.v4.app.DialogFragment imple
     public void onClick(View view) {
 
         if (ifAnyFieldsAreNotEmpty()) {
-            PostOrderCakeDetails.postOrderUserDetails(Apis.order_user_details, getActivity(), userPostDetails);
+            PostOrderCakeDetails.postOrderUserDetails(Apis.gift_order_details, getActivity(), userPostDetails);
             getDialog().dismiss();
         } else {
             MyUtils.showToast(getActivity(), "Please Check all the Details.");

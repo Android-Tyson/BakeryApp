@@ -25,7 +25,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
-import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedUserDetailsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedCakeDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
@@ -364,7 +364,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
     @Subscribe
-    public void orderUserDetails(OrderedUserDetailsEvent event) {
+    public void orderUserDetails(OrderedCakeDetailsEvent event) {
 
         orderSelectedProduct();
 

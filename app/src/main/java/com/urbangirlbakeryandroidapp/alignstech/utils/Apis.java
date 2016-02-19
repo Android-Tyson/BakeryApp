@@ -25,6 +25,8 @@ public class Apis {
 
     public static final String product_order = "http://cake.yogeshojha.com.np/api/order";
 
-    public static final String order_user_details = "http://cake.yogeshojha.com.np/api/receive_order_details";
+    public static final String cake_order_details = "http://cake.yogeshojha.com.np/api/receive_order_details";
     public static final String my_orders = "http://cake.yogeshojha.com.np/api/order_product";
+
+    public static final String gift_order_details = "http://cake.yogeshojha.com.np/api/receive_gift_order";
 }

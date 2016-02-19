@@ -8,7 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedCakeDetailsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedGiftDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class PostOrderCakeDetails {
+public class PostOrderGiftDetails {
 
     private static MaterialDialog materialDialog;
 
@@ -32,7 +32,7 @@ public class PostOrderCakeDetails {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MyBus.getInstance().post(new OrderedCakeDetailsEvent(response));
+                        MyBus.getInstance().post(new OrderedGiftDetailsEvent(response));
                         materialDialog.dismiss();
 
                     }
@@ -48,12 +48,11 @@ public class PostOrderCakeDetails {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("delivery_address", orderedUserDetail.get(0));
-                params.put("contact_person_name", orderedUserDetail.get(1));
-                params.put("phone_no1", orderedUserDetail.get(2));
-                params.put("phone_no2", orderedUserDetail.get(3));
-                params.put("date_time", orderedUserDetail.get(4));
-                params.put("message_on_cake", orderedUserDetail.get(5));
+                params.put("gift_sender_name", orderedUserDetail.get(0));
+                params.put("gift_receiver_name", orderedUserDetail.get(1));
+                params.put("sender_address", orderedUserDetail.get(2));
+                params.put("receiver_address", orderedUserDetail.get(3));
+                params.put("message", orderedUserDetail.get(4));
                 params.put("user_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
                 MyUtils.showLog(" ");
 
