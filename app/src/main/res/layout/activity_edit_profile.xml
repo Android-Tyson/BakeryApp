@@ -301,6 +301,68 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="20dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:layout_marginEnd="10dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:src="@mipmap/ic_launcher"-->
+                        <!--android:textColor="@color/share_icon_color"-->
+                        <!--android:textSize="20sp" />-->
+
+                        <EditText
+                            android:id="@+id/user_billing_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusableInTouchMode="true"
+                            android:hint="Billing Address"
+                            android:textColor="@color/myTextPrimaryColor"
+                            android:textColorHint="@color/textHint"
+                            android:padding="10dp"
+                            android:theme="@style/CustomEditTextTheme"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="20dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:layout_marginEnd="10dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:src="@mipmap/ic_launcher"-->
+                        <!--android:textColor="@color/share_icon_color"-->
+                        <!--android:textSize="20sp" />-->
+
+                        <EditText
+                            android:id="@+id/user_sipping_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusableInTouchMode="true"
+                            android:hint="Sipping Address"
+                            android:textColor="@color/myTextPrimaryColor"
+                            android:textColorHint="@color/textHint"
+                            android:padding="10dp"
+                            android:theme="@style/CustomEditTextTheme"/>
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class GetSomeCategories {
 
-    private static MaterialDialog materialDialog;
+    public static MaterialDialog materialDialog;
     public static void parseSomeCategoriesList(String url , final Context context)
     {
 

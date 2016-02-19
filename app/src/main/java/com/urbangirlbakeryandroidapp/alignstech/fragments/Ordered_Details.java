@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderUser;
+import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderCakeDetails;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -116,7 +116,7 @@ public class Ordered_Details extends android.support.v4.app.DialogFragment imple
     public void onClick(View view) {
 
         if (ifAnyFieldsAreNotEmpty()) {
-            PostOrderUser.postOrderUserDetails(Apis.order_user_details, getActivity(), userPostDetails);
+            PostOrderCakeDetails.postOrderUserDetails(Apis.order_user_details, getActivity(), userPostDetails);
             getDialog().dismiss();
         } else {
             MyUtils.showToast(getActivity(), "Please Check all the Details.");

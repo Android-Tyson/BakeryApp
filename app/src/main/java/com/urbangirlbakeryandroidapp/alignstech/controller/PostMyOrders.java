@@ -53,8 +53,7 @@ public class PostMyOrders {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-//                params.put("user_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
-                params.put("user_id", "asdfasd233");
+                params.put("user_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
 
                 return params;
             }

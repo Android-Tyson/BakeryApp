@@ -217,7 +217,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             String location = userDetials.getLocation();
             String profilePicUrl = userDetials.getProfilePicUrl();
 
-            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl);
+            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl );
             dataBase_userInfo.save();
 
 //            String user_fb_id = userDetials.getFb_id();

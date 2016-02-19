@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech.profile_fragment;
 
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,17 +23,16 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Profile extends android.support.v4.app.Fragment {
+public class MyProfile extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     private List<String> titleList, infoList;
 
-    public Profile() {
+    public MyProfile() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,8 +64,8 @@ public class Profile extends android.support.v4.app.Fragment {
         titleList = new ArrayList<>();
         infoList = new ArrayList<>();
 
-        titleList.add("First Name");
-        titleList.add("Last Name");
+        titleList.add("Full Name");
+//        titleList.add("Last Name");
         titleList.add("Email");
         titleList.add("Primary Phone No.");
         titleList.add("Secondary Phone No.");
@@ -77,8 +75,8 @@ public class Profile extends android.support.v4.app.Fragment {
         if (DataBase_Utils.isUserInfoDataExists()) {
             List<DataBase_UserInfo> infoList = DataBase_Utils.getUserInfoList();
 
-            String firstName = infoList.get(0).getFirstName();
-            String lastName = infoList.get(0).getLastName();
+            String firstName = infoList.get(0).getFirstName() + " "+ infoList.get(0).getLastName();
+//            String lastName = infoList.get(0).getLastName();
             String email = infoList.get(0).getEmail();
             String primaryPhone = infoList.get(0).getMobileNo();
             String secondaryPhone = infoList.get(0).getMobileNo();
@@ -88,9 +86,9 @@ public class Profile extends android.support.v4.app.Fragment {
             if(firstName == null || firstName.isEmpty()){
                 firstName = "Your FirstName";
             }
-            if(lastName == null || lastName.isEmpty()){
-                lastName = "Your LastName";
-            }
+//            if(lastName == null || lastName.isEmpty()){
+//                lastName = "Your LastName";
+//            }
             if(email == null || email.isEmpty()){
                 email = "Your Email";
             }
@@ -109,7 +107,7 @@ public class Profile extends android.support.v4.app.Fragment {
 
 
             this.infoList.add(firstName);
-            this.infoList.add(lastName);
+//            this.infoList.add(lastName);
             this.infoList.add(email);
             this.infoList.add(primaryPhone);
             this.infoList.add(secondaryPhone);

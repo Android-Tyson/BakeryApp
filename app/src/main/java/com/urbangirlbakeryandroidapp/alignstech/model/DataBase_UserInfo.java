@@ -43,7 +43,29 @@ public class DataBase_UserInfo extends Model{
     @Column(name = "PicUrl")
     private String profilePicUrl;
 
+    @Column(name = "billingAddress")
+    private String billingAddress;
+
+    @Column(name = "sippingAddress")
+    private String sippingAddress;
+
     public DataBase_UserInfo(){}
+
+    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl , String billingAddress , String sippingAddress) {
+        this.fb_id = fb_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mobileNo = mobileNo;
+        this.email = email;
+        this.dob = dob;
+        this.gender = gender;
+        this.zone = zone;
+        this.district = district;
+        this.location = location;
+        this.profilePicUrl = profilePicUrl;
+        this.billingAddress = billingAddress;
+        this.sippingAddress = sippingAddress;
+    }
 
     public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl) {
         this.fb_id = fb_id;
@@ -146,4 +168,21 @@ public class DataBase_UserInfo extends Model{
     public void setProfilePicUrl(String profilePicUrl) {
         this.profilePicUrl = profilePicUrl;
     }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public String getSippingAddress() {
+        return sippingAddress;
+    }
+
+    public void setSippingAddress(String sippingAddress) {
+        this.sippingAddress = sippingAddress;
+    }
+
 }

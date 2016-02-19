@@ -37,7 +37,7 @@ public class PostNormalUserRegister {
                         MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
                         MyUtils.saveDataInPreferences(context, "USER_ID", userInfo.get(0));
                         DataBase_Utils.deleteUserInfoList();
-                        DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9));
+                        DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9) , userInfo.get(10) , userInfo.get(11));
                         dataBase_userInfo.save();
                         MyBus.getInstance().post(new NormalRegisterEventBus(response));
                         materialDialog.dismiss();
@@ -64,7 +64,8 @@ public class PostNormalUserRegister {
                 params.put("district", userInfo.get(6));
                 params.put("location", userInfo.get(7));
                 params.put("full_name", userInfo.get(8));
-                MyUtils.showLog(" ");
+                params.put("billing_address", userInfo.get(10));
+                params.put("sipping_address", userInfo.get(11));
 
                 return params;
             }

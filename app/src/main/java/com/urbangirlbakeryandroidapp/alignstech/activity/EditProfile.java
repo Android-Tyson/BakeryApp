@@ -56,7 +56,16 @@ public class EditProfile extends AppCompatActivity {
     @InjectView(R.id.user_district)
     EditText user_district;
 
-    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district , profilePicUrl;
+    @InjectView(R.id.user_billing_address)
+    EditText user_billing_address;
+
+    @InjectView(R.id.user_sipping_address)
+    EditText user_sipping_address;
+
+
+    private String fb_id, fullName, email, mobileNo,
+            dob, gender, location, zone, district , profilePicUrl
+            , sippingAddress , billingAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +94,8 @@ public class EditProfile extends AppCompatActivity {
             user_location.setText(userInfos.get(0).getLocation());
             user_zone.setText(userInfos.get(0).getZone());
             user_district.setText(userInfos.get(0).getDistrict());
-
+            user_billing_address.setText(userInfos.get(0).getBillingAddress());
+            user_sipping_address.setText(userInfos.get(0).getSippingAddress());
         }
     }
 
@@ -109,6 +119,8 @@ public class EditProfile extends AppCompatActivity {
         location = user_location.getText().toString();
         zone = user_zone.getText().toString();
         district = user_district.getText().toString();
+        sippingAddress = user_sipping_address.getText().toString();
+        billingAddress = user_billing_address.getText().toString();
 
     }
 
@@ -141,6 +153,8 @@ public class EditProfile extends AppCompatActivity {
             userInfo.add(district);
             userInfo.add(location);
             userInfo.add(profilePicUrl);
+            userInfo.add(billingAddress);
+            userInfo.add(sippingAddress);
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {

@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.Profile;
+import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.MyProfile;
 import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.Complaints;
-import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.Order;
+import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.MyOrder;
 
 /**
  * Created by Dell on 2/9/2016.
@@ -27,9 +27,9 @@ public class ProfileViewPagerAdapter extends FragmentStatePagerAdapter{
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new Profile();
+                return new MyProfile();
             case 1:
-                return new Order();
+                return new MyOrder();
             case 2:
                 return new Complaints();
             default:

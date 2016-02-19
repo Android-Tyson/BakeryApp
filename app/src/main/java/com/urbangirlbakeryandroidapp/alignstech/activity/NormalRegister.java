@@ -54,7 +54,15 @@ public class NormalRegister extends AppCompatActivity {
     @InjectView(R.id.user_district)
     EditText user_district;
 
-    private String fb_id, fullName, email, mobileNo, dob, gender, location, zone, district , profilePicUrl;
+    @InjectView(R.id.user_billing_address)
+    EditText user_billing_address;
+
+    @InjectView(R.id.user_sipping_address)
+    EditText user_sipping_address;
+
+    private String fb_id, fullName, email, mobileNo,
+            dob, gender, location, zone, district , profilePicUrl
+            , sippingAddress , billingAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +95,8 @@ public class NormalRegister extends AppCompatActivity {
         zone = user_zone.getText().toString();
         district = user_district.getText().toString();
         profilePicUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
+        sippingAddress = user_sipping_address.getText().toString();
+        billingAddress = user_billing_address.getText().toString();
 
     }
 
@@ -119,6 +129,8 @@ public class NormalRegister extends AppCompatActivity {
             userInfo.add(district);
             userInfo.add(location);
             userInfo.add(profilePicUrl);
+            userInfo.add(billingAddress);
+            userInfo.add(sippingAddress);
 
 
             if (MyUtils.isNetworkConnected(this)) {
@@ -126,6 +138,7 @@ public class NormalRegister extends AppCompatActivity {
                     if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobileNo, this)) {
 
                         PostNormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
+
                     }
                 }
             }

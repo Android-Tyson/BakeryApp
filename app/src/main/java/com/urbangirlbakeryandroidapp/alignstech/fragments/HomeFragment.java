@@ -377,6 +377,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onStop() {
         mDemoSlider.stopAutoCycle();
+        if(GetSomeGifts.materialDialog != null){
+            GetSomeGifts.materialDialog.dismiss();
+        }
+        if(GetSomeCategories.materialDialog != null){
+            GetSomeCategories.materialDialog.dismiss();
+        }
         super.onStop();
     }
 

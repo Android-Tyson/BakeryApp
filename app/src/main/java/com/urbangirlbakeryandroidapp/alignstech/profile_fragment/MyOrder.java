@@ -17,8 +17,11 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.GetMyOrders;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostMyOrders;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,12 +33,13 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Order extends android.support.v4.app.Fragment {
+public class MyOrder extends android.support.v4.app.Fragment {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private List<String> titleList, infoList;
+    private List<String> orderDateList, productNameList;
+    private ProfileMyOrderAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class Order extends android.support.v4.app.Fragment {
         MyBus.getInstance().register(this);
     }
 
-    public Order() {
+    public MyOrder() {
         // Required empty public constructor
     }
 
@@ -61,13 +65,15 @@ public class Order extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        PostMyOrders.postMyOrderList(Apis.my_orders , getActivity());
+        PostMyOrders.postMyOrderList(Apis.my_orders, getActivity());
     }
 
     private void initializeRecyclerView() {
 
-        initializeListData();
-        ProfileMyOrderAdapter adapter = new ProfileMyOrderAdapter(getActivity(), titleList, infoList);
+        orderDateList = new ArrayList<>();
+        productNameList = new ArrayList<>();
+
+        adapter = new ProfileMyOrderAdapter(getActivity(), productNameList, orderDateList);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -79,18 +85,6 @@ public class Order extends android.support.v4.app.Fragment {
 
     }
 
-    private void initializeListData(){
-
-        titleList = new ArrayList<>();
-        infoList = new ArrayList<>();
-
-        titleList.add("Cake 1");
-        titleList.add("Cake 2");
-
-        infoList.add("Date 1");
-        infoList.add("Date 2");
-
-    }
 
     @Subscribe
     public void getMyOrderObject(GetMyOrders event){
@@ -102,22 +96,25 @@ public class Order extends android.support.v4.app.Fragment {
 
     private void performJsonTask(JSONObject jsonObject){
 
-//        ArrayList<String> giftChildList = new ArrayList<>();
-//
-//        try {
-//            JSONArray jsonArray = jsonObject.getJSONArray("result");
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                JSONObject jsonObj = jsonArray.getJSONObject(i);
-//                String singleChildname = jsonObj.getString("name");
-//                String singleChildId = jsonObj.getString("id");
-//                giftChildList.add(singleChildname);
-////                childIdList.add(singleChildId);
-////                childNameList.add(singleChildname);
-//
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                JSONObject orderDateObj = jsonObj.getJSONObject("0");
+                String orderDate = orderDateObj.getString("order_date");
+                orderDateList.add(orderDate);
+
+                JSONObject productNameObj = jsonObj.getJSONObject("product_name");
+                String productName = productNameObj.getString("product_name");
+                productNameList.add(productName);
+
+            }
+            MyUtils.showLog(" ");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+            adapter.notifyDataSetChanged();
+        }
 
     }
 
