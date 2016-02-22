@@ -36,7 +36,7 @@ public class NormalRegister extends AppCompatActivity {
     @InjectView(R.id.user_email)
     EditText user_email;
 
-    @InjectView(R.id.user_mobile)
+    @InjectView(R.id.user_mobile_primary)
     EditText user_mobile;
 
     @InjectView(R.id.user_dob)
@@ -60,9 +60,12 @@ public class NormalRegister extends AppCompatActivity {
     @InjectView(R.id.user_sipping_address)
     EditText user_sipping_address;
 
+    @InjectView(R.id.user_mobile_secondary)
+    EditText user_mobile_secondary;
+
     private String fb_id, fullName, email, mobileNo,
             dob, gender, location, zone, district , profilePicUrl
-            , sippingAddress , billingAddress;
+            , sippingAddress , billingAddress , mobileSecondary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,7 @@ public class NormalRegister extends AppCompatActivity {
         profilePicUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
         sippingAddress = user_sipping_address.getText().toString();
         billingAddress = user_billing_address.getText().toString();
+        mobileSecondary =user_mobile_secondary.getText().toString();
 
     }
 
@@ -131,7 +135,7 @@ public class NormalRegister extends AppCompatActivity {
             userInfo.add(profilePicUrl);
             userInfo.add(billingAddress);
             userInfo.add(sippingAddress);
-
+            userInfo.add(mobileSecondary);
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {

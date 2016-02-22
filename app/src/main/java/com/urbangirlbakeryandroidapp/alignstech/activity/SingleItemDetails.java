@@ -30,7 +30,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Details;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -429,7 +429,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onClick(View view) {
 
         if (MyUtils.isUserLoggedIn(this)) {
-            new Ordered_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
+            new Ordered_Cake_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
 //            orderSelectedProduct();
 
         } else {

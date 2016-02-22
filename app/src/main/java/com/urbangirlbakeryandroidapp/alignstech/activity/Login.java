@@ -267,7 +267,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //            userDetials.setLastName("Name");
         }
         if (userDetials.getMobileNo() == null) {
-//            userDetials.setMobileNo("");
+
         }
         if (userDetials.getEmail() == null) {
 //            userDetials.setEmail("yourmail@gmail.com");

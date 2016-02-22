@@ -78,10 +78,10 @@ public class MyProfile extends android.support.v4.app.Fragment {
             String firstName = infoList.get(0).getFirstName() + " "+ infoList.get(0).getLastName();
 //            String lastName = infoList.get(0).getLastName();
             String email = infoList.get(0).getEmail();
-            String primaryPhone = infoList.get(0).getMobileNo();
-            String secondaryPhone = infoList.get(0).getMobileNo();
-            String billingAddress = infoList.get(0).getLocation();
-            String sippingAddress = infoList.get(0).getZone();
+            String primaryPhone = infoList.get(0).getMobilePrimary();
+            String secondaryPhone = infoList.get(0).getMobileSecondary();
+            String billingAddress = infoList.get(0).getBillingAddress();
+            String sippingAddress = infoList.get(0).getSippingAddress();
 
             if(firstName == null || firstName.isEmpty()){
                 firstName = "Your FirstName";

@@ -38,8 +38,8 @@ public class EditProfile extends AppCompatActivity {
     @InjectView(R.id.user_email)
     EditText user_email;
 
-    @InjectView(R.id.user_mobile)
-    EditText user_mobile;
+    @InjectView(R.id.user_mobile_primary)
+    EditText user_mobile_primary;
 
     @InjectView(R.id.user_dob)
     EditText user_dob;
@@ -62,10 +62,12 @@ public class EditProfile extends AppCompatActivity {
     @InjectView(R.id.user_sipping_address)
     EditText user_sipping_address;
 
+    @InjectView(R.id.user_mobile_secondary)
+    EditText user_mobile_secondary;
 
-    private String fb_id, fullName, email, mobileNo,
+    private String fb_id, fullName, email, mobilePrimary,
             dob, gender, location, zone, district , profilePicUrl
-            , sippingAddress , billingAddress;
+            , sippingAddress , billingAddress , mobileSecondary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class EditProfile extends AppCompatActivity {
 
             user_full_name.setText(userInfos.get(0).getFirstName()+" "+userInfos.get(0).getLastName());
             user_email.setText(userInfos.get(0).getEmail());
-            user_mobile.setText(userInfos.get(0).getMobileNo());
+            user_mobile_primary.setText(userInfos.get(0).getMobilePrimary());
             user_dob.setText(userInfos.get(0).getDob());
             user_gender.setText(userInfos.get(0).getGender());
             user_location.setText(userInfos.get(0).getLocation());
@@ -96,6 +98,7 @@ public class EditProfile extends AppCompatActivity {
             user_district.setText(userInfos.get(0).getDistrict());
             user_billing_address.setText(userInfos.get(0).getBillingAddress());
             user_sipping_address.setText(userInfos.get(0).getSippingAddress());
+            user_mobile_secondary.setText(userInfos.get(0).getMobileSecondary());
         }
     }
 
@@ -113,7 +116,7 @@ public class EditProfile extends AppCompatActivity {
 //        fb_id = user_email.getText().toString();
         fullName = user_full_name.getText().toString();
         email = user_email.getText().toString();
-        mobileNo = user_mobile.getText().toString();
+        mobilePrimary = user_mobile_primary.getText().toString();
         dob = user_dob.getText().toString();
         gender = user_gender.getText().toString();
         location = user_location.getText().toString();
@@ -121,6 +124,7 @@ public class EditProfile extends AppCompatActivity {
         district = user_district.getText().toString();
         sippingAddress = user_sipping_address.getText().toString();
         billingAddress = user_billing_address.getText().toString();
+        mobileSecondary =user_mobile_secondary.getText().toString();
 
     }
 
@@ -145,7 +149,7 @@ public class EditProfile extends AppCompatActivity {
             List<String> userInfo = new ArrayList<>();
             userInfo.add(fb_id);
             userInfo.add(fullName);
-            userInfo.add(mobileNo);
+            userInfo.add(mobilePrimary);
             userInfo.add(email);
             userInfo.add(dob);
             userInfo.add(gender);
@@ -155,10 +159,11 @@ public class EditProfile extends AppCompatActivity {
             userInfo.add(profilePicUrl);
             userInfo.add(billingAddress);
             userInfo.add(sippingAddress);
+            userInfo.add(mobileSecondary);
 
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
-                    if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobileNo, this)) {
+                    if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobilePrimary, this)) {
                         PostNormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
                     }
                 }
@@ -170,7 +175,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private boolean checkIfAnyFieldsAreEmpty() {
-        if (fullName.isEmpty() || email.isEmpty() || mobileNo.isEmpty() || dob.isEmpty()
+        if (fullName.isEmpty() || email.isEmpty() || mobilePrimary.isEmpty() || dob.isEmpty()
                 || gender.isEmpty() || location.isEmpty() || zone.isEmpty() || district.isEmpty()) {
             MyUtils.showToast(this, "Some of the Field are empty..");
             return false;

@@ -127,13 +127,45 @@
                         <!--android:textSize="20sp" />-->
 
                     <EditText
-                        android:id="@+id/user_mobile"
+                        android:id="@+id/user_mobile_primary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:focusableInTouchMode="true"
                         android:inputType="number"
-                        android:hint="Mobile No."
+                        android:hint="Primary Mobile No."
+                        android:textColor="@color/myTextPrimaryColor"
+                        android:textColorHint="@color/textHint"
+                        android:padding="10dp"
+                        android:theme="@style/CustomEditTextTheme"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:src="@mipmap/ic_launcher"-->
+                    <!--android:textColor="@color/share_icon_color"-->
+                    <!--android:textSize="20sp" />-->
+
+                    <EditText
+                        android:id="@+id/user_mobile_secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:focusableInTouchMode="true"
+                        android:inputType="number"
+                        android:hint="Secondary Mobile No."
                         android:textColor="@color/myTextPrimaryColor"
                         android:textColorHint="@color/textHint"
                         android:padding="10dp"

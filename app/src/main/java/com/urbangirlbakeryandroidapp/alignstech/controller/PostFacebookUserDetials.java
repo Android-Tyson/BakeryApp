@@ -47,7 +47,6 @@ public class PostFacebookUserDetials {
                     List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
 
                     params.put("fb_id", queryResults.get(0).getFb_id());
-//                    params.put("mobile_no", queryResults.get(0).getMobileNo());
 //                    params.put("email", queryResults.get(0).getEmail());
 //                    params.put("dob", queryResults.get(0).getDob());
 //                    params.put("gender", queryResults.get(0).getGender());

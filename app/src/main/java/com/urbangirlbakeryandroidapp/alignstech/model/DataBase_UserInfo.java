@@ -20,7 +20,10 @@ public class DataBase_UserInfo extends Model{
     private String lastName;
 
     @Column(name = "MobileNo")
-    private String mobileNo;
+    private String mobilePrimary;
+
+    @Column(name = "MobileNo2")
+    private String mobileSecondary;
 
     @Column(name = "Email")
     private String email;
@@ -51,11 +54,11 @@ public class DataBase_UserInfo extends Model{
 
     public DataBase_UserInfo(){}
 
-    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl , String billingAddress , String sippingAddress) {
+    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobilePrimary, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl , String billingAddress , String sippingAddress , String mobileSecondary) {
         this.fb_id = fb_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mobileNo = mobileNo;
+        this.mobilePrimary = mobilePrimary;
         this.email = email;
         this.dob = dob;
         this.gender = gender;
@@ -65,13 +68,14 @@ public class DataBase_UserInfo extends Model{
         this.profilePicUrl = profilePicUrl;
         this.billingAddress = billingAddress;
         this.sippingAddress = sippingAddress;
+        this.mobileSecondary = mobileSecondary;
     }
 
-    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobileNo, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl) {
+    public DataBase_UserInfo(String fb_id, String firstName, String lastName, String mobilePrimary, String email, String dob, String gender, String zone, String district, String location, String profilePicUrl) {
         this.fb_id = fb_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mobileNo = mobileNo;
+        this.mobilePrimary = mobilePrimary;
         this.email = email;
         this.dob = dob;
         this.gender = gender;
@@ -105,12 +109,12 @@ public class DataBase_UserInfo extends Model{
         this.lastName = lastName;
     }
 
-    public String getMobileNo() {
-        return mobileNo;
+    public String getMobilePrimary() {
+        return mobilePrimary;
     }
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
+    public void setMobilePrimary(String mobilePrimary) {
+        this.mobilePrimary = mobilePrimary;
     }
 
     public String getEmail() {
@@ -185,4 +189,11 @@ public class DataBase_UserInfo extends Model{
         this.sippingAddress = sippingAddress;
     }
 
+    public String getMobileSecondary() {
+        return mobileSecondary;
+    }
+
+    public void setMobileSecondary(String mobileSecondary) {
+        this.mobileSecondary = mobileSecondary;
+    }
 }

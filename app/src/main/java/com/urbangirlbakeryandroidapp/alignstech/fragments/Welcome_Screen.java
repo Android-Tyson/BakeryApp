@@ -73,7 +73,7 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
 
             List<DataBase_UserInfo> userDetials = DataBase_Utils.getUserInfoList();
             String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
-            String userPhone = userDetials.get(0).getMobileNo();
+            String userPhone = userDetials.get(0).getMobilePrimary();
             String userEmail = userDetials.get(0).getEmail();
 
             user_name.setText(userName);

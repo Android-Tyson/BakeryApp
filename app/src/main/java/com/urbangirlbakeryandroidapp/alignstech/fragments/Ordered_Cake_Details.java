@@ -25,7 +25,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ordered_Details extends android.support.v4.app.DialogFragment implements View.OnClickListener {
+public class Ordered_Cake_Details extends android.support.v4.app.DialogFragment implements View.OnClickListener {
 
     @InjectView(R.id.deliveryAddress)
     EditText deliveryAddress;
@@ -50,7 +50,7 @@ public class Ordered_Details extends android.support.v4.app.DialogFragment imple
 
     private ArrayList<String> userPostDetails = new ArrayList<>();
 
-    public Ordered_Details() {
+    public Ordered_Cake_Details() {
         // Required empty public constructor
     }
 
