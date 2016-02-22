@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.DatePickerBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.TimePickerBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderCakeDetails;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.DateDialogHandler;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.TimeDialogHandler;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -143,7 +145,8 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
             }
         }else if(view.getId() == R.id.datePicker){
 
-
+            DateDialogHandler handler = new DateDialogHandler();
+            handler.show(getFragmentManager() , "DATE_DIALOG");
 
         }else if(view.getId() == R.id.timePicker){
 
@@ -158,6 +161,12 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     public void getSelectedDate(TimePickerBus event){
         tvTimePicker.setText(event.getCurrentTime());
     }
+
+    @Subscribe
+    public void getSelectedTime(DatePickerBus event){
+        tvDatePicker.setText(event.getCurrentDate());
+    }
+
 
     @Override
     public void onDestroy() {
