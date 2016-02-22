@@ -2,17 +2,21 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.TimePickerBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderCakeDetails;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.TimeDialogHandler;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
@@ -25,28 +29,36 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ordered_Cake_Details extends android.support.v4.app.DialogFragment implements View.OnClickListener {
+public class Ordered_Cake_Details extends android.support.v4.app.Fragment implements View.OnClickListener  {
 
-    @InjectView(R.id.deliveryAddress)
-    EditText deliveryAddress;
+    private Context context;
 
-    @InjectView(R.id.contactPersonName)
+    @InjectView(R.id.full_name)
     EditText contactPersonName;
 
-    @InjectView(R.id.phone_1)
+    @InjectView(R.id.phone1)
     EditText phone_1;
 
-    @InjectView(R.id.phone_2)
+    @InjectView(R.id.phone2)
     EditText phone_2;
 
-//    @InjectView(R.id.dateTime)
-//    EditText dateTime;
+    @InjectView(R.id.sippingAddress)
+    EditText deliveryAddress;
 
-    @InjectView(R.id.short_message)
+    @InjectView(R.id.shortMessage)
     EditText shortMessage;
 
     @InjectView(R.id.order)
     Button order;
+
+    @InjectView(R.id.datePicker)
+    TextView tvDatePicker;
+
+    @InjectView(R.id.timePicker)
+    TextView tvTimePicker;
+
+    private int hour , minute ;
+    private String amPm;
 
     private ArrayList<String> userPostDetails = new ArrayList<>();
 
@@ -64,16 +76,18 @@ public class Ordered_Cake_Details extends android.support.v4.app.DialogFragment 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.fragment_order__details, container, false);
+        View view = inflater.inflate(R.layout.fragment_order_cake_details, container, false);
         ButterKnife.inject(this, view);
         return view;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         order.setOnClickListener(this);
+        tvDatePicker.setOnClickListener(this);
+        tvTimePicker.setOnClickListener(this);
     }
 
     private boolean ifAnyFieldsAreNotEmpty() {
@@ -115,19 +129,40 @@ public class Ordered_Cake_Details extends android.support.v4.app.DialogFragment 
     @Override
     public void onClick(View view) {
 
-        if (ifAnyFieldsAreNotEmpty()) {
-            PostOrderCakeDetails.postOrderUserDetails(Apis.gift_order_details, getActivity(), userPostDetails);
-            getDialog().dismiss();
-        } else {
-            MyUtils.showToast(getActivity(), "Please Check all the Details.");
-        }
+        if(view.getId() == R.id.order) {
+            if (ifAnyFieldsAreNotEmpty()) {
 
+                android.support.v4.app.Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("FRAME_CONTAINER");
+                if (fragment != null)
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+                PostOrderCakeDetails.postOrderUserDetails(Apis.gift_order_details, getActivity(), userPostDetails);
+
+            } else {
+                MyUtils.showToast(getActivity(), "Please Check all the Details.");
+            }
+        }else if(view.getId() == R.id.datePicker){
+
+
+
+        }else if(view.getId() == R.id.timePicker){
+
+            TimeDialogHandler handler = new TimeDialogHandler();
+            handler.show(getFragmentManager() , "TIMER_DIALOG");
+
+        }
     }
 
+
+    @Subscribe
+    public void getSelectedDate(TimePickerBus event){
+        tvTimePicker.setText(event.getCurrentTime());
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         MyBus.getInstance().unregister(this);
     }
+
 }

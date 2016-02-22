@@ -429,8 +429,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onClick(View view) {
 
         if (MyUtils.isUserLoggedIn(this)) {
-            new Ordered_Cake_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
+//            new Ordered_Cake_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
 //            orderSelectedProduct();
+
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
+                    new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
+
 
         } else {
 

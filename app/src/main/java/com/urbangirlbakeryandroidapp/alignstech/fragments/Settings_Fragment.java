@@ -48,7 +48,7 @@ public class Settings_Fragment extends PreferenceFragment {
         Preference prefs_logout_profile = findPreference("logout_profile");
         prefs_logout_profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                new DialogFragment().show(getFragmentManager(), "dialog_screen_tag");
+//                new DialogFragment().show(getFragmentManager(), "dialog_screen_tag");
 
                 return true;
             }
@@ -57,7 +57,7 @@ public class Settings_Fragment extends PreferenceFragment {
         Preference prefs_share_apph = findPreference("share_app");
         prefs_share_apph.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                new DialogFragment().show(getFragmentManager(), "dialog_screen_tag");
+//                new DialogFragment().show(getFragmentManager(), "dialog_screen_tag");
                 return true;
             }
         });
