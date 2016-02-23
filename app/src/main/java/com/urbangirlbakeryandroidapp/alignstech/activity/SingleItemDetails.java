@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,8 +23,8 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
-import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedCakeDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.UserDetailsListEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
@@ -75,6 +73,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     RecyclerView recyclerView;
 
     private String product_price, pound, per_pound_price;
+    private Double totalPrice;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
@@ -86,6 +85,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private double accessoriesTotalPrice = 0.00;
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
+    private ArrayList<String> orderedUserDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,8 +330,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 }
             }
 
+            jsonObject.put("contact_person_name" , orderedUserDetails.get(0));
+            jsonObject.put("phone_no1" , orderedUserDetails.get(1));
+            jsonObject.put("phone_no2" , orderedUserDetails.get(2));
+            jsonObject.put("delivery_address" , orderedUserDetails.get(3));
+            jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
+            jsonObject.put("order_date" , orderedUserDetails.get(5));
+
             jsonObject.put("user_id", getUserId());
-            jsonObject.put("order_date", MyUtils.getCurrentDate());
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
 
@@ -363,38 +369,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    @Subscribe
-    public void orderUserDetails(OrderedCakeDetailsEvent event) {
-
-        orderSelectedProduct();
-
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_single_item_detils, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+//    @Subscribe
+//    public void orderUserDetails(OrderedCakeDetailsEvent event) {
+//
+//        orderSelectedProduct();
+//
+//    }
 
     @Override
     protected void onDestroy() {
@@ -413,6 +393,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             MyUtils.showLog(" ");
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
+            totalPrice = Double.parseDouble(product_price) +
+                            Double.parseDouble(per_pound_price) * Double.parseDouble(pound);
+                    tv_product_price.setText(String.valueOf(totalPrice));
             MyUtils.showLog(" ");
         }
 
@@ -429,12 +412,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onClick(View view) {
 
         if (MyUtils.isUserLoggedIn(this)) {
-//            new Ordered_Cake_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
-//            orderSelectedProduct();
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                     new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
-
 
         } else {
 
@@ -478,6 +458,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void getCheckedItems(CheckBoxEventBus eventBus) {
 
         checkedPosition.put(eventBus.getPosition(), eventBus.getPosition());
+        String accessoryItemPrice = accessoriesPriceList.get(eventBus.getPosition());
+        totalPrice += Double.parseDouble(accessoryItemPrice);
+        tv_product_price.setText(String.valueOf(totalPrice));
 
     }
 
@@ -486,9 +469,20 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void removeUncheckedItems(CheckBoxFalseEventBus eventBus) {
 
         checkedPosition.remove(eventBus.getPosition());
+        String accessoryItemPrice = accessoriesPriceList.get(eventBus.getPosition());
+        totalPrice -= Double.parseDouble(accessoryItemPrice);
+        tv_product_price.setText(String.valueOf(totalPrice));
 
     }
 
+    @Subscribe
+    public void userDetailList(UserDetailsListEvent event){
+
+        orderedUserDetails = event.getUserDetailsList();
+        MyUtils.showLog(orderedUserDetails.toString());
+        orderSelectedProduct();
+
+    }
 
     private String getUserId() {
 

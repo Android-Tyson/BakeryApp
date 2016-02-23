@@ -3,308 +3,321 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/layout_background"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="2dp">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="2dp">
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Full Name"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <EditText
-                                android:id="@+id/full_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="name"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="2dp">
 
                         <LinearLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Email"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
+                                android:orientation="vertical"
+                                android:padding="10dp">
 
-                            <EditText
-                                android:id="@+id/email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="email"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Full Name"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
 
-                        </LinearLayout>
+                                <EditText
+                                    android:id="@+id/full_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="name"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
 
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
-
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Primary Phone"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <EditText
-                                android:id="@+id/phone1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="phone 1"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Secondary Phone"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <EditText
-                                android:id="@+id/phone2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="phone 2"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Shipping Address"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <EditText
-                                android:id="@+id/sippingAddress"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="delivery address"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
-
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="3dp"
-                                android:text="Message on Cake"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <EditText
-                                android:id="@+id/shortMessage"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/white"
-                                android:hint="short Message"
-                                android:padding="3dp"
-                                android:singleLine="true"
-                                android:textColorHint="#999" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/myDividerColor" />
-
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Delivery Date"
-                                android:textColor="#555"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/timePicker"
-                                android:text="Select Time"
-                                android:textSize="20sp"
-                                android:textColor="@color/white"
-                                android:padding="5dp"
-                                android:background="@color/myPrimaryColor"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:layout_marginBottom="10dp"/>
+                            </LinearLayout>
 
                             <View
                                 android:layout_width="fill_parent"
                                 android:layout_height="1dp"
                                 android:background="@color/myDividerColor" />
 
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Delivery Time"
-                                android:textColor="#555"
-                                android:layout_marginTop="10dp"
-                                android:textSize="16sp" />
+                                android:orientation="vertical"
+                                android:padding="10dp">
 
-                            <TextView
-                                android:layout_width="match_parent"
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Email"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="email"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/datePicker"
-                                android:layout_weight="1"
-                                android:textSize="20sp"
-                                android:textColor="@color/white"
-                                android:padding="5dp"
-                                android:text="Select Date"
-                                android:gravity="center"
-                                android:background="@color/myPrimaryColor"/>
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Primary Phone"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/phone1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="phone 1"
+                                    android:inputType="number"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Secondary Phone"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/phone2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="phone 2"
+                                    android:inputType="number"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Shipping Address"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/sippingAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="delivery address"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Message on Cake"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/shortMessage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="short Message"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:text="Delivery Date"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/timePicker"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/myPrimaryColor"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Select Time"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/myDividerColor" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:text="Delivery Time"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/datePicker"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/myPrimaryColor"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Select Date"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
+                    </android.support.v7.widget.CardView>
 
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
+                    <Button
+                        android:id="@+id/order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/light_blue"
+                        android:text="Send"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
 
-                <Button
-                    android:id="@+id/order"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_blue"
-                    android:text="Send"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
-        </RelativeLayout>
-
+        </android.support.v7.widget.CardView>
     </ScrollView>
 
 </FrameLayout>

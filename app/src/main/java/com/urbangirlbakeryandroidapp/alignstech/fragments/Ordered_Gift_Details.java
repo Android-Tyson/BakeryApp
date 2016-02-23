@@ -2,11 +2,9 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ordered_Gift_Details extends DialogFragment implements View.OnClickListener {
+public class Ordered_Gift_Details extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     @InjectView(R.id.close)
     TextView closeDialog;
@@ -58,7 +56,7 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.fragment_ordered_gift_detials, container, false);
         ButterKnife.inject(this, view);
         return view;
@@ -75,11 +73,11 @@ public class Ordered_Gift_Details extends DialogFragment implements View.OnClick
     public void onClick(View view) {
 
         if (view.getId() == R.id.close){
-            getDialog().dismiss();
+//            getDialog().dismiss();
         }else if(view.getId() == R.id.order_gift){
             if(fieldsAreNotEmpty()) {
                 PostOrderGiftDetails.postOrderUserDetails(Apis.cake_order_details, getActivity(), userPostDetails);
-                getDialog().dismiss();
+//                getDialog().dismiss();
             }else {
                 MyUtils.showToast(getActivity(), "Some Fields are empty...");
             }

@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech.profile_fragment;
 
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -99,13 +98,10 @@ public class MyOrder extends android.support.v4.app.Fragment {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                JSONObject orderDateObj = jsonObj.getJSONObject("0");
-                String orderDate = orderDateObj.getString("order_date");
+                JSONObject myOrderObj = jsonArray.getJSONObject(i);
+                String orderDate = myOrderObj.getString("order_date");
                 orderDateList.add(orderDate);
-
-                JSONObject productNameObj = jsonObj.getJSONObject("product_name");
-                String productName = productNameObj.getString("product_name");
+                String productName = myOrderObj.getString("product_name");
                 productNameList.add(productName);
 
             }

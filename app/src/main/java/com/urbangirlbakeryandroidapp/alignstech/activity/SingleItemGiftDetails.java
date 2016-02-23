@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
@@ -150,7 +152,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 JSONObject jsonObjSingleProduct = new JSONObject();
 
                 if (i == 0) {
-                    jsonObjSingleProduct.put("order_id", MyUtils.getDataFromPreferences(this , "USER_ID"));
+                    jsonObjSingleProduct.put("order_id", "NO_ORDER_ID");
                     jsonObjSingleProduct.put("product_id", singleProductDetailsList.get(0));
                     jsonObjSingleProduct.put("product_name", singleProductDetailsList.get(1));
                     jsonObjSingleProduct.put("price", singleProductDetailsList.get(2));
@@ -160,7 +162,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 }
             }
 
-            jsonObject.put("user_id", "1");
+            jsonObject.put("user_id", MyUtils.getDataFromPreferences(this , "USER_ID"));
             jsonObject.put("order_date", getCurrentDate());
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
@@ -219,9 +221,47 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
 //        orderSelectedProduct();
 
-        new Ordered_Gift_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
+//        new Ordered_Gift_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
 
+        if (MyUtils.isUserLoggedIn(this)) {
+
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
+                    new Ordered_Gift_Details() , "FRAME_CONTAINER").commit();
+
+        } else {
+
+            dialogIfNotLoggedIn(this);
+        }
 
     }
 
+    private void dialogIfNotLoggedIn(final Context context) {
+
+        new MaterialDialog.Builder(this)
+                .title("Please Login")
+                .content("You Are not Logged In. Please login to continue..")
+                .positiveText("Login")
+                .negativeText("Later")
+                .autoDismiss(true)
+                .positiveColorRes(R.color.myPrimaryColor)
+                .negativeColorRes(R.color.myPrimaryColor)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        dialog.dismiss();
+                        startActivity(new Intent(context, Login.class));
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        super.onNegative(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
+
+    }
 }

@@ -2,7 +2,6 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,14 +15,16 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.DatePickerBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.TimePickerBus;
-import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderCakeDetails;
+import com.urbangirlbakeryandroidapp.alignstech.bus.UserDetailsListEvent;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.DateDialogHandler;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.TimeDialogHandler;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,12 +32,13 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ordered_Cake_Details extends android.support.v4.app.Fragment implements View.OnClickListener  {
-
-    private Context context;
+public class Ordered_Cake_Details extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     @InjectView(R.id.full_name)
-    EditText contactPersonName;
+    EditText fullName;
+
+    @InjectView(R.id.email)
+    EditText email;
 
     @InjectView(R.id.phone1)
     EditText phone_1;
@@ -59,20 +61,19 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     @InjectView(R.id.timePicker)
     TextView tvTimePicker;
 
-    private int hour , minute ;
-    private String amPm;
-
     private ArrayList<String> userPostDetails = new ArrayList<>();
 
     public Ordered_Cake_Details() {
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,36 +88,75 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        fillDataToEditText();
         order.setOnClickListener(this);
         tvDatePicker.setOnClickListener(this);
         tvTimePicker.setOnClickListener(this);
     }
 
+    private void fillDataToEditText() {
+
+        if (DataBase_Utils.isUserInfoDataExists()) {
+
+            List<DataBase_UserInfo> infoList = DataBase_Utils.getUserInfoList();
+            String user_fullName = infoList.get(0).getFirstName() + " " + infoList.get(0).getLastName();
+            String user_email = infoList.get(0).getEmail();
+            String primary_phone = infoList.get(0).getMobilePrimary();
+            String secondary_phone = infoList.get(0).getMobileSecondary();
+            String delivery_address = infoList.get(0).getSippingAddress();
+
+            if (!user_fullName.isEmpty())
+                fullName.setText(user_fullName);
+
+            if (user_email != null && !user_email.isEmpty())
+                email.setText(user_email);
+
+            if (primary_phone != null && !primary_phone.isEmpty())
+                phone_1.setText(primary_phone);
+
+            if (secondary_phone != null && !secondary_phone.isEmpty())
+                phone_2.setText(secondary_phone);
+
+            if (delivery_address != null && !delivery_address.isEmpty())
+                deliveryAddress.setText(delivery_address);
+        }
+
+    }
+
+
     private boolean ifAnyFieldsAreNotEmpty() {
 
-        String del_address = deliveryAddress.getText().toString();
-        String contact_Name = contactPersonName.getText().toString();
+        String full_name = fullName.getText().toString();
         String phone1 = phone_1.getText().toString();
         String phone2 = phone_2.getText().toString();
-//        String date_time = dateTime.getText().toString();
-        String short_message = shortMessage.getText().toString();
+        String delivery_address = deliveryAddress.getText().toString();
+        String message_on_cake = shortMessage.getText().toString();
+        String datePicker = tvDatePicker.getText().toString();
+        String timePicker = tvTimePicker.getText().toString();
+        String email_addr = email.getText().toString();
 
-        if (!del_address.isEmpty()
-                && !contact_Name.isEmpty()
+        if (!delivery_address.isEmpty()
+                && !full_name.isEmpty()
                 && !phone1.isEmpty()
                 && !phone2.isEmpty()
-//                && !date_time.isEmpty()
-                && !short_message.isEmpty()
+                && !message_on_cake.isEmpty()
+                && !datePicker.isEmpty()
+                && !timePicker.isEmpty()
                 ) {
+
+            if (!email_addr.isEmpty())
+                email_addr = "Empty Mail";
 
             if (MyUtils.isValidPhoneNumber(phone1, getActivity())
                     && MyUtils.isValidPhoneNumber(phone2, getActivity())) {
-                userPostDetails.add(del_address);
-                userPostDetails.add(contact_Name);
+
+                userPostDetails.add(full_name);
                 userPostDetails.add(phone1);
                 userPostDetails.add(phone2);
-                userPostDetails.add(MyUtils.getCurrentDate());
-                userPostDetails.add(short_message);
+                userPostDetails.add(delivery_address);
+                userPostDetails.add(message_on_cake);
+                userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
+                userPostDetails.add(email_addr);
 
                 return true;
             } else {
@@ -131,39 +171,39 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     @Override
     public void onClick(View view) {
 
-        if(view.getId() == R.id.order) {
+        if (view.getId() == R.id.order) {
             if (ifAnyFieldsAreNotEmpty()) {
 
                 android.support.v4.app.Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("FRAME_CONTAINER");
-                if (fragment != null)
+                if (fragment != null) {
+                    MyBus.getInstance().post(new UserDetailsListEvent(userPostDetails));
                     getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-                PostOrderCakeDetails.postOrderUserDetails(Apis.gift_order_details, getActivity(), userPostDetails);
+                }
 
             } else {
                 MyUtils.showToast(getActivity(), "Please Check all the Details.");
             }
-        }else if(view.getId() == R.id.datePicker){
+        } else if (view.getId() == R.id.datePicker) {
 
             DateDialogHandler handler = new DateDialogHandler();
-            handler.show(getFragmentManager() , "DATE_DIALOG");
+            handler.show(getFragmentManager(), "DATE_DIALOG");
 
-        }else if(view.getId() == R.id.timePicker){
+        } else if (view.getId() == R.id.timePicker) {
 
             TimeDialogHandler handler = new TimeDialogHandler();
-            handler.show(getFragmentManager() , "TIMER_DIALOG");
+            handler.show(getFragmentManager(), "TIMER_DIALOG");
 
         }
     }
 
 
     @Subscribe
-    public void getSelectedDate(TimePickerBus event){
+    public void getSelectedDate(TimePickerBus event) {
         tvTimePicker.setText(event.getCurrentTime());
     }
 
     @Subscribe
-    public void getSelectedTime(DatePickerBus event){
+    public void getSelectedTime(DatePickerBus event) {
         tvDatePicker.setText(event.getCurrentDate());
     }
 

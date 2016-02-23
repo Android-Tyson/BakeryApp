@@ -186,8 +186,8 @@ public class MyUtils
             public void onLogout() {
                 MyUtils.showLog("");
                 SharedPreferences userInfo = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-                userInfo.edit().remove("USER_LOGGED_IN").commit();
-                userInfo.edit().remove("USER_ID").commit();
+                userInfo.edit().remove("USER_LOGGED_IN").apply();
+                userInfo.edit().remove("USER_ID").apply();
                 DataBase_Utils.deleteUserInfoList();
                 Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
