@@ -72,12 +72,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private String product_price, pound, per_pound_price;
+    private String product_price = "0.00", pound = "0.00", per_pound_price = "0.00";
     private Double totalPrice = 0.00;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
     private ArrayList<String> accessoriesPriceList = new ArrayList<>();
+    private ArrayList<String> per_pound_price_list = new ArrayList<>();
 
     private HashMap<Integer, Integer> checkedPosition = new HashMap<>();
 
@@ -112,6 +113,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob() {
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
+            String apiName = getApiName();
+            MyUtils.showLog(getApiName());
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
         }
     }
@@ -164,7 +167,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     JSONObject flavorObject = flavorArray.getJSONObject(j);
                     String flavor_id = flavorObject.getString("id");
                     String flavor = flavorObject.getString("flavor");
-                    per_pound_price = flavorObject.getString("per_pound_price");
+//                    per_pound_price = flavorObject.getString("per_pound_price");
+                    per_pound_price_list.add(flavorObject.getString("per_pound_price"));
                     flavour.add(flavor);
                 }
                 setDataToSpinner(flavour, starting_pound, ending_pound);
@@ -390,11 +394,19 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         Spinner spinner = (Spinner) adapterView;
         if (spinner.getId() == R.id.spinner_flavour) {
             String selectedItem = adapterView.getItemAtPosition(i).toString();
-            MyUtils.showLog(" ");
+            per_pound_price = per_pound_price_list.get(i);
+            MyUtils.showLog(per_pound_price);
+
+            totalPrice = Double.parseDouble(product_price) +
+                    Double.parseDouble(per_pound_price) *
+                            Double.parseDouble(pound) + accessoriesTotalPrice;
+            tv_product_price.setText(String.valueOf(totalPrice));
+
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
             totalPrice = Double.parseDouble(product_price) +
-                            Double.parseDouble(per_pound_price) * Double.parseDouble(pound) + accessoriesTotalPrice;
+                            Double.parseDouble(per_pound_price) *
+                                    Double.parseDouble(pound) + accessoriesTotalPrice;
                     tv_product_price.setText(String.valueOf(totalPrice));
             MyUtils.showLog(" ");
         }
