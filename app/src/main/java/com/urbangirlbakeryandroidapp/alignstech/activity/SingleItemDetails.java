@@ -73,7 +73,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     RecyclerView recyclerView;
 
     private String product_price, pound, per_pound_price;
-    private Double totalPrice;
+    private Double totalPrice = 0.00;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
@@ -394,7 +394,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
             totalPrice = Double.parseDouble(product_price) +
-                            Double.parseDouble(per_pound_price) * Double.parseDouble(pound);
+                            Double.parseDouble(per_pound_price) * Double.parseDouble(pound) + accessoriesTotalPrice;
                     tv_product_price.setText(String.valueOf(totalPrice));
             MyUtils.showLog(" ");
         }
@@ -460,6 +460,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         checkedPosition.put(eventBus.getPosition(), eventBus.getPosition());
         String accessoryItemPrice = accessoriesPriceList.get(eventBus.getPosition());
         totalPrice += Double.parseDouble(accessoryItemPrice);
+        accessoriesTotalPrice += Double.parseDouble(accessoryItemPrice);
         tv_product_price.setText(String.valueOf(totalPrice));
 
     }
@@ -471,6 +472,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         checkedPosition.remove(eventBus.getPosition());
         String accessoryItemPrice = accessoriesPriceList.get(eventBus.getPosition());
         totalPrice -= Double.parseDouble(accessoryItemPrice);
+        accessoriesTotalPrice -= Double.parseDouble(accessoryItemPrice);
         tv_product_price.setText(String.valueOf(totalPrice));
 
     }
