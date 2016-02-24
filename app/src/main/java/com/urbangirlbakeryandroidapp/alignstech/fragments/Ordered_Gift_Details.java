@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderGiftDetails;
-import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
+import com.urbangirlbakeryandroidapp.alignstech.bus.DatePickerBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.TimePickerBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.UserDetailsListEvent;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.DateDialogHandler;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.TimeDialogHandler;
+import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
+import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,26 +33,41 @@ import butterknife.InjectView;
  */
 public class Ordered_Gift_Details extends android.support.v4.app.Fragment implements View.OnClickListener {
 
-    @InjectView(R.id.close)
-    TextView closeDialog;
+    @InjectView(R.id.full_name)
+    EditText fullName;
 
-    @InjectView(R.id.sender)
-    EditText sender;
+    @InjectView(R.id.email)
+    EditText email;
 
-    @InjectView(R.id.receiver)
-    EditText receiver;
+    @InjectView(R.id.phone1)
+    EditText phone_1;
 
-    @InjectView(R.id.senderAddress)
-    EditText senderAddress;
+    @InjectView(R.id.phone2)
+    EditText phone_2;
 
-    @InjectView(R.id.receiverAddress)
-    EditText receiverAddress;
+    @InjectView(R.id.sippingAddress)
+    EditText deliveryAddress;
 
-    @InjectView(R.id.short_message)
-    EditText message;
+    @InjectView(R.id.shortMessage)
+    EditText shortMessage;
 
-    @InjectView(R.id.order_gift)
-    Button order_gift;
+    @InjectView(R.id.order)
+    Button order;
+
+    @InjectView(R.id.datePicker)
+    TextView tvDatePicker;
+
+    @InjectView(R.id.timePicker)
+    TextView tvTimePicker;
+
+    @InjectView(R.id.sender_name)
+    EditText sender_name;
+
+    @InjectView(R.id.receiver_name)
+    EditText receiver_name;
+
+    @InjectView(R.id.sender_address)
+    EditText sender_address;
 
     private ArrayList<String> userPostDetails = new ArrayList<>();
 
@@ -53,63 +77,164 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyBus.getInstance().register(this);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.fragment_ordered_gift_detials, container, false);
         ButterKnife.inject(this, view);
         return view;
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        closeDialog.setOnClickListener(this);
-        order_gift.setOnClickListener(this);
+        fillDataToEditText();
+        order.setOnClickListener(this);
+        tvDatePicker.setOnClickListener(this);
+        tvTimePicker.setOnClickListener(this);
     }
+
+    private void fillDataToEditText() {
+
+        if (DataBase_Utils.isUserInfoDataExists()) {
+
+            List<DataBase_UserInfo> infoList = DataBase_Utils.getUserInfoList();
+            String user_fullName = infoList.get(0).getFirstName() + " " + infoList.get(0).getLastName();
+            String user_email = infoList.get(0).getEmail();
+            String primary_phone = infoList.get(0).getMobilePrimary();
+            String secondary_phone = infoList.get(0).getMobileSecondary();
+            String delivery_address = infoList.get(0).getSippingAddress();
+
+            if (!user_fullName.isEmpty())
+                fullName.setText(user_fullName);
+
+            if (user_email != null && !user_email.isEmpty())
+                email.setText(user_email);
+
+            if (primary_phone != null && !primary_phone.isEmpty())
+                phone_1.setText(primary_phone);
+
+            if (secondary_phone != null && !secondary_phone.isEmpty())
+                phone_2.setText(secondary_phone);
+
+            if (delivery_address != null && !delivery_address.isEmpty())
+                deliveryAddress.setText(delivery_address);
+        }
+
+    }
+
+
+    private boolean ifAnyFieldsAreNotEmpty() {
+
+        String full_name = fullName.getText().toString();
+        String phone1 = phone_1.getText().toString();
+        String phone2 = phone_2.getText().toString();
+        String delivery_address = deliveryAddress.getText().toString();
+        String message_on_cake = shortMessage.getText().toString();
+        String datePicker = tvDatePicker.getText().toString();
+        String timePicker = tvTimePicker.getText().toString();
+        String email_addr = email.getText().toString();
+        String senderName = sender_name.getText().toString();
+        String receiverName = receiver_name.getText().toString();
+        String senderAddress = sender_address.getText().toString();
+
+        if (!delivery_address.isEmpty()
+                && !full_name.isEmpty()
+                && !phone1.isEmpty()
+                && !phone2.isEmpty()
+                && !message_on_cake.isEmpty()
+                && !datePicker.isEmpty()
+                && !timePicker.isEmpty()
+                && !senderName.isEmpty()
+                && !receiverName.isEmpty()
+                && !senderAddress.isEmpty()
+
+                ) {
+
+            if (!email_addr.isEmpty())
+                email_addr = "Empty Mail";
+
+            if (MyUtils.isValidPhoneNumber(phone1, getActivity())
+                    && MyUtils.isValidPhoneNumber(phone2, getActivity())) {
+
+                if(!datePicker.equals("Select Date") && !timePicker.equals("Select Time")){
+
+                    userPostDetails.add(full_name);
+                    userPostDetails.add(phone1);
+                    userPostDetails.add(phone2);
+                    userPostDetails.add(delivery_address);
+                    userPostDetails.add(message_on_cake);
+                    userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
+                    userPostDetails.add(email_addr);
+                    userPostDetails.add(senderName);
+                    userPostDetails.add(receiverName);
+                    userPostDetails.add(senderAddress);
+
+                    return true;
+                }else{
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.close){
-//            getDialog().dismiss();
-        }else if(view.getId() == R.id.order_gift){
-            if(fieldsAreNotEmpty()) {
-                PostOrderGiftDetails.postOrderUserDetails(Apis.cake_order_details, getActivity(), userPostDetails);
-//                getDialog().dismiss();
-            }else {
-                MyUtils.showToast(getActivity(), "Some Fields are empty...");
+        if (view.getId() == R.id.order) {
+            if (ifAnyFieldsAreNotEmpty()) {
+
+                android.support.v4.app.Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("FRAME_CONTAINER");
+                if (fragment != null) {
+                    MyBus.getInstance().post(new UserDetailsListEvent(userPostDetails));
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
+
+            } else {
+                MyUtils.showToast(getActivity(), "Please Check all the Details.");
             }
-        }
+        } else if (view.getId() == R.id.datePicker) {
 
+            DateDialogHandler handler = new DateDialogHandler();
+            handler.show(getFragmentManager(), "DATE_DIALOG");
+
+        } else if (view.getId() == R.id.timePicker) {
+
+            TimeDialogHandler handler = new TimeDialogHandler();
+            handler.show(getFragmentManager(), "TIMER_DIALOG");
+
+        }
     }
 
-    public boolean fieldsAreNotEmpty(){
 
-        String sender_name = sender.getText().toString();
-        String receiver_name = receiver.getText().toString();
-        String sender_addr = senderAddress.getText().toString();
-        String receiver_addr = receiverAddress.getText().toString();
-        String short_message = message.getText().toString();
-
-        if(!sender_name.isEmpty() && !receiver_name.isEmpty() &&
-                !sender_addr.isEmpty() && !receiver_addr.isEmpty() &&
-                !short_message.isEmpty()){
-
-            userPostDetails.add(sender_name);
-            userPostDetails.add(receiver_name);
-            userPostDetails.add(sender_addr);
-            userPostDetails.add(receiver_addr);
-            userPostDetails.add(short_message);
-
-
-
-            return true;
-        }else{
-            MyUtils.showToast(getActivity() , "Please Fill all the fields..");
-            return false;
-        }
-
+    @Subscribe
+    public void getSelectedDate(TimePickerBus event) {
+        tvTimePicker.setText(event.getCurrentTime());
     }
+
+    @Subscribe
+    public void getSelectedTime(DatePickerBus event) {
+        tvDatePicker.setText(event.getCurrentDate());
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
+    }
+
 }

@@ -4,162 +4,420 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout_background"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen">
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="X"
-                android:textSize="20sp"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:paddingTop="5dp"
-                android:paddingRight="5dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-        </RelativeLayout>
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            card_view:cardCornerRadius="1dp">
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/sender"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:hint="Gift Sender Name"
-                    android:padding="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/myTextPrimaryColor"
-                    android:textColorHint="@color/textHint"
-                    android:background="@null"/>
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_below="@+id/sender"
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/layout_background" />
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="2dp">
 
-                <EditText
-                    android:id="@+id/receiver"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sender"
-                    android:hint="Gift Receiver Name"
-                    android:textSize="16sp"
-                    android:padding="10dp"
-                    android:textColor="@color/myTextPrimaryColor"
-                    android:textColorHint="@color/textHint"
-                    android:background="@null"/>
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Full Name"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/full_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="name"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Sender Name"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/sender_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="sender name"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Receiver Name"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/receiver_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="receiver name"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Email"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="email"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Primary Phone"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/phone1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="phone 1"
+                                    android:inputType="number"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Secondary Phone"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/phone2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="phone 2"
+                                    android:inputType="number"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Receiver Address"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/sippingAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="receiver address"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Sender Address"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/sender_address"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="Sender address"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="3dp"
+                                    android:text="Message on Cake"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/shortMessage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:hint="short Message"
+                                    android:padding="3dp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#999" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/myDividerColor" />
+
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:text="Delivery Date"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/timePicker"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/myPrimaryColor"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Select Time"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/myDividerColor" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:text="Delivery Time"
+                                    android:textColor="#555"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/datePicker"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/myPrimaryColor"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Select Date"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <Button
+                        android:id="@+id/order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/light_blue"
+                        android:text="Send"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
 
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            card_view:cardCornerRadius="1dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-
-                <EditText
-                    android:id="@+id/senderAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:hint="Sender Address"
-                    android:textSize="16sp"
-                    android:padding="10dp"
-                    android:textColor="@color/myTextPrimaryColor"
-                    android:textColorHint="@color/textHint"
-                    android:background="@null"/>
-
-                <View
-                    android:layout_below="@+id/senderAddress"
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/layout_background" />
-
-                <EditText
-                    android:id="@+id/receiverAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/senderAddress"
-                    android:hint="Receiver Address"
-                    android:padding="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/myTextPrimaryColor"
-                    android:textColorHint="@color/textHint"
-                    android:background="@null"/>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="5dp"
-            card_view:cardCornerRadius="1dp">
-
-            <EditText
-                android:id="@+id/short_message"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/senderAddress"
-                android:hint="Message From gift Sender..."
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:textColor="@color/myTextPrimaryColor"
-                android:textColorHint="@color/textHint"
-                android:background="@null"/>
-
-        </android.support.v7.widget.CardView>
-
-        <Button
-            android:id="@+id/order_gift"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Order Gift"
-            android:textColor="@color/white"
-            android:background="@color/myAccentColor"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

@@ -17,6 +17,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedGiftDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.UserDetailsListEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Gift_Details;
@@ -59,6 +60,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     private String product_price;
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
+    private ArrayList<String> orderedUserDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,8 +164,17 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 }
             }
 
+            jsonObject.put("contact_person_name" , orderedUserDetails.get(0));
+            jsonObject.put("phone_no1" , orderedUserDetails.get(1));
+            jsonObject.put("phone_no2" , orderedUserDetails.get(2));
+            jsonObject.put("receiver_address" , orderedUserDetails.get(3));
+            jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
+            jsonObject.put("order_date" , orderedUserDetails.get(5));
+            jsonObject.put("gift_sender_name" , orderedUserDetails.get(7));
+            jsonObject.put("gift_receiver_name" , orderedUserDetails.get(8));
+            jsonObject.put("sender_address" , orderedUserDetails.get(9));
+
             jsonObject.put("user_id", MyUtils.getDataFromPreferences(this , "USER_ID"));
-            jsonObject.put("order_date", getCurrentDate());
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
 
@@ -219,10 +230,6 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-//        orderSelectedProduct();
-
-//        new Ordered_Gift_Details().show(getSupportFragmentManager(), "welcome_screen_tag");
-
         if (MyUtils.isUserLoggedIn(this)) {
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
@@ -262,6 +269,15 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 })
                 .build()
                 .show();
+
+    }
+
+    @Subscribe
+    public void userDetailList(UserDetailsListEvent event){
+
+        orderedUserDetails = event.getUserDetailsList();
+        MyUtils.showLog(orderedUserDetails.toString());
+        orderSelectedProduct();
 
     }
 }
