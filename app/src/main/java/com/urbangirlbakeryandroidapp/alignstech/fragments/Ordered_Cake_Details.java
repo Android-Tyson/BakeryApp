@@ -150,15 +150,20 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
             if (MyUtils.isValidPhoneNumber(phone1, getActivity())
                     && MyUtils.isValidPhoneNumber(phone2, getActivity())) {
 
-                userPostDetails.add(full_name);
-                userPostDetails.add(phone1);
-                userPostDetails.add(phone2);
-                userPostDetails.add(delivery_address);
-                userPostDetails.add(message_on_cake);
-                userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
-                userPostDetails.add(email_addr);
+                if(!datePicker.equals("Select Date") && !timePicker.equals("Select Time")) {
 
-                return true;
+                    userPostDetails.add(full_name);
+                    userPostDetails.add(phone1);
+                    userPostDetails.add(phone2);
+                    userPostDetails.add(delivery_address);
+                    userPostDetails.add(message_on_cake);
+                    userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
+                    userPostDetails.add(email_addr);
+
+                    return true;
+                }else {
+                    return false;
+                }
             } else {
                 return false;
             }
