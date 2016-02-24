@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout_background"
+    android:layout_marginBottom="10dp"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details">
 
     <ScrollView
@@ -17,7 +18,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            card_view:cardCornerRadius="2dp">
+            card_view:cardCornerRadius="2dp"
+            card_view:cardBackgroundColor="@color/white">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -311,7 +313,8 @@
                         android:background="@color/light_blue"
                         android:text="Send"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:layout_marginBottom="10dp"/>
 
                 </LinearLayout>
 
