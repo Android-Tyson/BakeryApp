@@ -87,6 +87,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
     private ArrayList<String> orderedUserDetails;
+    private String selectedFlavor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,28 +245,28 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-    private double priceCalculation() {
-
-        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
-        if (product_price != null) {
-            base_price = Double.parseDouble(product_price);
-        }
-
-        if (pound != null) {
-            if (pound.equals("Select Pound"))
-                pound = "1.00";
-            pound_ = Double.parseDouble(pound);
-        }
-
-        if (per_pound_price != null) {
-            perPoundPrice = Double.parseDouble(per_pound_price);
-        }
-
-
-        double total = base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
-        return total;
-
-    }
+//    private double priceCalculation() {
+//
+//        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
+//        if (product_price != null) {
+//            base_price = Double.parseDouble(product_price);
+//        }
+//
+//        if (pound != null) {
+//            if (pound.equals("Select Pound"))
+//                pound = "1.00";
+//            pound_ = Double.parseDouble(pound);
+//        }
+//
+//        if (per_pound_price != null) {
+//            perPoundPrice = Double.parseDouble(per_pound_price);
+//        }
+//
+//
+//        double total = base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
+//        return total;
+//
+//    }
 
 
     private void orderSelectedProduct() {
@@ -340,9 +341,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("delivery_address" , orderedUserDetails.get(3));
             jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
             jsonObject.put("order_date" , orderedUserDetails.get(5));
+            jsonObject.put("gift_sender_name" , orderedUserDetails.get(7));
+            jsonObject.put("gift_receiver_name" , orderedUserDetails.get(8));
 
             jsonObject.put("user_id", getUserId());
-            jsonObject.put("total", priceCalculation());
+            jsonObject.put("total", totalPrice);
+            jsonObject.put("flavour" , selectedFlavor);
             jsonObject.put("order_details", jsonArray);
 
         } catch (JSONException e) {
@@ -363,9 +367,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             JSONObject jsonObject = new JSONObject(eventBus.getResponse());
             String result = jsonObject.getString("result");
             if (result.equals("success"))
-                MyUtils.showToast(this, "Successfully Ordered and your total price is: " + priceCalculation());
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+                MyUtils.showToast(this, "Successfully Ordered and your total price is: " + totalPrice);
+
+            Intent intent =new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -393,7 +399,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         Spinner spinner = (Spinner) adapterView;
         if (spinner.getId() == R.id.spinner_flavour) {
-            String selectedItem = adapterView.getItemAtPosition(i).toString();
+            selectedFlavor = adapterView.getItemAtPosition(i).toString();
             per_pound_price = per_pound_price_list.get(i);
             MyUtils.showLog(per_pound_price);
 

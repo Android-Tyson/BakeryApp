@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.utils.TimeSettings;
 
 import java.util.Calendar;
@@ -25,7 +26,7 @@ public class TimeDialogHandler extends DialogFragment {
 
         TimePickerDialog timePickerDialog;
         TimeSettings timeSettings = new TimeSettings(getActivity());
-        timePickerDialog = new TimePickerDialog(getActivity() , timeSettings ,
+        timePickerDialog = new TimePickerDialog(getActivity() , R.style.DialogTheme  , timeSettings ,
                 hour , minute , false);
 
         return timePickerDialog;

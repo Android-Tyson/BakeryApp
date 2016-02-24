@@ -61,6 +61,12 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     @InjectView(R.id.timePicker)
     TextView tvTimePicker;
 
+    @InjectView(R.id.sender_name)
+    EditText sender_name;
+
+    @InjectView(R.id.receiver_name)
+    EditText receiver_name;
+
     private ArrayList<String> userPostDetails = new ArrayList<>();
 
     public Ordered_Cake_Details() {
@@ -134,6 +140,8 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
         String datePicker = tvDatePicker.getText().toString();
         String timePicker = tvTimePicker.getText().toString();
         String email_addr = email.getText().toString();
+        String senderName = sender_name.getText().toString();
+        String receiverName = receiver_name.getText().toString();
 
         if (!delivery_address.isEmpty()
                 && !full_name.isEmpty()
@@ -159,6 +167,8 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
                     userPostDetails.add(message_on_cake);
                     userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
                     userPostDetails.add(email_addr);
+                    userPostDetails.add(senderName);
+                    userPostDetails.add(receiverName);
 
                     return true;
                 }else {

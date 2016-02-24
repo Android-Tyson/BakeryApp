@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DateSettings;
 
 import java.util.Calendar;
@@ -26,7 +27,7 @@ public class DateDialogHandler extends DialogFragment {
 
         DatePickerDialog datePickerDialog;
         DateSettings dateSettings = new DateSettings(getActivity());
-        datePickerDialog = new DatePickerDialog(getActivity() , dateSettings , year , month , day);
+        datePickerDialog = new DatePickerDialog(getActivity() , R.style.DialogTheme , dateSettings , year , month , day);
 
         return datePickerDialog;
 

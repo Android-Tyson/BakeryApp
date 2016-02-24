@@ -44,4 +44,11 @@
         <item name="android:textColor">@color/myTextColor2</item>
     </style>
 
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/myPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/myPrimaryDarkColor</item>
+        <item name="colorAccent">@color/myAccentColor</item>
+    </style>
+
 </resources>
