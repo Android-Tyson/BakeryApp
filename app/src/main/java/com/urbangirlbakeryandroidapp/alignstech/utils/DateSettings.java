@@ -35,7 +35,7 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener{
             day = String.valueOf(i2);
         }
 
-        String currentDate = day + "/"+ month + "/" + i;
+        String currentDate = day + "-"+ month + "-" + i;
         MyBus.getInstance().post(new DatePickerBus(currentDate));
     }
 }

@@ -348,7 +348,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             jsonObject.put("user_id", getUserId());
             jsonObject.put("total", totalPrice);
-            jsonObject.put("flavour" , selectedFlovourId);
+            jsonObject.put("flavor" , selectedFlovourId);
             jsonObject.put("order_details", jsonArray);
 
         } catch (JSONException e) {

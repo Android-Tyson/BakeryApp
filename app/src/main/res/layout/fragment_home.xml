@@ -241,7 +241,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:paddingBottom="5dp"
+                                    android:paddingBottom="2dp"
                                     android:paddingLeft="15dp"
                                     android:paddingRight="15dp"
                                     android:paddingTop="5dp"
@@ -250,11 +250,8 @@
                                     android:textSize="@dimen/textSizeSeeMore" />
 
                                 <ImageView
-                                    android:layout_gravity="right|center"
-                                    android:gravity="right|center"
-                                    android:background="@color/light_blue"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="20sp"
+                                    android:layout_height="15dp"
                                     android:layout_alignParentEnd="true"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
@@ -397,7 +394,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:paddingBottom="5dp"
+                                    android:paddingBottom="2dp"
                                     android:paddingLeft="15dp"
                                     android:paddingRight="15dp"
                                     android:paddingTop="5dp"
@@ -406,12 +403,13 @@
                                     android:textSize="@dimen/textSizeSeeMore" />
 
                                 <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="20sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="15dp"
                                     android:layout_alignParentEnd="true"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:src="@mipmap/ic_forward_head"
+                                    android:adjustViewBounds="true"
                                     android:tint="@color/myPrimaryColor" />
 
                             </RelativeLayout>
