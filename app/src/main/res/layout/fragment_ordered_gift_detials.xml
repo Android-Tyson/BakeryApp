@@ -321,7 +321,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="3dp"
-                                    android:text="Message on Cake"
+                                    android:text="Message on Gift"
                                     android:textColor="#555"
                                     android:textSize="16sp" />
 

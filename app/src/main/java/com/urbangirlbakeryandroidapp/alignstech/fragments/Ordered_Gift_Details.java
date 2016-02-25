@@ -172,7 +172,7 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
                     userPostDetails.add(phone2);
                     userPostDetails.add(delivery_address);
                     userPostDetails.add(message_on_cake);
-                    userPostDetails.add("Date: " + datePicker + "  Time: " + timePicker);
+                    userPostDetails.add(datePicker + " " + timePicker);
                     userPostDetails.add(email_addr);
                     userPostDetails.add(senderName);
                     userPostDetails.add(receiverName);
@@ -204,7 +204,7 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
                 }
 
             } else {
-                MyUtils.showToast(getActivity(), "Please Check all the Details.");
+                MyUtils.showToast(getActivity(), "Please Fill all the Details.");
             }
         } else if (view.getId() == R.id.datePicker) {
 

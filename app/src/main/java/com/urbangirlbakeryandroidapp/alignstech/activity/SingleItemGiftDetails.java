@@ -168,7 +168,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
             jsonObject.put("phone_no1" , orderedUserDetails.get(1));
             jsonObject.put("phone_no2" , orderedUserDetails.get(2));
             jsonObject.put("receiver_address" , orderedUserDetails.get(3));
-            jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
+            jsonObject.put("message" , orderedUserDetails.get(4));
             jsonObject.put("order_date" , orderedUserDetails.get(5));
             jsonObject.put("gift_sender_name" , orderedUserDetails.get(7));
             jsonObject.put("gift_receiver_name" , orderedUserDetails.get(8));

@@ -196,7 +196,7 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
                 }
 
             } else {
-                MyUtils.showToast(getActivity(), "Please Check all the Details.");
+                MyUtils.showToast(getActivity(), "Please Fill all the Details.");
             }
         } else if (view.getId() == R.id.datePicker) {
 

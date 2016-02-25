@@ -88,7 +88,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
     private ArrayList<String> orderedUserDetails;
-    private String selectedFlavor , selectedFlovourId;
+    private String selectedFlavor , selectedFlovourId ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -343,12 +343,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("delivery_address" , orderedUserDetails.get(3));
             jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
             jsonObject.put("order_date" , orderedUserDetails.get(5));
-            jsonObject.put("gift_sender_name" , orderedUserDetails.get(7));
-            jsonObject.put("gift_receiver_name" , orderedUserDetails.get(8));
+            jsonObject.put("sender_address" , orderedUserDetails.get(7));
+            jsonObject.put("receiver_address" , orderedUserDetails.get(8));
 
             jsonObject.put("user_id", getUserId());
             jsonObject.put("total", totalPrice);
             jsonObject.put("flavor" , selectedFlovourId);
+            jsonObject.put("pound" , pound);
             jsonObject.put("order_details", jsonArray);
 
         } catch (JSONException e) {
