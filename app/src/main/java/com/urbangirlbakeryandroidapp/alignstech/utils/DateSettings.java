@@ -19,7 +19,23 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener{
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        String currentDate = i + "-"+ i1 + "-" + i2;
+
+        i1 += 1;
+        String month , day;
+
+        if(i1 < 10){
+            month = "0" + i1;
+        }else {
+            month = String.valueOf(i1);
+        }
+
+        if(i2 < 10){
+            day = "0" + i2;
+        }else {
+            day = String.valueOf(i2);
+        }
+
+        String currentDate = day + "/"+ month + "/" + i;
         MyBus.getInstance().post(new DatePickerBus(currentDate));
     }
 }
