@@ -250,8 +250,9 @@
                                     android:textSize="@dimen/textSizeSeeMore" />
 
                                 <ImageView
-                                    android:layout_gravity="right"
-                                    android:gravity="right"
+                                    android:layout_gravity="right|center"
+                                    android:gravity="right|center"
+                                    android:background="@color/light_blue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="20sp"
                                     android:layout_alignParentEnd="true"

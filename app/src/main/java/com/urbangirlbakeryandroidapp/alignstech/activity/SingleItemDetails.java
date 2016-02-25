@@ -79,6 +79,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> accessoryNameList = new ArrayList<>();
     private ArrayList<String> accessoriesPriceList = new ArrayList<>();
     private ArrayList<String> per_pound_price_list = new ArrayList<>();
+    private ArrayList<String> flavourList = new ArrayList<>();
 
     private HashMap<Integer, Integer> checkedPosition = new HashMap<>();
 
@@ -87,7 +88,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
     private ArrayList<String> orderedUserDetails;
-    private String selectedFlavor;
+    private String selectedFlavor , selectedFlovourId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     String flavor = flavorObject.getString("flavor");
 //                    per_pound_price = flavorObject.getString("per_pound_price");
                     per_pound_price_list.add(flavorObject.getString("per_pound_price"));
+                    flavourList.add(flavorObject.getString("id"));
                     flavour.add(flavor);
                 }
                 setDataToSpinner(flavour, starting_pound, ending_pound);
@@ -346,7 +348,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             jsonObject.put("user_id", getUserId());
             jsonObject.put("total", totalPrice);
-            jsonObject.put("flavour" , selectedFlavor);
+            jsonObject.put("flavour" , selectedFlovourId);
             jsonObject.put("order_details", jsonArray);
 
         } catch (JSONException e) {
@@ -400,6 +402,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         Spinner spinner = (Spinner) adapterView;
         if (spinner.getId() == R.id.spinner_flavour) {
             selectedFlavor = adapterView.getItemAtPosition(i).toString();
+            selectedFlovourId = flavourList.get(i);
             per_pound_price = per_pound_price_list.get(i);
             MyUtils.showLog(per_pound_price);
 
