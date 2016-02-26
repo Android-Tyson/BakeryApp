@@ -51,7 +51,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                     , MyUtils.getUserProfilePic(), R.drawable.drawer_bg);
         } else {
             account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
-                    , R.mipmap.ic_launcher, R.drawable.drawer_bg);
+                    , R.drawable.empty_image, R.drawable.drawer_bg);
         }
 
         addAccount(account);

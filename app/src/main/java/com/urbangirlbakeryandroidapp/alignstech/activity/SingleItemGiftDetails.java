@@ -164,17 +164,17 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                 }
             }
 
-            jsonObject.put("contact_person_name" , orderedUserDetails.get(0));
-            jsonObject.put("phone_no1" , orderedUserDetails.get(1));
-            jsonObject.put("phone_no2" , orderedUserDetails.get(2));
-            jsonObject.put("receiver_address" , orderedUserDetails.get(3));
-            jsonObject.put("message" , orderedUserDetails.get(4));
-            jsonObject.put("order_date" , orderedUserDetails.get(5));
-            jsonObject.put("gift_sender_name" , orderedUserDetails.get(7));
-            jsonObject.put("gift_receiver_name" , orderedUserDetails.get(8));
-            jsonObject.put("sender_address" , orderedUserDetails.get(9));
+            jsonObject.put("contact_person_name", orderedUserDetails.get(0));
+            jsonObject.put("phone_no1", orderedUserDetails.get(1));
+            jsonObject.put("phone_no2", orderedUserDetails.get(2));
+            jsonObject.put("receiver_address", orderedUserDetails.get(3));
+            jsonObject.put("message", orderedUserDetails.get(4));
+            jsonObject.put("order_date", orderedUserDetails.get(5));
+            jsonObject.put("gift_sender_name", orderedUserDetails.get(7));
+            jsonObject.put("gift_receiver_name", orderedUserDetails.get(8));
+            jsonObject.put("sender_address", orderedUserDetails.get(9));
 
-            jsonObject.put("user_id", MyUtils.getDataFromPreferences(this , "USER_ID"));
+            jsonObject.put("user_id", MyUtils.getDataFromPreferences(this, "USER_ID"));
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
 
@@ -196,8 +196,10 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
             String result = jsonObject.getString("result");
             if (result.equals("success"))
                 MyUtils.showToast(this, "Successfully Ordered and your total price is: " + priceCalculation());
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -233,7 +235,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         if (MyUtils.isUserLoggedIn(this)) {
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                    new Ordered_Gift_Details() , "FRAME_CONTAINER").commit();
+                    new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
 
         } else {
 
@@ -273,7 +275,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     }
 
     @Subscribe
-    public void userDetailList(UserDetailsListEvent event){
+    public void userDetailList(UserDetailsListEvent event) {
 
         orderedUserDetails = event.getUserDetailsList();
         MyUtils.showLog(orderedUserDetails.toString());
