@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
@@ -27,15 +26,14 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    @InjectView(R.id.btn_loginWithFacebook)
-    Button btnLoginWithFacebook;
-
-    @InjectView(R.id.btn_normal_login)
-    Button btnNormalLogin;
+//    @InjectView(R.id.btn_loginWithFacebook)
+//    Button btnLoginWithFacebook;
+//
+//    @InjectView(R.id.btn_normal_login)
+//    Button btnNormalLogin;
 
     public static UserDetials userDetials;
     // Generate DEBUG KeyHash Reference
@@ -48,6 +46,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        simpleFacebook = SimpleFacebook.getInstance(this);
 
 
         if (MyUtils.isUserLoggedIn(this)) {
@@ -58,8 +57,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        btnLoginWithFacebook.setOnClickListener(this);
-        btnNormalLogin.setOnClickListener(this);
+//        btnLoginWithFacebook.setOnClickListener(this);
+//        btnNormalLogin.setOnClickListener(this);
 
         Permission[] permissions = new Permission[]{
                 Permission.USER_PHOTOS,
@@ -78,6 +77,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         simpleFacebook.setConfiguration(configuration);
 
+        if(!MyUtils.isUserLoggedIn(this)){
+            if (MyUtils.isNetworkConnected(this)) {
+                simpleFacebook.login(onLoginListener);
+                MyUtils.showLog("");
+            } else {
+                MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
+            }
+        }
     }
 
 
@@ -105,23 +112,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()) {
-
-            case R.id.btn_loginWithFacebook:
-
-                if (MyUtils.isNetworkConnected(this)) {
-                    simpleFacebook.login(onLoginListener);
-                } else {
-                    MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
-                }
-                break;
-
-            case R.id.btn_normal_login:
-                MyUtils.showLog("Clicked Direct login");
-                Intent intent1 = new Intent(this, NormalRegister.class);
-                startActivity(intent1);
-                finish();
-        }
+//        switch (view.getId()) {
+//
+//            case R.id.btn_loginWithFacebook:
+//
+//                if (MyUtils.isNetworkConnected(this)) {
+//                    simpleFacebook.login(onLoginListener);
+//                } else {
+//                    MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
+//                }
+//                break;
+//
+//            case R.id.btn_normal_login:
+//                MyUtils.showLog("Clicked Direct login");
+//                Intent intent1 = new Intent(this, NormalRegister.class);
+//                startActivity(intent1);
+//                finish();
+//        }
     }
 
     OnLoginListener onLoginListener = new OnLoginListener() {
@@ -228,7 +235,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             MyUtils.saveDataInPreferences(getApplicationContext(), "USER_ID", fb_id);
 
-            Intent intent = new Intent(getApplicationContext(), UserProfile.class);
+            Intent intent = new Intent(getApplicationContext(), EditProfile.class);
 //            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
             intent.putExtra("FacebookIntent", "FB_DATA");
             startActivity(intent);
@@ -302,7 +309,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        simpleFacebook = SimpleFacebook.getInstance(this);
     }
 
     @Override

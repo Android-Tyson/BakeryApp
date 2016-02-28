@@ -91,7 +91,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             Intent loginIntent = new Intent(this, Login.class);
             loginIntent.putExtras(loginBundle);
             startActivity(loginIntent);
-            finish();
+//            finish();
         }
     }
 

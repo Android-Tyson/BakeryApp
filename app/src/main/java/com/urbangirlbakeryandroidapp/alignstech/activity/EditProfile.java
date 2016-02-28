@@ -29,6 +29,8 @@ import butterknife.InjectView;
 
 public class EditProfile extends AppCompatActivity {
 
+    private boolean homeButtonPressed = true;
+
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
 
@@ -66,8 +68,8 @@ public class EditProfile extends AppCompatActivity {
     EditText user_mobile_secondary;
 
     private String fb_id, fullName, email, mobilePrimary,
-            dob, gender, location, zone, district , profilePicUrl
-            , sippingAddress , billingAddress , mobileSecondary;
+            dob, gender, location, zone, district, profilePicUrl, sippingAddress, billingAddress, mobileSecondary;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +83,14 @@ public class EditProfile extends AppCompatActivity {
 
     private void setEditTextFields() {
 
-        if(DataBase_Utils.isUserInfoDataExists()) {
+        if (DataBase_Utils.isUserInfoDataExists()) {
 
             List<DataBase_UserInfo> userInfos = DataBase_Utils.getUserInfoList();
 
             fb_id = userInfos.get(0).getFb_id();
             profilePicUrl = userInfos.get(0).getProfilePicUrl();
 
-            user_full_name.setText(userInfos.get(0).getFirstName()+" "+userInfos.get(0).getLastName());
+            user_full_name.setText(userInfos.get(0).getFirstName() + " " + userInfos.get(0).getLastName());
             user_email.setText(userInfos.get(0).getEmail());
             user_mobile_primary.setText(userInfos.get(0).getMobilePrimary());
             user_dob.setText(userInfos.get(0).getDob());
@@ -124,7 +126,7 @@ public class EditProfile extends AppCompatActivity {
         district = user_district.getText().toString();
         sippingAddress = user_sipping_address.getText().toString();
         billingAddress = user_billing_address.getText().toString();
-        mobileSecondary =user_mobile_secondary.getText().toString();
+        mobileSecondary = user_mobile_secondary.getText().toString();
 
     }
 
@@ -199,13 +201,16 @@ public class EditProfile extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-            startActivity(new Intent(this , UserProfile.class));
-            finish();
+            homeButtonPressed = false;
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } else if (keyCode == KeyEvent.KEYCODE_HOME) {
 
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
 
         }
@@ -219,4 +224,13 @@ public class EditProfile extends AppCompatActivity {
         MyBus.getInstance().unregister(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(homeButtonPressed){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+    }
 }
