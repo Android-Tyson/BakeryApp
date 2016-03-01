@@ -8,13 +8,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,34 +19,22 @@ import java.util.Map;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class PostOrderProduct {
+public class GetMyCompains {
 
     private static MaterialDialog materialDialog;
 
-    public static void postOrderProduct(String url, final Context context, final String jsonObjectString) {
+    public static void getUserComplain(String url, final Context context) {
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if(jsonObject.get("result").equals("success")){
-
-                                MyBus.getInstance().post(new OrderEventBus(response));
-
-                            }else{
-                                MyUtils.showToast(context , response);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        MyBus.getInstance().post(new GetComplainEvent(response));
                         materialDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -63,7 +48,7 @@ public class PostOrderProduct {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("json", jsonObjectString);
+                params.put("fb_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
                 MyUtils.showLog(" ");
 
                 return params;

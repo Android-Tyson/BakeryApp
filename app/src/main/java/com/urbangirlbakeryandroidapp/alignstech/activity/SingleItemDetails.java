@@ -407,15 +407,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             per_pound_price = per_pound_price_list.get(i);
             MyUtils.showLog(per_pound_price);
 
-            totalPrice = Double.parseDouble(product_price) +
-                    Double.parseDouble(per_pound_price) *
+            totalPrice = (Double.parseDouble(product_price) +
+                    Double.parseDouble(per_pound_price)) *
                             Double.parseDouble(pound) + accessoriesTotalPrice;
             tv_product_price.setText(String.valueOf(totalPrice));
 
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
-            totalPrice = Double.parseDouble(product_price) +
-                            Double.parseDouble(per_pound_price) *
+            totalPrice = (Double.parseDouble(product_price) +
+                            Double.parseDouble(per_pound_price)) *
                                     Double.parseDouble(pound) + accessoriesTotalPrice;
                     tv_product_price.setText(String.valueOf(totalPrice));
             MyUtils.showLog(" ");

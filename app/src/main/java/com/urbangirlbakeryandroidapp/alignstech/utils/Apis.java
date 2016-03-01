@@ -29,4 +29,8 @@ public class Apis {
     public static final String my_orders = "http://cake.yogeshojha.com.np/api/order_product";
 
     public static final String gift_order_details = "http://cake.yogeshojha.com.np/api/receive_gift_order";
+
+    public static final String post_complain = "http://cake.yogeshojha.com.np/api/receive_complain";
+    public static final String get_complain = "http://cake.yogeshojha.com.np/api/my_complain";
+
 }
