@@ -7,6 +7,7 @@ public class Apis {
 
     public static final String BASE_URL = "http://cake.yogeshojha.com.np/";
     public static final String userDetialPostURl = BASE_URL +"api/" + "userRegister";
+    public static final String userRegisterUpdate = BASE_URL +"api/userRegister/" + "update";
 
     public static final String some_categories_list = BASE_URL + "api/child-categories/5?n=3";
     public static final String some_gift_list = BASE_URL + "api/child-categories/3?n=3";

@@ -15,6 +15,9 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +38,25 @@ public class PostNormalUserRegister {
                     @Override
                     public void onResponse(String response) {
 
-                        MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
-                        MyUtils.saveDataInPreferences(context, "USER_ID", userInfo.get(0));
-                        DataBase_Utils.deleteUserInfoList();
-                        DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9) , userInfo.get(10) , userInfo.get(11) , userInfo.get(12));
-                        dataBase_userInfo.save();
-                        MyBus.getInstance().post(new NormalRegisterEventBus(response));
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if(jsonObject.get("result").equals("success")){
+
+                                MyUtils.saveDataInPreferences(context, "USER_LOGGED_IN", "LOGGED_IN");
+                                MyUtils.saveDataInPreferences(context, "USER_ID", userInfo.get(0));
+                                DataBase_Utils.deleteUserInfoList();
+                                DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(userInfo.get(0) , userInfo.get(1) , " " , userInfo.get(2) , userInfo.get(3) , userInfo.get(4) , userInfo.get(5) , userInfo.get(6) , userInfo.get(7) , userInfo.get(8) , userInfo.get(9) , userInfo.get(10) , userInfo.get(11) , userInfo.get(12));
+                                dataBase_userInfo.save();
+                                MyBus.getInstance().post(new NormalRegisterEventBus(response));
+
+                            }else{
+                                MyUtils.showToast(context, response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         materialDialog.dismiss();
 
                     }

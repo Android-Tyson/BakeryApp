@@ -48,23 +48,23 @@ public class UserProfile extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position) {
+//                switch (position) {
 
-                    case 0:
-                        toolbar.setTitle("Profile");
+//                    case 0:
+//                        toolbar.setTitle("Profile");
+//
+//                        break;
+//                    case 1:
+//                        toolbar.setTitle("Order");
+//                        break;
+//                    case 2:
+//                        toolbar.setTitle("Complaints");
+//
+//                        break;
+//                    default:
+//                        break;
 
-                        break;
-                    case 1:
-                        toolbar.setTitle("Order");
-                        break;
-                    case 2:
-                        toolbar.setTitle("Complaints");
-
-                        break;
-                    default:
-                        break;
-
-                }
+//                }
             }
 
             @Override
@@ -98,7 +98,11 @@ public class UserProfile extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_edit) {
-            startActivity(new Intent(this, EditProfile.class));
+
+            Intent intent = new Intent(this, EditProfile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
         }else if(id == R.id.action_logout){
 
             new MaterialDialog.Builder(this)

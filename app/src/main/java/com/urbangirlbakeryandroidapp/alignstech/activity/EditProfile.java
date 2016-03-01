@@ -166,7 +166,7 @@ public class EditProfile extends AppCompatActivity {
             if (MyUtils.isNetworkConnected(this)) {
                 if (checkIfAnyFieldsAreEmpty()) {
                     if (MyUtils.isEmailValid(email, this) && MyUtils.isValidPhoneNumber(mobilePrimary, this)) {
-                        PostNormalUserRegister.postUserDetials(Apis.userDetialPostURl, this, userInfo);
+                        PostNormalUserRegister.postUserDetials(Apis.userRegisterUpdate, this, userInfo);
                     }
                 }
             }

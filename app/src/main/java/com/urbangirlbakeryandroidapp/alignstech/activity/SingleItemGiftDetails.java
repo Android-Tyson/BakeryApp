@@ -260,8 +260,10 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                     public void onPositive(MaterialDialog dialog) {
                         super.onPositive(dialog);
                         dialog.dismiss();
-                        startActivity(new Intent(context, Login.class));
-                    }
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("LearningPattern" , "true");
+                        startActivity(intent);
+                        finish();                    }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {

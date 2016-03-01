@@ -461,7 +461,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     public void onPositive(MaterialDialog dialog) {
                         super.onPositive(dialog);
                         dialog.dismiss();
-                        startActivity(new Intent(context, Login.class));
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("LearningPattern" , "true");
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
