@@ -346,7 +346,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("sender_address" , orderedUserDetails.get(7));
             jsonObject.put("receiver_address" , orderedUserDetails.get(8));
 
-            jsonObject.put("user_id", getUserId());
+            if(MyUtils.isUserLoggedIn(this)){
+
+                jsonObject.put("user_id", getUserId());
+
+            }else {
+
+                jsonObject.put("user_id", "0");
+
+            }
             jsonObject.put("total", totalPrice);
             jsonObject.put("flavor" , selectedFlovourId);
             jsonObject.put("pound" , pound);
@@ -433,15 +441,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-        if (MyUtils.isUserLoggedIn(this)) {
+//        if (MyUtils.isUserLoggedIn(this)) {
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                     new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
 
-        } else {
-
-            dialogIfNotLoggedIn(this);
-        }
+//        } else {
+//
+//            dialogIfNotLoggedIn(this);
+//        }
 
     }
 

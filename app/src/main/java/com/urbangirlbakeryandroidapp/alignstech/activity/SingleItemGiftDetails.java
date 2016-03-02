@@ -232,15 +232,15 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-        if (MyUtils.isUserLoggedIn(this)) {
+//        if (MyUtils.isUserLoggedIn(this)) {
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                     new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
 
-        } else {
-
-            dialogIfNotLoggedIn(this);
-        }
+//        } else {
+//
+//            dialogIfNotLoggedIn(this);
+//        }
 
     }
 
