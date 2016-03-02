@@ -24,11 +24,11 @@ import java.util.Map;
  */
 public class PostFacebookUserDetials {
 
-    public static MaterialDialog materialDialog;
+//    public static MaterialDialog materialDialog;
 
     public static void postUserDetials(String url, final Context context) {
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
+//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -56,13 +56,13 @@ public class PostFacebookUserDetials {
                             e.printStackTrace();
                         }
 
-                        materialDialog.dismiss();
+                        MainActivity.materialDialog.dismiss();
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                materialDialog.dismiss();
+                MainActivity.materialDialog.dismiss();
             }
         }){
             @Override

@@ -3,6 +3,7 @@ package com.urbangirlbakeryandroidapp.alignstech;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
@@ -44,7 +45,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public static UserDetials userDetials;
     private String fb_id , firstName ,lastName , mobileNo , email ,
             dob , gender , zone , district , location , profilePicUrl;
-
+    public static MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +179,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
             // change the state of the button or do whatever you want
             MyUtils.showLog("Logged in");
+            materialDialog = new MaterialDialog.Builder(MainActivity.this).
+                    content("Loading Please wait...").cancelable(false).progress(true , 0).show();
             PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
             pictureAttributes.setHeight(500);
             pictureAttributes.setWidth(500);
@@ -269,7 +272,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
 //            String user_fb_id = userDetials.getFb_id();
 //            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
-
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
 //            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
 
@@ -352,9 +354,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onStop() {
         super.onStop();
-        if (PostFacebookUserDetials.materialDialog != null) {
-            if (PostFacebookUserDetials.materialDialog.isShowing()) {
-                PostFacebookUserDetials.materialDialog.dismiss();
+        if (materialDialog != null) {
+            if (materialDialog.isShowing()) {
+                materialDialog.dismiss();
             }
         }
     }
