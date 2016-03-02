@@ -299,12 +299,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        MyBus.getInstance().unregister(getActivity());
-        AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
-    }
 
     @Override
     public void onPageScrolled(int i, float v, int i1) {
@@ -384,6 +378,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             GetSomeCategories.materialDialog.dismiss();
         }
         super.onStop();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        MyBus.getInstance().unregister(getActivity());
+        AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
     }
 
     @Override

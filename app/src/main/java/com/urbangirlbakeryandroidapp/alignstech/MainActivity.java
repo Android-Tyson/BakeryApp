@@ -99,7 +99,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         addAccount(account);
         setAccountListener(this);
-        setDrawerHeaderImage(R.drawable.drawer_bg);
+//        setDrawerHeaderImage(R.drawable.drawer_bg); // Out of memory BUG here
 
         addSection(newSection(getResources().getString(R.string.home), R.mipmap.home, HomeFragment.newInstance(0)));
 
@@ -379,7 +379,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if(MyBus.getInstance() != null){
+//        if(MyBus.isRegister()){
 //            MyBus.getInstance().unregister(this);
 //        }
     }
