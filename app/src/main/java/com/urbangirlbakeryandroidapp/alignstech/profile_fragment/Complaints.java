@@ -49,11 +49,13 @@ public class Complaints extends android.support.v4.app.Fragment implements View.
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyBus.getInstance().register(this);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,15 +68,16 @@ public class Complaints extends android.support.v4.app.Fragment implements View.
         return view;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         GetMyCompains.getUserComplain(Apis.get_complain, getActivity());
     }
 
+
     private void initializeRecyclerView() {
 
-        initializeListData();
         adapter = new ProfileDataListAdapter(getActivity(), complainList, dateList);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -84,12 +87,6 @@ public class Complaints extends android.support.v4.app.Fragment implements View.
                         .color(getResources().getColor(R.color.layout_background))
                         .build());
         recyclerView.setAdapter(adapter);
-
-    }
-
-    private void initializeListData(){
-
-
 
     }
 
@@ -127,6 +124,7 @@ public class Complaints extends android.support.v4.app.Fragment implements View.
         }
 
     }
+
 
     @Override
     public void onDestroy() {
