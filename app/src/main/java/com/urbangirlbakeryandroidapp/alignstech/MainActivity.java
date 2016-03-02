@@ -1,9 +1,18 @@
 package com.urbangirlbakeryandroidapp.alignstech;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.squareup.otto.Subscribe;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
@@ -23,6 +32,8 @@ import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
+import com.urbangirlbakeryandroidapp.alignstech.gcm.QuickstartPreferences;
+import com.urbangirlbakeryandroidapp.alignstech.gcm.RegistrationIntentService;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.model.UserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -43,9 +54,17 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public static MaterialAccount account;
     private SimpleFacebook simpleFacebook;
     public static UserDetials userDetials;
-    private String fb_id , firstName ,lastName , mobileNo , email ,
-            dob , gender , zone , district , location , profilePicUrl;
+    private String fb_id, firstName, lastName, mobileNo, email,
+            dob, gender, zone, district, location, profilePicUrl;
     public static MaterialDialog materialDialog;
+
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "MainActivity";
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+//    private ProgressBar mRegistrationProgressBar;
+//    private TextView mInformationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +90,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         simpleFacebook.setConfiguration(configuration);
 
+        myGcmTask();
     }
 
     @Override
@@ -80,7 +100,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addMultiPaneSupport();
         if (getIntent().getStringExtra("LearningPattern") != null &&
                 getIntent().getStringExtra("LearningPattern").equals("true")) {
-        }else {
+        } else {
             disableLearningPattern();
         }
         setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
@@ -180,7 +200,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             // change the state of the button or do whatever you want
             MyUtils.showLog("Logged in");
             materialDialog = new MaterialDialog.Builder(MainActivity.this).
-                    content("Loading Please wait...").cancelable(false).progress(true , 0).show();
+                    content("Loading Please wait...").cancelable(false).progress(true, 0).show();
             PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
             pictureAttributes.setHeight(500);
             pictureAttributes.setWidth(500);
@@ -346,10 +366,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     protected void onStop() {
@@ -362,11 +378,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     @Subscribe
-    public void userDetailsPostResponse(PostFbUserDetailsEvent event){
+    public void userDetailsPostResponse(PostFbUserDetailsEvent event) {
 
         MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
         MyUtils.saveDataInPreferences(getApplicationContext(), "USER_ID", fb_id);
-        if(DataBase_Utils.isUserInfoDataExists())
+        if (DataBase_Utils.isUserInfoDataExists())
             DataBase_Utils.deleteUserInfoList();
         DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl);
         dataBase_userInfo.save();
@@ -384,6 +400,74 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 //        if(MyBus.isRegister()){
 //            MyBus.getInstance().unregister(this);
 //        }
+    }
+
+
+    // GCM Job
+    private void myGcmTask() {
+
+//        if (MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN").isEmpty() ||
+//                MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN") == null) {
+
+            mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+                    if (sentToken) {
+                        MyUtils.showToast(MainActivity.this, "Token Generated successfully");
+
+                    } else {
+                        MyUtils.showToast(MainActivity.this, "Token Generated Failed");
+
+                    }
+                }
+            };
+
+            if (checkPlayServices()) {
+                // Start IntentService to register this application with GCM.
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+//        }else {
+//            MyUtils.showToast(MainActivity.this, "Token already registered in the server");
+//        }
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 }
 

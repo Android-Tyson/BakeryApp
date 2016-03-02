@@ -4,6 +4,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+
+    // GCM
+    <string name="gcm_defaultSenderId">381984310290</string>
+    <string name="gcm_api_key">AIzaSyApU1vvMygtbZjmQ6XFRxu1o-9jSNW8g1o</string>
+
+     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="myContent">Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app. Static contents for bakery app.Static contents for bakery app.</string>
