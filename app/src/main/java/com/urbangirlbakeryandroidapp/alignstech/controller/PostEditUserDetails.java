@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Created by Dell on 1/5/2016.
  */
-public class PostNormalUserRegister {
+public class PostEditUserDetails {
 
     private static MaterialDialog materialDialog;
 
@@ -73,17 +73,31 @@ public class PostNormalUserRegister {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("fb_id", userInfo.get(0));
-                params.put("mobile_no", userInfo.get(1));
-                params.put("email", userInfo.get(2));
-                params.put("dob", userInfo.get(3));
-                params.put("gender", userInfo.get(4));
-                params.put("zone", userInfo.get(5));
-                params.put("district", userInfo.get(6));
-                params.put("location", userInfo.get(7));
-                params.put("full_name", userInfo.get(8));
+                params.put("full_name", userInfo.get(1));
+                params.put("mobile_no", userInfo.get(2));
+                params.put("email", userInfo.get(3));
+                params.put("dob", userInfo.get(4));
+                params.put("gender", userInfo.get(5));
+                params.put("zone", userInfo.get(6));
+                params.put("district", userInfo.get(7));
+                params.put("location", userInfo.get(8));
                 params.put("billing_address", userInfo.get(10));
-                params.put("sipping_address", userInfo.get(11));
+                params.put("shipping_address", userInfo.get(11));
                 params.put("secondary_phone" , userInfo.get(12));
+
+//                params.put("fb_id", userInfo.get(0));
+//                params.put("mobile_no", userInfo.get(1));
+//                params.put("email", userInfo.get(2));
+//                params.put("dob", userInfo.get(3));
+//                params.put("gender", userInfo.get(4));
+//                params.put("zone", userInfo.get(5));
+//                params.put("district", userInfo.get(6));
+//                params.put("location", userInfo.get(7));
+//                params.put("full_name", userInfo.get(8));
+//                params.put("billing_address", userInfo.get(10));
+//                params.put("shipping_address", userInfo.get(11));
+//                params.put("secondary_phone" , userInfo.get(12));
+
                 return params;
             }
         };
