@@ -39,7 +39,7 @@ public class PostGcmTokenToServer {
                                 MyBus.getInstance().post(new PostGcmToken(response));
 
                             }else{
-                                MyUtils.showToast(context , response);
+//                                MyUtils.showToast(context , response);
                             }
 
                         } catch (JSONException e) {
