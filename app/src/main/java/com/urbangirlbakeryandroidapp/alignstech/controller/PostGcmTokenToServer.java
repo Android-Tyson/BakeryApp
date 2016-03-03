@@ -23,11 +23,8 @@ import java.util.Map;
  */
 public class PostGcmTokenToServer {
 
-//    private static MaterialDialog materialDialog;
 
     public static void postOrderProduct(String url, final Context context, final String gcmToken) {
-
-//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -49,13 +46,11 @@ public class PostGcmTokenToServer {
                             e.printStackTrace();
                         }
 
-//                        materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(context, error.toString());
-//                materialDialog.dismiss();
             }
         }) {
             @Override

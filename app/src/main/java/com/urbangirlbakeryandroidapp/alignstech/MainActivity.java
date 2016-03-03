@@ -61,10 +61,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
-
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-//    private ProgressBar mRegistrationProgressBar;
-//    private TextView mInformationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +94,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public void init(Bundle bundle) {
 
         allowArrowAnimation();
-        addMultiPaneSupport();
         if (getIntent().getStringExtra("LearningPattern") != null &&
                 getIntent().getStringExtra("LearningPattern").equals("true")) {
         } else {
@@ -120,9 +116,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         addAccount(account);
         setAccountListener(this);
-//        setDrawerHeaderImage(R.drawable.drawer_bg); // Out of memory BUG here
 
-        addSection(newSection(getResources().getString(R.string.home), R.mipmap.home, HomeFragment.newInstance(0)));
+        addSection(newSection(getResources().getString(R.string.home), R.mipmap.home, new HomeFragment()));
 
         if (MyUtils.isUserLoggedIn(this)) {
             addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, UserProfile.class)));
@@ -153,15 +148,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
-//        if(!MyUtils.isUserLoggedIn(this)){
-//            Bundle loginBundle = new Bundle();
-//            loginBundle.putBoolean("isDirectLogin", true);
-//            Intent loginIntent = new Intent(this, Login.class);
-//            loginIntent.putExtras(loginBundle);
-//            startActivity(loginIntent);
-////            finish();
-//        }
-
         if (!MyUtils.isUserLoggedIn(this)) {
             if (MyUtils.isNetworkConnected(this)) {
                 simpleFacebook.login(onLoginListener);
@@ -182,6 +168,12 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
 
     @Override
+    public void onUserPhotoLoaded(MaterialAccount account) {
+        super.onUserPhotoLoaded(account);
+    }
+
+
+    @Override
     public void onBackPressed() {
 
         int count = getSupportFragmentManager().getBackStackEntryCount();
@@ -198,7 +190,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         @Override
         public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
             // change the state of the button or do whatever you want
-            MyUtils.showLog("Logged in");
             materialDialog = new MaterialDialog.Builder(MainActivity.this).
                     content("Loading Please wait...").cancelable(false).progress(true, 0).show();
             PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
@@ -247,30 +238,18 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         @Override
         public void onComplete(Profile profile) {
 
-//            MyUtils.saveDataInPreferences(getApplicationContext(), "USER_LOGGED_IN", "LOGGED_IN");
-
             userDetials = new UserDetials();
 
             userDetials.setFb_id(profile.getId());
-            MyUtils.showLog("My profile id =" + profile.getId());
             userDetials.setFirstName(profile.getFirstName());
-            MyUtils.showLog(" " + profile.getFirstName());
             userDetials.setLastName(profile.getLastName());
-            MyUtils.showLog(" " + profile.getLastName());
             userDetials.setMobileNo(profile.getReligion());
-            MyUtils.showLog(" " + profile.getReligion());
             userDetials.setEmail(profile.getEmail());
-            MyUtils.showLog(" " + profile.getEmail());
             userDetials.setDob(profile.getBirthday());
-            MyUtils.showLog(" " + profile.getBirthday());
             userDetials.setGender(profile.getGender());
-            MyUtils.showLog(" " + profile.getGender());
             userDetials.setZone(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setDistrict(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setLocation(profile.getLocale());
-            MyUtils.showLog(" " + profile.getLocale());
             userDetials.setProfilePicUrl(profile.getPicture());
 
             handlingNullUserInfo(userDetials);
@@ -287,20 +266,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             location = userDetials.getLocation();
             profilePicUrl = userDetials.getProfilePicUrl();
 
-//            DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl);
-//            dataBase_userInfo.save();
-
-//            String user_fb_id = userDetials.getFb_id();
-//            String profile_url = "http://graph.facebook.com/"+user_fb_id+"/picture?type=large&redirect=true&width=1000&height=1000";
             PostFacebookUserDetials.postUserDetials(Apis.userDetialPostURl, MainActivity.this);
-//            GetProfilePicture.userProfilePicture(getApplicationContext(), profile_url);
-
-//            MyUtils.saveDataInPreferences(getApplicationContext(), "USER_ID", fb_id);
-//            Intent intent = new Intent(getApplicationContext(), EditProfile.class);
-////            intent.putExtra("UserName" , userDetials.getFirstName()+" "+userDetials.getLastName());
-//            intent.putExtra("FacebookIntent", "FB_DATA");
-//            startActivity(intent);
-//            finish();
 
         }
 
@@ -309,10 +275,12 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             super.onException(throwable);
         }
 
+
         @Override
         public void onFail(String reason) {
             super.onFail(reason);
         }
+
 
         @Override
         public void onThinking() {
@@ -325,40 +293,45 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     private void handlingNullUserInfo(UserDetials userDetials) {
 
         if (userDetials.getFb_id() == null) {
+
             userDetials.setFb_id("yourmail@gmail.com");
+
         }
         if (userDetials.getFirstName() == null) {
-//            userDetials.setFirstName("Full");
+
         }
         if (userDetials.getLastName() == null) {
-//            userDetials.setLastName("Name");
+
         }
         if (userDetials.getMobileNo() == null) {
 
         }
         if (userDetials.getEmail() == null) {
-//            userDetials.setEmail("yourmail@gmail.com");
+
         }
         if (userDetials.getDob() == null) {
-//            userDetials.setDob("");
+
         }
         if (userDetials.getGender() == null) {
-//            userDetials.setGender("");
+
         }
         if (userDetials.getZone() == null) {
-//            userDetials.setZone("");
+
         }
         if (userDetials.getDistrict() == null) {
-//            userDetials.setDistrict("");
+
         }
         if (userDetials.getLocation() == null) {
-//            userDetials.setLocation("");
+
         }
         if (userDetials.getProfilePicUrl() == null) {
+
             userDetials.setProfilePicUrl(Apis.defaultImageUrl);
+
         }
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -377,6 +350,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         }
     }
 
+
     @Subscribe
     public void userDetailsPostResponse(PostFbUserDetailsEvent event) {
 
@@ -394,20 +368,16 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if(MyBus.isRegister()){
-//            MyBus.getInstance().unregister(this);
-//        }
+
     }
 
 
     // GCM Job
     private void myGcmTask() {
-
-//        if (MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN").isEmpty() ||
-//                MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN") == null) {
 
             if (MyUtils.isNetworkConnected(MainActivity.this)) {
 
@@ -417,10 +387,10 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
                         if (sentToken) {
-//                            MyUtils.showToast(MainActivity.this, "Token Generated successfully");
+
 
                         } else {
-//                            MyUtils.showToast(MainActivity.this, "Token Generated Failed");
+
 
                         }
                     }
@@ -434,9 +404,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
             }
 
-//        } else {
-//            MyUtils.showToast(MainActivity.this, "Token already registered in the server");
-//        }
 
     }
 
@@ -448,11 +415,13 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                 new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
     }
 
+
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
     }
+
 
     /**
      * Check the device to make sure it has the Google Play Services APK. If

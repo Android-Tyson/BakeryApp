@@ -99,16 +99,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private CustomHorizontalCakeViewAdapter adapter;
     public static HashMap<String , Boolean> isGift = new HashMap<>();
 
-    public static HomeFragment newInstance(int position) {
-
-        HomeFragment homeFragment = new HomeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("POSITION", position);
-        homeFragment.setArguments(bundle);
-
-        return homeFragment;
-    }
-
     public HomeFragment() {
         // Required empty public constructor
     }
