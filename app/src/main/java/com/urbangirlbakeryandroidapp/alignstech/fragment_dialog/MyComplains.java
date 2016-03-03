@@ -12,9 +12,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostUserCompains;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -82,6 +80,7 @@ public class MyComplains extends DialogFragment implements View.OnClickListener 
         } else if (view.getId() == R.id.post) {
 
             getUserInfoList();
+            getDialog().dismiss();
             if (!postText.getText().toString().isEmpty()) {
                 if (user_address != null) {
 
@@ -111,16 +110,18 @@ public class MyComplains extends DialogFragment implements View.OnClickListener 
 
     }
 
-    @Subscribe
-    public void userPostResponse(PostComplainEvent event) {
-
-        String sss = event.getResponse();
-
-        getDialog().dismiss();
-        MyUtils.showToast(getActivity(), "Your complain is successfully posted.");
-
-
-    }
+//    @Subscribe
+//    public void userPostResponse(PostComplainEvent event) {
+//
+//        String sss = event.getResponse();
+//
+//        MyUtils.showToast(getActivity(), "Your complain is successfully posted..");
+//        Intent intent = new Intent(getActivity() , MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//
+//
+//    }
 
     @Override
     public void onDestroy() {

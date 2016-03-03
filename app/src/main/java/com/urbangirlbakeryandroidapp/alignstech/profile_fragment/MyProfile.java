@@ -1,14 +1,17 @@
 package com.urbangirlbakeryandroidapp.alignstech.profile_fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileDataListAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
@@ -23,10 +26,13 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyProfile extends android.support.v4.app.Fragment {
+public class MyProfile extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @InjectView(R.id.postComplains)
+    ImageView postComplains;
 
     private List<String> titleList, infoList;
 
@@ -41,6 +47,7 @@ public class MyProfile extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.inject(this, view);
         initializeRecyclerView();
+        postComplains.setOnClickListener(this);
         return view;
     }
 
@@ -114,6 +121,19 @@ public class MyProfile extends android.support.v4.app.Fragment {
             this.infoList.add(billingAddress);
             this.infoList.add(sippingAddress);
 
+
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if(view.getId() == R.id.postComplains){
+
+            Intent intent = new Intent(getActivity(), EditProfile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         }
 

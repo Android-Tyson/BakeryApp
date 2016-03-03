@@ -67,7 +67,7 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        user_pic.setImageResource(R.drawable.drawer_bg);
+        user_pic.setImageResource(R.mipmap.ic_launcher);
 
         if(DataBase_Utils.isUserInfoDataExists()){
 
@@ -89,8 +89,8 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     public void onClick(View view) {
 
         Intent intent = new Intent(getActivity() , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        getActivity().finish();
 
     }
 }

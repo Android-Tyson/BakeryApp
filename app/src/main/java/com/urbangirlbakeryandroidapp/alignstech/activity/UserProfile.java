@@ -1,6 +1,5 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,23 +47,23 @@ public class UserProfile extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-//                switch (position) {
+                switch (position) {
 
-//                    case 0:
+                    case 0:
 //                        toolbar.setTitle("Profile");
 //
-//                        break;
-//                    case 1:
+                        break;
+                    case 1:
 //                        toolbar.setTitle("Order");
-//                        break;
-//                    case 2:
+                        break;
+                    case 2:
 //                        toolbar.setTitle("Complaints");
-//
-//                        break;
-//                    default:
-//                        break;
 
-//                }
+                        break;
+                    default:
+                        break;
+
+                }
             }
 
             @Override
@@ -97,13 +96,14 @@ public class UserProfile extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_edit) {
-
-            Intent intent = new Intent(this, EditProfile.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-
-        }else if(id == R.id.action_logout){
+//        if (id == R.id.action_edit) {
+//
+//            Intent intent = new Intent(this, EditProfile.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//
+//        }else
+        if(id == R.id.action_logout){
 
             new MaterialDialog.Builder(this)
                     .title("Log out!")

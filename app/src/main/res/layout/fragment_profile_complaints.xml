@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:id="@+id/postComplains"
-                    android:src="@mipmap/ic_home_offers"/>
+                    android:src="@mipmap/compose"/>
 
             </LinearLayout>
 

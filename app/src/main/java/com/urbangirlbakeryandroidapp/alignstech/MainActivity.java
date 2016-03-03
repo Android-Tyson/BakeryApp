@@ -409,27 +409,32 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 //        if (MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN").isEmpty() ||
 //                MyUtils.getDataFromPreferences(MainActivity.this, "GCM_TOKEN") == null) {
 
-            mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                    boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-                    if (sentToken) {
-                        MyUtils.showToast(MainActivity.this, "Token Generated successfully");
+            if (MyUtils.isNetworkConnected(MainActivity.this)) {
 
-                    } else {
-                        MyUtils.showToast(MainActivity.this, "Token Generated Failed");
+                mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                        boolean sentToken = sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+                        if (sentToken) {
+//                            MyUtils.showToast(MainActivity.this, "Token Generated successfully");
 
+                        } else {
+//                            MyUtils.showToast(MainActivity.this, "Token Generated Failed");
+
+                        }
                     }
-                }
-            };
+                };
 
-            if (checkPlayServices()) {
-                // Start IntentService to register this application with GCM.
-                Intent intent = new Intent(this, RegistrationIntentService.class);
-                startService(intent);
+                if (checkPlayServices()) {
+                    // Start IntentService to register this application with GCM.
+                    Intent intent = new Intent(this, RegistrationIntentService.class);
+                    startService(intent);
+                }
+
             }
-//        }else {
+
+//        } else {
 //            MyUtils.showToast(MainActivity.this, "Token already registered in the server");
 //        }
 
