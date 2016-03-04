@@ -67,7 +67,6 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        user_pic.setImageResource(R.mipmap.ic_launcher);
 
         if(DataBase_Utils.isUserInfoDataExists()){
 
@@ -75,6 +74,16 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
             String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
             String userPhone = userDetials.get(0).getMobilePrimary();
             String userEmail = userDetials.get(0).getEmail();
+            String gender = userDetials.get(0).getGender();
+            if(gender.equals("male")){
+
+                user_pic.setImageResource(R.mipmap.cakes);
+
+            }else if(gender.equals("female")) {
+
+                user_pic.setImageResource(R.mipmap.gifts);
+
+            }
 
             user_name.setText(userName);
             user_mail.setText(userEmail);

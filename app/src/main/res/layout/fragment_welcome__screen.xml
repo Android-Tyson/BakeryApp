@@ -195,8 +195,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_circular_imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerInParent="true"
             android:src="@mipmap/ic_launcher"
             app:border_color="@color/myPrimaryDarkColor"

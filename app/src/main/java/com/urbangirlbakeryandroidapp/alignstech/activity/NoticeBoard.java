@@ -75,9 +75,9 @@ public class NoticeBoard extends AppCompatActivity {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject myOrderObj = jsonArray.getJSONObject(i);
-                String message = myOrderObj.getString("message");
+                String message = myOrderObj.getString("title");
                 complainList.add(message);
-                String date = myOrderObj.getString("address");
+                String date = myOrderObj.getString("body");
                 dateList.add(date);
 
             }
