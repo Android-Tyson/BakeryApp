@@ -32,6 +32,7 @@
         <EditText
             android:id="@+id/postText"
             android:gravity="top|left"
+            android:textColor="#444"
             android:textColorHint="@color/textHint"
             android:layout_width="match_parent"
             android:layout_height="200dp"
