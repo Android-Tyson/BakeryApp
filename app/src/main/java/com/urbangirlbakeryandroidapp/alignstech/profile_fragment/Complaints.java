@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.profile_fragment;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.otto.Subscribe;
+import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileDataListAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetComplainEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetMyCompains;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.MyComplains;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -125,15 +128,15 @@ public class Complaints extends android.support.v4.app.Fragment implements View.
 
     }
 
-//    @Subscribe
-//    public void userPostResponse(PostComplainEvent event) {
-//
+    @Subscribe
+    public void userPostResponse(PostComplainEvent event) {
+
 //        MyUtils.showToast(getActivity(), "Your complain is successfully posted..");
-//        Intent intent = new Intent(getActivity() , MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//
-//    }
+        Intent intent = new Intent(getActivity() , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
 
     @Override
     public void onDestroy() {

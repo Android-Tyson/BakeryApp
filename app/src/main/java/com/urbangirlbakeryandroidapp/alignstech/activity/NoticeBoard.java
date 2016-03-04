@@ -10,12 +10,11 @@ import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileDataListAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.NoticeBoardListAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetNoticeEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetNoticeBoard;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +35,7 @@ public class NoticeBoard extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private List<String> titleList = new ArrayList<>(), descList = new ArrayList<>();
-    private ProfileDataListAdapter adapter;
+    private NoticeBoardListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +57,14 @@ public class NoticeBoard extends AppCompatActivity {
 
     private void initializeRecyclerView() {
 
-        adapter = new ProfileDataListAdapter(this , titleList, descList);
+        adapter = new NoticeBoardListAdapter(this , titleList, descList);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(this)
-                        .color(getResources().getColor(R.color.layout_background))
-                        .build());
+//        recyclerView.addItemDecoration(
+//                new HorizontalDividerItemDecoration.Builder(this)
+//                        .color(getResources().getColor(R.color.layout_background))
+//                        .build());
         recyclerView.setAdapter(adapter);
 
     }
