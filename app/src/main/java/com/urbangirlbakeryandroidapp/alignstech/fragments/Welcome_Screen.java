@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
@@ -26,8 +25,8 @@ import butterknife.InjectView;
  */
 public class Welcome_Screen extends DialogFragment implements View.OnClickListener {
 
-    @InjectView(R.id.user_circular_imageView)
-    CircularImageView user_pic;
+//    @InjectView(R.id.user_circular_imageView)
+//    CircularImageView user_pic;
 
     @InjectView(R.id.user_name)
     TextView user_name;
@@ -74,16 +73,16 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
             String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
             String userPhone = userDetials.get(0).getMobilePrimary();
             String userEmail = userDetials.get(0).getEmail();
-            String gender = userDetials.get(0).getGender();
-            if(gender.equals("male")){
-
-                user_pic.setImageResource(R.mipmap.cakes);
-
-            }else if(gender.equals("female")) {
-
-                user_pic.setImageResource(R.mipmap.gifts);
-
-            }
+//            String gender = userDetials.get(0).getGender();
+//            if(gender.equals("male")){
+//
+//                user_pic.setImageResource(R.mipmap.cakes);
+//
+//            }else if(gender.equals("female")) {
+//
+//                user_pic.setImageResource(R.mipmap.gifts);
+//
+//            }
 
             user_name.setText(userName);
             user_mail.setText(userEmail);
