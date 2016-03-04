@@ -35,4 +35,6 @@ public class Apis {
     public static final String get_complain = "http://cake.yogeshojha.com.np/api/my_complain";
 
     public static String post_gcm = BASE_URL + "api/notify";
+    public static String get_gcm_notice = BASE_URL + "api/notice";
+
 }

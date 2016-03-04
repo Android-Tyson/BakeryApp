@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout_background"
-    android:layout_marginBottom="10dp"
+    android:paddingBottom="10dp"
     tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details">
 
     <ScrollView

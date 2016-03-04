@@ -7,14 +7,13 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetNoticeEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONObject;
 
 /**
  * Created by Dell on 1/5/2016.
@@ -22,19 +21,16 @@ import java.util.Map;
 public class GetNoticeBoard {
 
     private static MaterialDialog materialDialog;
+    public static void parseNoticeList(String url , final Context context){
 
-    public static void parseNoticeList(String url, final Context context) {
+        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
-
-        StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-
-                        MyBus.getInstance().post(new GetNoticeEvent(response));
+                    public void onResponse(JSONObject response) {
+                        MyBus.getInstance().post(new GetNoticeEvent(response.toString()));
                         materialDialog.dismiss();
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -42,23 +38,53 @@ public class GetNoticeBoard {
                 MyUtils.showToast(context, error.toString());
                 materialDialog.dismiss();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-
-                params.put("fb_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
-                MyUtils.showLog(" ");
-
-                return params;
-            }
-        };
-        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
+        });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(jsonStringRequest);
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "PRODUCT_DETAILS");
 
     }
+
+
+
+//    public static void parseNoticeList(String url, final Context context) {
+//
+//
+//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
+//
+//        StringRequest jsonStringRequest = new StringRequest(Request.Method.POST, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        MyBus.getInstance().post(new GetNoticeEvent(response));
+//                        materialDialog.dismiss();
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                MyUtils.showToast(context, error.toString());
+//                materialDialog.dismiss();
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() {
+//
+//                Map<String, String> params = new HashMap<>();
+//
+//                params.put("fb_id", MyUtils.getDataFromPreferences(context, "USER_ID"));
+//                MyUtils.showLog(" ");
+//
+//                return params;
+//            }
+//        };
+//        jsonStringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        AppController.getInstance().addToRequestQueue(jsonStringRequest);
+
+//    }
 
 }

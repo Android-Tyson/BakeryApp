@@ -231,6 +231,7 @@
                         android:textColor="@color/myTextPrimaryColor"
                         android:textColorHint="@color/textHint"
                         android:padding="10dp"
+                        android:editable="false"
                         android:theme="@style/CustomEditTextTheme"/>
 
                 </LinearLayout>

@@ -12,6 +12,8 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileDataListAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetNoticeEvent;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetNoticeBoard;
+import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -33,7 +35,7 @@ public class NoticeBoard extends AppCompatActivity {
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private List<String> complainList = new ArrayList<>(), dateList = new ArrayList<>();
+    private List<String> titleList = new ArrayList<>(), descList = new ArrayList<>();
     private ProfileDataListAdapter adapter;
 
     @Override
@@ -44,6 +46,7 @@ public class NoticeBoard extends AppCompatActivity {
         ButterKnife.inject(this);
         initializeToolbar();
         initializeRecyclerView();
+        GetNoticeBoard.parseNoticeList(Apis.get_gcm_notice , this);
     }
 
     private void initializeToolbar() {
@@ -55,7 +58,7 @@ public class NoticeBoard extends AppCompatActivity {
 
     private void initializeRecyclerView() {
 
-        adapter = new ProfileDataListAdapter(this , complainList, dateList);
+        adapter = new ProfileDataListAdapter(this , titleList, descList);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -76,9 +79,9 @@ public class NoticeBoard extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject myOrderObj = jsonArray.getJSONObject(i);
                 String message = myOrderObj.getString("title");
-                complainList.add(message);
-                String date = myOrderObj.getString("body");
-                dateList.add(date);
+                titleList.add(message);
+                String date = myOrderObj.getString("description");
+                descList.add(date);
 
             }
         } catch (JSONException e) {
