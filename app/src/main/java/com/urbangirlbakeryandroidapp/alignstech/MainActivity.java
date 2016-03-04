@@ -113,7 +113,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                     queryResults.get(0).getFirstName() + " " + queryResults.get(0).getLastName(), ""
                     , MyUtils.getUserProfilePic(), R.drawable.drawer_bg);
         } else {
-            account = new MaterialAccount(getResources(), "You're not logged in.", "Click here for facebook login."
+            account = new MaterialAccount(getResources(), "You're not logged in.", "Click here to login with facebook."
                     , R.drawable.empty_image, R.drawable.drawer_bg);
         }
 
@@ -142,9 +142,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
-        addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.compose, new Intent(this , NoticeBoard.class)));
+        addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.notice_drawer, new Intent(this , NoticeBoard.class)));
         if (MyUtils.isUserLoggedIn(this)) {
-            addSection(newSection(getResources().getString(R.string.complain), R.mipmap.compose, new MaterialSectionListener() {
+            addSection(newSection(getResources().getString(R.string.complain), R.mipmap.complain_drawer, new MaterialSectionListener() {
                 @Override
                 public void onClick(MaterialSection materialSection) {
                     if (MyUtils.isNetworkConnected(getApplicationContext()))

@@ -20,7 +20,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="X"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
                 android:textColor="@color/myPrimaryColor"
                 android:textSize="18sp" />
 
@@ -29,8 +31,14 @@
 
         <EditText
             android:id="@+id/postText"
+            android:gravity="top|left"
+            android:textColorHint="@color/textHint"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="Write a complain..."/>
 
         <TextView
             android:id="@+id/post"
@@ -39,7 +47,7 @@
             android:background="@color/myPrimaryColor"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Post"
+            android:text="Send"
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold" />

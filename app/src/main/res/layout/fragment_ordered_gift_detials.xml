@@ -48,32 +48,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Full Name"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Full Name"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/full_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="name"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Full Name"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -81,32 +81,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Sender Name"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Sender Name"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/sender_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="sender name"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Sender Name"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -114,32 +114,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Receiver Name"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Receiver Name"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/receiver_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="receiver name"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Receiver Name"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -147,32 +147,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Email"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Email"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/email"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="email"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="E-mail"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
 
                             <LinearLayout
@@ -181,33 +181,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Primary Phone"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Primary Phone"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/phone1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="phone 1"
-                                    android:inputType="number"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Primary Phone"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -215,33 +214,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Secondary Phone"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Secondary Phone"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/phone2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="phone 2"
-                                    android:inputType="number"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Secondary Phone"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -249,32 +247,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Receiver Address"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Receiver Address"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/sippingAddress"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="receiver address"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Delivery address"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -282,32 +280,32 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Sender Address"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Sender Address"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/sender_address"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="Sender address"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Sender Address"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
 
                             <LinearLayout
@@ -316,48 +314,49 @@
                                 android:orientation="vertical"
                                 android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="3dp"
-                                    android:text="Message on Gift"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="3dp"-->
+                                    <!--android:text="Message on Gift"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <EditText
                                     android:id="@+id/shortMessage"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/card_view_color"
-                                    android:hint="short Message"
-                                    android:padding="3dp"
-                                    android:singleLine="true"
-                                    android:textColorHint="#999" />
+                                    android:focusableInTouchMode="true"
+                                    android:hint="Message on cake"
+                                    android:textColor="@color/myTextPrimaryColor"
+                                    android:textColorHint="@color/textHint"
+                                    android:padding="10dp"
+                                    android:theme="@style/CustomEditTextTheme"/>
 
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/myDividerColor" />
+                            <!--<View-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="1dp"-->
+                                <!--android:background="@color/myDividerColor" />-->
 
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="10dp">
+                                android:padding="10dp"
+                                android:layout_marginBottom="10dp">
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="5dp"
-                                    android:text="Delivery Time"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="5dp"-->
+                                    <!--android:text="Delivery Time"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <TextView
                                     android:id="@+id/timePicker"
@@ -368,24 +367,24 @@
                                     android:background="@color/myPrimaryColor"
                                     android:gravity="center"
                                     android:padding="5dp"
-                                    android:text="Select Time"
+                                    android:text="Delivery Time"
                                     android:textColor="@color/white"
                                     android:textSize="20sp" />
 
-                                <View
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/myDividerColor" />
+                                <!--<View-->
+                                    <!--android:layout_width="fill_parent"-->
+                                    <!--android:layout_height="1dp"-->
+                                    <!--android:background="@color/myDividerColor" />-->
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_weight="1"
-                                    android:padding="5dp"
-                                    android:text="Delivery Date"
-                                    android:textColor="#555"
-                                    android:textSize="16sp" />
+                                <!--<TextView-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="10dp"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:padding="5dp"-->
+                                    <!--android:text="Delivery Date"-->
+                                    <!--android:textColor="#555"-->
+                                    <!--android:textSize="16sp" />-->
 
                                 <TextView
                                     android:id="@+id/datePicker"
@@ -395,7 +394,8 @@
                                     android:background="@color/myPrimaryColor"
                                     android:gravity="center"
                                     android:padding="5dp"
-                                    android:text="Select Date"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Delivery Date"
                                     android:textColor="@color/white"
                                     android:textSize="20sp" />
 

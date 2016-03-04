@@ -23,7 +23,7 @@
             android:layout_marginLeft="30dp"
             android:gravity="center"
             android:text="Accessory"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
