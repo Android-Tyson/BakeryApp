@@ -14,13 +14,16 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.NoticeBoard;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Dell on 2/28/2016.
  */
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
-
+    private String title , body;
     /**
      * Called when message is received.
      *
@@ -69,11 +72,12 @@ public class MyGcmListenerService extends GcmListenerService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        getTitleAndBody(message);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(message)
-                .setContentText(message)
+                .setContentTitle(title)
+                .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
@@ -82,5 +86,18 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    private void getTitleAndBody(String message){
+
+        try {
+            JSONObject jsonObject = new JSONObject(message);
+            title = jsonObject.getString("title");
+            body = jsonObject.getString("body");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
