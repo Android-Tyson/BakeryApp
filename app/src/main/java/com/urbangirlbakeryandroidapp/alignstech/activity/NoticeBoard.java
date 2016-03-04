@@ -1,12 +1,26 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.adapter.ProfileDataListAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetNoticeEvent;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,19 +30,62 @@ public class NoticeBoard extends AppCompatActivity {
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
 
+    @InjectView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    private List<String> complainList = new ArrayList<>(), dateList = new ArrayList<>();
+    private ProfileDataListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_board);
+        MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
+        initializeRecyclerView();
     }
 
     private void initializeToolbar() {
 
-        toolbar.setTitle(R.string.edit_profile);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    private void initializeRecyclerView() {
+
+        adapter = new ProfileDataListAdapter(this , complainList, dateList);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(
+                new HorizontalDividerItemDecoration.Builder(this)
+                        .color(getResources().getColor(R.color.layout_background))
+                        .build());
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    @Subscribe
+    public void getNoticeObject(GetNoticeEvent event){
+
+        try {
+            JSONObject jsonObject = new JSONObject(event.getResponse());
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject myOrderObj = jsonArray.getJSONObject(i);
+                String message = myOrderObj.getString("message");
+                complainList.add(message);
+                String date = myOrderObj.getString("address");
+                dateList.add(date);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+            adapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -52,5 +109,11 @@ public class NoticeBoard extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyBus.getInstance().unregister(this);
     }
 }
