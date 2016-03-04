@@ -66,5 +66,6 @@
     <string name="urgentCakes">Urgent Cakes</string>
     <string name="action_logout">Logout</string>
     <string name="complain">Complain</string>
+    <string name="title_activity_notice_board">Notice Board</string>
 
 </resources>

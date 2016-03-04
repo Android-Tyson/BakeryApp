@@ -23,6 +23,7 @@ import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
+import com.urbangirlbakeryandroidapp.alignstech.activity.NoticeBoard;
 import com.urbangirlbakeryandroidapp.alignstech.activity.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
@@ -141,6 +142,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
+        addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.compose, new Intent(this , NoticeBoard.class)));
         if (MyUtils.isUserLoggedIn(this)) {
             addSection(newSection(getResources().getString(R.string.complain), R.mipmap.compose, new MaterialSectionListener() {
                 @Override
