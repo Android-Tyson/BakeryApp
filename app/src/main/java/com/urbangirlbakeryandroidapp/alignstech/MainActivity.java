@@ -25,8 +25,10 @@ import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
+import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.PostFbUserDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.MyComplains;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -139,7 +141,17 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
         addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
-
+        if (MyUtils.isUserLoggedIn(this)) {
+            addSection(newSection(getResources().getString(R.string.complain), R.mipmap.compose, new MaterialSectionListener() {
+                @Override
+                public void onClick(MaterialSection materialSection) {
+                    if (MyUtils.isNetworkConnected(getApplicationContext()))
+                    {
+                        new MyComplains().show(getSupportFragmentManager(), "welcome_screen_tag");
+                    }
+                }
+            }));
+        }
         addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, new Intent(this, Settings.class)));
 
     }
@@ -442,6 +454,13 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             return false;
         }
         return true;
+    }
+
+    @Subscribe
+    public void userPostResponse(PostComplainEvent event) {
+
+        MyUtils.showToast(this, "Your complain is successfully posted..");
+
     }
 }
 
