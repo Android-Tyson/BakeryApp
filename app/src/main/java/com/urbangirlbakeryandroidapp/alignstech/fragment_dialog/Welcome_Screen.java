@@ -1,4 +1,4 @@
-package com.urbangirlbakeryandroidapp.alignstech.fragments;
+package com.urbangirlbakeryandroidapp.alignstech.fragment_dialog;
 
 import android.app.Fragment;
 import android.content.Intent;

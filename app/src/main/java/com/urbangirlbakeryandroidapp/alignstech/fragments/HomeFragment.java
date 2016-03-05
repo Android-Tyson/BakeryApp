@@ -130,11 +130,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (MyUtils.isNetworkConnected(getActivity())) {
-            GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
-            GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-            GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
-            GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+        if(savedInstanceState == null) {
+            if (MyUtils.isNetworkConnected(getActivity())) {
+                GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
+                GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
+                GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
+                GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+            }
         }
         initializeUrgentCakeRecyclerView();
     }
@@ -359,26 +361,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     }
 
     @Override
-    public void onStop() {
-        mDemoSlider.stopAutoCycle();
-        if(GetSomeGifts.materialDialog != null){
-            GetSomeGifts.materialDialog.dismiss();
-        }
-        if(GetSomeCategories.materialDialog != null){
-            GetSomeCategories.materialDialog.dismiss();
-        }
-        super.onStop();
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        MyBus.getInstance().unregister(getActivity());
-        AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
-    }
-
-    @Override
     public void onClick(View view) {
         if(!someGiftList.isEmpty() && !someCategoryList.isEmpty()) {
             if (view.getId() == R.id.see_more_categories) {
@@ -415,6 +397,45 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME , productName)).commit();
 
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        mDemoSlider.stopAutoCycle();
+        if(GetSomeGifts.materialDialog != null){
+            GetSomeGifts.materialDialog.dismiss();
+        }
+        if(GetSomeCategories.materialDialog != null){
+            GetSomeCategories.materialDialog.dismiss();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        MyBus.getInstance().unregister(getActivity());
+        AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
 }

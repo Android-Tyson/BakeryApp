@@ -14,7 +14,7 @@ import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.NormalRegisterEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostEditUserDetails;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Welcome_Screen;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.Welcome_Screen;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;

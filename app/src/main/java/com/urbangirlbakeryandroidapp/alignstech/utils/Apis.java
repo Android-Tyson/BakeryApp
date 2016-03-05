@@ -24,15 +24,15 @@ public class Apis {
     public static final String defaultImageUrl = "http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
     public static final String nav_collection = BASE_URL + "collection";
 
-    public static final String product_order = "http://cake.yogeshojha.com.np/api/order";
+    public static final String product_order = BASE_URL + "api/order";
 
     public static final String cake_order_details = "http://cake.yogeshojha.com.np/api/receive_order_details";
-    public static final String my_orders = "http://cake.yogeshojha.com.np/api/order_product";
+    public static final String my_orders = BASE_URL + "api/order_product";
 
     public static final String gift_order_details = "http://cake.yogeshojha.com.np/api/receive_gift_order";
 
-    public static final String post_complain = "http://cake.yogeshojha.com.np/api/receive_complain";
-    public static final String get_complain = "http://cake.yogeshojha.com.np/api/my_complain";
+    public static final String post_complain = BASE_URL + "api/receive_complain";
+    public static final String get_complain = BASE_URL + "api/my_complain";
 
     public static String post_gcm = BASE_URL + "api/notify";
     public static String get_gcm_notice = BASE_URL + "api/notice";

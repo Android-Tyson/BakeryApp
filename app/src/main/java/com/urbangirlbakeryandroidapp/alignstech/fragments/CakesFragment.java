@@ -102,6 +102,17 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
         listView.setAdapter(new CustomListItemAdapter(getActivity(), giftChildList));
     }
 
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
+        String product_title = childNameList.get(i);
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_cake, All_Item_Grid_Fragment.newInstance(API_NAME, product_title)).commit();
+
+
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -110,12 +121,28 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onStart() {
+        super.onStart();
+    }
 
-        String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
-        String product_title = childNameList.get(i);
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_cake, All_Item_Grid_Fragment.newInstance(API_NAME , product_title)).commit();
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

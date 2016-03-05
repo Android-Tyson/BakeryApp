@@ -30,7 +30,6 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.PostFbUserDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.MyComplains;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.AccessoriesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
@@ -141,7 +140,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
-        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
+//        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
         addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.notice_drawer, new Intent(this , NoticeBoard.class)));
         if (MyUtils.isUserLoggedIn(this)) {
             addSection(newSection(getResources().getString(R.string.complain), R.mipmap.complain_drawer, new MaterialSectionListener() {

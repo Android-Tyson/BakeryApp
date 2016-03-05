@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.MyProfile;
-import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.Complaints;
-import com.urbangirlbakeryandroidapp.alignstech.profile_fragment.MyOrder;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.MyProfile;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.Complaints;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_profile.MyOrder;
 
 /**
  * Created by Dell on 2/9/2016.
