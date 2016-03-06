@@ -97,7 +97,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
 
     private CustomHorizontalCakeViewAdapter adapter;
-    public static HashMap<String , Boolean> isGift = new HashMap<>();
+    public static HashMap<String, Boolean> isGift = new HashMap<>();
+
+//    boolean isFirstTime = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -130,12 +132,15 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             if (MyUtils.isNetworkConnected(getActivity())) {
-                GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
-                GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-                GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
-                GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+//                if (isFirstTime) {
+                    GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
+                    GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
+                    GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
+                    GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+//                    isFirstTime = false;
+//                }
             }
         }
         initializeUrgentCakeRecyclerView();
@@ -362,7 +367,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onClick(View view) {
-        if(!someGiftList.isEmpty() && !someCategoryList.isEmpty()) {
+        if (!someGiftList.isEmpty() && !someCategoryList.isEmpty()) {
             if (view.getId() == R.id.see_more_categories) {
                 startActivity(new Intent(getActivity(), SeeMoreCategories.class));
             } else if (view.getId() == R.id.see_more_gift) {
@@ -376,13 +381,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
 
             } else if (view.getId() == R.id.textView_gift_1) {
-                isGift.put("GiftClick" , true);
+                isGift.put("GiftClick", true);
                 someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
             } else if (view.getId() == R.id.textView_gift_2) {
-                isGift.put("GiftClick" , true);
+                isGift.put("GiftClick", true);
                 someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
             } else if (view.getId() == R.id.textView_gift_3) {
-                isGift.put("GiftClick" , true);
+                isGift.put("GiftClick", true);
                 someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
             }
         }
@@ -394,7 +399,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (productId != null && productName != null) {
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
-            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME , productName)).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME, productName)).commit();
 
         }
     }
@@ -407,10 +412,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onStop() {
         mDemoSlider.stopAutoCycle();
-        if(GetSomeGifts.materialDialog != null){
+        if (GetSomeGifts.materialDialog != null) {
             GetSomeGifts.materialDialog.dismiss();
         }
-        if(GetSomeCategories.materialDialog != null){
+        if (GetSomeCategories.materialDialog != null) {
             GetSomeCategories.materialDialog.dismiss();
         }
         super.onStop();
@@ -424,6 +429,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
+
     }
 
     @Override
