@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,7 +50,7 @@ import java.util.HashMap;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -74,8 +76,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @InjectView(R.id.eggless)
+    CheckBox eggless;
+
     private String product_price = "0.00", pound = "0.00", per_pound_price = "0.00";
-    private Double totalPrice = 0.00;
+    private Double totalPrice = 0.00 , eggless_price = 0.00;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
@@ -91,8 +96,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
     private ArrayList<String> orderedUserDetails;
     private String selectedFlavor , selectedFlovourId ;
-
-    boolean isOpening = true;
+    private boolean isEggless = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         parsingJob();
         orderNow.setOnClickListener(this);
         initializeDataForAccessories();
+        eggless.setOnCheckedChangeListener(this);
 
     }
 
@@ -365,6 +370,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("flavor" , selectedFlovourId);
             jsonObject.put("pound" , pound);
             jsonObject.put("order_details", jsonArray);
+            jsonObject.put("isEgg_less" , isEggless);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -421,14 +427,14 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             per_pound_price = per_pound_price_list.get(i);
             MyUtils.showLog(per_pound_price);
 
-            totalPrice = (Double.parseDouble(product_price) +
+            totalPrice = (Double.parseDouble(product_price) + eggless_price +
                     Double.parseDouble(per_pound_price)) *
                             Double.parseDouble(pound) + accessoriesTotalPrice;
             tv_product_price.setText(String.valueOf(totalPrice));
 
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
-            totalPrice = (Double.parseDouble(product_price) +
+            totalPrice = (Double.parseDouble(product_price) + eggless_price +
                             Double.parseDouble(per_pound_price)) *
                                     Double.parseDouble(pound) + accessoriesTotalPrice;
                     tv_product_price.setText(String.valueOf(totalPrice));
@@ -454,7 +460,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 //
 //        }
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
+                new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
 
 
     }
@@ -558,6 +564,38 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private String getUserId() {
 
         return MyUtils.getDataFromPreferences(this, "USER_ID");
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+        if(compoundButton.isChecked()){
+
+            isEggless = true;
+            eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this , "EGG_LESS_PRICE"));
+            eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this , "EGG_LESS_PRICE"));
+
+            totalPrice = (Double.parseDouble(product_price) + eggless_price +
+                    Double.parseDouble(per_pound_price)) *
+                    Double.parseDouble(pound) + accessoriesTotalPrice;
+
+            tv_product_price.setText(String.valueOf(totalPrice));
+
+        }else{
+
+            isEggless = false;
+            eggless_price = 0.00;
+            eggless_price = 0.00;
+
+            totalPrice = (Double.parseDouble(product_price) + eggless_price +
+                    Double.parseDouble(per_pound_price)) *
+                    Double.parseDouble(pound) + accessoriesTotalPrice;
+
+            tv_product_price.setText(String.valueOf(totalPrice));
+
+        }
 
     }
 }

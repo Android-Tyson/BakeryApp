@@ -23,6 +23,7 @@
             android:layout_marginLeft="30dp"
             android:gravity="center"
             android:text="Accessory"
+            android:textColor="@color/myTextColor"
             android:textSize="18sp" />
 
     </LinearLayout>
