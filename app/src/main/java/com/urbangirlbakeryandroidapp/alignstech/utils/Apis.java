@@ -36,5 +36,6 @@ public class Apis {
 
     public static String post_gcm = BASE_URL + "api/notify";
     public static String get_gcm_notice = BASE_URL + "api/notice";
+    public static String get_opening_closing = BASE_URL + "api/settings";
 
 }

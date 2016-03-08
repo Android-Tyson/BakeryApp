@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.DatePickerBus;
@@ -68,6 +70,7 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
     EditText receiver_name;
 
     private ArrayList<String> userPostDetails = new ArrayList<>();
+    private boolean isOpenedOnce = true;
 
     public Ordered_Cake_Details() {
         // Required empty public constructor
@@ -98,7 +101,9 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
         order.setOnClickListener(this);
         tvDatePicker.setOnClickListener(this);
         tvTimePicker.setOnClickListener(this);
+        dialogForOpeningAndClosingTime(getActivity());
     }
+
 
     private void fillDataToEditText() {
 
@@ -229,4 +234,25 @@ public class Ordered_Cake_Details extends android.support.v4.app.Fragment implem
         MyBus.getInstance().unregister(this);
     }
 
+    private void dialogForOpeningAndClosingTime(final Context context) {
+
+        new MaterialDialog.Builder(context)
+                .title("Notice")
+                .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
+                        + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"))
+                .positiveText("Ok")
+                .cancelable(false)
+                .positiveColorRes(R.color.myPrimaryColor)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
+
+    }
 }

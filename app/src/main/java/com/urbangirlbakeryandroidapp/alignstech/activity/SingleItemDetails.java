@@ -22,10 +22,12 @@ import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessor
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetOpeningClosingEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.UserDetailsListEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
+import com.urbangirlbakeryandroidapp.alignstech.controller.GetOpeningClosingDate;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProductDetials;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostOrderProduct;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.Ordered_Cake_Details;
@@ -90,6 +92,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> orderedUserDetails;
     private String selectedFlavor , selectedFlovourId ;
 
+    boolean isOpening = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +122,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String apiName = getApiName();
             MyUtils.showLog(getApiName());
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
+            GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
+
         }
     }
 
@@ -441,17 +447,18 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-//        if (MyUtils.isUserLoggedIn(this)) {
-
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                    new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
-
-//        } else {
+//        if(isOpening){
 //
-//            dialogIfNotLoggedIn(this);
+//            GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
+//            isOpening = false;
+//
 //        }
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
+                new Ordered_Cake_Details() , "FRAME_CONTAINER").commit();
+
 
     }
+
 
     private void dialogIfNotLoggedIn(final Context context) {
 
@@ -470,7 +477,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         super.onPositive(dialog);
                         dialog.dismiss();
                         Intent intent = new Intent(context, MainActivity.class);
-                        intent.putExtra("LearningPattern" , "true");
+                        intent.putExtra("LearningPattern", "true");
                         startActivity(intent);
                         finish();
                     }
@@ -518,6 +525,35 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         orderSelectedProduct();
 
     }
+
+    @Subscribe
+    public void getOpeningClosingDate(GetOpeningClosingEvent event){
+
+        String response = event.getResponse();
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            String opening_hour = jsonObject.getString("opening_hour");
+            String closing_hour = jsonObject.getString("closing_hour");
+            String egg_less_price = jsonObject.getString("egg_less_price");
+            MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
+
+            if(MyUtils.getDataFromPreferences(this , "OPENING_HOUR").isEmpty())
+            {
+                MyUtils.saveDataInPreferences(this , "OPENING_HOUR" , opening_hour);
+                MyUtils.saveDataInPreferences(this , "CLOSING_HOUR" , closing_hour);
+            }else {
+                MyUtils.editDataOfPreferences(this , "OPENING_HOUR" , opening_hour);
+                MyUtils.editDataOfPreferences(this , "CLOSING_HOUR" , closing_hour);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
     private String getUserId() {
 

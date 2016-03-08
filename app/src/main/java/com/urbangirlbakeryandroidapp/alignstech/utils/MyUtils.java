@@ -117,6 +117,17 @@ public class MyUtils
         return result;
     }
 
+    public static void editDataOfPreferences(Context context, String key , String value)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(key, value).apply();
+    }
+
+    public static void removeSingleSharedPreference(Context context, String key)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(key).apply();
+    }
 
     public static void saveUserProfiePic(Bitmap finalBitmap)
     {
