@@ -151,9 +151,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void performJsonTaskForSingleProductDetails(JSONObject jsonObject) {
 
         try {
-            JSONArray jsonArray = jsonObject.getJSONArray("result");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObj = jsonArray.getJSONObject(i);
+            JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+            JSONObject jsonObj = jsonObject1.getJSONObject("result");
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String product_id = jsonObj.getString("id");
                 String product_name = jsonObj.getString("product_name");
                 String starting_pound = jsonObj.getString("starting_pound");
@@ -173,14 +174,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     product_image_url = Apis.BASE_URL + "images/" + path;
                 }
 
-                JSONArray flavorArray = jsonObj.getJSONArray("flavor");
+                JSONObject flavorObj = jsonObj.getJSONObject("flavor");
                 ArrayList<String> flavour = new ArrayList<>();
 
-                for (int j = 0; j < flavorArray.length(); j++) {
-                    JSONObject flavorObject = flavorArray.getJSONObject(j);
+                for (int j = 0; j < flavorObj.length() - 1; j++) {
+                    JSONObject flavorObject = flavorObj.getJSONObject(String.valueOf(j));
                     String flavor_id = flavorObject.getString("id");
                     String flavor = flavorObject.getString("flavor");
-//                    per_pound_price = flavorObject.getString("per_pound_price");
                     per_pound_price_list.add(flavorObject.getString("per_pound_price"));
                     flavourList.add(flavorObject.getString("id"));
                     flavour.add(flavor);
@@ -189,8 +189,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 tv_product_price.setText(product_price);
                 tv_product_description.setText(product_description);
                 iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
-            }
+//            }
         } catch (JSONException e) {
+            e.printStackTrace();
             e.printStackTrace();
         }
     }
@@ -575,7 +576,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             isEggless = true;
             eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this , "EGG_LESS_PRICE"));
-            eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this , "EGG_LESS_PRICE"));
 
             totalPrice = (Double.parseDouble(product_price) + eggless_price +
                     Double.parseDouble(per_pound_price)) *
@@ -586,7 +586,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         }else{
 
             isEggless = false;
-            eggless_price = 0.00;
             eggless_price = 0.00;
 
             totalPrice = (Double.parseDouble(product_price) + eggless_price +
