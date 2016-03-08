@@ -272,7 +272,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <!--<ImageView-->
                         <!--android:layout_width="20dp"-->
@@ -294,7 +295,8 @@
                         android:textColor="@color/myTextPrimaryColor"
                         android:textColorHint="@color/textHint"
                         android:padding="10dp"
-                        android:theme="@style/CustomEditTextTheme"/>
+                        android:theme="@style/CustomEditTextTheme"
+                        />
 
                 </LinearLayout>
 
@@ -303,7 +305,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <!--<ImageView-->
                         <!--android:layout_width="20dp"-->
@@ -325,7 +328,8 @@
                         android:textColor="@color/myTextPrimaryColor"
                         android:textColorHint="@color/textHint"
                         android:padding="10dp"
-                        android:theme="@style/CustomEditTextTheme"/>
+                        android:theme="@style/CustomEditTextTheme"
+                        />
 
                 </LinearLayout>
 

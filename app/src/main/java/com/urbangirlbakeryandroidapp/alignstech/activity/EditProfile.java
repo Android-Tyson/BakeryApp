@@ -96,8 +96,10 @@ public class EditProfile extends AppCompatActivity {
             user_dob.setText(userInfos.get(0).getDob());
             user_gender.setText(userInfos.get(0).getGender());
             user_location.setText(userInfos.get(0).getLocation());
-            user_zone.setText(userInfos.get(0).getZone());
-            user_district.setText(userInfos.get(0).getDistrict());
+//            user_zone.setText(userInfos.get(0).getZone());
+//            user_district.setText(userInfos.get(0).getDistrict());
+            user_zone.setText("Bagmati");
+            user_district.setText("Kathmandu");
             user_billing_address.setText(userInfos.get(0).getBillingAddress());
             user_sipping_address.setText(userInfos.get(0).getSippingAddress());
             user_mobile_secondary.setText(userInfos.get(0).getMobileSecondary());
