@@ -19,24 +19,23 @@ import org.json.JSONObject;
  */
 public class GetSomeCategories {
 
-//    public static MaterialDialog materialDialog;
     public static void parseSomeCategoriesList(String url , final Context context)
     {
-
-//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
-
+        
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         MyBus.getInstance().post(new SomeCategoriesEventBus(response));
-//                        materialDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 MyUtils.showToast(context, error.toString());
-//                materialDialog.dismiss();
+
             }
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,

@@ -30,9 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,9 +42,6 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
     @InjectView(R.id.product_image)
     NetworkImageView iv_product_image;
-
-//    @InjectView(R.id.product_name)
-//    TextView tv_product_name;
 
     @InjectView(R.id.product_price)
     TextView tv_product_price;
@@ -126,7 +121,6 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                     product_image_url = Apis.BASE_URL + "images/" + path;
                 }
 
-//                tv_product_name.setText(product_name);
                 tv_product_price.setText(product_price);
                 tv_product_description.setText(product_description);
                 iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
@@ -214,12 +208,6 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
     }
 
-    private String getCurrentDate() {
-
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
-    }
-
 
     @Override
     protected void onDestroy() {
@@ -232,15 +220,8 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-//        if (MyUtils.isUserLoggedIn(this)) {
-
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                     new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
-
-//        } else {
-//
-//            dialogIfNotLoggedIn(this);
-//        }
 
     }
 

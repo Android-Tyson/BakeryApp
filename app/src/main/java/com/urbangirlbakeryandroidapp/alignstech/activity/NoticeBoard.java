@@ -59,10 +59,6 @@ public class NoticeBoard extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(
-//                new HorizontalDividerItemDecoration.Builder(this)
-//                        .color(getResources().getColor(R.color.layout_background))
-//                        .build());
         recyclerView.setAdapter(adapter);
 
     }
@@ -89,27 +85,6 @@ public class NoticeBoard extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_notice_board, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     protected void onDestroy() {

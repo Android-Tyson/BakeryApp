@@ -25,12 +25,16 @@ public class GetHeaderImageSlider {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         MyBus.getInstance().post(new HeaderImageSliderEventBus(response));
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 MyUtils.showToast(context, error.toString());
+
             }
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,

@@ -134,8 +134,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob() {
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
-//            String apiName = getApiName();
-//            MyUtils.showLog(getApiName());
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
             GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
 
@@ -179,8 +177,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         try {
             JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
             JSONObject jsonObj = jsonObject1.getJSONObject("result");
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                JSONObject jsonObj = jsonArray.getJSONObject(i);
             String product_id = jsonObj.getString("id");
             String product_name = jsonObj.getString("product_name");
             String starting_pound = jsonObj.getString("starting_pound");
@@ -204,11 +200,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 product_image_url = Apis.BASE_URL + "images/" + path;
             }
 
-//                // Default Flavour Job
-//                JSONObject defaultFlavorObj = jsonObj.getJSONObject("default_flavors");
-//                defaultFlavorObj.getString("flavor");
-//                defaultFlavorObj.getString("per_pound_price");
-
 
             JSONObject flavorObj = jsonObj.getJSONObject("flavor");
             ArrayList<String> flavour = new ArrayList<>();
@@ -218,7 +209,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 String flavor_id = flavorObject.getString("id");
                 if (flavor_id.equals(default_flavour_id)) {
                     per_pound_price_list.add(flavorObject.getString("per_pound_price"));
-//                        flavourList.add(flavorObject.getString("id"));
                     flavour.add(flavorObject.getString("flavor"));
 
                 }
@@ -261,7 +251,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             flavour_list.add(flavour.get(i));
         }
 
-
         spinner_flavour.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, flavour_list));
         spinner_pound.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pound));
 
@@ -277,6 +266,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         performJsonTaskForAccessories(event.getJsonObject());
 
     }
+
 
     private void performJsonTaskForAccessories(JSONObject jsonObject) {
 
@@ -309,29 +299,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         recyclerView.setAdapter(adapter);
 
     }
-
-//    private double priceCalculation() {
-//
-//        double base_price = 0.00, pound_ = 0.00, perPoundPrice = 0.00, candle = 0.00, knife = 0.00;
-//        if (product_price != null) {
-//            base_price = Double.parseDouble(product_price);
-//        }
-//
-//        if (pound != null) {
-//            if (pound.equals("Select Pound"))
-//                pound = "1.00";
-//            pound_ = Double.parseDouble(pound);
-//        }
-//
-//        if (per_pound_price != null) {
-//            perPoundPrice = Double.parseDouble(per_pound_price);
-//        }
-//
-//
-//        double total = base_price + (pound_ * perPoundPrice) + candle + knife + accessoriesTotalPrice;
-//        return total;
-//
-//    }
 
 
     private void orderSelectedProduct() {
@@ -454,12 +421,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     }
 
-//    @Subscribe
-//    public void orderUserDetails(OrderedCakeDetailsEvent event) {
-//
-//        orderSelectedProduct();
-//
-//    }
 
     @Override
     protected void onDestroy() {
@@ -505,20 +466,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-//        if(isOpening){
-//
-//            GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
-//            isOpening = false;
-//
-//        }
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                 new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
         dialogForOpeningAndClosingTime(this);
 
     }
-
-
-
 
 
     @Subscribe
@@ -646,6 +598,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     .show();
 
         } else {
+
             new MaterialDialog.Builder(context)
                     .title("Notice")
                     .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")

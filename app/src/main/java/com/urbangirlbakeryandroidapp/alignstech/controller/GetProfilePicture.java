@@ -27,15 +27,19 @@ public class GetProfilePicture {
                 ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmapResponse) {
+
                         MainActivity.account.setPhoto(bitmapResponse);
                         MyUtils.saveUserProfiePic(bitmapResponse);
+
                     }
                 }, 50, 50, null, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
                         MyUtils.showToast(context, error.toString());
                         List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
                         GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
+
                     }
                 });
                 imageRequest.setRetryPolicy(new DefaultRetryPolicy(30000,

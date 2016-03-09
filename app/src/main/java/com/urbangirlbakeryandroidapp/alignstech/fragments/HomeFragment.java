@@ -142,10 +142,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState == null) {
             if (MyUtils.isNetworkConnected(getActivity())) {
-//                if (isFirstTime) {
+
                 doParsingJob();
-//                    isFirstTime = false;
-//                }
+
             }
         }
         initializeUrgentCakeRecyclerView();
@@ -222,6 +221,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         swipeRefreshLayout.setRefreshing(false);
     }
 
+
     @Subscribe
     public void getOffersScrollList(GetUrgentCakesEvent event) {
         JSONObject jsonObject = event.getJsonObject();
@@ -231,6 +231,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             materialDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
     }
+
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
 
@@ -250,6 +251,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         }
 
     }
+
 
     private void performJsonTaskForGifts(JSONObject jsonObject) {
 
@@ -306,6 +308,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
+
     private void performJsonTaskForDealsAndOffers(JSONObject jsonObject) {
 
         ArrayList<String> urgentCakeIdList = new ArrayList<>();
@@ -344,13 +347,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onPageScrolled(int i, float v, int i1) {
     }
 
+
     @Override
     public void onPageSelected(int i) {
     }
 
+
     @Override
     public void onPageScrollStateChanged(int i) {
     }
+
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
