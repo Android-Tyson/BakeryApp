@@ -102,7 +102,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> orderedUserDetails;
     private String selectedFlavor, selectedFlovourId;
     private boolean isEggless = false;
-
+    private boolean isUrgent = false;
     private MaterialDialog materialDialog;
 
     @Override
@@ -188,6 +188,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             product_price = jsonObj.getString("price");
             String product_description = jsonObj.getString("description");
             String default_flavour_id = jsonObj.getString("default_flavor");
+            if(jsonObj.getString("is_active").equals("2"))
+                isUrgent = true;
+
 
             singleProductDetailsList.add(product_id);
             singleProductDetailsList.add(product_name);
@@ -510,43 +513,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 //        }
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                 new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
-
-
-    }
-
-
-    private void dialogIfNotLoggedIn(final Context context) {
-
-        new MaterialDialog.Builder(this)
-                .title("Please Login")
-                .content("You Are not Logged In. Please login to continue..")
-                .positiveText("Login")
-                .negativeText("Later")
-                .autoDismiss(true)
-                .positiveColorRes(R.color.myPrimaryColor)
-                .negativeColorRes(R.color.myPrimaryColor)
-                .callback(new MaterialDialog.ButtonCallback() {
-
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        super.onPositive(dialog);
-                        dialog.dismiss();
-                        Intent intent = new Intent(context, MainActivity.class);
-                        intent.putExtra("LearningPattern", "true");
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        super.onNegative(dialog);
-                        dialog.dismiss();
-                    }
-                })
-                .build()
-                .show();
+        dialogForOpeningAndClosingTime(this);
 
     }
+
+
+
 
 
     @Subscribe
@@ -648,5 +620,50 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         parsingJob();
 
+    }
+
+    private void dialogForOpeningAndClosingTime(final Context context) {
+
+        if (isUrgent) {
+
+            new MaterialDialog.Builder(context)
+                    .title("Notice")
+                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
+                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
+                            ". This is urgent cake ...... BLAH")
+                    .positiveText("Ok")
+                    .cancelable(false)
+                    .positiveColorRes(R.color.myPrimaryColor)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            super.onPositive(dialog);
+                            dialog.dismiss();
+                        }
+                    })
+                    .build()
+                    .show();
+
+        } else {
+            new MaterialDialog.Builder(context)
+                    .title("Notice")
+                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
+                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"))
+                    .positiveText("Ok")
+                    .cancelable(false)
+                    .positiveColorRes(R.color.myPrimaryColor)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            super.onPositive(dialog);
+                            dialog.dismiss();
+                        }
+                    })
+                    .build()
+                    .show();
+
+        }
     }
 }

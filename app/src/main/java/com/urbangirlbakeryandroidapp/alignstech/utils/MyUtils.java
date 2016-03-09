@@ -14,9 +14,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
+import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetProfilePicture;
 import com.urbangirlbakeryandroidapp.alignstech.model.DataBase_UserInfo;
 
@@ -216,5 +218,39 @@ public class MyUtils
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+
+    private void dialogIfNotLoggedIn(final Context context) {
+
+        new MaterialDialog.Builder(context)
+                .title("Please Login")
+                .content("You Are not Logged In. Please login to continue..")
+                .positiveText("Login")
+                .negativeText("Later")
+                .autoDismiss(true)
+                .positiveColorRes(R.color.myPrimaryColor)
+                .negativeColorRes(R.color.myPrimaryColor)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        dialog.dismiss();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("LearningPattern", "true");
+                        context.startActivity(intent);
+//                        finish();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        super.onNegative(dialog);
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
+
     }
 }
