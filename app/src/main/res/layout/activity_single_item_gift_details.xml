@@ -52,18 +52,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/textView_background"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:paddingBottom="5dp"
-                        android:paddingLeft="15dp"
                         android:paddingTop="5dp">
 
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/textView_background"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="5dp"
+                            android:text="NRs. "
+                            android:textColor="@color/myAccentColor"
+                            android:textSize="26sp" />
 
                         <TextView
                             android:id="@+id/product_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="NRs. 1234.00"
+                            android:background="@color/textView_background"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:text="1234"
                             android:textColor="@color/myAccentColor"
                             android:textSize="26sp" />
 

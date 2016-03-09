@@ -81,7 +81,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.eggless)
     CheckBox eggless;
 
-    public static SwipeRefreshLayout swipeRefreshLayout;
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private String product_price = "0.00", pound = "0.00", per_pound_price = "0.00";
     private Double totalPrice = 0.00, eggless_price = 0.00;
@@ -109,7 +110,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_detils);
         ButterKnife.inject(this);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_horoscope_screen);
         initializeToolbar();
         adapter = new CustomHorizontalAccessoriesAdapter(this, accessoryNameList);
         MyBus.getInstance().register(this);

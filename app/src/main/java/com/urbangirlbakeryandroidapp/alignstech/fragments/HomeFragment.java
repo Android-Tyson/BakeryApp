@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -52,7 +54,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends android.support.v4.app.Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener {
+public class HomeFragment extends android.support.v4.app.Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -84,6 +86,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @InjectView(R.id.slider)
     SliderLayout mDemoSlider;
 
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private ArrayList<String> headerImageIdList = new ArrayList<>();
     private ArrayList<String> headerImageTitleList = new ArrayList<>();
 
@@ -95,11 +100,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public static ArrayList<String> urgentCakeName = new ArrayList<>();
     public static ArrayList<String> urgentCakeId = new ArrayList<>();
 
-
-    private CustomHorizontalCakeViewAdapter adapter;
     public static HashMap<String, Boolean> isGift = new HashMap<>();
 
-//    boolean isFirstTime = true;
+    private MaterialDialog materialDialog;
+    boolean isHeaderImageLoad = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -126,8 +130,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         gift_1.setOnClickListener(this);
         gift_2.setOnClickListener(this);
         gift_3.setOnClickListener(this);
+        materialDialog = new MaterialDialog.Builder(getActivity()).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myAccentColor));
+        swipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -135,16 +143,24 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (savedInstanceState == null) {
             if (MyUtils.isNetworkConnected(getActivity())) {
 //                if (isFirstTime) {
-                    GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
-                    GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-                    GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
-                    GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+                doParsingJob();
 //                    isFirstTime = false;
 //                }
             }
         }
         initializeUrgentCakeRecyclerView();
     }
+
+
+    private void doParsingJob() {
+
+        GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
+        GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
+        GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
+        GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
+
+    }
+
 
     private void initializeUrgentCakeRecyclerView() {
 
@@ -154,6 +170,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
+
     private void initializeDataForUrgentCake(ArrayList<String> titleList, ArrayList<String> imageUrlList) {
 
         List<RecyclerViewModel> urgentCakeList = new ArrayList<>();
@@ -162,37 +179,57 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             urgentCakeList.add(new RecyclerViewModel(titleList.get(i), imageUrlList.get(i)));
         }
         initializeUrgentCakeRecyclerView();
-        adapter = new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList);
+        CustomHorizontalCakeViewAdapter adapter = new CustomHorizontalCakeViewAdapter(getActivity(), urgentCakeList);
         recyclerView.setAdapter(adapter);
     }
 
 
     @Subscribe
     public void getSomeCategoriesList(SomeCategoriesEventBus event) {
+
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForCategories(jsonObject);
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
+
 
     @Subscribe
     public void getSomeGiftList(SomeGiftEventBus event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
         performJsonTaskForGifts(jsonObject);
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
+
 
     @Subscribe
     public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
-        performJsonTaskForHeaderImages(jsonObject);
+        if(isHeaderImageLoad){
+
+            performJsonTaskForHeaderImages(jsonObject);
+            isHeaderImageLoad = false;
+
+        }
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Subscribe
     public void getOffersScrollList(GetUrgentCakesEvent event) {
         JSONObject jsonObject = event.getJsonObject();
         MyUtils.showLog(jsonObject.toString());
-        performJsonTaskForUrgentCakes(jsonObject);
+        performJsonTaskForDealsAndOffers(jsonObject);
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void performJsonTaskForCategories(JSONObject jsonObject) {
@@ -240,6 +277,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
+
+            if(!headerImageIdList.isEmpty()){
+                headerImageIdList.clear();
+                headerImageTitleList.clear();
+                headerImageUrlList.clear();
+            }
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String headerImageId = jsonObj.getString("id");
@@ -263,7 +306,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     }
 
-    private void performJsonTaskForUrgentCakes(JSONObject jsonObject) {
+    private void performJsonTaskForDealsAndOffers(JSONObject jsonObject) {
 
         ArrayList<String> urgentCakeIdList = new ArrayList<>();
         ArrayList<String> urgentCakeTitleList = new ArrayList<>();
@@ -337,6 +380,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private void imageSliderJob(ArrayList<String> imageTitle, ArrayList<String> imageUrlLink) {
 
         HashMap<String, String> url_maps = new HashMap<>();
+        if(!url_maps.isEmpty())
+            url_maps.clear();
         for (int i = 0; i < imageUrlLink.size(); i++) {
             url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
         }
@@ -357,10 +402,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             mDemoSlider.addSlider(textSliderView);
         }
 
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(2000);
+        mDemoSlider.setDuration(7000);
         mDemoSlider.addOnPageChangeListener(this);
 
     }
@@ -412,12 +457,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onStop() {
         mDemoSlider.stopAutoCycle();
-        if (GetSomeGifts.materialDialog != null) {
-            GetSomeGifts.materialDialog.dismiss();
-        }
-        if (GetSomeCategories.materialDialog != null) {
-            GetSomeCategories.materialDialog.dismiss();
-        }
         super.onStop();
     }
 
@@ -435,7 +474,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        MyBus.getInstance().unregister(getActivity());
         AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
     }
 
@@ -444,4 +482,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         super.onDestroyView();
     }
 
+    @Override
+    public void onRefresh() {
+
+        doParsingJob();
+
+    }
 }
