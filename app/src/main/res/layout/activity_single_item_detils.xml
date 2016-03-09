@@ -9,16 +9,16 @@
 
     <include layout="@layout/app_toolbar" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_horoscope_screen"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:tag="frame_container">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/frame_container"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_horoscope_screen"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:tag="frame_container">
+            android:layout_height="wrap_content">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -278,7 +278,7 @@
                 </LinearLayout>
 
             </ScrollView>
-        </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
