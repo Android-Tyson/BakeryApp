@@ -87,7 +87,7 @@
                                 android:paddingBottom="10dp"
                                 android:text="Sweet and Simple Product Description"
                                 android:textColor="@color/myTextColor"
-                                android:textSize="18sp" />
+                                android:textSize="16sp" />
 
                             <View
                                 android:layout_width="match_parent"

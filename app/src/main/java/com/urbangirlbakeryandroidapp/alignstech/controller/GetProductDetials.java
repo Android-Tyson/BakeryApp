@@ -2,16 +2,15 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -20,23 +19,25 @@ import org.json.JSONObject;
  */
 public class GetProductDetials {
 
-    private static MaterialDialog materialDialog;
+//    private static MaterialDialog materialDialog;
     public static void parseProductDetials(String url , final Context context){
 
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
+//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         MyBus.getInstance().post(new ProductDetialsEvent(response));
-                        materialDialog.dismiss();
+//                        materialDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showToast(context, error.toString());
-                materialDialog.dismiss();
+//                MyUtils.showToast(context, error.toString());
+                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
+
+//                materialDialog.dismiss();
             }
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,

@@ -110,18 +110,7 @@ public class MyComplains extends DialogFragment implements View.OnClickListener 
 
     }
 
-//    @Subscribe
-//    public void userPostResponse(PostComplainEvent event) {
-//
-//        String sss = event.getResponse();
-//
-//        MyUtils.showToast(getActivity(), "Your complain is successfully posted..");
-//        Intent intent = new Intent(getActivity() , MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//
-//
-//    }
+
 
     @Override
     public void onDestroy() {

@@ -3,6 +3,7 @@ package com.urbangirlbakeryandroidapp.alignstech.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalAccessor
 import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.CheckBoxFalseEventBus;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetOpeningClosingEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
@@ -50,7 +52,7 @@ import java.util.HashMap;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class SingleItemDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener, SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -79,8 +81,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @InjectView(R.id.eggless)
     CheckBox eggless;
 
+    public static SwipeRefreshLayout swipeRefreshLayout;
+
     private String product_price = "0.00", pound = "0.00", per_pound_price = "0.00";
-    private Double totalPrice = 0.00 , eggless_price = 0.00;
+    private Double totalPrice = 0.00, eggless_price = 0.00;
 
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
@@ -95,14 +99,17 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
     private ArrayList<String> orderedUserDetails;
-    private String selectedFlavor , selectedFlovourId ;
+    private String selectedFlavor, selectedFlovourId;
     private boolean isEggless = false;
+
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_detils);
         ButterKnife.inject(this);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_horoscope_screen);
         initializeToolbar();
         adapter = new CustomHorizontalAccessoriesAdapter(this, accessoryNameList);
         MyBus.getInstance().register(this);
@@ -110,6 +117,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         orderNow.setOnClickListener(this);
         initializeDataForAccessories();
         eggless.setOnCheckedChangeListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myAccentColor));
+        swipeRefreshLayout.setOnRefreshListener(this);
+        materialDialog = new MaterialDialog.Builder(this).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
     }
 
@@ -124,8 +134,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private void parsingJob() {
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
-            String apiName = getApiName();
-            MyUtils.showLog(getApiName());
+//            String apiName = getApiName();
+//            MyUtils.showLog(getApiName());
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
             GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
 
@@ -143,10 +153,26 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Subscribe
     public void getSingleProductDetials(ProductDetialsEvent event) {
 
+
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
         JSONObject jsonObject = event.getJsonObject();
         performJsonTaskForSingleProductDetails(jsonObject);
 
+        swipeRefreshLayout.setRefreshing(false);
     }
+
+
+    @Subscribe
+    public void onResponseError(GetErrorEvent event) {
+
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        MyUtils.showToast(this, event.getError());
+        swipeRefreshLayout.setRefreshing(false);
+
+    }
+
 
     private void performJsonTaskForSingleProductDetails(JSONObject jsonObject) {
 
@@ -155,40 +181,60 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             JSONObject jsonObj = jsonObject1.getJSONObject("result");
 //            for (int i = 0; i < jsonArray.length(); i++) {
 //                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                String product_id = jsonObj.getString("id");
-                String product_name = jsonObj.getString("product_name");
-                String starting_pound = jsonObj.getString("starting_pound");
-                String ending_pound = jsonObj.getString("ending_pound");
-                product_price = jsonObj.getString("price");
-                String product_description = jsonObj.getString("description");
+            String product_id = jsonObj.getString("id");
+            String product_name = jsonObj.getString("product_name");
+            String starting_pound = jsonObj.getString("starting_pound");
+            String ending_pound = jsonObj.getString("ending_pound");
+            product_price = jsonObj.getString("price");
+            String product_description = jsonObj.getString("description");
+            String default_flavour_id = jsonObj.getString("default_flavor");
 
-                singleProductDetailsList.add(product_id);
-                singleProductDetailsList.add(product_name);
-                singleProductDetailsList.add(product_price);
+            singleProductDetailsList.add(product_id);
+            singleProductDetailsList.add(product_name);
+            singleProductDetailsList.add(product_price);
 
-                String path = jsonObj.getString("path");
-                String product_image_url;
-                if (path.equals("null")) {
-                    product_image_url = Apis.defaultImageUrl;
-                } else {
-                    product_image_url = Apis.BASE_URL + "images/" + path;
+            String path = jsonObj.getString("path");
+            String product_image_url;
+            if (path.equals("null")) {
+                product_image_url = Apis.defaultImageUrl;
+            } else {
+                product_image_url = Apis.BASE_URL + "images/" + path;
+            }
+
+//                // Default Flavour Job
+//                JSONObject defaultFlavorObj = jsonObj.getJSONObject("default_flavors");
+//                defaultFlavorObj.getString("flavor");
+//                defaultFlavorObj.getString("per_pound_price");
+
+
+            JSONObject flavorObj = jsonObj.getJSONObject("flavor");
+            ArrayList<String> flavour = new ArrayList<>();
+
+            for (int j = 0; j < flavorObj.length() - 1; j++) {
+                JSONObject flavorObject = flavorObj.getJSONObject(String.valueOf(j));
+                String flavor_id = flavorObject.getString("id");
+                if (flavor_id.equals(default_flavour_id)) {
+                    per_pound_price_list.add(flavorObject.getString("per_pound_price"));
+//                        flavourList.add(flavorObject.getString("id"));
+                    flavour.add(flavorObject.getString("flavor"));
+
                 }
+            }
 
-                JSONObject flavorObj = jsonObj.getJSONObject("flavor");
-                ArrayList<String> flavour = new ArrayList<>();
-
-                for (int j = 0; j < flavorObj.length() - 1; j++) {
-                    JSONObject flavorObject = flavorObj.getJSONObject(String.valueOf(j));
-                    String flavor_id = flavorObject.getString("id");
+            for (int j = 0; j < flavorObj.length() - 1; j++) {
+                JSONObject flavorObject = flavorObj.getJSONObject(String.valueOf(j));
+                String flavor_id = flavorObject.getString("id");
+                if (!flavor_id.equals(default_flavour_id)) {
                     String flavor = flavorObject.getString("flavor");
                     per_pound_price_list.add(flavorObject.getString("per_pound_price"));
                     flavourList.add(flavorObject.getString("id"));
                     flavour.add(flavor);
                 }
-                setDataToSpinner(flavour, starting_pound, ending_pound);
-                tv_product_price.setText(product_price);
-                tv_product_description.setText(product_description);
-                iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
+            }
+            setDataToSpinner(flavour, starting_pound, ending_pound);
+            tv_product_price.setText(product_price);
+            tv_product_description.setText(product_description);
+            iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
 //            }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -233,6 +279,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
+            if (!accessoryNameList.isEmpty())
+                accessoryNameList.clear();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String id = jsonObj.getString("id");
@@ -349,29 +397,29 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                 }
             }
 
-            jsonObject.put("contact_person_name" , orderedUserDetails.get(0));
-            jsonObject.put("phone_no1" , orderedUserDetails.get(1));
-            jsonObject.put("phone_no2" , orderedUserDetails.get(2));
-            jsonObject.put("delivery_address" , orderedUserDetails.get(3));
-            jsonObject.put("message_on_cake" , orderedUserDetails.get(4));
-            jsonObject.put("order_date" , orderedUserDetails.get(5));
-            jsonObject.put("sender_address" , orderedUserDetails.get(7));
-            jsonObject.put("receiver_address" , orderedUserDetails.get(8));
+            jsonObject.put("contact_person_name", orderedUserDetails.get(0));
+            jsonObject.put("phone_no1", orderedUserDetails.get(1));
+            jsonObject.put("phone_no2", orderedUserDetails.get(2));
+            jsonObject.put("delivery_address", orderedUserDetails.get(3));
+            jsonObject.put("message_on_cake", orderedUserDetails.get(4));
+            jsonObject.put("order_date", orderedUserDetails.get(5));
+            jsonObject.put("sender_address", orderedUserDetails.get(7));
+            jsonObject.put("receiver_address", orderedUserDetails.get(8));
 
-            if(MyUtils.isUserLoggedIn(this)){
+            if (MyUtils.isUserLoggedIn(this)) {
 
                 jsonObject.put("user_id", getUserId());
 
-            }else {
+            } else {
 
                 jsonObject.put("user_id", "0");
 
             }
             jsonObject.put("total", totalPrice);
-            jsonObject.put("flavor" , selectedFlovourId);
-            jsonObject.put("pound" , pound);
+            jsonObject.put("flavor", selectedFlovourId);
+            jsonObject.put("pound", pound);
             jsonObject.put("order_details", jsonArray);
-            jsonObject.put("isEgg_less" , isEggless);
+            jsonObject.put("isEgg_less", isEggless);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -393,7 +441,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             if (result.equals("success"))
                 MyUtils.showToast(this, "Successfully Ordered and your total price is: " + totalPrice);
 
-            Intent intent =new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
@@ -430,15 +478,15 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             totalPrice = (Double.parseDouble(product_price) + eggless_price +
                     Double.parseDouble(per_pound_price)) *
-                            Double.parseDouble(pound) + accessoriesTotalPrice;
+                    Double.parseDouble(pound) + accessoriesTotalPrice;
             tv_product_price.setText(String.valueOf(totalPrice));
 
         } else if (spinner.getId() == R.id.spinner_pound) {
             pound = adapterView.getItemAtPosition(i).toString();
             totalPrice = (Double.parseDouble(product_price) + eggless_price +
-                            Double.parseDouble(per_pound_price)) *
-                                    Double.parseDouble(pound) + accessoriesTotalPrice;
-                    tv_product_price.setText(String.valueOf(totalPrice));
+                    Double.parseDouble(per_pound_price)) *
+                    Double.parseDouble(pound) + accessoriesTotalPrice;
+            tv_product_price.setText(String.valueOf(totalPrice));
             MyUtils.showLog(" ");
         }
 
@@ -525,7 +573,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
     @Subscribe
-    public void userDetailList(UserDetailsListEvent event){
+    public void userDetailList(UserDetailsListEvent event) {
 
         orderedUserDetails = event.getUserDetailsList();
         MyUtils.showLog(orderedUserDetails.toString());
@@ -534,7 +582,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     }
 
     @Subscribe
-    public void getOpeningClosingDate(GetOpeningClosingEvent event){
+    public void getOpeningClosingDate(GetOpeningClosingEvent event) {
 
         String response = event.getResponse();
         try {
@@ -544,13 +592,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String egg_less_price = jsonObject.getString("egg_less_price");
             MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
 
-            if(MyUtils.getDataFromPreferences(this , "OPENING_HOUR").isEmpty())
-            {
-                MyUtils.saveDataInPreferences(this , "OPENING_HOUR" , opening_hour);
-                MyUtils.saveDataInPreferences(this , "CLOSING_HOUR" , closing_hour);
-            }else {
-                MyUtils.editDataOfPreferences(this , "OPENING_HOUR" , opening_hour);
-                MyUtils.editDataOfPreferences(this , "CLOSING_HOUR" , closing_hour);
+            if (MyUtils.getDataFromPreferences(this, "OPENING_HOUR").isEmpty()) {
+                MyUtils.saveDataInPreferences(this, "OPENING_HOUR", opening_hour);
+                MyUtils.saveDataInPreferences(this, "CLOSING_HOUR", closing_hour);
+            } else {
+                MyUtils.editDataOfPreferences(this, "OPENING_HOUR", opening_hour);
+                MyUtils.editDataOfPreferences(this, "CLOSING_HOUR", closing_hour);
             }
 
         } catch (JSONException e) {
@@ -558,8 +605,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         }
 
     }
-
-
 
 
     private String getUserId() {
@@ -572,10 +617,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
 
-        if(compoundButton.isChecked()){
+        if (compoundButton.isChecked()) {
 
             isEggless = true;
-            eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this , "EGG_LESS_PRICE"));
+            eggless_price = Double.parseDouble(MyUtils.getDataFromPreferences(this, "EGG_LESS_PRICE"));
 
             totalPrice = (Double.parseDouble(product_price) + eggless_price +
                     Double.parseDouble(per_pound_price)) *
@@ -583,7 +628,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             tv_product_price.setText(String.valueOf(totalPrice));
 
-        }else{
+        } else {
 
             isEggless = false;
             eggless_price = 0.00;
@@ -595,6 +640,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             tv_product_price.setText(String.valueOf(totalPrice));
 
         }
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+        parsingJob();
 
     }
 }
