@@ -103,7 +103,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public static HashMap<String, Boolean> isGift = new HashMap<>();
 
     private MaterialDialog materialDialog;
-    private static boolean isImageLoaded = true;
+//    private static boolean isImageLoaded = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -143,6 +143,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (savedInstanceState == null) {
             if (MyUtils.isNetworkConnected(getActivity())) {
 
+                GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
                 doParsingJob();
 
             }
@@ -155,7 +156,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
         GetSomeCategories.parseSomeCategoriesList(Apis.some_categories_list, getActivity());
         GetSomeGifts.parseSomeCategoriesList(Apis.some_gift_list, getActivity());
-        GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
         GetHeaderOffers.parseheaderOffers(Apis.header_offers, getActivity());
 
     }
@@ -458,6 +458,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 
     @Override
     public void onStop() {
@@ -480,4 +484,5 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         doParsingJob();
 
     }
+
 }
