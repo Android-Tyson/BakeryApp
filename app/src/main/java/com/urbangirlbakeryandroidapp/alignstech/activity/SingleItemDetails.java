@@ -130,8 +130,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
         toolbar.setTitle(getItemTitle());
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void parsingJob() {

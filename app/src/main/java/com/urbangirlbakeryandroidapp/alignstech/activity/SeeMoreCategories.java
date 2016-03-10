@@ -58,7 +58,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
 
         toolbar.setTitle(R.string.categories);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

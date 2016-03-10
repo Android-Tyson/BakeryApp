@@ -111,7 +111,7 @@ public class EditProfile extends AppCompatActivity {
 
         toolbar.setTitle(R.string.edit_profile);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

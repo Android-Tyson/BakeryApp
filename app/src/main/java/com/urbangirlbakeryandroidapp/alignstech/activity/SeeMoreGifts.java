@@ -56,7 +56,7 @@ public class SeeMoreGifts extends AppCompatActivity implements AdapterView.OnIte
 
         toolbar.setTitle(R.string.gifts);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
