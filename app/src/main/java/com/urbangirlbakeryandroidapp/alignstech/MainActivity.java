@@ -138,16 +138,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         }
 
         addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
-        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection materialSection) {
-
-                addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
-
-
-            }
-        }));
-
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
 //        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));

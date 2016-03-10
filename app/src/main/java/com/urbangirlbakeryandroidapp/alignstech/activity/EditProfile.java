@@ -227,10 +227,10 @@ public class EditProfile extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(homeButtonPressed){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
+//        if(homeButtonPressed){
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//        }
     }
 }

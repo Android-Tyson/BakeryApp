@@ -19,10 +19,10 @@ import org.json.JSONObject;
  */
 public class GetAllAccessories {
 
-    public static void parseAllAccessoriesList(String url, final Context context){
+    public static void parseAllAccessoriesList(String url, final Context context) {
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -34,14 +34,15 @@ public class GetAllAccessories {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
+                if (error != null)
+                    MyBus.getInstance().post(new GetErrorEvent(error.toString()));
 
             }
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "GET_ALL_ACCESSORIES_TAG");
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, "GET_ALL_ACCESSORIES_TAG");
 
     }
 
