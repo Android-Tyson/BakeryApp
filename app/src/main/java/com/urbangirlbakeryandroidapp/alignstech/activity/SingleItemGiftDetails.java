@@ -101,30 +101,29 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     private void performJsonTaskForSingleProductDetails(JSONObject jsonObject) {
 
         try {
-            JSONArray jsonArray = jsonObject.getJSONArray("result");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                String product_id = jsonObj.getString("id");
-                String product_name = jsonObj.getString("product_name");
-                product_price = jsonObj.getString("price");
-                String product_description = jsonObj.getString("description");
+            JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+            JSONObject jsonObj = jsonObject1.getJSONObject("result");
+            String product_id = jsonObj.getString("id");
+            String product_name = jsonObj.getString("product_name");
+            product_price = jsonObj.getString("price");
+            String product_description = jsonObj.getString("description");
 
-                singleProductDetailsList.add(product_id);
-                singleProductDetailsList.add(product_name);
-                singleProductDetailsList.add(product_price);
+            singleProductDetailsList.add(product_id);
+            singleProductDetailsList.add(product_name);
+            singleProductDetailsList.add(product_price);
 
-                String path = jsonObj.getString("path");
-                String product_image_url;
-                if (path.equals("null")) {
-                    product_image_url = Apis.defaultImageUrl;
-                } else {
-                    product_image_url = Apis.BASE_URL + "images/" + path;
-                }
-
-                tv_product_price.setText(product_price);
-                tv_product_description.setText(product_description);
-                iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
+            String path = jsonObj.getString("path");
+            String product_image_url;
+            if (path.equals("null")) {
+                product_image_url = Apis.defaultImageUrl;
+            } else {
+                product_image_url = Apis.BASE_URL + "images/" + path;
             }
+
+            tv_product_price.setText(product_price);
+            tv_product_description.setText(product_description);
+            iv_product_image.setImageUrl(product_image_url, AppController.getInstance().getImageLoader());
+//            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -220,8 +219,8 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                    new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
+                new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
 
     }
 
@@ -242,9 +241,10 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
                         super.onPositive(dialog);
                         dialog.dismiss();
                         Intent intent = new Intent(context, MainActivity.class);
-                        intent.putExtra("LearningPattern" , "true");
+                        intent.putExtra("LearningPattern", "true");
                         startActivity(intent);
-                        finish();                    }
+                        finish();
+                    }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {

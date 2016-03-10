@@ -103,7 +103,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public static HashMap<String, Boolean> isGift = new HashMap<>();
 
     private MaterialDialog materialDialog;
-    boolean isHeaderImageLoad = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -208,17 +207,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Subscribe
     public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
+
         JSONObject jsonObject = event.getJsonObject();
-        MyUtils.showLog(jsonObject.toString());
-        if(isHeaderImageLoad){
+        performJsonTaskForHeaderImages(jsonObject);
 
-            performJsonTaskForHeaderImages(jsonObject);
-            isHeaderImageLoad = false;
-
-        }
         if (materialDialog.isShowing())
             materialDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
+
     }
 
 
@@ -280,7 +276,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("result");
 
-            if(!headerImageIdList.isEmpty()){
+            if (!headerImageIdList.isEmpty()) {
                 headerImageIdList.clear();
                 headerImageTitleList.clear();
                 headerImageUrlList.clear();
@@ -386,7 +382,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     private void imageSliderJob(ArrayList<String> imageTitle, ArrayList<String> imageUrlLink) {
 
         HashMap<String, String> url_maps = new HashMap<>();
-        if(!url_maps.isEmpty())
+        if (!url_maps.isEmpty())
             url_maps.clear();
         for (int i = 0; i < imageUrlLink.size(); i++) {
             url_maps.put(imageTitle.get(i), imageUrlLink.get(i));
@@ -402,6 +398,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                     .setOnSliderClickListener(this);
 
             //add your extra information
+
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle().putString("extra", name);
 
