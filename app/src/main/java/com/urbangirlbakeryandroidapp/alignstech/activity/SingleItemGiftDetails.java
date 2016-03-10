@@ -72,7 +72,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
         toolbar.setTitle(getItemTitle());
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

@@ -49,7 +49,7 @@ public class NoticeBoard extends AppCompatActivity {
     private void initializeToolbar() {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

@@ -29,7 +29,7 @@ public class Settings extends AppCompatActivity {
 
         toolbar.setTitle("Settings");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
