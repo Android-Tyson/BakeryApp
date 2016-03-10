@@ -26,6 +26,7 @@ import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomHorizontalCakeViewAdapter;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetUrgentCakesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
@@ -482,6 +483,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onRefresh() {
 
         doParsingJob();
+
+    }
+
+    @Subscribe
+    public void onResponseError(GetErrorEvent event) {
+
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        MyUtils.showToast(getActivity(), event.getError());
+        swipeRefreshLayout.setRefreshing(false);
 
     }
 

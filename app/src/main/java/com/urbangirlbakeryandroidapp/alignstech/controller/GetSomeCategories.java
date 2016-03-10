@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -34,6 +35,7 @@ public class GetSomeCategories {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
                 MyUtils.showToast(context, error.toString());
 
             }
