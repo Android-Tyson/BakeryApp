@@ -10,7 +10,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.HeaderImageSliderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -33,7 +32,7 @@ public class GetHeaderImageSlider {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                MyUtils.showToast(context, error.toString());
+//                MyUtils.showToast(context, error.toString());
 
             }
         });

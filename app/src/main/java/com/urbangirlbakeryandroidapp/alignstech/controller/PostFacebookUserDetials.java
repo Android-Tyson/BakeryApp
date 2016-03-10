@@ -2,7 +2,6 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -53,7 +52,9 @@ public class PostFacebookUserDetials {
                             }
 
                         } catch (JSONException e) {
+
                             e.printStackTrace();
+
                         }
 
                         MainActivity.materialDialog.dismiss();

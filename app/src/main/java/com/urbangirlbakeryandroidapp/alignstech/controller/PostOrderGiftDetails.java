@@ -39,7 +39,7 @@ public class PostOrderGiftDetails {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyUtils.showToast(context, error.toString());
+//                MyUtils.showToast(context, error.toString());
                 materialDialog.dismiss();
             }
         }) {
