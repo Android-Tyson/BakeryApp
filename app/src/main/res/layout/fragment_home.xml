@@ -324,7 +324,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentTop="true"
                                         android:gravity="center|left"
-                                        android:padding="@dimen/Categories_padding"
+                                        android:padding="@dimen/Categories_padding_2"
                                         android:textColor="@color/myTextColor"
                                         android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -349,7 +349,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentTop="true"
                                         android:gravity="center|left"
-                                        android:padding="@dimen/Categories_padding"
+                                        android:padding="@dimen/Categories_padding_2"
                                         android:textColor="@color/myTextColor"
                                         android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -374,7 +374,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentTop="true"
                                         android:gravity="center|left"
-                                        android:padding="@dimen/Categories_padding"
+                                        android:padding="@dimen/Categories_padding_2"
                                         android:textColor="@color/myTextColor"
                                         android:textSize="@dimen/textSizeCategoriesItem" />
 
@@ -397,7 +397,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:padding="@dimen/Categories_padding"
+                                        android:padding="@dimen/Categories_padding_2"
                                         android:text="@string/see_more"
                                         android:layout_marginLeft="5dp"
                                         android:textColor="@color/myPrimaryColor"
