@@ -210,12 +210,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
 
         JSONObject jsonObject = event.getJsonObject();
-        if(isImageLoaded){
+//        if(isImageLoaded){
 
             performJsonTaskForHeaderImages(jsonObject);
-            isImageLoaded = false;
+//            isImageLoaded = false;
 
-        }
+//        }
 
         if (materialDialog.isShowing())
             materialDialog.dismiss();
@@ -461,7 +461,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onStop() {
-        isImageLoaded = true;
+//        isImageLoaded = true;
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }
