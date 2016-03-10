@@ -140,9 +140,4 @@ public class CakesFragment extends android.support.v4.app.Fragment implements Ad
         super.onViewStateRestored(savedInstanceState);
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 }

@@ -192,7 +192,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count == 0) {
-            HomeFragment.isImageLoaded = true;
             super.onBackPressed();
         } else {
             getSupportFragmentManager().popBackStack();

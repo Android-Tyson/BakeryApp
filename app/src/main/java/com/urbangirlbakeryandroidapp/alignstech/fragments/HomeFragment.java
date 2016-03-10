@@ -103,7 +103,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public static HashMap<String, Boolean> isGift = new HashMap<>();
 
     private MaterialDialog materialDialog;
-    public static boolean isImageLoaded = true;
+    private static boolean isImageLoaded = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -458,27 +458,14 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
     @Override
     public void onStop() {
+        isImageLoaded = true;
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-    }
 
     @Override
     public void onDestroy() {
@@ -486,10 +473,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
     @Override
     public void onRefresh() {
