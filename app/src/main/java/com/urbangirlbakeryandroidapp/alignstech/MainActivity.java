@@ -169,7 +169,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                 MyUtils.showToast(this, "Please Check your Internet Connection And try again...");
             }
         } else {
-            MyUtils.showToast(this, "You are already logged in..");
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
         }
     }
 

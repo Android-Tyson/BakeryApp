@@ -19,7 +19,7 @@ import org.json.JSONObject;
  */
 public class GetOpeningClosingDate {
 
-    public static void getOpeningClosingDate(String url, final Context context) {
+    public static void getSettingApis(String url, final Context context) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
                 new Response.Listener<JSONObject>() {

@@ -3,7 +3,6 @@ package com.urbangirlbakeryandroidapp.alignstech.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -105,7 +104,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private ArrayList<String> orderedUserDetails;
     private String selectedFlavor, selectedFlovourId;
     private boolean isEggless = false;
-    private boolean isUrgent = false;
+
+//    private boolean isUrgent = false;
+//    private boolean isHoliday = false;
+    private String urgentDetails = "" , holidayDetails = "";
     private MaterialDialog materialDialog;
 
     @Override
@@ -138,7 +140,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
-            GetOpeningClosingDate.getOpeningClosingDate(Apis.get_opening_closing, this);
+            GetOpeningClosingDate.getSettingApis(Apis.get_opening_closing, this);
 
         }
     }
@@ -188,7 +190,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String product_description = jsonObj.getString("description");
             String default_flavour_id = jsonObj.getString("default_flavor");
             if(jsonObj.getString("is_active").equals("2"))
-                isUrgent = true;
+                urgentDetails = "This is urgent cake too..";
+//                isUrgent = true;
 
 
             singleProductDetailsList.add(product_id);
@@ -517,6 +520,12 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String opening_hour = jsonObject.getString("opening_hour");
             String closing_hour = jsonObject.getString("closing_hour");
             String egg_less_price = jsonObject.getString("egg_less_price");
+            String holiday = jsonObject.getString("holiday_date_and_time");
+            if(holiday != null && !holiday.isEmpty() && !holiday.equals("0")){
+                holidayDetails = "There will be holiday on: "+ holiday;
+//                isHoliday = true;
+            }
+
             MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
 
             if (MyUtils.getDataFromPreferences(this, "OPENING_HOUR").isEmpty()) {
@@ -579,13 +588,38 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private void dialogForOpeningAndClosingTime(final Context context) {
 
-        if (isUrgent) {
+//        if (isUrgent && isHoliday) {
+//
+//            new MaterialDialog.Builder(context)
+//                    .title("Notice")
+//                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
+//                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
+//                            ". This is urgent cake ...... BLAH")
+//                    .positiveText("Ok")
+//                    .cancelable(false)
+//                    .positiveColorRes(R.color.myPrimaryColor)
+//                    .callback(new MaterialDialog.ButtonCallback() {
+//
+//                        @Override
+//                        public void onPositive(MaterialDialog dialog) {
+//                            super.onPositive(dialog);
+//                            dialog.dismiss();
+//                        }
+//                    })
+//                    .build()
+//                    .show();
+//
+//        } else if(isUrgent){
+//
+//
+//
+//        } else {
 
             new MaterialDialog.Builder(context)
                     .title("Notice")
                     .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
                             + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
-                            ". This is urgent cake ...... BLAH")
+                            urgentDetails +" "+ holidayDetails)
                     .positiveText("Ok")
                     .cancelable(false)
                     .positiveColorRes(R.color.myPrimaryColor)
@@ -600,27 +634,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                     .build()
                     .show();
 
-        } else {
-
-            new MaterialDialog.Builder(context)
-                    .title("Notice")
-                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
-                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"))
-                    .positiveText("Ok")
-                    .cancelable(false)
-                    .positiveColorRes(R.color.myPrimaryColor)
-                    .callback(new MaterialDialog.ButtonCallback() {
-
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            super.onPositive(dialog);
-                            dialog.dismiss();
-                        }
-                    })
-                    .build()
-                    .show();
-
-        }
+//        }
     }
 
     @Override
@@ -636,11 +650,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        if(id == R.id.homeAsUp){
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
