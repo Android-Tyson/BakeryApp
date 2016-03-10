@@ -1,4 +1,4 @@
-package com.urbangirlbakeryandroidapp.alignstech.fragments;
+package com.urbangirlbakeryandroidapp.alignstech.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
