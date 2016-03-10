@@ -213,7 +213,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         JSONObject jsonObject = event.getJsonObject();
 //        if(isImageLoaded){
 
-            performJsonTaskForHeaderImages(jsonObject);
+        performJsonTaskForHeaderImages(jsonObject);
 //            isImageLoaded = false;
 
 //        }
