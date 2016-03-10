@@ -650,7 +650,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id == R.id.action_settings){
 
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
+                    new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
+            dialogForOpeningAndClosingTime(this);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 }
