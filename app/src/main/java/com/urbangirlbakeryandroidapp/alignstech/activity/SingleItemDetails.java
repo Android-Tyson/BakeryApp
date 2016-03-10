@@ -190,7 +190,10 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String product_description = jsonObj.getString("description");
             String default_flavour_id = jsonObj.getString("default_flavor");
             if(jsonObj.getString("is_active").equals("2"))
-                urgentDetails = "This is urgent cake too..";
+                urgentDetails = "This cake has been treated as urgent and must be order between "
+                        + " ("+ MyUtils.getDataFromPreferences(this, "OPENING_HOUR")+"-"+
+                        MyUtils.getDataFromPreferences(this, "CLOSING_HOUR")
+                        + " )" + "and is delivered same day! ";
 //                isUrgent = true;
 
 
@@ -522,7 +525,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String egg_less_price = jsonObject.getString("egg_less_price");
             String holiday = jsonObject.getString("holiday_date_and_time");
             if(holiday != null && !holiday.isEmpty() && !holiday.equals("0")){
-                holidayDetails = "There will be holiday on: "+ holiday;
+                holidayDetails = "Sorry!! we do not take order in some special holiday like "+
+                        holiday + " visit back soon at your comfort.";
 //                isHoliday = true;
             }
 
@@ -617,7 +621,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             new MaterialDialog.Builder(context)
                     .title("Notice")
-                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
+                    .content("You must place your order before 24 hour before your estimated delivery time. " +
+                            "Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
                             + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
                             urgentDetails +" "+ holidayDetails)
                     .positiveText("Ok")

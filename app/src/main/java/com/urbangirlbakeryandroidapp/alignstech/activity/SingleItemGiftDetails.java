@@ -1,8 +1,8 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,6 +16,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.MainActivity;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.bus.OrderedGiftDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SingleItemGiftDetails extends AppCompatActivity implements View.OnClickListener {
+public class SingleItemGiftDetails extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
@@ -54,6 +55,11 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @InjectView(R.id.order_now)
     LinearLayout orderNow;
 
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    private MaterialDialog materialDialog;
+
     private String product_price;
 
     private ArrayList<String> singleProductDetailsList = new ArrayList<>();
@@ -68,6 +74,9 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         MyBus.getInstance().register(this);
         parsingJob();
         orderNow.setOnClickListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myAccentColor));
+        swipeRefreshLayout.setOnRefreshListener(this);
+        materialDialog = new MaterialDialog.Builder(this).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
     }
 
     private void initializeToolbar() {
@@ -97,6 +106,19 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
         JSONObject jsonObject = event.getJsonObject();
         performJsonTaskForSingleProductDetails(jsonObject);
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
+
+    }
+
+    @Subscribe
+    public void onResponseError(GetErrorEvent event) {
+
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        MyUtils.showToast(this, event.getError());
+        swipeRefreshLayout.setRefreshing(false);
 
     }
 
@@ -226,38 +248,38 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
 
     }
 
-    private void dialogIfNotLoggedIn(final Context context) {
-
-        new MaterialDialog.Builder(this)
-                .title("Please Login")
-                .content("You Are not Logged In. Please login to continue..")
-                .positiveText("Login")
-                .negativeText("Later")
-                .autoDismiss(true)
-                .positiveColorRes(R.color.myPrimaryColor)
-                .negativeColorRes(R.color.myPrimaryColor)
-                .callback(new MaterialDialog.ButtonCallback() {
-
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        super.onPositive(dialog);
-                        dialog.dismiss();
-                        Intent intent = new Intent(context, MainActivity.class);
-                        intent.putExtra("LearningPattern", "true");
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        super.onNegative(dialog);
-                        dialog.dismiss();
-                    }
-                })
-                .build()
-                .show();
-
-    }
+//    private void dialogIfNotLoggedIn(final Context context) {
+//
+//        new MaterialDialog.Builder(this)
+//                .title("Please Login")
+//                .content("You Are not Logged In. Please login to continue..")
+//                .positiveText("Login")
+//                .negativeText("Later")
+//                .autoDismiss(true)
+//                .positiveColorRes(R.color.myPrimaryColor)
+//                .negativeColorRes(R.color.myPrimaryColor)
+//                .callback(new MaterialDialog.ButtonCallback() {
+//
+//                    @Override
+//                    public void onPositive(MaterialDialog dialog) {
+//                        super.onPositive(dialog);
+//                        dialog.dismiss();
+//                        Intent intent = new Intent(context, MainActivity.class);
+//                        intent.putExtra("LearningPattern", "true");
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onNegative(MaterialDialog dialog) {
+//                        super.onNegative(dialog);
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .build()
+//                .show();
+//
+//    }
 
     @Subscribe
     public void userDetailList(UserDetailsListEvent event) {
@@ -281,7 +303,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if(id == R.id.action_settings){
+        if (id == R.id.action_settings) {
 
             getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
                     new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
@@ -289,5 +311,12 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+
+        parsingJob();
+
     }
 }

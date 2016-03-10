@@ -22,7 +22,7 @@ import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
-import com.urbangirlbakeryandroidapp.alignstech.activity.EditProfile;
+import com.urbangirlbakeryandroidapp.alignstech.activity.FillProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.NoticeBoard;
 import com.urbangirlbakeryandroidapp.alignstech.activity.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
@@ -138,6 +138,16 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         }
 
         addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
+        addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection materialSection) {
+
+                addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
+
+
+            }
+        }));
+
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
 //        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
@@ -375,7 +385,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         DataBase_UserInfo dataBase_userInfo = new DataBase_UserInfo(fb_id, firstName, lastName, mobileNo, email, dob, gender, zone, district, location, profilePicUrl);
         dataBase_userInfo.save();
         MyUtils.showToast(getApplicationContext(), "You are Successfully Logged in. Please Fill All the info..");
-        Intent intent = new Intent(getApplicationContext(), EditProfile.class);
+        Intent intent = new Intent(getApplicationContext(), FillProfile.class);
         intent.putExtra("FacebookIntent", "FB_DATA");
         startActivity(intent);
         finish();
