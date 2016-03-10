@@ -243,8 +243,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
+        startActivity(new Intent(this , Ordered_Gift_Details.class));
 
     }
 
@@ -305,8 +304,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
         if (id == R.id.action_settings) {
 
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                    new Ordered_Gift_Details(), "FRAME_CONTAINER").commit();
+            startActivity(new Intent(this, Ordered_Gift_Details.class));
 
         }
 

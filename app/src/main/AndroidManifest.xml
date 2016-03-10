@@ -129,6 +129,22 @@
             android:theme="@style/UGCakeTheme" >
         </activity>
 
+        <activity
+            android:name=".fragments.Ordered_Cake_Details"
+            android:label="@string/title_activity_notice_board"
+            android:parentActivityName=".activity.SingleItemDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
+
+        <activity
+            android:name=".fragments.Ordered_Gift_Details"
+            android:label="@string/title_activity_notice_board"
+            android:parentActivityName=".activity.SingleItemGiftDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
+
         // GCM RECEIVER STUFFS
         <!-- [START gcm_receiver] -->
         <receiver

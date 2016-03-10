@@ -19,9 +19,9 @@ import org.json.JSONObject;
  */
 public class GetProductDetials {
 
-    public static void parseProductDetials(String url , final Context context){
+    public static void parseProductDetials(String url, final Context context) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -33,14 +33,15 @@ public class GetProductDetials {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
+                if (error != null)
+                    MyBus.getInstance().post(new GetErrorEvent(error.toString()));
 
             }
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "PRODUCT_DETAILS");
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, "PRODUCT_DETAILS");
 
     }
 

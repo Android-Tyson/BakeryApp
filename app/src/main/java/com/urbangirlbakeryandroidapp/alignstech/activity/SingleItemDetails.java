@@ -475,8 +475,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
         dialogForOpeningAndClosingTime(this);
 
     }
@@ -592,33 +590,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private void dialogForOpeningAndClosingTime(final Context context) {
 
-//        if (isUrgent && isHoliday) {
-//
-//            new MaterialDialog.Builder(context)
-//                    .title("Notice")
-//                    .content("Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
-//                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
-//                            ". This is urgent cake ...... BLAH")
-//                    .positiveText("Ok")
-//                    .cancelable(false)
-//                    .positiveColorRes(R.color.myPrimaryColor)
-//                    .callback(new MaterialDialog.ButtonCallback() {
-//
-//                        @Override
-//                        public void onPositive(MaterialDialog dialog) {
-//                            super.onPositive(dialog);
-//                            dialog.dismiss();
-//                        }
-//                    })
-//                    .build()
-//                    .show();
-//
-//        } else if(isUrgent){
-//
-//
-//
-//        } else {
-
             new MaterialDialog.Builder(context)
                     .title("Notice")
                     .content("You must place your order before 24 hour before your estimated delivery time. " +
@@ -633,13 +604,13 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         @Override
                         public void onPositive(MaterialDialog dialog) {
                             super.onPositive(dialog);
+                            startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
                             dialog.dismiss();
                         }
                     })
                     .build()
                     .show();
 
-//        }
     }
 
     @Override
@@ -657,8 +628,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         int id = item.getItemId();
         if(id == R.id.action_settings){
 
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container,
-                    new Ordered_Cake_Details(), "FRAME_CONTAINER").commit();
             dialogForOpeningAndClosingTime(this);
 
         }

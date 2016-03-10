@@ -3,9 +3,9 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,7 +31,10 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ordered_Gift_Details extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class Ordered_Gift_Details extends AppCompatActivity implements View.OnClickListener {
+
+    @InjectView(R.id.app_toolbar)
+    Toolbar toolbar;
 
     @InjectView(R.id.full_name)
     EditText fullName;
@@ -79,27 +82,22 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_ordered_gift_detials);
         MyBus.getInstance().register(this);
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ordered_gift_detials, container, false);
-        ButterKnife.inject(this, view);
-        return view;
-    }
-
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        ButterKnife.inject(this);
+        initializeToolbar();
         fillDataToEditText();
         order.setOnClickListener(this);
         tvDatePicker.setOnClickListener(this);
         tvTimePicker.setOnClickListener(this);
+
+    }
+
+    private void initializeToolbar() {
+
+        toolbar.setTitle("Fill Details");
+        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void fillDataToEditText() {
@@ -162,10 +160,10 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
             if (!email_addr.isEmpty())
                 email_addr = "Empty Mail";
 
-            if (MyUtils.isValidPhoneNumber(phone1, getActivity())
-                    && MyUtils.isValidPhoneNumber(phone2, getActivity())) {
+            if (MyUtils.isValidPhoneNumber(phone1, this)
+                    && MyUtils.isValidPhoneNumber(phone2, this)) {
 
-                if(!datePicker.equals("Select Date") && !timePicker.equals("Select Time")){
+                if (!datePicker.equals("Select Date") && !timePicker.equals("Select Time")) {
 
                     userPostDetails.add(full_name);
                     userPostDetails.add(phone1);
@@ -179,7 +177,7 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
                     userPostDetails.add(senderAddress);
 
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             } else {
@@ -197,24 +195,23 @@ public class Ordered_Gift_Details extends android.support.v4.app.Fragment implem
         if (view.getId() == R.id.order) {
             if (ifAnyFieldsAreNotEmpty()) {
 
-                android.support.v4.app.Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("FRAME_CONTAINER");
-                if (fragment != null) {
-                    MyBus.getInstance().post(new UserDetailsListEvent(userPostDetails));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
+
+                MyBus.getInstance().post(new UserDetailsListEvent(userPostDetails));
+                finish();
+
 
             } else {
-                MyUtils.showToast(getActivity(), "Please Fill all the Details.");
+                MyUtils.showToast(this, "Please Fill all the Details.");
             }
         } else if (view.getId() == R.id.datePicker) {
 
             DateDialogHandler handler = new DateDialogHandler();
-            handler.show(getFragmentManager(), "DATE_DIALOG");
+            handler.show(getSupportFragmentManager(), "DATE_DIALOG");
 
         } else if (view.getId() == R.id.timePicker) {
 
             TimeDialogHandler handler = new TimeDialogHandler();
-            handler.show(getFragmentManager(), "TIMER_DIALOG");
+            handler.show(getSupportFragmentManager(), "TIMER_DIALOG");
 
         }
     }
