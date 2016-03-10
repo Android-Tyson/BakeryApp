@@ -93,7 +93,7 @@ public class Ordered_Cake_Details extends AppCompatActivity implements View.OnCl
 
     private void initializeToolbar() {
 
-        toolbar.setTitle("Fill Details");
+        toolbar.setTitle("Please fill your details");
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
