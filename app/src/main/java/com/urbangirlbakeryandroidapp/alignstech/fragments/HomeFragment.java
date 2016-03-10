@@ -103,6 +103,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public static HashMap<String, Boolean> isGift = new HashMap<>();
 
     private MaterialDialog materialDialog;
+    public static boolean isImageLoaded = true;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -209,7 +210,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
 
         JSONObject jsonObject = event.getJsonObject();
-        performJsonTaskForHeaderImages(jsonObject);
+        if(isImageLoaded){
+
+            performJsonTaskForHeaderImages(jsonObject);
+            isImageLoaded = false;
+
+        }
 
         if (materialDialog.isShowing())
             materialDialog.dismiss();
