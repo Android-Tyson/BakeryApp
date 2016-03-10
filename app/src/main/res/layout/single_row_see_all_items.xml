@@ -12,7 +12,7 @@
         android:text="Text Demo"
         android:textColor="@color/myTextColor"
         android:gravity="center|left"
-        android:padding="10dp"
+        android:padding="15dp"
         android:drawableRight="@mipmap/ic_forward_head" />
 
 </LinearLayout>

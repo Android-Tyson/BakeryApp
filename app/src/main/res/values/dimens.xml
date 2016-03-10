@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="categoriesTextSize">20sp</dimen>
-    <dimen name="Categories_padding">11dp</dimen>
+    <dimen name="Categories_padding">12dp</dimen>
     <dimen name="Categories_padding_2">12dp</dimen>
     <dimen name="textSizeCategoriesItem">16sp</dimen>
     <dimen name="textSizeSeeMore">15sp</dimen>
