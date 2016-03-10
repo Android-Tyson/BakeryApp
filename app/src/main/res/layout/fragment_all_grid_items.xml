@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#555"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment">
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.fragments.GridFragment_Gift">
 
     <GridView
         android:padding="10dp"

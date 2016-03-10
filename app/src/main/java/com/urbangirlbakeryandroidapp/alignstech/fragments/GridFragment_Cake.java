@@ -17,7 +17,6 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemGiftDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -36,7 +35,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
+public class GridFragment_Cake extends android.support.v4.app.Fragment implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.gridView)
     GridView gridView;
@@ -44,12 +43,12 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
     private CustomGridViewAdapter adapter;
     private List<Product> productList = new ArrayList<>();
 
-    public All_Item_Grid_Fragment() {
+    public GridFragment_Cake() {
         // Required empty public constructor
     }
 
-    public static All_Item_Grid_Fragment newInstance(String apiName, String titleName) {
-        All_Item_Grid_Fragment fragObject = new All_Item_Grid_Fragment();
+    public static GridFragment_Cake newInstance(String apiName, String titleName) {
+        GridFragment_Cake fragObject = new GridFragment_Cake();
 
         Bundle args = new Bundle();
         args.putString("API", apiName);
@@ -122,24 +121,11 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         String product_name = product.getProductName();
         String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
-        android.support.v4.app.Fragment fragment_gift = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_gift);
-        if (fragment_gift instanceof All_Item_Grid_Fragment ||
-                HomeFragment.isGift.containsKey("GiftClick")) {
+        Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+        intent.putExtra("TITLE_NAME", product_name);
+        intent.putExtra("API_NAME", api_name);
+        startActivity(intent);
 
-            HomeFragment.isGift.clear();
-            Intent intent = new Intent(getActivity(), SingleItemGiftDetails.class);
-            intent.putExtra("TITLE_NAME", product_name);
-            intent.putExtra("API_NAME", api_name);
-            startActivity(intent);
-
-        }else{
-
-            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
-            intent.putExtra("TITLE_NAME", product_name);
-            intent.putExtra("API_NAME", api_name);
-            startActivity(intent);
-
-        }
 
     }
 
@@ -155,27 +141,27 @@ public class All_Item_Grid_Fragment extends android.support.v4.app.Fragment impl
         }
 
         android.support.v4.app.Fragment fragment_home = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_home);
-        if (fragment_home instanceof All_Item_Grid_Fragment) {
+        if (fragment_home instanceof GridFragment_Cake) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.home);
         }
 
         android.support.v4.app.Fragment fragment_cake = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_cake);
-        if (fragment_cake instanceof All_Item_Grid_Fragment) {
+        if (fragment_cake instanceof GridFragment_Cake) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.cakes);
         }
 
         android.support.v4.app.Fragment fragment_gift = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_gift);
-        if (fragment_gift instanceof All_Item_Grid_Fragment) {
+        if (fragment_gift instanceof GridFragment_Cake) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.gifts);
         }
 
         android.support.v4.app.Fragment fragment_offers = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_offer);
-        if (fragment_offers instanceof All_Item_Grid_Fragment) {
+        if (fragment_offers instanceof GridFragment_Cake) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.offers);
         }
 
         android.support.v4.app.Fragment fragment_accessories = getActivity().getSupportFragmentManager().findFragmentById(R.id.frame_container_accessories);
-        if (fragment_accessories instanceof All_Item_Grid_Fragment) {
+        if (fragment_accessories instanceof GridFragment_Cake) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.accessories);
         }
     }

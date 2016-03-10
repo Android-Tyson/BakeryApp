@@ -429,32 +429,42 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 startActivity(new Intent(getActivity(), SeeMoreGifts.class));
 
             } else if (view.getId() == R.id.textView_categories_1) {
-                someItemListClickJob(someCategoryIdList.get(0), someCategoryList.get(0));
+                someCakeItemListClickJob(someCategoryIdList.get(0), someCategoryList.get(0));
             } else if (view.getId() == R.id.textView_categories_2) {
-                someItemListClickJob(someCategoryIdList.get(1), someCategoryList.get(1));
+                someCakeItemListClickJob(someCategoryIdList.get(1), someCategoryList.get(1));
             } else if (view.getId() == R.id.textView_categories_3) {
-                someItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
+                someCakeItemListClickJob(someCategoryIdList.get(2), someCategoryList.get(2));
 
             } else if (view.getId() == R.id.textView_gift_1) {
                 isGift.put("GiftClick", true);
-                someItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
+                someGiftItemListClickJob(someGiftIdList.get(0), someGiftList.get(0));
             } else if (view.getId() == R.id.textView_gift_2) {
                 isGift.put("GiftClick", true);
-                someItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
+                someGiftItemListClickJob(someGiftIdList.get(1), someGiftList.get(1));
             } else if (view.getId() == R.id.textView_gift_3) {
                 isGift.put("GiftClick", true);
-                someItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
+                someGiftItemListClickJob(someGiftIdList.get(2), someGiftList.get(2));
             }
         }
     }
 
 
-    private void someItemListClickJob(String productId, String productName) {
+    private void someCakeItemListClickJob(String productId, String productName) {
 
         if (productId != null && productName != null) {
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
-            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, All_Item_Grid_Fragment.newInstance(API_NAME, productName)).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Cake.newInstance(API_NAME, productName)).commit();
+
+        }
+    }
+
+    private void someGiftItemListClickJob(String productId, String productName) {
+
+        if (productId != null && productName != null) {
+
+            String API_NAME = Apis.BASE_URL + "api/products/" + productId;
+            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Gift.newInstance(API_NAME, productName)).commit();
 
         }
     }

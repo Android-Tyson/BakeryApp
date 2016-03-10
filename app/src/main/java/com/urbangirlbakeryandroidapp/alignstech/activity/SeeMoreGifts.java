@@ -12,7 +12,7 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.All_Item_Grid_Fragment;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.GridFragment_Gift;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -97,7 +97,7 @@ public class SeeMoreGifts extends AppCompatActivity implements AdapterView.OnIte
 
         String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
         String product_title = childNameList.get(i);
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, All_Item_Grid_Fragment.newInstance(API_NAME , product_title)).commit();
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Gift.newInstance(API_NAME, product_title)).commit();
 
 
     }
