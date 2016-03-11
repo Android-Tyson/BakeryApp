@@ -191,8 +191,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
                         + " ("+ MyUtils.getDataFromPreferences(this, "OPENING_HOUR")+"-"+
                         MyUtils.getDataFromPreferences(this, "CLOSING_HOUR")
                         + " )" + "and is delivered same day! ";
-//                isUrgent = true;
-
 
             singleProductDetailsList.add(product_id);
             singleProductDetailsList.add(product_name);
@@ -599,8 +597,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             new MaterialDialog.Builder(context)
                     .title("Notice")
-                    .content("You must place your order before 24 hour before your estimated delivery time. "
-                            + urgentDetails )
+                    .content("Cake will be order by adding require time to make that cake. " + urgentDetails )
                     .positiveText("Ok")
                     .cancelable(false)
                     .positiveColorRes(R.color.myPrimaryColor)
