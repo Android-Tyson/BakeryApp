@@ -104,9 +104,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     private String selectedFlavor, selectedFlovourId;
     private boolean isEggless = false;
 
-//    private boolean isUrgent = false;
-//    private boolean isHoliday = false;
-    private String urgentDetails = "" , holidayDetails = "";
+    private String urgentDetails = "" ;
     private MaterialDialog materialDialog;
 
     @Override
@@ -601,10 +599,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
             new MaterialDialog.Builder(context)
                     .title("Notice")
-                    .content("You must place your order before 24 hour before your estimated delivery time. " +
-                            "Please order this cake before: " + MyUtils.getDataFromPreferences(context, "OPENING_HOUR")
-                            + " and after: " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR") +
-                            urgentDetails +" "+ holidayDetails)
+                    .content("You must place your order before 24 hour before your estimated delivery time. "
+                            + urgentDetails )
                     .positiveText("Ok")
                     .cancelable(false)
                     .positiveColorRes(R.color.myPrimaryColor)

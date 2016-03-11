@@ -8,6 +8,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.bus.TimePickerBus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Dell on 2/22/2016.
  */
@@ -29,14 +32,12 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
         int openingHour = openingHour(MyUtils.getDataFromPreferences(context, "OPENING_HOUR"));
         int closingHour = closingHour(MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"));
 
-        if(i >= openingHour && i1 < closingHour){
+        List<String> closingHourList = new ArrayList<>();
+        closingHour++;
 
-            MyUtils.showToast(context , "Good to go with...");
-
-        }else {
-
-            showDialog(context);
-
+        for(int j = 0 ; j < Math.abs(closingHour - openingHour) ; j++){
+            int hrs  = closingHour + j ;
+            closingHourList.add(String.valueOf(hrs));
         }
 
         String am_pm, hour, minute;
@@ -62,8 +63,17 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
             minute = String.valueOf(i1);
         }
 
-        String selectedTime = hour + " : " + minute + " : " + am_pm;
-        MyBus.getInstance().post(new TimePickerBus(selectedTime));
+        if(!closingHourList.contains(String.valueOf(i))){
+
+            String selectedTime = hour + " : " + minute + " : " + am_pm;
+            MyBus.getInstance().post(new TimePickerBus(selectedTime));
+
+        }else {
+
+            showDialog(context);
+
+        }
+
     }
 
 
