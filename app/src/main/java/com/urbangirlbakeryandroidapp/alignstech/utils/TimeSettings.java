@@ -16,8 +16,6 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
 
 
     private Context context;
-//    private int openingHour = openingHour(MyUtils.getDataFromPreferences(context, "OPENING_HOUR"));
-//    private int closingHour = closingHour(MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"));
 
 
     public TimeSettings(Context context) {
@@ -27,15 +25,19 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-//        if(i >= openingHour && i < closingHour){
-//
-//            MyUtils.showToast(context , "Good to go with...");
-//
-//        }else {
-//
-//            showDialog(context);
-//
-//        }
+
+        int openingHour = openingHour(MyUtils.getDataFromPreferences(context, "OPENING_HOUR"));
+        int closingHour = closingHour(MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"));
+
+        if(i >= openingHour && i1 < closingHour){
+
+            MyUtils.showToast(context , "Good to go with...");
+
+        }else {
+
+            showDialog(context);
+
+        }
 
         String am_pm, hour, minute;
 
@@ -76,7 +78,7 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
     private int closingHour(String string){
 
         String[] list = string.split(":");
-        int time = Integer.parseInt(list[1]);
+        int time = Integer.parseInt(list[0]);
 
         return time;
     }

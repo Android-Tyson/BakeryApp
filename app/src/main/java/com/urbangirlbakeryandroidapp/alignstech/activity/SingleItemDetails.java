@@ -522,12 +522,22 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String egg_less_price = jsonObject.getString("egg_less_price");
             String holiday = jsonObject.getString("holiday_date_and_time");
             if(holiday != null && !holiday.isEmpty() && !holiday.equals("0")){
-                holidayDetails = "Sorry!! we do not take order in some special holiday like "+
-                        holiday + " visit back soon at your comfort.";
-//                isHoliday = true;
+
+                if (MyUtils.getDataFromPreferences(this, "HOLIDAY").isEmpty()) {
+                    MyUtils.saveDataInPreferences(this, "HOLIDAY", holiday);
+                }else{
+                    MyUtils.editDataOfPreferences(this, "HOLIDAY", holiday);
+                }
+
             }
 
-            MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
+
+            if (MyUtils.getDataFromPreferences(this, "EGG_LESS_PRICE").isEmpty()) {
+                MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
+            }else{
+                MyUtils.editDataOfPreferences(this, "EGG_LESS_PRICE", egg_less_price);
+            }
+
 
             if (MyUtils.getDataFromPreferences(this, "OPENING_HOUR").isEmpty()) {
                 MyUtils.saveDataInPreferences(this, "OPENING_HOUR", opening_hour);
