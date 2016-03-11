@@ -84,6 +84,7 @@
             android:label="@string/title_activity_see_all_categories"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
@@ -91,12 +92,14 @@
             android:label="@string/title_activity_see_all_gifts"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
             android:name=".activity.SingleItemDetails"
             android:label="@string/title_activity_single_item_detils"
             android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
@@ -104,6 +107,7 @@
             android:name=".activity.SingleItemGiftDetails"
             android:label="@string/title_activity_single_item_detils"
             android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
@@ -112,6 +116,7 @@
             android:label="@string/title_activity_profile"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity

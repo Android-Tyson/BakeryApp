@@ -97,7 +97,7 @@ public class Ordered_Gift_Details extends AppCompatActivity implements View.OnCl
 
         toolbar.setTitle("Please fill your details");
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void fillDataToEditText() {
