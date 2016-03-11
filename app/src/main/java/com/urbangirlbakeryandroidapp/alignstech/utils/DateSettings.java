@@ -57,7 +57,7 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener{
 
         new MaterialDialog.Builder(context)
                 .title("Notice")
-                .content("There will be holiday on this date ("+ date +"). So, please select another date. ")
+                .content("Sorry, There will be holiday on this date ("+ date +"). So, please select another date. ")
                 .positiveText("Ok")
                 .cancelable(false)
                 .positiveColorRes(R.color.myPrimaryColor)
