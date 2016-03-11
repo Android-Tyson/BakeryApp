@@ -106,6 +106,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
 
     private String urgentDetails = "" ;
     private MaterialDialog materialDialog;
+    public static String delivery_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +187,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             product_price = jsonObj.getString("price");
             String product_description = jsonObj.getString("description");
             String default_flavour_id = jsonObj.getString("default_flavor");
+            delivery_date = jsonObj.getString("delivery_date");
             if(jsonObj.getString("is_active").equals("2"))
                 urgentDetails = "This cake has been treated as urgent and must be order between "
                         + " ("+ MyUtils.getDataFromPreferences(this, "OPENING_HOUR")+"-"+
