@@ -189,7 +189,18 @@ public class FillProfile extends AppCompatActivity {
     public void isSuccess(NormalRegisterEventBus eventBus) {
         if (!eventBus.getResponse().isEmpty()) {
 
-            new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
+            if(!isFinishing()) {
+
+                try {
+
+                    new Welcome_Screen().show(getSupportFragmentManager(), "welcome_screen_tag");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+
+            }
 
         }
     }
