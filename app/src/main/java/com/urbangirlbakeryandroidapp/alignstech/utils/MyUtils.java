@@ -205,6 +205,8 @@ public class MyUtils
                 Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(i);
+                MyUtils.showLog("  ");
+                MyUtils.showLog("  ");
             }
         });
     }

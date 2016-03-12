@@ -35,6 +35,7 @@ public class GetSomeCategories {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                if(error != null)
                 MyBus.getInstance().post(new GetErrorEvent(error.toString()));
                 MyUtils.showToast(context, error.toString());
 

@@ -20,9 +20,9 @@ import org.json.JSONObject;
  */
 public class GetHeaderOffers {
 
-    public static void parseheaderOffers(String url, final Context context){
+    public static void parseheaderOffers(String url, final Context context) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url ,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -34,7 +34,8 @@ public class GetHeaderOffers {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
+                if (error != null)
+                    MyBus.getInstance().post(new GetErrorEvent(error.toString()));
                 MyUtils.showToast(context, error.toString());
 
             }
@@ -42,7 +43,7 @@ public class GetHeaderOffers {
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest , "HOME_SCREEN_RESPONSE");
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, "HOME_SCREEN_RESPONSE");
 
     }
 }

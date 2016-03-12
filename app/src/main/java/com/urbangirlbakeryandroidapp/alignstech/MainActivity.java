@@ -385,6 +385,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     @Override
     protected void onDestroy() {
+        MyBus.getInstance().unregister(this);
         super.onDestroy();
 
     }

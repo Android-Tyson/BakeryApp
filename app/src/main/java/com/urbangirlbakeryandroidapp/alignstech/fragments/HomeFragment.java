@@ -485,6 +485,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Override
     public void onDestroy() {
         super.onDestroy();
+        MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("HOME_SCREEN_RESPONSE");
     }
 
