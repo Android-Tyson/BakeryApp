@@ -40,7 +40,7 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     @InjectView(R.id.user_go)
     TextView user_go;
 
-    public static Welcome_Screen newInstance(){
+    public static Welcome_Screen newInstance() {
 
         Welcome_Screen welcome_screen = new Welcome_Screen();
         return welcome_screen;
@@ -59,7 +59,6 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.fragment_welcome__screen, container, false);
         ButterKnife.inject(this, view);
-//        user_pic.setImageUrl("http://sleepycabin.com/cabinshit/uploads/profile_builder/avatars/userID_2566_originalAvatar_profile_pic.png", MySingleton.getInstance(getActivity()).getImageLoader());
         return view;
     }
 
@@ -67,22 +66,13 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(DataBase_Utils.isUserInfoDataExists()){
+        if (DataBase_Utils.isUserInfoDataExists()) {
 
             List<DataBase_UserInfo> userDetials = DataBase_Utils.getUserInfoList();
-            String userName = userDetials.get(0).getFirstName()+ " "+ userDetials.get(0).getLastName();
+            String userName = userDetials.get(0).getFirstName() + " " + userDetials.get(0).getLastName();
             String userPhone = userDetials.get(0).getMobilePrimary();
             String userEmail = userDetials.get(0).getEmail();
-//            String gender = userDetials.get(0).getGender();
-//            if(gender.equals("male")){
-//
-//                user_pic.setImageResource(R.mipmap.cakes);
-//
-//            }else if(gender.equals("female")) {
-//
-//                user_pic.setImageResource(R.mipmap.gifts);
-//
-//            }
+
 
             user_name.setText(userName);
             user_mail.setText(userEmail);
@@ -96,7 +86,7 @@ public class Welcome_Screen extends DialogFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
 
-        Intent intent = new Intent(getActivity() , MainActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
