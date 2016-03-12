@@ -75,9 +75,9 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal_register);
+        MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
-        MyBus.getInstance().register(this);
         setEditTextFields();
     }
 
