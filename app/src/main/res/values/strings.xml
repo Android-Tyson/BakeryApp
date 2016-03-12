@@ -67,5 +67,8 @@
     <string name="action_logout">Logout</string>
     <string name="complain">Complain</string>
     <string name="title_activity_notice_board">Notice Board</string>
+    <string name="about">About</string>
+    <string name="mail">Email: info@urbangirl.me</string>
+    <string name="ug_description">The tastiest cakes available in Kathmandu, in any design you want. Order online, pay cash on delivery.  Deliver is free within Ring Road starting 2 pounds. All prices shown are of 2 pounds by default. Please choose your cake size and flavor while you order.</string>
 
 </resources>

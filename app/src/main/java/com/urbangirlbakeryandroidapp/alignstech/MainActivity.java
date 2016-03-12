@@ -24,11 +24,11 @@ import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
 import com.urbangirlbakeryandroidapp.alignstech.activity.FillProfile;
 import com.urbangirlbakeryandroidapp.alignstech.activity.NoticeBoard;
-import com.urbangirlbakeryandroidapp.alignstech.activity.Settings;
 import com.urbangirlbakeryandroidapp.alignstech.activity.UserProfile;
 import com.urbangirlbakeryandroidapp.alignstech.bus.PostComplainEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.PostFbUserDetailsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.PostFacebookUserDetials;
+import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.About_Us;
 import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.MyComplains;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
@@ -153,7 +153,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                 }
             }));
         }
-        addBottomSection(newSection(getResources().getString(R.string.settings), R.mipmap.settings, new Intent(this, Settings.class)));
+        addBottomSection(newSection(getResources().getString(R.string.about), R.mipmap.settings, new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection materialSection) {
+
+                new About_Us().show(getSupportFragmentManager() , "ABOUT_US");
+
+            }
+        }));
 
     }
 
