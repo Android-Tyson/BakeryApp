@@ -75,9 +75,9 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal_register);
-        MyBus.getInstance().register(this);
         ButterKnife.inject(this);
         initializeToolbar();
+        MyBus.getInstance().register(this);
         setEditTextFields();
     }
 
@@ -96,8 +96,6 @@ public class EditProfile extends AppCompatActivity {
             user_dob.setText(userInfos.get(0).getDob());
             user_gender.setText(userInfos.get(0).getGender());
             user_location.setText(userInfos.get(0).getLocation());
-//            user_zone.setText(userInfos.get(0).getZone());
-//            user_district.setText(userInfos.get(0).getDistrict());
             user_zone.setText("Bagmati");
             user_district.setText("Kathmandu");
             user_billing_address.setText(userInfos.get(0).getBillingAddress());
