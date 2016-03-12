@@ -305,7 +305,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="true"
-                                        android:hint="Short Message"
+                                        android:hint="Message on cake.."
                                         android:textColor="@color/myTextPrimaryColor"
                                         android:textColorHint="@color/textHint"
                                         android:padding="10dp"

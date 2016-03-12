@@ -389,7 +389,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:focusableInTouchMode="true"
-                        android:hint="Sipping Address"
+                        android:hint="Delivery Address"
                         android:textColor="@color/myTextPrimaryColor"
                         android:textColorHint="@color/textHint"
                         android:padding="10dp"

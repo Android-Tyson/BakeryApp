@@ -81,6 +81,7 @@ public class EditProfile extends AppCompatActivity {
         setEditTextFields();
     }
 
+
     private void setEditTextFields() {
 
         if (DataBase_Utils.isUserInfoDataExists()) {
@@ -113,6 +114,7 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
+
     private void getEditTextFields() {
 
 //        fb_id = user_email.getText().toString();
@@ -130,12 +132,14 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_normal_register, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -176,6 +180,7 @@ public class EditProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     private boolean checkIfAnyFieldsAreEmpty() {
         if (fullName.isEmpty() || email.isEmpty() || mobilePrimary.isEmpty() || dob.isEmpty()
                 || gender.isEmpty() || location.isEmpty() || zone.isEmpty() || district.isEmpty()) {
@@ -184,6 +189,7 @@ public class EditProfile extends AppCompatActivity {
         }
         return true;
     }
+
 
     @Subscribe
     public void isSuccess(NormalRegisterEventBus eventBus) {
