@@ -151,7 +151,7 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener {
 
         new MaterialDialog.Builder(context)
                 .title("Invalid Date")
-                .content("Please Select Valid date. You have selected the date that had passed away.")
+                .content("Please select valid date. You have selected the date that had passed away.")
                 .positiveText("Ok")
                 .cancelable(false)
                 .positiveColorRes(R.color.myPrimaryColor)
