@@ -168,7 +168,7 @@ public class MyUtils
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            options.inSampleSize = 8;
+//            options.inSampleSize = 8;
             bitmap = BitmapFactory.decodeFile(root  , options);
             return bitmap;
         } catch (Exception e) {
