@@ -472,7 +472,9 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-        dialogForOpeningAndClosingTime(this);
+//        dialogForOpeningAndClosingTime(this);
+        startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
+
 
     }
 
@@ -632,7 +634,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         int id = item.getItemId();
         if(id == R.id.action_settings){
 
-            dialogForOpeningAndClosingTime(this);
+//            dialogForOpeningAndClosingTime(this);
+            startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
 
         }
         return super.onOptionsItemSelected(item);
