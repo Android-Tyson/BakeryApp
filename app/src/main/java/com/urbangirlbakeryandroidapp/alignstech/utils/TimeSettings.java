@@ -98,9 +98,9 @@ public class TimeSettings implements TimePickerDialog.OnTimeSetListener {
 
         new MaterialDialog.Builder(context)
                 .title("Notice")
-                .content("Sorry, You must place your order before "+
+                .content("Sorry, You must place your order after "+
                         MyUtils.getDataFromPreferences(context, "OPENING_HOUR") +
-                        " and after " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"))
+                        " and before " + MyUtils.getDataFromPreferences(context, "CLOSING_HOUR"))
                 .positiveText("Ok")
                 .cancelable(false)
                 .positiveColorRes(R.color.myPrimaryColor)
