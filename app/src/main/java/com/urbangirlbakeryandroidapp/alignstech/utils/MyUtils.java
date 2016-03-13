@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -156,7 +157,7 @@ public class MyUtils
 
     public static String getCurrentDate() {
 
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd" , Locale.US).format(new Date());
 
     }
 
