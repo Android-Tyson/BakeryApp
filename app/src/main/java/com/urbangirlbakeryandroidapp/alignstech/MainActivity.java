@@ -153,7 +153,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                 }
             }));
         }
-        addBottomSection(newSection(getResources().getString(R.string.about), R.mipmap.settings, new MaterialSectionListener() {
+        addBottomSection(newSection(getResources().getString(R.string.about), R.mipmap.about, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection materialSection) {
 
