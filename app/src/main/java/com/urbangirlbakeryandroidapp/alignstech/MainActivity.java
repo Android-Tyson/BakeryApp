@@ -166,6 +166,20 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
 
     @Override
+    public void onClick(MaterialSection section) {
+        super.onClick(section);
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if(count > 0){
+
+            getSupportFragmentManager().popBackStack();
+
+        }
+
+    }
+
+
+    @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
 
         if (!MyUtils.isUserLoggedIn(this)) {
