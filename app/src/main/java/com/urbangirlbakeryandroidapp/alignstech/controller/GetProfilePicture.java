@@ -32,7 +32,7 @@ public class GetProfilePicture {
                         MyUtils.saveUserProfiePic(bitmapResponse);
 
                     }
-                }, 50, 50, null, new Response.ErrorListener() {
+                }, 200, 200, null, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
