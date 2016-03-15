@@ -94,7 +94,7 @@ public class NoticeBoard extends AppCompatActivity implements SwipeRefreshLayout
                 JSONObject myOrderObj = jsonArray.getJSONObject(i);
                 String message = myOrderObj.getString("title");
                 titleList.add(message);
-                String date = myOrderObj.getString("description");
+                String date = myOrderObj.getString("description").trim();
                 descList.add(date);
 
             }

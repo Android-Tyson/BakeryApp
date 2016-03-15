@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -186,6 +187,8 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             String ending_pound = jsonObj.getString("ending_pound");
             product_price = jsonObj.getString("price");
             String product_description = jsonObj.getString("description");
+            product_description = String.valueOf(Html.fromHtml(product_description));
+
             String default_flavour_id = jsonObj.getString("default_flavor");
             delivery_date = jsonObj.getString("delivery_date");
             if(jsonObj.getString("is_active").equals("2"))
@@ -294,10 +297,11 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             e.printStackTrace();
         }
         initializeDataForAccessories();
+
     }
 
-    private void initializeDataForAccessories() {
 
+    private void initializeDataForAccessories() {
 
         LinearLayoutManager layoutManager = new org.solovyev.android.views.llm.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -400,8 +404,6 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        MyUtils.showLog(jsonObject.toString());
-        MyUtils.showLog(jsonArray.toString());
 
         PostOrderProduct.postOrderProduct(Apis.product_order, this, jsonObject.toString());
 
@@ -472,9 +474,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
     @Override
     public void onClick(View view) {
 
-//        dialogForOpeningAndClosingTime(this);
         startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
-
 
     }
 
