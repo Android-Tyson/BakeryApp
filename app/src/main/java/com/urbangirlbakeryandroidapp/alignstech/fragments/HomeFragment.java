@@ -324,7 +324,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String id = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("product_name");
-                String path = jsonObj.getString("path");
+                String path = jsonObj.getString("thumb");
                 String headerImageUrl;
                 if (path.equals("null")) {
                     headerImageUrl = Apis.defaultImageUrl;

@@ -193,6 +193,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
             jsonObject.put("user_id", MyUtils.getDataFromPreferences(this, "USER_ID"));
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
+            jsonObject.put("time" , MyUtils.getCurrentDate());
 
         } catch (JSONException e) {
             e.printStackTrace();

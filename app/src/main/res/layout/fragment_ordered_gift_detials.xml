@@ -171,6 +171,7 @@
                                         android:focusableInTouchMode="true"
                                         android:hint="E-mail"
                                         android:padding="10dp"
+                                        android:inputType="textEmailAddress"
                                         android:textColor="@color/myTextPrimaryColor"
                                         android:textColorHint="@color/textHint"
                                         android:theme="@style/CustomEditTextTheme" />
@@ -207,6 +208,7 @@
                                         android:padding="10dp"
                                         android:textColor="@color/myTextPrimaryColor"
                                         android:textColorHint="@color/textHint"
+                                        android:inputType="number"
                                         android:theme="@style/CustomEditTextTheme" />
 
                                 </LinearLayout>
@@ -237,6 +239,7 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="true"
                                         android:hint="Secondary Phone"
+                                        android:inputType="number"
                                         android:padding="10dp"
                                         android:textColor="@color/myTextPrimaryColor"
                                         android:textColorHint="@color/textHint"

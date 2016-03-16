@@ -49,7 +49,7 @@ public class GetAllItems {
                                         imageUrl =  Apis.defaultImageUrl;
                                     } else {
                                         product.setProductName(obj.getString("product_name"));
-                                        imageUrl = Apis.BASE_URL + "images/" + obj.getString("path");
+                                        imageUrl = Apis.BASE_URL + "images/" + obj.getString("thumb");
                                         product.setProduct_id(obj.getString("id"));
 
                                     }

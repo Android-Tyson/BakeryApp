@@ -6,14 +6,34 @@ android {
     defaultConfig {
         applicationId "com.urbangirlbakeryandroidapp.alignstech"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
+//    signingConfigs {
+//        release {
+//            storeFile file('C:/Users/Dell/Desktop/UgCake/KEYSTORE/keystore.jks')
+//            storePassword "UG@Gmail.com"
+//            keyAlias "UG Cake"
+//            keyPassword "UG@Gmail.com"
+//        }
+//        dubug {
+//            storeFile file('C:/Users/Dell/Desktop/UgCake/KEYSTORE/keystore.jks')
+//            storePassword "UG@Gmail.com"
+//            keyAlias "UG Cake"
+//            keyPassword "UG@Gmail.com"
+//        }
+//    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+//            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+//            signingConfig signingConfigs.dubug
         }
     }
     productFlavors {
@@ -51,7 +71,5 @@ dependencies {
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
     compile 'org.solovyev.android.views:linear-layout-manager:0.5@aar'
-    compile "com.google.android.gms:play-services-gcm:8.1.0"
-
-
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
 }

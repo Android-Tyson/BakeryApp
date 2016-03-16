@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Base64;
 import android.util.Log;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -43,6 +46,8 @@ import com.urbangirlbakeryandroidapp.alignstech.utils.DataBase_Utils;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -90,6 +95,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         simpleFacebook.setConfiguration(configuration);
 
         myGcmTask();
+        showHashKey(this);
     }
 
     @Override
@@ -485,6 +491,27 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         MyUtils.showToast(this, "Your complain is successfully posted..");
 
+    }
+
+    public  void showHashKey(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager()
+                    .getPackageInfo("com.urbangirlbakeryandroidapp.alignstech",
+                            PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+
+                String sign= Base64.encodeToString(md.digest(), Base64.DEFAULT);
+                Log.e("KeyHash:", sign);
+                //  Toast.makeText(getApplicationContext(),sign,     Toast.LENGTH_LONG).show();
+            }
+            Log.d("KeyHash:", "****------------***");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 }
 
