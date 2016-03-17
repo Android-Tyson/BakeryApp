@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -164,7 +165,10 @@ public class MyUtils
 
     public static String getCurrentTime() {
 
-        return new SimpleDateFormat("HH:mm:ss" , Locale.US).format(new Date());
+//         String date = new SimpleDateFormat("HH:mm:ss" , Locale.US).format(new Date());
+        CharSequence charw = DateFormat.format("kk:mm:ss", new Date());
+        return charw.toString();
+
 
     }
 

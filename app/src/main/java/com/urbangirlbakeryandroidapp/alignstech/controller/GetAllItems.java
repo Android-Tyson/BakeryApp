@@ -45,7 +45,7 @@ public class GetAllItems {
                                     JSONObject obj = jsonArray.getJSONObject(i);
                                     Product product = new Product();
                                     String imageUrl;
-                                    if (obj.getString("path").equals("null")) {
+                                    if (obj.getString("thumb").equals("null")) {
                                         imageUrl =  Apis.defaultImageUrl;
                                     } else {
                                         product.setProductName(obj.getString("product_name"));

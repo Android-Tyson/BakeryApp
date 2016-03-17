@@ -6,7 +6,8 @@
 
 
     // GCM
-    <string name="gcm_defaultSenderId">381984310290</string>
+    <!--<string name="gcm_defaultSenderId">381984310290</string>-->
+    <string name="gcm_defaultSenderId">730074876211</string>
     <string name="gcm_api_key">AIzaSyApU1vvMygtbZjmQ6XFRxu1o-9jSNW8g1o</string>
 
      <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to

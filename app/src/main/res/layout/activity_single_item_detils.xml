@@ -221,6 +221,7 @@
                                             android:paddingTop="15dp"
                                             android:text="Sweet and Simple Product Description"
                                             android:textColor="@color/myTextColor"
+                                            android:lineSpacingExtra="5dp"
                                             android:textSize="14sp" />
 
                                         <View
