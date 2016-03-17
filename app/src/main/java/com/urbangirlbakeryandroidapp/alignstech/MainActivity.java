@@ -35,7 +35,7 @@ import com.urbangirlbakeryandroidapp.alignstech.fragment_dialog.MyComplains;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.CakesFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.GiftsFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.Notice;
+import com.urbangirlbakeryandroidapp.alignstech.fragments.NoticeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.OfferFragment;
 import com.urbangirlbakeryandroidapp.alignstech.gcm.QuickstartPreferences;
 import com.urbangirlbakeryandroidapp.alignstech.gcm.RegistrationIntentService;
@@ -147,7 +147,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
 //        addSection(newSection(getResources().getString(R.string.accessories), R.mipmap.accessories, new AccessoriesFragment()));
-        addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.notice_drawer, new Notice()));
+        addSection(newSection(getResources().getString(R.string.title_activity_notice_board), R.mipmap.notice_drawer, new NoticeFragment()));
         if (MyUtils.isUserLoggedIn(this)) {
             addSection(newSection(getResources().getString(R.string.complain), R.mipmap.complain_drawer, new MaterialSectionListener() {
                 @Override

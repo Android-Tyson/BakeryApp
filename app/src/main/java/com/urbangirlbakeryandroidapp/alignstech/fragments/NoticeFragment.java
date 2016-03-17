@@ -34,7 +34,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Notice extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class NoticeFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -47,7 +47,7 @@ public class Notice extends android.support.v4.app.Fragment implements SwipeRefr
     private List<String> titleList = new ArrayList<>(), descList = new ArrayList<>();
     private NoticeBoardListAdapter adapter;
 
-    public Notice() {
+    public NoticeFragment() {
         // Required empty public constructor
     }
 
