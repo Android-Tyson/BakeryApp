@@ -162,6 +162,13 @@ public class MyUtils
     }
 
 
+    public static String getCurrentTime() {
+
+        return new SimpleDateFormat("HH:mm:ss" , Locale.US).format(new Date());
+
+    }
+
+
     public static Bitmap getUserProfilePic()
     {
         Bitmap bitmap;

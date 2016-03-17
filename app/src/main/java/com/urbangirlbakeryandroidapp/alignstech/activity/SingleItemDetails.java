@@ -385,7 +385,7 @@ public class SingleItemDetails extends AppCompatActivity implements AdapterView.
             jsonObject.put("order_date", orderedUserDetails.get(5));
             jsonObject.put("sender_address", orderedUserDetails.get(7));
             jsonObject.put("receiver_address", orderedUserDetails.get(8));
-            jsonObject.put("time" , MyUtils.getCurrentDate());
+            jsonObject.put("time" , MyUtils.getCurrentTime());
 
             if (MyUtils.isUserLoggedIn(this)) {
 

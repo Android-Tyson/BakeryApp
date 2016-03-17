@@ -10,26 +10,26 @@ android {
         versionCode 1
         versionName "1.0"
     }
-//    signingConfigs {
-//        release {
-//            storeFile file('C:/Users/Dell/Desktop/UgCake/KEYSTORE/keystore.jks')
-//            storePassword "UG@Gmail.com"
-//            keyAlias "UG Cake"
-//            keyPassword "UG@Gmail.com"
-//        }
+    signingConfigs {
+        release {
+            storeFile file('C:/Users/Dell/Desktop/UgCake/KEYSTORE/keystore.jks')
+            storePassword "UG@Gmail.com"
+            keyAlias "UG Cake"
+            keyPassword "UG@Gmail.com"
+        }
 //        dubug {
 //            storeFile file('C:/Users/Dell/Desktop/UgCake/KEYSTORE/keystore.jks')
 //            storePassword "UG@Gmail.com"
 //            keyAlias "UG Cake"
 //            keyPassword "UG@Gmail.com"
 //        }
-//    }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
         debug {
             debuggable true
@@ -65,8 +65,8 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:2.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.afollestad:material-dialogs:0.7.6.0'
-    compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'

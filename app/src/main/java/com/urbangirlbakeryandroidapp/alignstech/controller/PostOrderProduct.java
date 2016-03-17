@@ -42,7 +42,7 @@ public class PostOrderProduct {
                                 MyBus.getInstance().post(new OrderEventBus(response));
 
                             }else{
-                                MyUtils.showToast(context , response);
+                                MyUtils.showToast(context , jsonObject.getString("result"));
                             }
 
                         } catch (JSONException e) {
