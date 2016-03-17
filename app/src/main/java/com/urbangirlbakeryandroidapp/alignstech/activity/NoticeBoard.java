@@ -55,7 +55,7 @@ public class NoticeBoard extends AppCompatActivity implements SwipeRefreshLayout
         materialDialog = new MaterialDialog.Builder(this).content("Loading Please wait...").cancelable(false).progress(true , 0).show();
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myAccentColor));
         swipeRefreshLayout.setOnRefreshListener(this);
-        GetNoticeBoard.parseNoticeList(Apis.get_gcm_notice );
+        GetNoticeBoard.parseNoticeList(Apis.get_gcm_notice , this );
     }
 
     private void initializeToolbar() {
@@ -125,7 +125,7 @@ public class NoticeBoard extends AppCompatActivity implements SwipeRefreshLayout
     @Override
     public void onRefresh() {
 
-        GetNoticeBoard.parseNoticeList(Apis.get_gcm_notice );
+        GetNoticeBoard.parseNoticeList(Apis.get_gcm_notice , this );
 
     }
 }

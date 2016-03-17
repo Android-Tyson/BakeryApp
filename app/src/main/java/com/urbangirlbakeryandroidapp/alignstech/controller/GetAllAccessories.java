@@ -11,6 +11,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.AccessoriesListResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ public class GetAllAccessories {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                MyUtils.showToast(context, error.toString());
                 if (error != null)
                     MyBus.getInstance().post(new GetErrorEvent(error.toString()));
 

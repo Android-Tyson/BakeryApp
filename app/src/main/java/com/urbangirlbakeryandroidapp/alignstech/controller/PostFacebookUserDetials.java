@@ -64,6 +64,8 @@ public class PostFacebookUserDetials {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MainActivity.materialDialog.dismiss();
+                MyUtils.showToast(context, error.toString());
+
             }
         }){
             @Override

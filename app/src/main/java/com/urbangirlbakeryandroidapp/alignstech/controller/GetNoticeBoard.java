@@ -1,5 +1,7 @@
 package com.urbangirlbakeryandroidapp.alignstech.controller;
 
+import android.content.Context;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -9,6 +11,7 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.GetNoticeEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
+import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -17,7 +20,7 @@ import org.json.JSONObject;
  */
 public class GetNoticeBoard {
 
-    public static void parseNoticeList(String url) {
+    public static void parseNoticeList(String url , final Context context) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
@@ -31,6 +34,7 @@ public class GetNoticeBoard {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                MyUtils.showToast(context, error.toString());
                 MyBus.getInstance().post(new GetErrorEvent(error.toString()));
 
             }

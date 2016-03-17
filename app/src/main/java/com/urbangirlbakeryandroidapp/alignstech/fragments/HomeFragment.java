@@ -292,6 +292,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String headerImageId = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("name");
+                if(headerImageTitle.length() > 20){
+                    headerImageTitle = headerImageTitle.substring(0 , 20) + ("..");
+                }
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
                 if (path.equals("null")) {
@@ -324,6 +327,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String id = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("product_name");
+                if(headerImageTitle.length() > 13){
+                    headerImageTitle = headerImageTitle.substring(0 ,13) + "..";
+                }
                 String path = jsonObj.getString("thumb");
                 String headerImageUrl;
                 if (path.equals("null")) {

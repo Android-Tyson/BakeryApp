@@ -34,9 +34,9 @@ public class GetHeaderOffers {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                MyUtils.showToast(context, error.toString());
                 if (error != null)
                     MyBus.getInstance().post(new GetErrorEvent(error.toString()));
-                MyUtils.showToast(context, error.toString());
 
             }
         });
