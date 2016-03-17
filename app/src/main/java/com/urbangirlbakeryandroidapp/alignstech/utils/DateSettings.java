@@ -6,7 +6,7 @@ import android.widget.DatePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails;
 import com.urbangirlbakeryandroidapp.alignstech.bus.DatePickerBus;
 
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener {
         if(dateValidationBeforeToday(i , i1 , i2)){
 
             // Date Validation LeapYear Stuffs
-            i2 = i2 + Integer.parseInt(SingleItemDetails.delivery_date);
+            i2 = i2 + Integer.parseInt(SingleItemCakeDetails.delivery_date);
             int additionalDay = leapYearValidation(i1, i2);
             if (additionalDay > 0) {
                 i1 += 1;
@@ -100,11 +100,11 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener {
 
     private void additionalDayDialog(String date) {
 
-        if (Integer.parseInt(SingleItemDetails.delivery_date) > 0) {
+        if (Integer.parseInt(SingleItemCakeDetails.delivery_date) > 0) {
 
             new MaterialDialog.Builder(context)
                     .title("Notice")
-                    .content("The time to make this cake is " + SingleItemDetails.delivery_date +
+                    .content("The time to make this cake is " + SingleItemCakeDetails.delivery_date +
                             " days. The cake will be delivered by adding the " +
                             "additional time to makeup this cake." +
                             " So the cake delivery date will be on " + date + ".")
@@ -123,7 +123,7 @@ public class DateSettings implements DatePickerDialog.OnDateSetListener {
                     .show();
 
 
-        } else if (Integer.parseInt(SingleItemDetails.delivery_date) == 0) {
+        } else if (Integer.parseInt(SingleItemCakeDetails.delivery_date) == 0) {
 
             new MaterialDialog.Builder(context)
                     .title("Notice")

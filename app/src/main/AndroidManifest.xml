@@ -83,7 +83,7 @@
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
-            android:name=".activity.SingleItemDetails"
+            android:name=".activity.SingleItemCakeDetails"
             android:label="@string/title_activity_single_item_detils"
             android:parentActivityName=".MainActivity"
             android:launchMode="singleTop"
@@ -124,7 +124,7 @@
         <activity
             android:name=".activity.Ordered_Cake_Details"
             android:label="@string/title_activity_notice_board"
-            android:parentActivityName=".activity.SingleItemDetails"
+            android:parentActivityName=".activity.SingleItemCakeDetails"
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>

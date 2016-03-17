@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/layout_background"
     android:orientation="vertical"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails">
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails">
 
     <include layout="@layout/app_toolbar" />
 

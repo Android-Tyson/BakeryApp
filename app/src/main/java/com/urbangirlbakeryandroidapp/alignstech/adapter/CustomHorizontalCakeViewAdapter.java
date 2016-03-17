@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails;
 import com.urbangirlbakeryandroidapp.alignstech.fragments.HomeFragment;
 import com.urbangirlbakeryandroidapp.alignstech.model.RecyclerViewModel;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -72,7 +72,7 @@ public class CustomHorizontalCakeViewAdapter extends RecyclerView.Adapter<Custom
             String product_name = HomeFragment.urgentCakeName.get(getAdapterPosition());
             String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
-            Intent intent = new Intent(context , SingleItemDetails.class);
+            Intent intent = new Intent(context , SingleItemCakeDetails.class);
             intent.putExtra("TITLE_NAME" , product_name);
             intent.putExtra("API_NAME" , api_name);
             context.startActivity(intent);

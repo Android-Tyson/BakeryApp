@@ -16,7 +16,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
@@ -121,7 +121,7 @@ public class GridFragment_Cake extends android.support.v4.app.Fragment implement
         String product_name = product.getProductName();
         String api_name = Apis.BASE_URL + "api/product-details/" + product_id;
 
-        Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+        Intent intent = new Intent(getActivity(), SingleItemCakeDetails.class);
         intent.putExtra("TITLE_NAME", product_name);
         intent.putExtra("API_NAME", api_name);
         startActivity(intent);

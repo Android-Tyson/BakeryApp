@@ -16,7 +16,7 @@ import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
-import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemDetails;
+import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemGiftDetails;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
@@ -134,7 +134,7 @@ public class GridFragment_Gift extends android.support.v4.app.Fragment implement
 
         }else{
 
-            Intent intent = new Intent(getActivity(), SingleItemDetails.class);
+            Intent intent = new Intent(getActivity(), SingleItemCakeDetails.class);
             intent.putExtra("TITLE_NAME", product_name);
             intent.putExtra("API_NAME", api_name);
             startActivity(intent);
