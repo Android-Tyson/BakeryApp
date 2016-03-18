@@ -465,6 +465,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             Intent intent = new Intent(getActivity() , GridProduct.class);
             intent.putExtra("API", API_NAME);
             intent.putExtra("TITLE_NAME", productName);
+            intent.putExtra("HOME", "HOME");
             startActivity(intent);
         }
     }
@@ -479,6 +480,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             Intent intent = new Intent(getActivity() , GridProduct.class);
             intent.putExtra("API", API_NAME);
             intent.putExtra("TITLE_NAME", productName);
+            intent.putExtra("HOME", "HOME");
             startActivity(intent);
         }
     }

@@ -101,6 +101,12 @@ public class GridProduct extends AppCompatActivity implements AdapterView.OnItem
             return true;
         }
 
+        if (item.getItemId() == android.R.id.home) {
+
+            finish();
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -307,7 +307,10 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
             startActivity(new Intent(this, Ordered_Gift_Details.class));
 
         }
+        if (item.getItemId() == android.R.id.home) {
 
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 

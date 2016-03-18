@@ -93,6 +93,11 @@ public class UserProfile extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (item.getItemId() == android.R.id.home) {
+
+            finish();
+        }
+
         if(id == R.id.action_logout){
 
             new MaterialDialog.Builder(this)

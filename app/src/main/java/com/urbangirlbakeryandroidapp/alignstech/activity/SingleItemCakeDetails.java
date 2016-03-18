@@ -649,9 +649,12 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
         int id = item.getItemId();
         if(id == R.id.action_settings){
 
-//            dialogForOpeningAndClosingTime(this);
             startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
 
+        }
+        if (item.getItemId() == android.R.id.home) {
+
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
