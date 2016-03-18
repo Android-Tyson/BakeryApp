@@ -213,12 +213,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void getHeaderImageSlider_urgentCake(HeaderImageSliderEventBus event) {
 
         JSONObject jsonObject = event.getJsonObject();
-//        if(isImageLoaded){
-
         performJsonTaskForHeaderImages(jsonObject);
-//            isImageLoaded = false;
-
-//        }
 
         if (materialDialog.isShowing())
             materialDialog.dismiss();
@@ -294,9 +289,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String headerImageId = jsonObj.getString("id");
                 String headerImageTitle = jsonObj.getString("name");
-//                if(headerImageTitle.length() > 20){
-//                    headerImageTitle = headerImageTitle.substring(0 , 20) + ("..");
-//                }
                 String path = jsonObj.getString("path");
                 String headerImageUrl;
                 if (path.equals("null")) {

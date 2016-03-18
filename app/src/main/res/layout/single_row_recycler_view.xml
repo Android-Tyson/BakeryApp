@@ -36,6 +36,7 @@
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
                     android:text="title"
+                    android:maxLength="12"
                     android:background="#99000000"
                     android:textColor="#ffffff"
                     android:textSize="14sp" />
