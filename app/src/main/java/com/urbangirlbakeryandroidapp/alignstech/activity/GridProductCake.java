@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GridProduct extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GridProductCake extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     @InjectView(R.id.gridView)
     GridView gridView;
