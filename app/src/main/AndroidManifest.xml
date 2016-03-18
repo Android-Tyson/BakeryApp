@@ -58,7 +58,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
-
         <activity
             android:name=".activity.FillProfile"
             android:label="@string/title_activity_edit_profile"
@@ -69,41 +68,41 @@
         <activity
             android:name=".activity.SeeMoreCategories"
             android:label="@string/title_activity_see_all_categories"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
             android:name=".activity.SeeMoreGifts"
             android:label="@string/title_activity_see_all_gifts"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
             android:name=".activity.SingleItemCakeDetails"
             android:label="@string/title_activity_single_item_detils"
-            android:parentActivityName=".MainActivity"
             android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
             android:name=".activity.SingleItemGiftDetails"
             android:label="@string/title_activity_single_item_detils"
-            android:parentActivityName=".MainActivity"
             android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
             android:name=".activity.UserProfile"
             android:label="@string/title_activity_profile"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
@@ -120,7 +119,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
-
         <activity
             android:name=".activity.Ordered_Cake_Details"
             android:label="@string/title_activity_notice_board"
@@ -128,7 +126,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
-
         <activity
             android:name=".activity.Ordered_Gift_Details"
             android:label="@string/title_activity_notice_board"
@@ -136,6 +133,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme" >
         </activity>
+        <activity
+            android:name=".activity.GridCake"
+            android:label="@string/title_activity_grid_cake"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/UGCakeTheme">
+        </activity>
+
+
+
 
         // GCM RECEIVER STUFFS
         <!-- [START gcm_receiver] -->

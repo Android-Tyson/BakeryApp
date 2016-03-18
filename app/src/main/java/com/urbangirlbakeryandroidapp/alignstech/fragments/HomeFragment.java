@@ -22,6 +22,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.GridCake;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreCategories;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SeeMoreGifts;
 import com.urbangirlbakeryandroidapp.alignstech.activity.SingleItemCakeDetails;
@@ -460,8 +461,11 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (productId != null && productName != null) {
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
-            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Cake.newInstance(API_NAME, productName)).commit();
-
+//            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Cake.newInstance(API_NAME, productName)).commit();
+            Intent intent = new Intent(getActivity() , GridCake.class);
+            intent.putExtra("API", API_NAME);
+            intent.putExtra("TITLE_NAME", productName);
+            startActivity(intent);
         }
     }
 
