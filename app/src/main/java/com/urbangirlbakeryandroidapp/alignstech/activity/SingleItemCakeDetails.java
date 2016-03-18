@@ -92,6 +92,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
     private ArrayList<String> accessoryIdList = new ArrayList<>();
     private ArrayList<String> accessoryNameList = new ArrayList<>();
     private ArrayList<String> accessoriesPriceList = new ArrayList<>();
+
     private ArrayList<String> per_pound_price_list = new ArrayList<>();
     private ArrayList<String> flavourList = new ArrayList<>();
 
@@ -218,6 +219,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
                 String flavor_id = flavorObject.getString("id");
                 if (flavor_id.equals(default_flavour_id)) {
                     per_pound_price_list.add(flavorObject.getString("per_pound_price"));
+                    flavourList.add(flavorObject.getString("id"));
                     flavour.add(flavorObject.getString("flavor"));
 
                 }

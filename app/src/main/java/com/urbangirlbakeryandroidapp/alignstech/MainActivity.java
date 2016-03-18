@@ -127,22 +127,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         addSection(newSection(getResources().getString(R.string.home), R.mipmap.home, new HomeFragment()));
 
-        if (MyUtils.isUserLoggedIn(this)) {
-            addSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, UserProfile.class)));
-        } else {
-            addSection(newSection(getResources().getString(R.string.login), R.mipmap.login, new MaterialSectionListener() {
-                @Override
-                public void onClick(MaterialSection materialSection) {
-                    if (MyUtils.isNetworkConnected(getApplicationContext())) {
-                        simpleFacebook.login(onLoginListener);
-                        MyUtils.showLog("");
-                    } else {
-                        MyUtils.showToast(getApplicationContext(), "Please Check your Internet Connection And try again...");
-                    }
-                }
-            }));
-        }
-
         addSection(newSection(getResources().getString(R.string.cakes), R.mipmap.cakes, new CakesFragment()));
         addSection(newSection(getResources().getString(R.string.gifts), R.mipmap.gifts, new GiftsFragment()));
         addSection(newSection(getResources().getString(R.string.offers), R.mipmap.offers, new OfferFragment()));
@@ -159,15 +143,30 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
                 }
             }));
         }
-        addBottomSection(newSection(getResources().getString(R.string.about), R.mipmap.about, new MaterialSectionListener() {
+        addSection(newSection(getResources().getString(R.string.about), R.mipmap.about, new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection materialSection) {
 
-                new About_Us().show(getSupportFragmentManager() , "ABOUT_US");
+                new About_Us().show(getSupportFragmentManager(), "ABOUT_US");
 
             }
         }));
 
+        if (MyUtils.isUserLoggedIn(this)) {
+            addBottomSection(newSection(getResources().getString(R.string.profile), R.mipmap.profile, new Intent(this, UserProfile.class)));
+        } else {
+            addBottomSection(newSection(getResources().getString(R.string.login), R.mipmap.login, new MaterialSectionListener() {
+                @Override
+                public void onClick(MaterialSection materialSection) {
+                    if (MyUtils.isNetworkConnected(getApplicationContext())) {
+                        simpleFacebook.login(onLoginListener);
+                        MyUtils.showLog("");
+                    } else {
+                        MyUtils.showToast(getApplicationContext(), "Please Check your Internet Connection And try again...");
+                    }
+                }
+            }));
+        }
     }
 
 

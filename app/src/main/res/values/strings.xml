@@ -58,7 +58,7 @@
     <string name="title_activity_single_item_detils">SingleItemDetils</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
-    <string name="login">Login</string>
+    <string name="login">Login with Facebook</string>
     <string name="title_activity_single_item_gift_details">SingleItemGiftDetails</string>
     <string name="title_activity_profile">Profile</string>
     <string name="action_edit">Edit Profile</string>
