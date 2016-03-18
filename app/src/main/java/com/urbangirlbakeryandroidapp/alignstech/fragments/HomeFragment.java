@@ -149,6 +149,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
                 doParsingJob();
 
+            } else {
+                if (materialDialog.isShowing())
+                    materialDialog.dismiss();
             }
         }
         initializeUrgentCakeRecyclerView();
@@ -225,7 +228,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     @Subscribe
     public void getOffersScrollList(GetUrgentCakesEvent event) {
         JSONObject jsonObject = event.getJsonObject();
-        MyUtils.showLog(jsonObject.toString());
         performJsonTaskForDealsAndOffers(jsonObject);
         if (materialDialog.isShowing())
             materialDialog.dismiss();
@@ -455,7 +457,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
 //            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Cake.newInstance(API_NAME, productName)).commit();
-            Intent intent = new Intent(getActivity() , GridProductCake.class);
+            Intent intent = new Intent(getActivity(), GridProductCake.class);
             intent.putExtra("API", API_NAME);
             intent.putExtra("TITLE_NAME", productName);
             intent.putExtra("HOME", "HOME");
@@ -470,7 +472,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
 //            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Gift.newInstance(API_NAME, productName)).commit();
 
-            Intent intent = new Intent(getActivity() , GridProductGift.class);
+            Intent intent = new Intent(getActivity(), GridProductGift.class);
             intent.putExtra("API", API_NAME);
             intent.putExtra("TITLE_NAME", productName);
             intent.putExtra("HOME", "HOME");
@@ -485,7 +487,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
     @Override
     public void onStop() {
-//        isImageLoaded = true;
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }
@@ -515,7 +516,6 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         swipeRefreshLayout.setRefreshing(false);
 
     }
-
 
 
 }
