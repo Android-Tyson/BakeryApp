@@ -134,7 +134,7 @@
             android:theme="@style/UGCakeTheme" >
         </activity>
         <activity
-            android:name=".activity.GridCake"
+            android:name=".activity.GridProduct"
             android:label="@string/title_activity_grid_cake"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"

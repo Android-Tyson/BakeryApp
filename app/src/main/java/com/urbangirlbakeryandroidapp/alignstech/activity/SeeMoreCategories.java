@@ -131,7 +131,7 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
         String product_title = childNameList.get(i);
 //        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Cake.newInstance(API_NAME, product_title)).commit();
 
-        Intent intent = new Intent(this , GridCake.class);
+        Intent intent = new Intent(this , GridProduct.class);
         intent.putExtra("API", API_NAME);
         intent.putExtra("TITLE_NAME", product_title);
         startActivity(intent);
