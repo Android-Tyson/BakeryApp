@@ -474,8 +474,12 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         if (productId != null && productName != null) {
 
             String API_NAME = Apis.BASE_URL + "api/products/" + productId;
-            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Gift.newInstance(API_NAME, productName)).commit();
+//            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_home, GridFragment_Gift.newInstance(API_NAME, productName)).commit();
 
+            Intent intent = new Intent(getActivity() , GridProduct.class);
+            intent.putExtra("API", API_NAME);
+            intent.putExtra("TITLE_NAME", productName);
+            startActivity(intent);
         }
     }
 

@@ -2,6 +2,7 @@ package com.urbangirlbakeryandroidapp.alignstech.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
+import com.urbangirlbakeryandroidapp.alignstech.activity.GridProduct;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
@@ -114,7 +116,12 @@ public class GiftsFragment extends android.support.v4.app.Fragment implements Ad
 
         String API_NAME = Apis.BASE_URL  + "api/products/" + childIdList.get(i);
         String product_title = childNameList.get(i);
-        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Gift.newInstance(API_NAME, product_title)).commit();
+//        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Gift.newInstance(API_NAME, product_title)).commit();
+
+        Intent intent = new Intent(getActivity() , GridProduct.class);
+        intent.putExtra("API", API_NAME);
+        intent.putExtra("TITLE_NAME", product_title);
+        startActivity(intent);
 
     }
 }
