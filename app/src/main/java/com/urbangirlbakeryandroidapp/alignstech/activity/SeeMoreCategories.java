@@ -1,5 +1,6 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +13,6 @@ import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllCategoriesEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllCategoriesCake;
-import com.urbangirlbakeryandroidapp.alignstech.fragments.GridFragment_Cake;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
@@ -129,8 +129,12 @@ public class SeeMoreCategories extends AppCompatActivity implements AdapterView.
 
         String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
         String product_title = childNameList.get(i);
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Cake.newInstance(API_NAME, product_title)).commit();
+//        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Cake.newInstance(API_NAME, product_title)).commit();
 
+        Intent intent = new Intent(this , GridCake.class);
+        intent.putExtra("API", API_NAME);
+        intent.putExtra("TITLE_NAME", product_title);
+        startActivity(intent);
     }
 }
 
