@@ -415,7 +415,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
         }
 
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(7000);
         mDemoSlider.addOnPageChangeListener(this);
