@@ -100,7 +100,7 @@ public class SeeMoreGifts extends AppCompatActivity implements AdapterView.OnIte
         String API_NAME = Apis.BASE_URL + "api/products/" + childIdList.get(i);
         String product_title = childNameList.get(i);
 //        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Gift.newInstance(API_NAME, product_title)).commit();
-        Intent intent = new Intent(this , GridProductCake.class);
+        Intent intent = new Intent(this , GridProductGift.class);
         intent.putExtra("API", API_NAME);
         intent.putExtra("TITLE_NAME", product_title);
         intent.putExtra("SEE_GIFT", "SEE_GIFT");

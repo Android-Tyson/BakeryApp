@@ -129,10 +129,15 @@
             android:label="@string/title_activity_grid_cake"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@style/UGCakeTheme" >
+        </activity>
+        <activity
+            android:name=".activity.GridProductGift"
+            android:label="@string/title_activity_grid_product_gift"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/UGCakeTheme">
         </activity>
-
-
 
 
         // GCM RECEIVER STUFFS

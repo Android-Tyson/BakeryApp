@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
-import com.urbangirlbakeryandroidapp.alignstech.activity.GridProductCake;
+import com.urbangirlbakeryandroidapp.alignstech.activity.GridProductGift;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomListItemAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SeeAllGiftsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
@@ -118,7 +118,7 @@ public class GiftsFragment extends android.support.v4.app.Fragment implements Ad
         String product_title = childNameList.get(i);
 //        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frame_container_gift, GridFragment_Gift.newInstance(API_NAME, product_title)).commit();
 
-        Intent intent = new Intent(getActivity() , GridProductCake.class);
+        Intent intent = new Intent(getActivity() , GridProductGift.class);
         intent.putExtra("API", API_NAME);
         intent.putExtra("TITLE_NAME", product_title);
         startActivity(intent);
