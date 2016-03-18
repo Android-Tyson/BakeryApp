@@ -86,6 +86,12 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
     @InjectView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @InjectView(R.id.egglessBlock)
+    LinearLayout egglessLinearLayout;
+
+    @InjectView(R.id.egglessRow)
+    View egglessRow;
+
     private String product_price = "0.00", pound = "0.00", per_pound_price = "0.00";
     private Double totalPrice = 0.00, eggless_price = 0.00;
 
@@ -105,6 +111,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
     private ArrayList<String> orderedUserDetails;
     private String selectedFlavor, selectedFlovourId;
     private boolean isEggless = false;
+    private String isCakeEggless = "";
 
     private String urgentDetails = "" ;
     private MaterialDialog materialDialog;
@@ -187,6 +194,11 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
             String starting_pound = jsonObj.getString("starting_pound");
             String ending_pound = jsonObj.getString("ending_pound");
             product_price = jsonObj.getString("price");
+            isCakeEggless = jsonObj.getString("is_eggless");
+            if(isCakeEggless.equals("n")){
+                egglessLinearLayout.setVisibility(View.GONE);
+                egglessRow.setVisibility(View.GONE);
+            }
             String product_description = jsonObj.getString("description");
             product_description = String.valueOf(Html.fromHtml(product_description));
 

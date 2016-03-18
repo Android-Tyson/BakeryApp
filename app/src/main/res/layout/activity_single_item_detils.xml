@@ -26,7 +26,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -39,7 +40,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -102,7 +103,7 @@
                                     <!--Second Section-->
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="150dp"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical"
                                         android:paddingLeft="15dp"
                                         android:paddingRight="15dp">
@@ -162,11 +163,13 @@
 
 
                                         <View
+                                            android:id="@+id/egglessRow"
                                             android:layout_width="match_parent"
                                             android:layout_height="1dp"
                                             android:background="@color/myDividerColor" />
 
                                         <LinearLayout
+                                            android:id="@+id/egglessBlock"
                                             android:layout_width="match_parent"
                                             android:layout_height="50dp"
                                             android:orientation="horizontal">
@@ -216,12 +219,12 @@
                                             android:id="@+id/product_description"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:lineSpacingExtra="5dp"
                                             android:paddingBottom="25dp"
                                             android:paddingLeft="15dp"
                                             android:paddingTop="15dp"
                                             android:text="Sweet and Simple Product Description"
                                             android:textColor="@color/myTextColor"
-                                            android:lineSpacingExtra="5dp"
                                             android:textSize="14sp" />
 
                                         <View
@@ -230,62 +233,134 @@
                                             android:background="@color/myDividerColor" />
 
                                     </LinearLayout>
-                                    <!--Third Section-->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
 
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:background="@color/textView_background"
-                                            android:gravity="center|left"
-                                            android:paddingBottom="10dp"
-                                            android:paddingLeft="15dp"
-                                            android:paddingTop="10dp"
-                                            android:text="You may also need?"
-                                            android:textSize="18sp"
-                                            android:textStyle="bold" />
-                                    </LinearLayout>
 
-                                    <!--Fourth Section-->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center">
+                                    <!--&lt;!&ndash;Third Section&ndash;&gt;-->
+                                    <!--<LinearLayout-->
+                                        <!--android:layout_width="match_parent"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:orientation="vertical">-->
 
-                                        <android.support.v7.widget.RecyclerView
-                                            android:id="@+id/recycler_view"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:minHeight="50dp"
-                                            android:paddingLeft="15dp"
-                                            android:paddingRight="15dp" />
+                                        <!--<TextView-->
+                                            <!--android:layout_width="match_parent"-->
+                                            <!--android:layout_height="match_parent"-->
+                                            <!--android:background="@color/textView_background"-->
+                                            <!--android:gravity="center|left"-->
+                                            <!--android:paddingBottom="10dp"-->
+                                            <!--android:paddingLeft="15dp"-->
+                                            <!--android:paddingTop="10dp"-->
+                                            <!--android:text="You may also need?"-->
+                                            <!--android:textSize="18sp"-->
+                                            <!--android:textStyle="bold" />-->
+                                    <!--</LinearLayout>-->
 
-                                    </LinearLayout>
+                                    <!--&lt;!&ndash;Fourth Section&ndash;&gt;-->
+                                    <!--<LinearLayout-->
+                                        <!--android:layout_width="match_parent"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_gravity="center">-->
 
-                                    <LinearLayout
-                                        android:id="@+id/order_now"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="48dp"
-                                        android:layout_marginTop="10dp"
-                                        android:background="@color/light_blue"
-                                        android:gravity="center">
+                                        <!--<android.support.v7.widget.RecyclerView-->
+                                            <!--android:id="@+id/recycler_view"-->
+                                            <!--android:layout_width="match_parent"-->
+                                            <!--android:layout_height="wrap_content"-->
+                                            <!--android:minHeight="50dp"-->
+                                            <!--android:paddingLeft="15dp"-->
+                                            <!--android:paddingRight="15dp" />-->
 
-                                        <ImageView
-                                            android:id="@+id/imageViewAddToCart"
-                                            android:layout_width="124dp"
-                                            android:layout_height="match_parent"
-                                            android:fillViewport="true"
-                                            android:src="@mipmap/order_now" />
+                                    <!--</LinearLayout>-->
 
-                                    </LinearLayout>
+                                    <!--<LinearLayout-->
+                                        <!--android:id="@+id/order_now"-->
+                                        <!--android:layout_width="match_parent"-->
+                                        <!--android:layout_height="48dp"-->
+                                        <!--android:layout_marginTop="10dp"-->
+                                        <!--android:background="@color/light_blue"-->
+                                        <!--android:gravity="center">-->
+
+                                        <!--<ImageView-->
+                                            <!--android:id="@+id/imageViewAddToCart"-->
+                                            <!--android:layout_width="124dp"-->
+                                            <!--android:layout_height="match_parent"-->
+                                            <!--android:fillViewport="true"-->
+                                            <!--android:src="@mipmap/order_now" />-->
+
+                                    <!--</LinearLayout>-->
 
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        card_view:cardCornerRadius="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!--Third Section-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/textView_background"
+                                    android:gravity="center|left"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
+                                    android:text="You may also need?"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <!--Fourth Section-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/recycler_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:minHeight="50dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/order_now"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_blue"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/imageViewAddToCart"
+                                    android:layout_width="124dp"
+                                    android:layout_height="match_parent"
+                                    android:fillViewport="true"
+                                    android:src="@mipmap/order_now" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
                     </android.support.v7.widget.CardView>
 
                 </LinearLayout>
