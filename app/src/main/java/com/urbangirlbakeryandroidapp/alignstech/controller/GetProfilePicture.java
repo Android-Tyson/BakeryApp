@@ -36,7 +36,7 @@ public class GetProfilePicture {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        MyUtils.showToast(context, error.toString());
+//                        MyUtils.showToast(context, error.toString());
                         List<DataBase_UserInfo> queryResults = DataBase_Utils.getUserInfoList();
                         GetProfilePicture.userProfilePicture(context, queryResults.get(0).getProfilePicUrl());
 

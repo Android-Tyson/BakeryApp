@@ -15,7 +15,6 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.SomeCategoriesEventBus;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +43,7 @@ public class GetSomeCategories {
 
                 if(error != null)
                 MyBus.getInstance().post(new GetErrorEvent(error.toString()));
-                MyUtils.showToast(context, error.toString());
+//                MyUtils.showToast(context, error.toString());
 
             }
         }){

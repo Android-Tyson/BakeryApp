@@ -11,7 +11,6 @@ import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.bus.ProductDetialsEvent;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONObject;
 
@@ -36,7 +35,7 @@ public class GetProductDetials {
 
                 if (error != null)
                     MyBus.getInstance().post(new GetErrorEvent(error.toString()));
-                MyUtils.showToast(context, error.toString());
+//                MyUtils.showToast(context, error.toString());
 
             }
         });

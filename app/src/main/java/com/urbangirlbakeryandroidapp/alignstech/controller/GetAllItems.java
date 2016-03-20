@@ -79,7 +79,7 @@ public class GetAllItems {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                MyUtils.showToast(context, error.toString());
+//                MyUtils.showToast(context, error.toString());
                 materialDialog.dismiss();
 
             }
