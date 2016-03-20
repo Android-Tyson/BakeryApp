@@ -17,7 +17,6 @@ import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllAccessories;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,9 +59,9 @@ public class AccessoriesFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(MyUtils.isNetworkConnected(getActivity())){
+//        if(MyUtils.isNetworkConnected(getActivity())){
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, getActivity());
-        }
+//        }
     }
 
     @Subscribe

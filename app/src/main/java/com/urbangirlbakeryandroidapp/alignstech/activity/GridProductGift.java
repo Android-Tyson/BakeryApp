@@ -61,9 +61,9 @@ public class GridProductGift extends AppCompatActivity implements AdapterView.On
 
     private void doParsing() {
 
-        if (MyUtils.isNetworkConnected(this)) {
+//        if (MyUtils.isNetworkConnected(this)) {
             GetAllItems.parseAllItems(this, getApi());
-        }
+//        }
 
     }
 

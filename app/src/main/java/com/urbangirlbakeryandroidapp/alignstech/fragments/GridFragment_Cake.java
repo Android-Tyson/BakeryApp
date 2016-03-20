@@ -90,10 +90,10 @@ public class GridFragment_Cake extends android.support.v4.app.Fragment implement
         super.onActivityCreated(savedInstanceState);
         adapter = new CustomGridViewAdapter(getActivity(), productList);
         gridView.setAdapter(adapter);
-        if (MyUtils.isNetworkConnected(getActivity())) {
+//        if (MyUtils.isNetworkConnected(getActivity())) {
             String url = getApi();
             GetAllItems.parseAllItems(getActivity(), getApi());
-        }
+//        }
     }
 
     @Subscribe

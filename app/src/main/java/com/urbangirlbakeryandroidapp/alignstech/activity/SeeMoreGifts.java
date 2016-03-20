@@ -18,7 +18,6 @@ import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,9 +60,9 @@ public class SeeMoreGifts extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void parseAllGifts(){
-        if(MyUtils.isNetworkConnected(this)){
+//        if(MyUtils.isNetworkConnected(this)){
             GetAllGifts.parseAllGiftList(Apis.see_all_gifts, this);
-        }
+//        }
     }
 
     @Subscribe

@@ -113,7 +113,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
     private boolean isEggless = false;
     private String isCakeEggless = "";
 
-    private String urgentDetails = "" ;
+    private String urgentDetails = "";
     private MaterialDialog materialDialog;
     public static String delivery_date;
 
@@ -144,12 +144,12 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
     }
 
     private void parsingJob() {
-        if (MyUtils.isNetworkConnected(this)) {
+//        if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
             GetAllAccessories.parseAllAccessoriesList(Apis.see_all_accessories, this);
             GetOpeningClosingDate.getSettingApis(Apis.get_opening_closing, this);
 
-        }
+//        }
     }
 
     private String getApiName() {
@@ -195,7 +195,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
             String ending_pound = jsonObj.getString("ending_pound");
             product_price = jsonObj.getString("price");
             isCakeEggless = jsonObj.getString("is_eggless");
-            if(isCakeEggless.equals("n")){
+            if (isCakeEggless.equals("n")) {
                 egglessLinearLayout.setVisibility(View.GONE);
                 egglessRow.setVisibility(View.GONE);
             }
@@ -204,9 +204,9 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
 
             String default_flavour_id = jsonObj.getString("default_flavor");
             delivery_date = jsonObj.getString("delivery_date");
-            if(jsonObj.getString("is_active").equals("2"))
+            if (jsonObj.getString("is_active").equals("2"))
                 urgentDetails = "This cake has been treated as urgent and must be order between "
-                        + " ("+ MyUtils.getDataFromPreferences(this, "OPENING_HOUR")+"-"+
+                        + " (" + MyUtils.getDataFromPreferences(this, "OPENING_HOUR") + "-" +
                         MyUtils.getDataFromPreferences(this, "CLOSING_HOUR")
                         + " )" + "and is delivered same day! ";
 
@@ -399,7 +399,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
             jsonObject.put("order_date", orderedUserDetails.get(5));
             jsonObject.put("sender_address", orderedUserDetails.get(7));
             jsonObject.put("receiver_address", orderedUserDetails.get(8));
-            jsonObject.put("time" , MyUtils.getCurrentTime());
+            jsonObject.put("time", MyUtils.getCurrentTime());
 
             if (MyUtils.isUserLoggedIn(this)) {
 
@@ -536,11 +536,11 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
             String closing_hour = jsonObject.getString("closing_hour");
             String egg_less_price = jsonObject.getString("egg_less_price");
             String holiday = jsonObject.getString("holiday_date_and_time");
-            if(holiday != null && !holiday.isEmpty() && !holiday.equals("0")){
+            if (holiday != null && !holiday.isEmpty() && !holiday.equals("0")) {
 
                 if (MyUtils.getDataFromPreferences(this, "HOLIDAY").isEmpty()) {
                     MyUtils.saveDataInPreferences(this, "HOLIDAY", holiday);
-                }else{
+                } else {
                     MyUtils.editDataOfPreferences(this, "HOLIDAY", holiday);
                 }
 
@@ -549,7 +549,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
 
             if (MyUtils.getDataFromPreferences(this, "EGG_LESS_PRICE").isEmpty()) {
                 MyUtils.saveDataInPreferences(this, "EGG_LESS_PRICE", egg_less_price);
-            }else{
+            } else {
                 MyUtils.editDataOfPreferences(this, "EGG_LESS_PRICE", egg_less_price);
             }
 
@@ -614,23 +614,23 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
 
     private void dialogForOpeningAndClosingTime(final Context context) {
 
-            new MaterialDialog.Builder(context)
-                    .title("Notice")
-                    .content("Cake will be order by adding require time to make that cake. " + urgentDetails )
-                    .positiveText("Ok")
-                    .cancelable(false)
-                    .positiveColorRes(R.color.myPrimaryColor)
-                    .callback(new MaterialDialog.ButtonCallback() {
+        new MaterialDialog.Builder(context)
+                .title("Notice")
+                .content("Cake will be order by adding require time to make that cake. " + urgentDetails)
+                .positiveText("Ok")
+                .cancelable(false)
+                .positiveColorRes(R.color.myPrimaryColor)
+                .callback(new MaterialDialog.ButtonCallback() {
 
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            super.onPositive(dialog);
-                            startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
-                            dialog.dismiss();
-                        }
-                    })
-                    .build()
-                    .show();
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
 
     }
 
@@ -647,7 +647,7 @@ public class SingleItemCakeDetails extends AppCompatActivity implements AdapterV
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if(id == R.id.action_settings){
+        if (id == R.id.action_settings) {
 
             startActivity(new Intent(getApplicationContext(), Ordered_Cake_Details.class));
 

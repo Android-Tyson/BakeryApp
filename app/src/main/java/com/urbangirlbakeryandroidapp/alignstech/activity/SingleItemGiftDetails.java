@@ -87,9 +87,9 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     }
 
     private void parsingJob() {
-        if (MyUtils.isNetworkConnected(this)) {
+//        if (MyUtils.isNetworkConnected(this)) {
             GetProductDetials.parseProductDetials(getApiName(), this);
-        }
+//        }
     }
 
     private String getApiName() {
@@ -193,7 +193,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
             jsonObject.put("user_id", MyUtils.getDataFromPreferences(this, "USER_ID"));
             jsonObject.put("total", priceCalculation());
             jsonObject.put("order_details", jsonArray);
-            jsonObject.put("time" , MyUtils.getCurrentDate());
+            jsonObject.put("time", MyUtils.getCurrentDate());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -243,7 +243,7 @@ public class SingleItemGiftDetails extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-        startActivity(new Intent(this , Ordered_Gift_Details.class));
+        startActivity(new Intent(this, Ordered_Gift_Details.class));
 
     }
 

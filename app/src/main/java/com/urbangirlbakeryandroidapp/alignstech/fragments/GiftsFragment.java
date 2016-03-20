@@ -20,7 +20,6 @@ import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllGifts;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
 import com.urbangirlbakeryandroidapp.alignstech.utils.MyBus;
-import com.urbangirlbakeryandroidapp.alignstech.utils.MyUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,15 +64,15 @@ public class GiftsFragment extends android.support.v4.app.Fragment implements Ad
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(MyUtils.isNetworkConnected(getActivity())){
+//        if(MyUtils.isNetworkConnected(getActivity())){
             parseAllGifts();
-        }
+//        }
     }
 
     private void parseAllGifts(){
-        if(MyUtils.isNetworkConnected(getActivity())){
+
             GetAllGifts.parseAllGiftList(Apis.see_all_gifts, getActivity());
-        }
+
     }
 
     @Subscribe
