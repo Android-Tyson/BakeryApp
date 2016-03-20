@@ -2,23 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.urbangirlbakeryandroidapp.alignstech.activity.GridProductGift"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.urbangirlbakeryandroidapp.alignstech.activity.GridProductGift">
 
     <include
         android:id="@+id/app_toolbar"
         layout="@layout/app_toolbar" />
 
-    <GridView
-        android:padding="10dp"
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/layout_background"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/layout_background"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:padding="10dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

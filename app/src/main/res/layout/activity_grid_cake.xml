@@ -9,6 +9,11 @@
         android:id="@+id/app_toolbar"
         layout="@layout/app_toolbar" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <GridView
         android:padding="10dp"
         android:id="@+id/gridView"
@@ -21,5 +26,5 @@
         android:numColumns="auto_fit"
         android:verticalSpacing="10dp" />
 
-
+</android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

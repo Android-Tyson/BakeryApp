@@ -1,6 +1,7 @@
 package com.urbangirlbakeryandroidapp.alignstech.activity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.otto.Subscribe;
 import com.urbangirlbakeryandroidapp.alignstech.R;
 import com.urbangirlbakeryandroidapp.alignstech.adapter.CustomGridViewAdapter;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.controller.GetAllItems;
 import com.urbangirlbakeryandroidapp.alignstech.model.Product;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
@@ -27,7 +30,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GridProductGift extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GridProductGift extends AppCompatActivity implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.gridView)
     GridView gridView;
@@ -35,8 +38,12 @@ public class GridProductGift extends AppCompatActivity implements AdapterView.On
     @InjectView(R.id.app_toolbar)
     Toolbar toolbar;
 
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private CustomGridViewAdapter adapter;
     private List<Product> productList = new ArrayList<>();
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,9 @@ public class GridProductGift extends AppCompatActivity implements AdapterView.On
         adapter = new CustomGridViewAdapter(this, productList);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
+        materialDialog = new MaterialDialog.Builder(this).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myAccentColor));
+        swipeRefreshLayout.setOnRefreshListener(this);
         doParsing();
     }
 
@@ -110,10 +120,23 @@ public class GridProductGift extends AppCompatActivity implements AdapterView.On
     @Subscribe
     public void getAllItemList(AllItemsResultEvent event) {
 
+
         productList = event.getAllItemList();
         gridView.setAdapter(new CustomGridViewAdapter(this, productList));
         adapter.notifyDataSetChanged();
-        MyUtils.showLog(adapter.toString());
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
+
+    }
+
+    @Subscribe
+    public void onResponseErro (GetErrorEvent event) {
+
+        if (materialDialog.isShowing())
+            materialDialog.dismiss();
+        MyUtils.showToast(this, event.getError());
+        swipeRefreshLayout.setRefreshing(false);
 
     }
 
@@ -137,5 +160,12 @@ public class GridProductGift extends AppCompatActivity implements AdapterView.On
         super.onDestroy();
         MyBus.getInstance().unregister(this);
         AppController.getInstance().cancelPendingRequests("GET_ALL_ITEMS");
+    }
+
+    @Override
+    public void onRefresh() {
+
+        doParsing();
+
     }
 }

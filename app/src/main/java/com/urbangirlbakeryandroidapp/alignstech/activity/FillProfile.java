@@ -144,6 +144,15 @@ public class FillProfile extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (item.getItemId() == android.R.id.home) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
 
@@ -214,14 +223,16 @@ public class FillProfile extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
-        } else if (keyCode == KeyEvent.KEYCODE_HOME) {
-
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            finish();
 
         }
+//        else if (keyCode == KeyEvent.KEYCODE_HOME) {
+//
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//
+//        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -236,10 +247,10 @@ public class FillProfile extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(homeButtonPressed){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
+//        if(homeButtonPressed){
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//        }
     }
 }

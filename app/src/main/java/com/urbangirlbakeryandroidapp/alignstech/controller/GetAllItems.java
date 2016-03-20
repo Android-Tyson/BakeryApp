@@ -2,7 +2,6 @@ package com.urbangirlbakeryandroidapp.alignstech.controller;
 
 import android.content.Context;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -12,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.urbangirlbakeryandroidapp.alignstech.bus.AllItemsResultEvent;
+import com.urbangirlbakeryandroidapp.alignstech.bus.GetErrorEvent;
 import com.urbangirlbakeryandroidapp.alignstech.model.Product;
 import com.urbangirlbakeryandroidapp.alignstech.utils.Apis;
 import com.urbangirlbakeryandroidapp.alignstech.utils.AppController;
@@ -31,10 +31,10 @@ import java.util.List;
  */
 public class GetAllItems {
 
-    public static MaterialDialog materialDialog;
+//    public static MaterialDialog materialDialog;
 
     public static void parseAllItems(final Context context, String url) {
-        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
+//        materialDialog = new MaterialDialog.Builder(context).content("Loading Please wait...").cancelable(false).progress(true, 0).show();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
@@ -72,7 +72,7 @@ public class GetAllItems {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        materialDialog.dismiss();
+//                        materialDialog.dismiss();
                     }
 
                 }, new Response.ErrorListener() {
@@ -80,7 +80,8 @@ public class GetAllItems {
             public void onErrorResponse(VolleyError error) {
 
 //                MyUtils.showToast(context, error.toString());
-                materialDialog.dismiss();
+//                materialDialog.dismiss();
+                MyBus.getInstance().post(new GetErrorEvent(error.toString()));
 
             }
         }){
