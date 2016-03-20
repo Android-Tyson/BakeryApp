@@ -512,7 +512,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
 
         if (materialDialog.isShowing())
             materialDialog.dismiss();
-        MyUtils.showToast(getActivity(), event.getError());
+//        MyUtils.showToast(getActivity(), event.getError());
         swipeRefreshLayout.setRefreshing(false);
 
     }
