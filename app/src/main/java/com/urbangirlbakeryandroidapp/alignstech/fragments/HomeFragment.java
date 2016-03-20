@@ -144,7 +144,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState == null) {
-            if (MyUtils.isNetworkConnected(getActivity())) {
+//            if (MyUtils.isNetworkConnected(getActivity())) {
 
                 GetHeaderImageSlider.parseHeaderImageSlider(Apis.headerImageSlider_urgent_cake, getActivity());
                 doParsingJob();
@@ -153,7 +153,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Bas
                 if (materialDialog.isShowing())
                     materialDialog.dismiss();
             }
-        }
+//        }
         initializeUrgentCakeRecyclerView();
     }
 
